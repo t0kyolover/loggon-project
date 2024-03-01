@@ -166,7 +166,7 @@ export const Navbar = () => {
                   data-bs-target="#signupModalToggle"
                   data-bs-toggle="modal"
                 >
-                  No tienes cuenta?
+                  No tengo cuenta
                 </button>
               </div>
             </div>

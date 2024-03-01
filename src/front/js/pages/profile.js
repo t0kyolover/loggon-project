@@ -9,15 +9,15 @@ export const Profile = () => {
   const [email, setEmail] = useState("pereayats@email.com");
   const [steamUsername, setSteamUsername] = useState("");
   const [twitchUsername, setTwitchUsername] = useState("");
-  
+
 /*Habilitar lapiz de editar y conectar useStates con sus useEffects*/
   return (
-    <div>
+    <div className="container-fluid">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
-      <div className="row justify-content-center mt-3">
-        <div className="d-flex flex-column text-white col-8">
+      <div className="d-flex justify-content-center w-100 mt-3">
+        <div className="d-flex flex-column text-white ">
           <h3>Mi perfil</h3>
-          <div className="d-flex flex-row">
+          <div className="d-flex flex-row flex-wrap">
             <img
               className="rounded-circle img-fluid m-5"
               src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116"
@@ -57,6 +57,7 @@ export const Profile = () => {
                   </div>
                 </li>
                 {/*---------------------------------------Password---------------------------------*/}
+                {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
                 <div style={{ fontSize: "12px", color: "#992899" }}>
                   Contraseña
                 </div>
