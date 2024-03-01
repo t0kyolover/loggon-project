@@ -116,7 +116,37 @@ export const Navbar = () => {
                 ></button>
               </div>
               <div className="modal-body">
-                Show a second modal and hide this one with the button below.
+                {/*---------------------------------------Diego---------------------------------*/}
+
+
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Username</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" />
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" />
+                </div>
+                <label for="inputPassword5" class="form-label">Password</label>
+                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" />
+                <div id="passwordHelpBlock" class="form-text">
+                  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                </div>
+
+
+                <div className="text-center mt-4">
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-steam text-dark fs-3"></i>
+                  </button>
+
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-twitch text-dark fs-3"></i>
+                  </button>
+                </div>
+
+
+
+                {/*---------------------------------------Diego---------------------------------*/}
               </div>
               <div className="modal-footer flex-column">
                 <button className="btn text-white" style={{ background: "#992899" }}>
@@ -155,7 +185,34 @@ export const Navbar = () => {
                 ></button>
               </div>
               <div className="modal-body">
-                Hide this modal and show the first with the button below.
+                {/*---------------------------------------Diego---------------------------------*/}
+               
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Username</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" />
+                </div>
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" />
+                </div>
+                <label for="inputPassword5" class="form-label">Password</label>
+                <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" />
+                <div id="passwordHelpBlock" class="form-text">
+                  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                </div>
+
+
+                <div className="text-center mt-4">
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-steam text-dark fs-3"></i>
+                  </button>
+
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-twitch text-dark fs-3"></i>
+                  </button>
+                </div>
+                            <h1> Recuperar contrase;a </h1>
+                {/*---------------------------------------Diego---------------------------------*/}
               </div>
               <div className="modal-footer flex-column">
                 <button className="btn text-white" style={{ background: "#992899" }}>
