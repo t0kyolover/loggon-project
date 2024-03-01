@@ -9,8 +9,10 @@ export const Profile = () => {
   const [email, setEmail] = useState("pereayats@email.com");
   const [steamUsername, setSteamUsername] = useState("");
   const [twitchUsername, setTwitchUsername] = useState("");
+  const [usernameClicked, setUsernameClicked] = useState(false);
+  const [emailClicked, setEmailClicked] = useState(false);
 
-/*Habilitar lapiz de editar y conectar useStates con sus useEffects*/
+  /*Habilitar lapiz de editar y conectar useStates con sus useEffects*/
   return (
     <div className="container-fluid">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
@@ -30,10 +32,20 @@ export const Profile = () => {
                 </div>
                 <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
                   <div className="me-auto">
-                    <p className="fw-bold mb-0">{username}</p>
+                    {usernameClicked ? (
+                      <input className="form-control border-0 text-white bg-transparent" />
+                    ) : (
+                      <p className="fw-bold mb-0">{username}</p>
+                    )}
                   </div>
                   <div className="ms-3">
-                    <button className="btn py-0">
+                    <button
+                      className="btn py-0"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setUsernameClicked(!usernameClicked);
+                      }}
+                    >
                       <i
                         className="fa-solid fa-pencil"
                         style={{ color: "#992899" }}
@@ -45,10 +57,20 @@ export const Profile = () => {
                 <div style={{ fontSize: "12px", color: "#992899" }}>Correo</div>
                 <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
                   <div className="me-auto">
-                    <p className="fw-bold mb-0">{email}</p>
+                  {emailClicked ? (
+                      <input className="form-control border-0 text-white bg-transparent" />
+                    ) : (
+                      <p className="fw-bold mb-0">{email}</p>
+                    )}
                   </div>
                   <div className="ms-3">
-                    <button className="btn py-0">
+                    <button
+                      className="btn py-0"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setEmailClicked(!emailClicked);
+                      }}
+                    >
                       <i
                         className="fa-solid fa-pencil"
                         style={{ color: "#992899" }}

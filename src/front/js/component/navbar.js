@@ -100,7 +100,7 @@ export const Navbar = () => {
           id="signupModalToggle"
           aria-hidden="true"
           aria-labelledby="signupModalToggleLabel"
-          tabindex="-1"
+          tabIndex="-1"
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
@@ -129,7 +129,7 @@ export const Navbar = () => {
                 >
                   Ya tienes una cuenta?
                 </button>
-              </div>
+              </div> 
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ export const Navbar = () => {
           id="loginModalToggle"
           aria-hidden="true"
           aria-labelledby="loginModalToggleLabel"
-          tabindex="-1"
+          tabIndex="-1"
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
