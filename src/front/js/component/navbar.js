@@ -15,9 +15,8 @@ export const Navbar = () => {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
-    setSuggestions(actions.getSuggestions(e.target.value))
+    setSuggestions(actions.getSuggestions(e.target.value));
   };
-
 
   return (
     <div className="position-relative">
@@ -45,6 +44,8 @@ export const Navbar = () => {
               />
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
+            {/*Añadir display de sugerencias, search handle con enter, centrar la barra de búsqueda
+            (el problema está en bottom padding de <p>, pero a sobreescribirlo el campo de input se descuadra)*/}
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
@@ -80,16 +81,100 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-          {/*---------------------------------------SIGNUP---------------------------------*/}
-          <button className="mx-3 btn">
+          {/*---------------------------------------SIGNUP MODAL TRIGGER BUTTON---------------------------------*/}
+          <button
+            type="button"
+            className="mx-3 btn"
+            data-bs-toggle="modal"
+            data-bs-target="#signupModalToggle"
+          >
             <i
               className="fa-solid fa-user-plus"
               style={{ color: "#992899" }}
             ></i>
           </button>
         </div>
+        {/*---------------------------------------SIGNUP MODAL---------------------------------*/}
+        <div
+          className="modal fade"
+          id="signupModalToggle"
+          aria-hidden="true"
+          aria-labelledby="signupModalToggleLabel"
+          tabindex="-1"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="signupModalToggleLabel">
+                  Registrarse
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                Show a second modal and hide this one with the button below.
+              </div>
+              <div className="modal-footer flex-column">
+                <button className="btn text-white" style={{ background: "#992899" }}>
+                  Registrarse
+                </button>
+                <button
+                  className="btn btn-sm btn-link"
+                  data-bs-target="#loginModalToggle"
+                  data-bs-toggle="modal"
+                >
+                  Ya tienes una cuenta?
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/*---------------------------------------LOGIN MODAL---------------------------------*/}
+        <div
+          className="modal fade"
+          id="loginModalToggle"
+          aria-hidden="true"
+          aria-labelledby="loginModalToggleLabel"
+          tabindex="-1"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="loginModalToggleLabel">
+                  Iniciar sesión
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                Hide this modal and show the first with the button below.
+              </div>
+              <div className="modal-footer flex-column">
+                <button className="btn text-white" style={{ background: "#992899" }}>
+                  Iniciar sesión
+                </button>
+                <button
+                  className="btn btn-sm btn-link"
+                  data-bs-target="#signupModalToggle"
+                  data-bs-toggle="modal"
+                >
+                  No tienes cuenta?
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </nav>
       {/*---------------------------------------MENU CONTENTS---------------------------------*/}
+      {/*Cuando haces click fuera del menu tiene que cerrar, ahora no lo hace*/}
       <div
         className="collapse bg-dark bg-gradient text-white position-absolute"
         id="navbar-menu"
@@ -112,8 +197,15 @@ export const Navbar = () => {
             Ofertas
           </Link>
         </div>
+        {/*---------------------------------------LOGIN MODAL TRIGGER BUTTON---------------------------------*/}
         <div className="ms-4 mb-3">
-          <button className="btn text-white" style={{ background: "#992899" }}>
+          <button
+            type="button"
+            className="btn text-white"
+            style={{ background: "#992899" }}
+            data-bs-toggle="modal"
+            data-bs-target="#loginModalToggle"
+          >
             Login
           </button>
         </div>

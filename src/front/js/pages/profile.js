@@ -9,7 +9,8 @@ export const Profile = () => {
   const [email, setEmail] = useState("pereayats@email.com");
   const [steamUsername, setSteamUsername] = useState("");
   const [twitchUsername, setTwitchUsername] = useState("");
-
+  
+/*Habilitar lapiz de editar y conectar useStates con sus useEffects*/
   return (
     <div>
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
