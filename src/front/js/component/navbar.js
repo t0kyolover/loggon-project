@@ -28,16 +28,16 @@ export const Navbar = () => {
             </Link>
 
             <form className="input-group mx-3 w-25">
-              <span className="input-group-text" id="search-icon">
+              <span className="input-group-text rounded-start-5" id="search-icon">
                 <i className="fa-solid fa-magnifying-glass" style={{color: "#992899"}}></i>
               </span>
               <input
                 type="text"
-                className="form-control"
+                className="form-control rounded-end-5"
                 placeholder="Búsqueda"
                 aria-label="Búsqueda"
                 aria-describedby="search-icon"
-              />
+              ></input>
             </form>
           </div>
           <button className="mx-3 btn">
