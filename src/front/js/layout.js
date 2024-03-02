@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Profile } from "./pages/profile";
+import { CardPostView } from "./pages/cardPostView";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -26,6 +27,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Profile />} path="/profile/:username" />
+                        <Route element={<CardPostView />} path="/cardPostView" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
