@@ -227,22 +227,7 @@ export const Navbar = () => {
               <div className="modal-body">
                 {/*---------------------------------------Diego---------------------------------*/}
 
-                <div className="mb-3">
-                  <label for="exampleFormControlInput1" className="form-label">Username</label>
-                  <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
-                </div>
-                <div className="mb-3">
-                  <label for="exampleFormControlInput1" className="form-label">Email address</label>
-                  <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
-                </div>
-                <label for="inputPassword5" className="form-label">Password</label>
-                <input type="password" id="inputPassword5" className="form-control text-white bg-transparent" aria-describedby="passwordHelpBlock" />
-                <div id="passwordHelpBlock" className="form-text text-white">
-                  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                </div>
-
-
-                <div className="text-center mt-4">
+                <div className="text-center mt-4 p-3">
                   <button className="mt-2 rounded-circle mx-2">
                     <i className="fa-brands fa-steam text-dark fs-3"></i>
                   </button>
@@ -250,8 +235,45 @@ export const Navbar = () => {
                   <button className="mt-2 rounded-circle mx-2">
                     <i className="fa-brands fa-twitch text-dark fs-3"></i>
                   </button>
+
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-google text-dark fs-3"></i>
+                  </button>
                 </div>
-                <h1> Recuperar contrase;a </h1>
+
+                <div className="text-center mt-3">
+                  <h1>oR</h1>
+                </div>
+
+                <div className="mb-3">
+                  <label for="exampleFormControlInput1" className="form-label">Email</label>
+                  <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
+                </div>
+                <label for="inputPassword5" className="form-label">Password</label>
+                <input type="password" id="inputPassword5" className="form-control text-white bg-transparent" aria-describedby="passwordHelpBlock" />
+                <div id="passwordHelpBlock" className="form-text text-white">
+
+                </div>
+
+                <div class="mb-3 form-check m-3">
+                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                      <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "15px" }}>
+                        Recordar
+                      </label>
+                    </div>
+
+                <div className="text-center">
+                  <button
+                    className="btn btn-sm btn-link "
+                    data-bs-target="#loginModalToggle"
+                    data-bs-toggle="modal"
+                  >
+                    Recuperar Contraseña
+                  </button>
+                </div>
+
+
+
                 {/*---------------------------------------Diego---------------------------------*/}
               </div>
               <div className="modal-footer flex-column">
