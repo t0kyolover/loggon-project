@@ -102,7 +102,7 @@ export const Navbar = () => {
           aria-labelledby="signupModalToggleLabel"
           tabindex="-1"
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-dialog modal-xl modal-dialog-centered">
             <div className="modal-content bg-dark text-white">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="signupModalToggleLabel">
@@ -309,10 +309,10 @@ export const Navbar = () => {
           <Link className="text-white text-decoration-none mb-2" to={"/"}>
             Publicar oferta
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/"}>
+          <Link className="text-white text-decoration-none mb-2" to={"/gamesCatalogue"}>
             Juegos
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/"}>
+          <Link className="text-white text-decoration-none mb-2" to={"/feed"}>
             Ofertas
           </Link>
         </div>
