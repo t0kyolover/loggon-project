@@ -103,23 +103,28 @@ export const Navbar = () => {
           tabIndex="-1"
         >
           <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
+            <div className="modal-content bg-dark text-white">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="signupModalToggleLabel">
                   Registrarse
                 </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <div className="ms-auto" data-bs-theme="dark">
+                  <button
+                    type="button"
+                    className="btn-close "
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
               </div>
               <div className="modal-body">
                 Show a second modal and hide this one with the button below.
               </div>
               <div className="modal-footer flex-column">
-                <button className="btn text-white" style={{ background: "#992899" }}>
+                <button
+                  className="btn text-white"
+                  style={{ background: "#992899" }}
+                >
                   Registrarse
                 </button>
                 <button
@@ -129,7 +134,7 @@ export const Navbar = () => {
                 >
                   Ya tienes una cuenta?
                 </button>
-              </div> 
+              </div>
             </div>
           </div>
         </div>
@@ -142,23 +147,28 @@ export const Navbar = () => {
           tabIndex="-1"
         >
           <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
+            <div className="modal-content bg-dark text-white">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="loginModalToggleLabel">
                   Iniciar sesión
                 </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <div className="ms-auto" data-bs-theme="dark">
+                  <button
+                    type="button"
+                    className="btn-close "
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
               </div>
               <div className="modal-body">
                 Hide this modal and show the first with the button below.
               </div>
               <div className="modal-footer flex-column">
-                <button className="btn text-white" style={{ background: "#992899" }}>
+                <button
+                  className="btn text-white"
+                  style={{ background: "#992899" }}
+                >
                   Iniciar sesión
                 </button>
                 <button
@@ -187,7 +197,7 @@ export const Navbar = () => {
           >
             Mi perfil
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/"}>
+          <Link className="text-white text-decoration-none mb-2" to={"/postdeal/:username"}>
             Publicar oferta
           </Link>
           <Link className="text-white text-decoration-none mb-2" to={"/"}>

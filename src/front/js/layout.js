@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Profile } from "./pages/profile";
+import { PostDeal } from "./pages/postDeal";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -26,6 +27,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Profile />} path="/profile/:username" />
+                        <Route element={<PostDeal />} path="/postdeal/:username" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

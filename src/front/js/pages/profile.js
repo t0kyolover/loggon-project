@@ -14,183 +14,252 @@ export const Profile = () => {
 
   /*Habilitar lapiz de editar y conectar useStates con sus useEffects*/
   return (
-    <div className="container-fluid">
+    <div className="container-fluid m-auto">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
-        <div className="d-flex flex-column text-white ">
-          <h3>Mi perfil</h3>
-          <div className="d-flex flex-row flex-wrap">
+        <div className="d-flex flex-column text-white">
+          <h3 className="ms-3">Mi perfil</h3>
+
+          <form className="d-flex flex-row flex-wrap">
             <img
+            style={{ maxWidth: "500px", maxHeight: "500px" }}
               className="rounded-circle img-fluid m-5"
               src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116"
             />
-            <form>
-              <ul className="list-group my-5">
-                {/*---------------------------------------Username---------------------------------*/}
-                <div style={{ fontSize: "12px", color: "#992899" }}>
-                  Usuario
+            <ul className="list-group">
+              {/*---------------------------------------Username---------------------------------*/}
+              <div style={{ fontSize: "12px", color: "#992899" }}>Usuario</div>
+              <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
+                <div className="w-100">
+                  {usernameClicked ? (
+                    <input className="form-control border-0 text-white bg-transparent" />
+                  ) : (
+                    <p className="fw-bold mb-0">{username}</p>
+                  )}
                 </div>
-                <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
-                  <div className="me-auto">
-                    {usernameClicked ? (
-                      <input className="form-control border-0 text-white bg-transparent" />
-                    ) : (
-                      <p className="fw-bold mb-0">{username}</p>
-                    )}
-                  </div>
-                  <div className="ms-3">
-                    <button
-                      className="btn py-0"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setUsernameClicked(!usernameClicked);
-                      }}
-                    >
-                      <i
-                        className="fa-solid fa-pencil"
-                        style={{ color: "#992899" }}
-                      ></i>
-                    </button>
-                  </div>
-                </li>
-                {/*---------------------------------------Email---------------------------------*/}
-                <div style={{ fontSize: "12px", color: "#992899" }}>Correo</div>
-                <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
-                  <div className="me-auto">
-                  {emailClicked ? (
-                      <input className="form-control border-0 text-white bg-transparent" />
-                    ) : (
-                      <p className="fw-bold mb-0">{email}</p>
-                    )}
-                  </div>
-                  <div className="ms-3">
-                    <button
-                      className="btn py-0"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setEmailClicked(!emailClicked);
-                      }}
-                    >
-                      <i
-                        className="fa-solid fa-pencil"
-                        style={{ color: "#992899" }}
-                      ></i>
-                    </button>
-                  </div>
-                </li>
-                {/*---------------------------------------Password---------------------------------*/}
-                {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
-                <div style={{ fontSize: "12px", color: "#992899" }}>
-                  Contraseña
-                </div>
-                <div className="d-flex flex-row">
-                  <li className="list-group-item rounded-5 my-2 text-white bg-transparent">
-                    <div className="me-auto">
-                      <p className="fw-bold mb-0">*********</p>
-                    </div>
-                  </li>
+                <div className="ms-auto">
                   <button
-                    className="btn text-white rounded-5 ms-3"
-                    style={{ background: "#992899" }}
+                    className="btn py-0"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setUsernameClicked(!usernameClicked);
+                    }}
                   >
-                    Cambiar
+                    <i
+                      className="fa-solid fa-pencil"
+                      style={{ color: "#992899" }}
+                    ></i>
                   </button>
                 </div>
-                {/*---------------------------------------Platforms usernames---------------------------------*/}
-                <div style={{ fontSize: "12px", color: "#992899" }}>
-                  Vincular
+              </li>
+              {/*---------------------------------------Email---------------------------------*/}
+              <div style={{ fontSize: "12px", color: "#992899" }}>Correo</div>
+              <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
+                <div className="w-100">
+                  {emailClicked ? (
+                    <input className="form-control border-0 text-white bg-transparent" />
+                  ) : (
+                    <p className="fw-bold mb-0">{email}</p>
+                  )}
                 </div>
-                <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
-                  {/*---------------------------------------Steam---------------------------------*/}
-                  <p className="me-2">
-                    <button
-                      className="btn p-0"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseSteam"
-                      aria-expanded="false"
-                      aria-controls="collapseSteam"
-                    >
-                      <i className="fa-brands fa-steam text-white fs-3"></i>
-                    </button>
-                  </p>
-                  <div style={{ minHeight: "50px" }}>
-                    <div
-                      className="collapse collapse-horizontal"
-                      id="collapseSteam"
-                    >
-                      <input
-                        type="text"
-                        className="form-control rounded-5 text-black w-auto"
-                        style={{ maxHeight: "30px" }}
-                        onChange={(e) => setSteamUsername(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  {/*---------------------------------------Twitch---------------------------------*/}
-                  <p className="mx-2">
-                    <button
-                      className="btn p-0"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseTwitch"
-                      aria-expanded="false"
-                      aria-controls="collapseTwitch"
-                    >
-                      <i className="fa-brands fa-twitch text-white fs-3"></i>
-                    </button>
-                  </p>
-                  <div style={{ minHeight: "50px" }}>
-                    <div
-                      className="collapse collapse-horizontal"
-                      id="collapseTwitch"
-                    >
-                      <input
-                        type="text"
-                        className="form-control rounded-5 text-black w-auto"
-                        style={{ maxHeight: "30px" }}
-                        onChange={(e) => setTwitchUsername(e.target.value)}
-                      />
-                    </div>
+                <div className="ms-auto">
+                  <button
+                    className="btn py-0"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setEmailClicked(!emailClicked);
+                    }}
+                  >
+                    <i
+                      className="fa-solid fa-pencil"
+                      style={{ color: "#992899" }}
+                    ></i>
+                  </button>
+                </div>
+              </li>
+              {/*---------------------------------------Password---------------------------------*/}
+              {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
+              <div style={{ fontSize: "12px", color: "#992899" }}>
+                Contraseña
+              </div>
+              <div className="d-flex flex-row">
+                <li className="list-group-item rounded-5 my-2 text-white bg-transparent">
+                  <div className="me-auto">
+                    <p className="fw-bold mb-0">*********</p>
                   </div>
                 </li>
-                {/*---------------------------------------Interests---------------------------------*/}
-                <div style={{ fontSize: "12px", color: "#992899" }}>
-                  Intereses
+                <button
+                  className="btn text-white rounded-5 ms-3"
+                  style={{ background: "#992899" }}
+                >
+                  Cambiar
+                </button>
+              </div>
+              {/*---------------------------------------Platforms usernames---------------------------------*/}
+              <div style={{ fontSize: "12px", color: "#992899" }}>Vincular</div>
+              <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
+                {/*---------------------------------------Steam---------------------------------*/}
+                <p className="me-2">
+                  <button
+                    className="btn p-0"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseSteam"
+                    aria-expanded="false"
+                    aria-controls="collapseSteam"
+                  >
+                    <i className="fa-brands fa-steam text-white fs-3"></i>
+                  </button>
+                </p>
+                <div style={{ minHeight: "50px" }}>
+                  <div
+                    className="collapse collapse-horizontal"
+                    id="collapseSteam"
+                  >
+                    <input
+                      type="text"
+                      className="form-control rounded-5 text-black w-auto"
+                      style={{ maxHeight: "30px" }}
+                      onChange={(e) => setSteamUsername(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
-                  <div className="d-flex flex-wrap gap-2">
-                    <p className="bg-transparent rounded-5 border-white border p-2">
-                      Single Player
-                    </p>
-                    <p className="bg-transparent rounded-5 border-white border p-2">
-                      Horror
-                    </p>
-                    <p className="bg-transparent rounded-5 border-white border p-2">
-                      Survival
-                    </p>
-                    <p className="bg-transparent rounded-5 border-white border p-2">
-                      Third Person
-                    </p>
-                    <p className="bg-transparent rounded-5 border-white border p-2">
-                      Action-Adventure
-                    </p>
-                    <p className="bg-transparent rounded-5 border-white border p-2">
-                      3D
-                    </p>
+                {/*---------------------------------------Twitch---------------------------------*/}
+                <p className="mx-2">
+                  <button
+                    className="btn p-0"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwitch"
+                    aria-expanded="false"
+                    aria-controls="collapseTwitch"
+                  >
+                    <i className="fa-brands fa-twitch text-white fs-3"></i>
+                  </button>
+                </p>
+                <div style={{ minHeight: "50px" }}>
+                  <div
+                    className="collapse collapse-horizontal"
+                    id="collapseTwitch"
+                  >
+                    <input
+                      type="text"
+                      className="form-control rounded-5 text-black w-auto"
+                      style={{ maxHeight: "30px" }}
+                      onChange={(e) => setTwitchUsername(e.target.value)}
+                    />
                   </div>
-                  <div className="ms-3">
-                    <button className="btn">
-                      <i
-                        className="fa-solid fa-pencil"
-                        style={{ color: "#992899" }}
-                      ></i>
-                    </button>
+                </div>
+              </li>
+              {/*---------------------------------------Interests---------------------------------*/}
+              <div style={{ fontSize: "12px", color: "#992899" }}>
+                Intereses
+              </div>
+              <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
+                <div className="d-flex flex-wrap gap-2">
+                  <p className="bg-transparent rounded-5 border-white border p-2">
+                    Single Player
+                  </p>
+                  <p className="bg-transparent rounded-5 border-white border p-2">
+                    Horror
+                  </p>
+                  <p className="bg-transparent rounded-5 border-white border p-2">
+                    Survival
+                  </p>
+                  <p className="bg-transparent rounded-5 border-white border p-2">
+                    Third Person
+                  </p>
+                  <p className="bg-transparent rounded-5 border-white border p-2">
+                    Action-Adventure
+                  </p>
+                  <p className="bg-transparent rounded-5 border-white border p-2">
+                    3D
+                  </p>
+                </div>
+                {/*----------------------------Modify Interests Modal Trigger Button-----------------------*/}
+                <div className="ms-3">
+                  <button
+                    type="button"
+                    className="btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modifyInterestsModal"
+                  >
+                    <i
+                      className="fa-solid fa-pencil"
+                      style={{ color: "#992899" }}
+                    ></i>
+                  </button>
+                </div>
+                {/*----------------------------Modify Interests Modal-------------------------------*/}
+                <div
+                  className="modal fade"
+                  id="modifyInterestsModal"
+                  tabIndex="-1"
+                  aria-labelledby="modifyInterestsModalLabel"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content bg-dark">
+                      <div className="modal-header border-0">
+                        <h1
+                          className="modal-title fs-5"
+                          id="modifyInterestsModalLabel"
+                        >
+                          Intereses
+                        </h1>
+                        <div className="ms-auto" data-bs-theme="dark">
+                          <button
+                            type="button"
+                            className="btn-close "
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                      </div>
+                      <div className="modal-body">
+                        <input
+                          type="search"
+                          className="form-control rounded-5 bg-transparent text-white mb-3"
+                        ></input>
+                        <small>Mis intereses</small>
+                        <ul className="list-group border-0 my-2 bg-transparent d-flex flex-row">
+                          <div className="d-flex flex-wrap gap-2 justify-content-center">
+                            <li className="list-group-item bg-transparent text-white rounded-5 border-white border p-2">
+                              Single Player
+                            </li>
+                            <li className="list-group-item bg-transparent text-white rounded-5 border-white border p-2">
+                              Horror
+                            </li>
+                            <li className="list-group-item bg-transparent text-white rounded-5 border-white border p-2">
+                              Survival
+                            </li>
+                            <li className="list-group-item bg-transparent text-white rounded-5 border-white border p-2">
+                              Third Person
+                            </li>
+                            <li className="list-group-item bg-transparent text-white rounded-5 border-white border p-2">
+                              Action-Adventure
+                            </li>
+                            <li className="list-group-item bg-transparent text-white rounded-5 border-white border p-2">
+                              3D
+                            </li>
+                          </div>
+                        </ul>
+                      </div>
+                      <div className="modal-footer border-0">
+                        <button
+                          type="button"
+                          className="btn"
+                          style={{ background: "#992899" }}
+                        >
+                          Guardar cambios
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </li>
-              </ul>
-            </form>
-          </div>
+                </div>
+              </li>
+            </ul>
+          </form>
         </div>
       </div>
       {/*---------------------------------------TABS---------------------------------*/}
