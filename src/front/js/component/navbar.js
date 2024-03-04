@@ -102,9 +102,9 @@ export const Navbar = () => {
           aria-labelledby="signupModalToggleLabel"
           tabIndex="-1"
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content bg-dark text-white">
-              <div className="modal-header">
+              <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="signupModalToggleLabel">
                   Registrarse
                 </h1>
@@ -120,7 +120,7 @@ export const Navbar = () => {
               <div className="modal-body">
                 Show a second modal and hide this one with the button below.
               </div>
-              <div className="modal-footer flex-column">
+              <div className="modal-footer flex-column border-0">
                 <button
                   className="btn text-white"
                   style={{ background: "#992899" }}
@@ -148,7 +148,7 @@ export const Navbar = () => {
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content bg-dark text-white">
-              <div className="modal-header">
+              <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="loginModalToggleLabel">
                   Iniciar sesión
                 </h1>
@@ -164,7 +164,7 @@ export const Navbar = () => {
               <div className="modal-body">
                 Hide this modal and show the first with the button below.
               </div>
-              <div className="modal-footer flex-column">
+              <div className="modal-footer border-0 flex-column">
                 <button
                   className="btn text-white"
                   style={{ background: "#992899" }}
