@@ -48,53 +48,7 @@ export const CardPostView = () => {
         </div>
       </div>
 
-      {/* ----------------------Modal for offer details-------------------------------- */}
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            {/* -------------------------------Modal Body -------------------------*/}
-            <div className="modal-body p-0">
-              {/* Background Image */}
-              <div
-                className="position-relative"
-                style={{
-                  backgroundImage: 'url("https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/mYn2ETBKFct26V9mJnZi4aSS.png?w=440&thumb=false")',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  minHeight: '300px'
-                }}
-              >
-                {/* Gradiente preto sólido na parte inferior */}
-                <div
-                  className="position-absolute w-100 bottom-0"
-                  style={{
-                    height: '70%',
-                    background: 'linear-gradient(to top, rgba(0, 0, 0, 1), transparent)'
-                  }}
-                ></div>
-                {/* Gradiente transparente na parte superior */}
-                <div
-                  className="position-absolute w-100 top-0"
-                  style={{
-                    height: '30%',
-                    background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), transparent)'
-                  }}
-                ></div>
-                <div className="position-absolute top-50 start-0 translate-middle-y text-white">
-                  <h1 className="text-white ms-3">Modal title</h1>
-                  <p className="text-white ms-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id feugiat eros, non porttitor magna. Sed non lacus auctor, fringilla nisi nec, consequat nisi.</p>
-                </div>
-                {/* Botão de fechar */}
-                <button type="button" className="btn btn-close position-absolute top-0 end-0 text-white" aria-label="Close" data-bs-dismiss="modal"></button>
-              </div>
-              {/* ----------------------------Content ----------------------------------*/}
-              <div className="container text-white">
-                {/* Your content here */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+ 
     </div>
   );
 };
