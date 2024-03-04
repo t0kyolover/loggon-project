@@ -118,7 +118,77 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="modal-body">
-                Show a second modal and hide this one with the button below.
+                {/*---------------------------------------Diego---------------------------------*/}
+                {/*Notas: 
+                          *Acomodar modal para que sea responsive con el formulario
+                          *Cambiar el place holder a blanco y poner ejemplos dentro
+                                                                                  --------------*/}
+                <div className="d-flex flex-row">
+                  <div className="mb-3 col-6 m-4">
+                    <img src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C" className="img-fluid rounded-circle" alt="Logo" />
+
+                    <div className="text-center mt-4">
+                      <button className="mt-2 rounded-circle mx-2">
+                        <i className="fa-brands fa-steam text-dark fs-3"></i>
+                      </button>
+
+                      <button className="mt-2 rounded-circle mx-2">
+                        <i className="fa-brands fa-twitch text-dark fs-3"></i>
+                      </button>
+
+                      <button className="mt-2 rounded-circle mx-2">
+                        <i className="fa-brands fa-google text-dark fs-3"></i>
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                  <div className="col-9 m-3">
+                    <div className="mb-1">
+                      <label htmlFor="exampleFormControlInput1" className="form-label">Username</label>
+                      <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
+                    </div>
+
+                    <div className="mb-1">
+                      <label htmlFor="exampleFormControlInput1" className="form-label">Email</label>
+                      <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
+                    </div>
+
+                    <div className="mb-1">
+                      <label htmlFor="inputPassword5" className="form-label">Password</label>
+                      <input type="password" id="inputPassword5" className="form-control text-white bg-transparent" aria-describedby="passwordHelpBlock" />
+                    </div>
+
+                    <div id="passwordHelpBlock" className="form-text text-white">
+                      Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </div>
+
+                    <div class="mb-3 form-check m-3">
+                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                      <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "10px" }}>
+                        Acepto recibir comunicaciones comerciales u ofertas por parte de LoGGon
+                      </label>
+                    </div>
+
+                    <div class="mb-3 form-check m-3">
+                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                      <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "10px" }}>
+                        He leido y acepto las condiciones de uso y la politica de privacidad
+                      </label>
+                    </div>
+
+
+                  </div>
+
+
+
+                </div>
+
+
+
+
+                {/*---------------------------------------Diego---------------------------------*/}
               </div>
               <div className="modal-footer flex-column border-0">
                 <button
@@ -162,7 +232,56 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="modal-body">
-                Hide this modal and show the first with the button below.
+                {/*---------------------------------------Diego---------------------------------*/}
+
+                <div className="text-center mt-4 p-3">
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-steam text-dark fs-3"></i>
+                  </button>
+
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-twitch text-dark fs-3"></i>
+                  </button>
+
+                  <button className="mt-2 rounded-circle mx-2">
+                    <i className="fa-brands fa-google text-dark fs-3"></i>
+                  </button>
+                </div>
+
+                <div className="text-center mt-3">
+                  <h1>oR</h1>
+                </div>
+
+                <div className="mb-3">
+                  <label for="exampleFormControlInput1" className="form-label">Email</label>
+                  <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
+                </div>
+                <label for="inputPassword5" className="form-label">Password</label>
+                <input type="password" id="inputPassword5" className="form-control text-white bg-transparent" aria-describedby="passwordHelpBlock" />
+                <div id="passwordHelpBlock" className="form-text text-white">
+
+                </div>
+
+                <div class="mb-3 form-check m-3">
+                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                      <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "15px" }}>
+                        Recordar
+                      </label>
+                    </div>
+
+                <div className="text-center">
+                  <button
+                    className="btn btn-sm btn-link "
+                    data-bs-target="#loginModalToggle"
+                    data-bs-toggle="modal"
+                  >
+                    Recuperar Contraseña
+                  </button>
+                </div>
+
+
+
+                {/*---------------------------------------Diego---------------------------------*/}
               </div>
               <div className="modal-footer border-0 flex-column">
                 <button
@@ -200,10 +319,10 @@ export const Navbar = () => {
           <Link className="text-white text-decoration-none mb-2" to={"/postdeal/:username"}>
             Publicar oferta
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/"}>
+          <Link className="text-white text-decoration-none mb-2" to={"/gamesCatalogue"}>
             Juegos
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/"}>
+          <Link className="text-white text-decoration-none mb-2" to={"/feed"}>
             Ofertas
           </Link>
         </div>
