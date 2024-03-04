@@ -4,7 +4,7 @@ import { GameCard } from "../component/gameCard";
 
 
 
-export const GamesCatalogue = () => {
+export const Games = () => {
     const [activeTab, setActiveTab] = useState("grid1");
 
     const handleTabChange = (tab) => {
