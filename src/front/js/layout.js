@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Profile } from "./pages/profile";
+import { CardPostView } from "./pages/cardPostView";
 import { PostDeal } from "./pages/postDeal";
 import injectContext from "./store/appContext";
 
@@ -31,6 +32,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Profile />} path="/profile/:username" />
+                        <Route element={<CardPostView />} path="/cardPostView" />
                         <Route element={<Feed />} path="/feed" />
                         <Route element={<GamesCatalogue />} path="/gamesCatalogue" />
                         <Route element={<SearchResults />} path="/searchResults" />
