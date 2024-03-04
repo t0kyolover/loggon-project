@@ -11,8 +11,9 @@ export const Profile = () => {
   const [twitchUsername, setTwitchUsername] = useState("");
   const [usernameClicked, setUsernameClicked] = useState(false);
   const [emailClicked, setEmailClicked] = useState(false);
+  const [imageClicked, setImageClicked] = useState(false);
 
-  /*Habilitar lapiz de editar y conectar useStates con sus useEffects*/
+  /*Conectar useStates con sus useEffects*/
   return (
     <div className="container-fluid m-auto">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
@@ -21,11 +22,30 @@ export const Profile = () => {
           <h3 className="ms-3">Mi perfil</h3>
 
           <form className="d-flex flex-row flex-wrap">
-            <img
-            style={{ maxWidth: "500px", maxHeight: "500px" }}
-              className="rounded-circle img-fluid m-5"
-              src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116"
-            />
+            <div>
+              <button
+                className="btn py-0"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setImageClicked(!imageClicked);
+                }}
+              >
+                <i
+                  className="fa-solid fa-pencil fa-flip-horizontal"
+                  style={{ color: "#992899" }}
+                ></i>
+              </button>
+              {imageClicked ? (
+                <input type="file" className="img-fluid" />
+              ) : (
+                <img
+                  style={{ maxWidth: "500px", maxHeight: "500px" }}
+                  className="rounded-circle img-fluid m-5"
+                  src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116"
+                />
+              )}
+            </div>
+
             <ul className="list-group">
               {/*---------------------------------------Username---------------------------------*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>Usuario</div>
