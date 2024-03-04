@@ -11,7 +11,7 @@ export const DealCard = () => {
                 <h5 className="card-title">title</h5>
                 <p className="card-text">Digital/CD</p>
                 <p className="card-text">00000</p>
-                
+                <Link className="btn btn-link" to="/post/:id">Detalles</Link>
                 </div>
                 <div className="ms-auto">
                     <p>Raiting</p>

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CardPostView = () => {
+export const SingleDeal = () => {
   return (
     <div className="container-fluid">
       {/* --------------------Game details section----------------------- */}
@@ -47,8 +47,6 @@ export const CardPostView = () => {
           </div>
         </div>
       </div>
-
- 
     </div>
   );
 };

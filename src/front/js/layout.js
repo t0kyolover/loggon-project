@@ -5,14 +5,14 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Profile } from "./pages/profile";
-import { CardPostView } from "./pages/cardPostView";
+import { SingleDeal } from "./pages/singleDeal";
 import { PostDeal } from "./pages/postDeal";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Feed } from "./pages/feed";
-import { GamesCatalogue } from "./pages/gamesCatalogue";
+import { Games } from "./pages/games";
 import { SearchResults } from "./pages/searchResults";
 
 
@@ -30,12 +30,11 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Home />} path="/" />
+                        <Route element={<Feed />} path="/" />
                         <Route element={<Profile />} path="/profile/:username" />
-                        <Route element={<CardPostView />} path="/cardPostView" />
-                        <Route element={<Feed />} path="/feed" />
-                        <Route element={<GamesCatalogue />} path="/gamesCatalogue" />
-                        <Route element={<SearchResults />} path="/searchResults" />
+                        <Route element={<SingleDeal />} path="/post/:id" />
+                        <Route element={<Games />} path="/games" />
+                        <Route element={<SearchResults />} path="/search/results" />
                         <Route element={<PostDeal />} path="/postdeal/:username" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

@@ -263,12 +263,11 @@ export const Navbar = () => {
                 </div>
 
                 <div class="mb-3 form-check m-3">
-                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                      <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "15px" }}>
-                        Recordar
-                      </label>
-                    </div>
-
+                  <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                  <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "15px" }}>
+                    Recordar
+                  </label>
+                </div>
                 <div className="text-center">
                   <button
                     className="btn btn-sm btn-link "
@@ -278,9 +277,6 @@ export const Navbar = () => {
                     Recuperar Contraseña
                   </button>
                 </div>
-
-
-
                 {/*---------------------------------------Diego---------------------------------*/}
               </div>
               <div className="modal-footer border-0 flex-column">
@@ -319,10 +315,10 @@ export const Navbar = () => {
           <Link className="text-white text-decoration-none mb-2" to={"/postdeal/:username"}>
             Publicar oferta
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/gamesCatalogue"}>
+          <Link className="text-white text-decoration-none mb-2" to={"/games"}>
             Juegos
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/feed"}>
+          <Link className="text-white text-decoration-none mb-2" to={"/"}>
             Ofertas
           </Link>
         </div>
