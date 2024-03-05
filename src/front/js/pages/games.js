@@ -1,17 +1,20 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
+import React, { useContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import { GameCard } from "../component/gameCard";
 
+import { Context } from "../store/appContext";
 
 export const Games = () => {
-    const [activeTab, setActiveTab] = useState("grid1");
+    const { store, actions } = useContext(Context);
+    const [ activeTab, setActiveTab ] = useState("grid1");
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
     };
 
     return (
-        <>
+        <div>
             <div className="text-center text-white m-5">
                 <h1 style={{ fontSize: "50px" }}>Games</h1>
             </div>
@@ -35,7 +38,6 @@ export const Games = () => {
                     <div className="col"><GameCard /></div>
                 </div>
             </div>
-
-        </>
+        </div>
     );
 };
