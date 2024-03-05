@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     if (!searchTerm) {
@@ -45,7 +47,7 @@ export const Navbar = () => {
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
             {/*Añadir display de sugerencias, search handle con enter, centrar la barra de búsqueda
-            (el problema está en bottom padding de <p>, pero a sobreescribirlo el campo de input se descuadra)*/}
+            (el problema está en bottom margin de <p>, pero a sobreescribirlo el campo de input se descuadra)*/}
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
@@ -82,17 +84,19 @@ export const Navbar = () => {
             </div>
           </div>
           {/*---------------------------------------SIGNUP MODAL TRIGGER BUTTON---------------------------------*/}
-          <button
-            type="button"
-            className="mx-3 btn"
-            data-bs-toggle="modal"
-            data-bs-target="#signupModalToggle"
-          >
-            <i
-              className="fa-solid fa-user-plus"
-              style={{ color: "#992899" }}
-            ></i>
-          </button>
+          {!loggedIn && (
+            <button
+              type="button"
+              className="mx-3 btn"
+              data-bs-toggle="modal"
+              data-bs-target="#signupModalToggle"
+            >
+              <i
+                className="fa-solid fa-user-plus"
+                style={{ color: "#992899" }}
+              ></i>
+            </button>
+          )}
         </div>
         {/*---------------------------------------SIGNUP MODAL---------------------------------*/}
         <div
@@ -106,7 +110,7 @@ export const Navbar = () => {
             <div className="modal-content bg-dark text-white">
               <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="signupModalToggleLabel">
-                  Registrarse
+                  Signup
                 </h1>
                 <div className="ms-auto" data-bs-theme="dark">
                   <button
@@ -118,92 +122,131 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="modal-body">
-                {/*---------------------------------------Diego---------------------------------*/}
-                {/*Notas: 
-                          *Acomodar modal para que sea responsive con el formulario
-                          *Cambiar el place holder a blanco y poner ejemplos dentro
-                                                                                  --------------*/}
                 <div className="d-flex flex-row">
                   <div className="mb-3 col-6 m-4">
-                    <img src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C" className="img-fluid rounded-circle" alt="Logo" />
-
+                    <img
+                      src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C"
+                      className="img-fluid rounded-circle"
+                      alt="Logo"
+                    />
+                    {/*---------------------------------------Signup modal 3rd party buttons---------------------------------*/}
                     <div className="text-center mt-4">
                       <button className="mt-2 rounded-circle mx-2">
                         <i className="fa-brands fa-steam text-dark fs-3"></i>
                       </button>
-
                       <button className="mt-2 rounded-circle mx-2">
                         <i className="fa-brands fa-twitch text-dark fs-3"></i>
                       </button>
-
                       <button className="mt-2 rounded-circle mx-2">
                         <i className="fa-brands fa-google text-dark fs-3"></i>
                       </button>
-
                     </div>
-
                   </div>
-
-                  <div className="col-9 m-3">
+                  {/*---------------------------------------Signup modal registration form---------------------------------*/}
+                  <form className="col-5 m-3">
                     <div className="mb-1">
-                      <label htmlFor="exampleFormControlInput1" className="form-label">Username</label>
-                      <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
+                      <label
+                        htmlFor="signupUsernameInput"
+                        className="form-label"
+                      >
+                        Username
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control text-white bg-transparent"
+                        id="signupUsernameInput"
+                        placeholder=""
+                      />
                     </div>
 
                     <div className="mb-1">
-                      <label htmlFor="exampleFormControlInput1" className="form-label">Email</label>
-                      <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
+                      <label
+                        htmlFor="signupEmailInput"
+                        className="form-label"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control text-white bg-transparent"
+                        id="signupEmailInput"
+                        placeholder=""
+                      />
                     </div>
 
                     <div className="mb-1">
-                      <label htmlFor="inputPassword5" className="form-label">Password</label>
-                      <input type="password" id="inputPassword5" className="form-control text-white bg-transparent" aria-describedby="passwordHelpBlock" />
+                      <label htmlFor="signupPasswordInput" className="form-label">
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        id="signupPasswordInput"
+                        className="form-control text-white bg-transparent"
+                        aria-describedby="passwordHelpBlock"
+                      />
                     </div>
 
-                    <div id="passwordHelpBlock" className="form-text text-white">
-                      Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    <div
+                      id="passwordHelpBlock"
+                      className="form-text text-white"
+                    >
+                      Your password must be 8-20 characters long, contain
+                      letters and numbers, and must not contain spaces, special
+                      characters, or emoji.
                     </div>
 
-                    <div class="mb-3 form-check m-3">
-                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                      <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "10px" }}>
-                        Acepto recibir comunicaciones comerciales u ofertas por parte de LoGGon
+                    <div className="mb-3 form-check m-3">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id="newsletterCheck"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="newsletterCheck"
+                        style={{ fontSize: "10px" }}
+                      >
+                        I agree to receive commercial communications and offers
+                        by loGGon
                       </label>
                     </div>
 
-                    <div class="mb-3 form-check m-3">
-                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                      <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "10px" }}>
-                        He leido y acepto las condiciones de uso y la politica de privacidad
+                    <div className="mb-3 form-check m-3">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id="privacyCheck"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="privacyCheck"
+                        style={{ fontSize: "10px" }}
+                      >
+                        I have read and accept the{" "}
+                        <Link to="/" className="form-check-label btn btn-link">
+                          Terms & Conditions of Use and Privacy Policy
+                        </Link>
                       </label>
                     </div>
-
-
-                  </div>
-
-
-
+                    {/*---------------------------------------Signup modal buttons---------------------------------*/}
+                    <div className="modal-footer flex-column border-0">
+                      <button
+                        className="btn text-white"
+                        style={{ background: "#992899" }}
+                      >
+                        Signup
+                      </button>
+                      <button
+                        className="btn btn-sm btn-link"
+                        data-bs-target="#loginModalToggle"
+                        data-bs-toggle="modal"
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        Already registered?
+                      </button>
+                    </div>
+                  </form>
                 </div>
-
-
-
-
-                {/*---------------------------------------Diego---------------------------------*/}
-              </div>
-              <div className="modal-footer flex-column border-0">
-                <button
-                  className="btn text-white"
-                  style={{ background: "#992899" }}
-                >
-                  Registrarse
-                </button>
-                <button
-                  className="btn btn-sm btn-link"
-                  data-bs-target="#loginModalToggle"
-                  data-bs-toggle="modal"
-                >
-                  Ya tienes una cuenta?
-                </button>
               </div>
             </div>
           </div>
@@ -220,7 +263,7 @@ export const Navbar = () => {
             <div className="modal-content bg-dark text-white">
               <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="loginModalToggleLabel">
-                  Iniciar sesión
+                  Login
                 </h1>
                 <div className="ms-auto" data-bs-theme="dark">
                   <button
@@ -232,7 +275,7 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="modal-body">
-                {/*---------------------------------------Diego---------------------------------*/}
+                {/*---------------------------------------Login modal 3rd party buttons---------------------------------*/}
 
                 <div className="text-center mt-4 p-3">
                   <button className="mt-2 rounded-circle mx-2">
@@ -251,55 +294,83 @@ export const Navbar = () => {
                 <div className="text-center mt-3">
                   <h1>oR</h1>
                 </div>
-
-                <div className="mb-3">
-                  <label for="exampleFormControlInput1" className="form-label">Email</label>
-                  <input type="email" className="form-control text-white bg-transparent" id="exampleFormControlInput1" placeholder="" />
-                </div>
-                <label for="inputPassword5" className="form-label">Password</label>
-                <input type="password" id="inputPassword5" className="form-control text-white bg-transparent" aria-describedby="passwordHelpBlock" />
-                <div id="passwordHelpBlock" className="form-text text-white">
-
-                </div>
-
-                <div class="mb-3 form-check m-3">
-                  <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                  <label className="form-check-label" for="exampleCheck1" style={{ fontSize: "15px" }}>
-                    Recordar
+                {/*---------------------------------------Login modal form---------------------------------*/}
+                <form>
+                  <div className="mb-3">
+                    <label
+                      htmlFor="loginEmailInput"
+                      className="form-label"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control text-white bg-transparent"
+                      id="loginEmailInput"
+                      placeholder=""
+                    />
+                  </div>
+                  <label htmlFor="loginPasswordInput" className="form-label">
+                    Password
                   </label>
-                </div>
-                <div className="text-center">
-                  <button
-                    className="btn btn-sm btn-link "
-                    data-bs-target="#loginModalToggle"
-                    data-bs-toggle="modal"
-                  >
-                    Recuperar Contraseña
-                  </button>
-                </div>
-                {/*---------------------------------------Diego---------------------------------*/}
-              </div>
-              <div className="modal-footer border-0 flex-column">
-                <button
-                  className="btn text-white"
-                  style={{ background: "#992899" }}
-                >
-                  Iniciar sesión
-                </button>
-                <button
-                  className="btn btn-sm btn-link"
-                  data-bs-target="#signupModalToggle"
-                  data-bs-toggle="modal"
-                >
-                  No tengo cuenta
-                </button>
+                  <input
+                    type="password"
+                    id="loginPasswordInput"
+                    className="form-control text-white bg-transparent"
+                    aria-describedby="passwordHelpBlock"
+                  />
+                  <div
+                    id="passwordHelpBlock"
+                    className="form-text text-white"
+                  ></div>
+                  <div className="mb-3 form-check m-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="rememberMeCheck"
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="rememberMeCheck"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Remember me
+                    </label>
+                  </div>
+                  {/*---------------------------------------Login Modal buttons---------------------------------*/}
+                  <div className="text-center">
+                    <button
+                      className="btn btn-sm btn-link "
+                      data-bs-target="#loginModalToggle"
+                      data-bs-toggle="modal"
+                    >
+                      Forgot my password
+                    </button>
+                  </div>{" "}
+                  <div className="modal-footer border-0 flex-column">
+                    <button
+                      className="btn text-white"
+                      style={{ background: "#992899" }}
+                    >
+                      Login
+                    </button>
+                    <button
+                      className="btn btn-sm btn-link"
+                      data-bs-target="#signupModalToggle"
+                      data-bs-toggle="modal"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Not registered yet?
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </nav>
       {/*---------------------------------------MENU CONTENTS---------------------------------*/}
-      {/*Cuando haces click fuera del menu tiene que cerrar, ahora no lo hace*/}
+      {/*Cuando haces click fuera del menu tiene que cerrar, ahora no lo hace y no se abre por encima de todo lo demas*/}
       <div
         className="collapse bg-dark bg-gradient text-white position-absolute"
         id="navbar-menu"
@@ -310,29 +381,89 @@ export const Navbar = () => {
             className="text-white text-decoration-none mb-2"
             to={"/profile/:username"}
           >
-            Mi perfil
+            My profile
           </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/postdeal/:username"}>
-            Publicar oferta
+          <Link
+            className="text-white text-decoration-none mb-2"
+            to={"/postdeal/:username"}
+          >
+            Post deal
           </Link>
           <Link className="text-white text-decoration-none mb-2" to={"/games"}>
-            Juegos
+            Games
           </Link>
           <Link className="text-white text-decoration-none mb-2" to={"/"}>
-            Ofertas
+            Deals
           </Link>
         </div>
-        {/*---------------------------------------LOGIN MODAL TRIGGER BUTTON---------------------------------*/}
+        {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
         <div className="ms-4 mb-3">
-          <button
-            type="button"
-            className="btn text-white"
-            style={{ background: "#992899" }}
-            data-bs-toggle="modal"
-            data-bs-target="#loginModalToggle"
+          {!loggedIn ? (
+            <button
+              type="button"
+              className="btn text-white"
+              style={{ background: "#992899" }}
+              data-bs-toggle="modal"
+              data-bs-target="#loginModalToggle"
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn text-white"
+              style={{ background: "#992899" }}
+              data-bs-toggle="modal"
+              data-bs-target="#logoutModal"
+            >
+              Logout
+            </button>
+          )}
+          {/*---------------------------------------LOGOUT MODAL---------------------------------*/}
+          <div
+            className="modal fade"
+            id="logoutModal"
+            aria-hidden="true"
+            aria-labelledby="logoutModalLabel"
+            tabIndex="-1"
           >
-            Login
-          </button>
+            <div className="modal-dialog modal-sm modal-dialog-centered">
+              <div className="modal-content bg-dark text-white">
+                <div className="modal-header border-0">
+                  <h1 className="modal-title fs-5" id="logoutModalLabel">
+                    Are you sure?
+                  </h1>
+                  <div className="ms-auto" data-bs-theme="dark">
+                    <button
+                      type="button"
+                      className="btn-close "
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                </div>
+                <div className="modal-footer border-0">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <Link to="/">
+                    {" "}
+                    <button
+                      className="btn text-white"
+                      data-bs-dismiss="modal"
+                      style={{ background: "#992899" }}
+                    >
+                      Logout
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

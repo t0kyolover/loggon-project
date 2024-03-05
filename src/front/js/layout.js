@@ -3,17 +3,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Home } from "./pages/home";
 import { Profile } from "./pages/profile";
 import { SingleDeal } from "./pages/singleDeal";
 import { PostDeal } from "./pages/postDeal";
+import { SearchResults } from "./pages/searchResults";
+import { Games } from "./pages/games";
+import { Feed } from "./pages/feed";
+
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Feed } from "./pages/feed";
-import { Games } from "./pages/games";
-import { SearchResults } from "./pages/searchResults";
 
 
 //create your first component
