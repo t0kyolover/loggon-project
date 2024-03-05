@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import { GameCard } from "../component/gameCard";
 
 
-
 export const Games = () => {
     const [activeTab, setActiveTab] = useState("grid1");
 

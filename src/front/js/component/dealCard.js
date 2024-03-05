@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const DealCard = () => {
-    return (
+    const { store, actions } = useContext(Context);
 
+    return (
         <div className="card" style={{ width: "18rem" }}>
             <img src="https://picsum.photos/200" className="card-img-top" alt="..." />
             <div className="card-body flex-row d-flex">
@@ -18,6 +20,5 @@ export const DealCard = () => {
                 </div>
             </div>
         </div>
-
     );
 };
