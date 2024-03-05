@@ -22,7 +22,7 @@ export const GameCard = () => {
         {/*---------------------------------------DETAILS MODAL TRIGGER BUTTON---------------------------------*/}
         <button
           type="button"
-          class="btn btn-primary"
+          className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#detailsModal"
         >
@@ -30,26 +30,26 @@ export const GameCard = () => {
         </button>
         {/*---------------------------------------DETAILS MODAL---------------------------------*/}
         <div
-          class="modal fade"
+          className="modal fade"
           id="detailsModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="detailsModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-white">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="detailsModalLabel">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content bg-dark text-white">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="detailsModalLabel">
                   Game Details
                 </h1>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body p-0">
+              <div className="modal-body p-0">
                 <div
                   className="position-relative"
                   style={{
@@ -98,7 +98,7 @@ export const GameCard = () => {
                   {/* Your content here */}
                 </div>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <p style={{ color: "#992899" }}>
                   Made by DKA <i className="fa-solid fa-skull-crossbones"></i>
                 </p>
