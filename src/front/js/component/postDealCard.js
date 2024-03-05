@@ -29,7 +29,7 @@ export const PostDealCard = () => {
                   <input
                     type="search"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
-                    placeholder="Nombre de Juego"
+                    placeholder="Game title"
                     required
                   />
                 </li>
@@ -55,12 +55,12 @@ export const PostDealCard = () => {
                 >
                   <select
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
-                    placeholder="Tipo"
+                    placeholder="Type"
                     required
                   >
-                    <option value="PC">Juego</option>
+                    <option value="PC">Game</option>
                     <option value="PC">DLC</option>
-                    <option value="PC">In-game</option>
+                    <option value="PC">In-game Purchase</option>
                   </select>
                 </li>
                 {/*---------------------------------------Format---------------------------------*/}
@@ -106,7 +106,7 @@ export const PostDealCard = () => {
                   <input
                     type="number"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
-                    placeholder="Precio original"
+                    placeholder="Original price"
                     required
                   />
                 </li>
@@ -118,7 +118,7 @@ export const PostDealCard = () => {
                   <input
                     type="number"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
-                    placeholder="Precio de oferta"
+                    placeholder="Offer price"
                     required
                   />
                 </li>
@@ -129,7 +129,7 @@ export const PostDealCard = () => {
                 >
                   <input
                     type="date"
-                    placeholder="Fecha de vencimiento"
+                    placeholder="Expiration date"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                   />
                 </li>
@@ -141,7 +141,7 @@ export const PostDealCard = () => {
                   <input
                     type="text"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
-                    placeholder="Código Promocional"
+                    placeholder="Promocode"
                   />
                 </li>
                 {/*---------------------------------------Offer Link---------------------------------*/}
@@ -152,7 +152,7 @@ export const PostDealCard = () => {
                   <input
                     type="text"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
-                    placehoolder="Enlace de oferta"
+                    placehoolder="Offer link"
                     required
                   />
                 </li>
@@ -168,7 +168,7 @@ export const PostDealCard = () => {
                       type="checkbox"
                     />
                     <label className="form-check-label ms-2" htmlFor="scheduleCheck">
-                      Programar
+                      Schedule
                     </label>
                     {/*---------------------------------------Schedule Post Modal Trigger---------------------------------*/}
                     {scheduled && (
@@ -179,7 +179,7 @@ export const PostDealCard = () => {
                         data-bs-toggle="modal"
                         data-bs-target="#scheduleModal"
                       >
-                        Elegir fecha y hora
+                        Choose date and time
                       </button>
                     )}
                   </div>
@@ -199,7 +199,7 @@ export const PostDealCard = () => {
                           className="modal-title fs-5"
                           id="scheduleModalLabel"
                         >
-                          Programar la publicación
+                          Schedule Post
                         </h1>
                         <div className="ms-auto" data-bs-theme="dark">
                           <button
@@ -225,7 +225,7 @@ export const PostDealCard = () => {
                           className="btn text-white"
                           style={{ background: "#992899" }}
                         >
-                          Guardar
+                          Save
                         </button>
                       </div>
                     </div>

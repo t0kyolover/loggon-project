@@ -1,10 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const Profile = () => {
+export const Profile = (props) => {
   const { store, actions } = useContext(Context);
+  const params = useParams();
+
   const [username, setUsername] = useState("@Pere");
   const [email, setEmail] = useState("pereayats@email.com");
   const [steamUsername, setSteamUsername] = useState("");
@@ -19,7 +22,7 @@ export const Profile = () => {
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-column text-white">
-          <h3 className="ms-3">Mi perfil</h3>
+          <h3 className="ms-3">My Profile</h3>
 
           <form className="d-flex flex-row flex-wrap">
             <div>
@@ -48,7 +51,7 @@ export const Profile = () => {
 
             <ul className="list-group">
               {/*---------------------------------------Username---------------------------------*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>Usuario</div>
+              <div style={{ fontSize: "12px", color: "#992899" }}>Username</div>
               <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
                 <div className="w-100">
                   {usernameClicked ? (
@@ -73,7 +76,7 @@ export const Profile = () => {
                 </div>
               </li>
               {/*---------------------------------------Email---------------------------------*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>Correo</div>
+              <div style={{ fontSize: "12px", color: "#992899" }}>Email</div>
               <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
                 <div className="w-100">
                   {emailClicked ? (
@@ -100,7 +103,7 @@ export const Profile = () => {
               {/*---------------------------------------Password---------------------------------*/}
               {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>
-                Contraseña
+                Password
               </div>
               <div className="d-flex flex-row">
                 <li className="list-group-item rounded-5 my-2 text-white bg-transparent">
@@ -112,11 +115,11 @@ export const Profile = () => {
                   className="btn text-white rounded-5 ms-3"
                   style={{ background: "#992899" }}
                 >
-                  Cambiar
+                  Change
                 </button>
               </div>
               {/*---------------------------------------Platforms usernames---------------------------------*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>Vincular</div>
+              <div style={{ fontSize: "12px", color: "#992899" }}>Link</div>
               <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
                 {/*---------------------------------------Steam---------------------------------*/}
                 <p className="me-2">
@@ -173,7 +176,7 @@ export const Profile = () => {
               </li>
               {/*---------------------------------------Interests---------------------------------*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>
-                Intereses
+                Interests
               </div>
               <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
                 <div className="d-flex flex-wrap gap-2">
@@ -225,7 +228,7 @@ export const Profile = () => {
                           className="modal-title fs-5"
                           id="modifyInterestsModalLabel"
                         >
-                          Intereses
+                          Interests
                         </h1>
                         <div className="ms-auto" data-bs-theme="dark">
                           <button
@@ -241,7 +244,7 @@ export const Profile = () => {
                           type="search"
                           className="form-control rounded-5 bg-transparent text-white mb-3"
                         ></input>
-                        <small>Mis intereses</small>
+                        <small>My interests</small>
                         <ul className="list-group border-0 my-2 bg-transparent d-flex flex-row">
                           <div className="d-flex flex-wrap gap-2 justify-content-center">
                             <li className="list-group-item bg-transparent text-white rounded-5 border-white border p-2">
@@ -271,7 +274,7 @@ export const Profile = () => {
                           className="btn"
                           style={{ background: "#992899" }}
                         >
-                          Guardar cambios
+                          Save changes
                         </button>
                       </div>
                     </div>
@@ -297,7 +300,7 @@ export const Profile = () => {
               aria-selected="true"
               style={{ color: "#992899" }}
             >
-              Mis ofertas
+              My deals
             </button>
             <button
               className="nav-link"
@@ -310,7 +313,7 @@ export const Profile = () => {
               aria-selected="false"
               style={{ color: "#992899" }}
             >
-              Guardados
+              Saved
             </button>
             <button
               className="nav-link"
@@ -323,12 +326,13 @@ export const Profile = () => {
               aria-selected="false"
               style={{ color: "#992899" }}
             >
-              Alertas
+              Alerts
             </button>
           </div>
         </nav>
         {/*---------------------------------------TABS CONTENT---------------------------------*/}
         <div className="tab-content text-white" id="nav-tabContent">
+          {/*---------------------------------------My deals---------------------------------*/}
           <div
             className="tab-pane fade show active d-flex justify-content-center"
             id="nav-my-posts"
@@ -338,6 +342,7 @@ export const Profile = () => {
           >
             Grid with deal cards
           </div>
+          {/*---------------------------------------Saved---------------------------------*/}
           <div
             className="tab-pane fade d-flex justify-content-center"
             id="nav-saved"
@@ -347,6 +352,7 @@ export const Profile = () => {
           >
             Grid with saved deals
           </div>
+          {/*---------------------------------------Alerts---------------------------------*/}
           <div
             className="tab-pane fade d-flex justify-content-center"
             id="nav-alerts"
