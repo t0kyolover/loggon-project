@@ -8,6 +8,17 @@ export const SingleDeal = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
+  const [gameTitle, setGameTitle] = useState("GTA -ONLINE");
+  const [type, setType] = useState("DLC");
+  const [format, setFormat] = useState("Digital");
+  const [originalPrice, setOriginalPrice] = useState(100);
+  const [offerPrice, setOfferPrice] = useState(65);
+  const [dealPublisher, setDealPublisher] = useState("pere");
+  const [offerLink, setOfferLink] = useState(
+    "https://store.steampowered.com/app/397540/Borderlands_3/"
+  );
+  const [rating, setRating] = useState(10);
+
   return (
     <div className="container-fluid">
       <div className="d-flex justify-content-center w-100 mt-3">
@@ -23,21 +34,26 @@ export const SingleDeal = (props) => {
           {/*------------------------------------DEAL DETAILS---------------------------------*/}
           <div className="d-flex flex-column justify-content-between p-5 col-8 col-md-4">
             <div>
-              <h3 className="pb-3">GTA -ONLINE (title)</h3>
-              <h5 className="pb-3">type</h5>
-              <h5 className="pb-3">Digital/CD</h5>
-              <h5 className="pb-3">$ 000,00(original price)</h5>
-              <h5 className="pb-3">$ 000,00(offer price)</h5>
-              <h5 className="pb-3">publisher username</h5>
+              <h3 className="pb-3">{gameTitle}</h3>
+              <h5 className="pb-3">{type}</h5>
+              <h5 className="pb-3">{format}</h5>
+              <h5 className="pb-3 text-decoration-line-through">
+                {originalPrice} €
+              </h5>
+              <h5 className="pb-3">{offerPrice} €</h5>
+              <Link to="/profile/:username">
+                <h5 className="pb-3">@{dealPublisher}</h5>
+              </Link>
             </div>
             {/*------------------------------------OFFER LINK---------------------------------*/}
-            <button
-              type="button"
+            <a
+              role="button"
               className="btn text-white rounded-5"
               style={{ background: "#992899", alignSelf: "start" }}
+              href={offerLink}
             >
-              Offer link
-            </button>
+              Deal
+            </a>
           </div>
           {/*------------------------------------RATING---------------------------------*/}
           <div className="p-5 col-4 col-md-2 d-flex align-items-end">

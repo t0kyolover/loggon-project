@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const PostDealCard = () => {
+export const PostDealCard = (props) => {
   const { store, actions } = useContext(Context);
   const [scheduled, setScheduled] = useState(false);
 
@@ -30,7 +30,7 @@ export const PostDealCard = () => {
                     type="search"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placeholder="Game title"
-                    required
+                    
                   />
                 </li>
                 {/*---------------------------------------Platform---------------------------------*/}
@@ -40,7 +40,7 @@ export const PostDealCard = () => {
                 >
                   <select
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
-                    required
+                    
                   >
                     <option value="PC">PC</option>
                     <option value="PC">PS4</option>
@@ -56,7 +56,7 @@ export const PostDealCard = () => {
                   <select
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placeholder="Type"
-                    required
+                    
                   >
                     <option value="PC">Game</option>
                     <option value="PC">DLC</option>
@@ -107,7 +107,7 @@ export const PostDealCard = () => {
                     type="number"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placeholder="Original price"
-                    required
+                    
                   />
                 </li>
                 {/*---------------------------------------Promo Price---------------------------------*/}
@@ -119,7 +119,7 @@ export const PostDealCard = () => {
                     type="number"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placeholder="Offer price"
-                    required
+                    
                   />
                 </li>
                 {/*---------------------------------------Exp Date---------------------------------*/}
@@ -153,7 +153,7 @@ export const PostDealCard = () => {
                     type="text"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placehoolder="Offer link"
-                    required
+                    
                   />
                 </li>
                 {/*---------------------------------------Schedule Post---------------------------------*/}
@@ -167,23 +167,35 @@ export const PostDealCard = () => {
                       className="form-check-input"
                       type="checkbox"
                     />
-                    <label className="form-check-label ms-2" htmlFor="scheduleCheck">
+                    <label
+                      className="form-check-label ms-2"
+                      htmlFor="scheduleCheck"
+                    >
                       Schedule
                     </label>
                     {/*---------------------------------------Schedule Post Modal Trigger---------------------------------*/}
-                    {scheduled && (
-                      <button
-                        type="button"
-                        className="btn btn-link"
-                        id="scheduleCheck"
-                        data-bs-toggle="modal"
-                        data-bs-target="#scheduleModal"
-                      >
-                        Choose date and time
-                      </button>
-                    )}
+                    <div className="d-inline-flex">
+                      {scheduled && (
+                        <button
+                          type="button"
+                          className="btn btn-link"
+                          id="scheduleCheck"
+                          data-bs-toggle="modal"
+                          data-bs-target="#scheduleModal"
+                        >
+                          Choose date and time
+                        </button>
+                      )}
+                      {/*---------------------------------------DELETE BUTTON---------------------------------*/}
+                      {props.isAdditional && (
+                        <button className="btn py-0" onClick={props.onClick}>
+                          <i className="fa-regular fa-trash-can text-danger"></i>
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </li>
+
                 {/*---------------------------------------Schedule Post Modal---------------------------------*/}
                 <div
                   className="modal fade"

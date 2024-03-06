@@ -380,7 +380,7 @@ export const Navbar = () => {
         <div className="d-flex flex-column ms-4 my-3">
           <Link
             className="text-white text-decoration-none mb-2"
-            to={"/profile/:username"}
+            to={"/myprofile/:username"}
           >
             My profile
           </Link>
