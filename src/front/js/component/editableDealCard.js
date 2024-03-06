@@ -10,6 +10,7 @@ export const EditableDealCard = () => {
   const [format, setFormat] = useState("Digital");
   const [offerPrice, setOfferPrice] = useState(100);
   const [rating, setRating] = useState(10);
+  const [scheduled, setScheduled] = useState(false);
 
   return (
     <div className="card" style={{ width: "18rem" }}>
@@ -23,23 +24,14 @@ export const EditableDealCard = () => {
             Details
           </Link>
         </div>
-        {/*--------------------------MODIFY DEAL MODAL TRIGGER BUTTON----------------------*/}
         <div className="ms-auto">
-          <button
-            className="btn py-0"
-            data-bs-toggle="modal"
-            data-bs-target="#editDealModalToggle"
-          >
-            <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
-          </button>
-          <p>Rating {rating}</p>
           {/*--------------------------MODIFY DEAL MODAL----------------------*/}
           <div
             className="modal fade"
             id="editDealModalToggle"
-            tabIndex="-1"
-            aria-labelledby="editDealModalToggleLabel"
             aria-hidden="true"
+            aria-labelledby="editDealModalToggleLabel"
+            tabIndex="-1"
           >
             <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content bg-dark text-white">
@@ -129,31 +121,99 @@ export const EditableDealCard = () => {
                                 required
                               />
                             </li>
+                            {/*------------------------------------Schedule Post---------------------------------*/}
+                            <li
+                              className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row"
+                              style={{ maxHeight: "35px" }}
+                            >
+                              <div className="form-check d-flex flex-row align-items-center">
+                                <input
+                                  onChange={(e) => setScheduled(!scheduled)}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                />
+                                <label
+                                  className="form-check-label ms-2"
+                                  htmlFor="scheduleCheck"
+                                >
+                                  Schedule
+                                </label>
+                                {/*-------------------------Schedule Post Modal Trigger Button-----------------------*/}
+                                {scheduled && (
+                                  <button
+                                className="btn btn-link btn-sm"
+                                data-bs-target="#editScheduleModalToggle"
+                                data-bs-toggle="modal"
+                              >
+                                Choose date and time
+                              </button>
+                                )}
+                              </div>
+                            </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </form>
                 </div>
+              </div>
+            </div>
+          </div>
+          {/*---------------------------------------Schedule Post Modal---------------------------------*/}
+          <div
+            className="modal fade"
+            id="editScheduleModalToggle"
+            aria-hidden="true"
+            aria-labelledby="editScheduleModalToggleLabel"
+            tabIndex="-1"
+          >
+            <div className="modal-dialog modal-sm modal-dialog-centered">
+              <div className="modal-content bg-dark text-white">
+                <div className="modal-header border-0">
+                  <h1
+                    className="modal-title fs-5"
+                    id="editScheduleModalToggleLabel"
+                  >
+                    Schedule Post
+                  </h1>
+                </div>
+                <div className="modal-body">
+                  <input
+                    type="date"
+                    className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
+                  />
+                  <input
+                    type="time"
+                    className="form-control rounded-5 text-white bg-transparent h-100"
+                  />
+                </div>
                 <div className="modal-footer border-0">
                   <button
-                    type="button"
-                    className="btn btn-danger"
-                    data-bs-dismiss="modal"
+                    className="btn btn-primary"
+                    data-bs-target="#editDealModalToggle"
+                    data-bs-toggle="modal"
                   >
-                    Delete
+                    Back
                   </button>
                   <button
-                    type="button"
                     className="btn text-white"
                     style={{ background: "#992899" }}
                   >
-                    Save changes
+                    Save
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          {/*--------------------------MODIFY DEAL MODAL TRIGGER BUTTON----------------------*/}
+          <button
+            className="btn py-0"
+            data-bs-target="#editDealModalToggle"
+            data-bs-toggle="modal"
+          >
+            <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
+          </button>
+          <p>Rating {rating}</p>
         </div>
       </div>
     </div>
