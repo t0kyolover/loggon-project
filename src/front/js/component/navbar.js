@@ -160,10 +160,7 @@ export const Navbar = () => {
                     </div>
 
                     <div className="mb-1">
-                      <label
-                        htmlFor="signupEmailInput"
-                        className="form-label"
-                      >
+                      <label htmlFor="signupEmailInput" className="form-label">
                         Email
                       </label>
                       <input
@@ -175,7 +172,10 @@ export const Navbar = () => {
                     </div>
 
                     <div className="mb-1">
-                      <label htmlFor="signupPasswordInput" className="form-label">
+                      <label
+                        htmlFor="signupPasswordInput"
+                        className="form-label"
+                      >
                         Password
                       </label>
                       <input
@@ -223,7 +223,11 @@ export const Navbar = () => {
                         style={{ fontSize: "10px" }}
                       >
                         I have read and accept the{" "}
-                        <Link to="/" className="form-check-label btn btn-link">
+                        <Link to="/privacyPolicy">
+                          <button
+                            className="form-check-label btn btn-link"
+                            data-bs-dismiss="modal"
+                          ></button>
                           Terms & Conditions of Use and Privacy Policy
                         </Link>
                       </label>
@@ -297,10 +301,7 @@ export const Navbar = () => {
                 {/*---------------------------------------Login modal form---------------------------------*/}
                 <form>
                   <div className="mb-3">
-                    <label
-                      htmlFor="loginEmailInput"
-                      className="form-label"
-                    >
+                    <label htmlFor="loginEmailInput" className="form-label">
                       Email
                     </label>
                     <input

@@ -61,7 +61,7 @@ export const RecoveryPassword = (props) => {
               <button class="btn btn-primary me-md-2 border-0" style={{ background: "#992899" }} type="button">
                 Reset Password
               </button>
-              </div>
+            </div>
 
           </form>
         </div>
