@@ -112,13 +112,14 @@ export const MyProfile = (props) => {
                     <p className="fw-bold mb-0">*********</p>
                   </div>
                 </li>
-                <Link
-                  to="/password_recovery/:username"
+                <Link to="/password/recovery/:username">
+                <button
                   className="btn text-white rounded-5 ms-3"
                   style={{ background: "#992899" }}
                   
                 >
                   Change
+                </button>
                 </Link>
               </div>
               {/*---------------------------------------Platforms usernames---------------------------------*/}
