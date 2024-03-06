@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
+import { EditableDealCard } from "../component/editableDealCard";
 import { DealCard } from "../component/dealCard";
 
 import { Context } from "../store/appContext";
@@ -104,9 +105,7 @@ export const Profile = (props) => {
               </li>
               {/*---------------------------------------Password---------------------------------*/}
               {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>
-                Password
-              </div>
+              <div style={{ fontSize: "12px", color: "#992899" }}>Password</div>
               <div className="d-flex flex-row">
                 <li className="list-group-item rounded-5 my-2 text-white bg-transparent">
                   <div className="me-auto">
@@ -344,21 +343,20 @@ export const Profile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
               </div>
             </div>
-           
           </div>
           {/*---------------------------------------Saved---------------------------------*/}
           <div
@@ -368,20 +366,20 @@ export const Profile = (props) => {
             aria-labelledby="nav-saved-tab"
             tabIndex="0"
           >
-             <div className="container text-center">
+            <div className="container text-center">
               <div className="row row-cols-auto">
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
               </div>
             </div>
           </div>
@@ -395,18 +393,18 @@ export const Profile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
-              <div className="col mx-2 my-4">
-                <DealCard />
-              </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
               </div>
             </div>
           </div>
