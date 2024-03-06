@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   useEffect(() => {
     if (!searchTerm) {
@@ -33,6 +33,7 @@ export const Navbar = () => {
               data-bs-target="#navbar-menu"
               aria-expanded="false"
               aria-controls="navbar-menu"
+              data-bs-auto-close="outside"
             >
               <i className="fa-solid fa-bars" style={{ color: "#992899" }}></i>
             </button>
