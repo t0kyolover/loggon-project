@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
+import { DealCard } from "../component/dealCard";
+
 import { Context } from "../store/appContext";
 
 export const Profile = (props) => {
@@ -334,33 +336,79 @@ export const Profile = (props) => {
         <div className="tab-content text-white" id="nav-tabContent">
           {/*---------------------------------------My deals---------------------------------*/}
           <div
-            className="tab-pane fade show active d-flex justify-content-center"
+            className="tab-pane fade show active"
             id="nav-my-posts"
             role="tabpanel"
             aria-labelledby="nav-my-posts-tab"
             tabIndex="0"
           >
-            Grid with deal cards
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              </div>
+            </div>
+           
           </div>
           {/*---------------------------------------Saved---------------------------------*/}
           <div
-            className="tab-pane fade d-flex justify-content-center"
+            className="tab-pane fade"
             id="nav-saved"
             role="tabpanel"
             aria-labelledby="nav-saved-tab"
             tabIndex="0"
           >
-            Grid with saved deals
+             <div className="container text-center">
+              <div className="row row-cols-auto">
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              </div>
+            </div>
           </div>
           {/*---------------------------------------Alerts---------------------------------*/}
           <div
-            className="tab-pane fade d-flex justify-content-center"
+            className="tab-pane fade"
             id="nav-alerts"
             role="tabpanel"
             aria-labelledby="nav-alerts-tab"
             tabIndex="0"
           >
-            Grid with deal cards based on interests
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              <div className="col mx-2 my-4">
+                <DealCard />
+              </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
