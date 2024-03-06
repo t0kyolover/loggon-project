@@ -38,16 +38,18 @@ export const GameCard = () => {
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content bg-dark text-white">
-              <div className="modal-header">
+              <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="detailsModalLabel">
                   Game Details
                 </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <div className="ms-auto" data-bs-theme="dark">
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
               </div>
               <div className="modal-body p-0">
                 <div
@@ -98,7 +100,7 @@ export const GameCard = () => {
                   {/* Your content here */}
                 </div>
               </div>
-              <div className="modal-footer">
+              <div className="modal-footer border-0">
                 <p style={{ color: "#992899" }}>
                   Made by DKA <i className="fa-solid fa-skull-crossbones"></i>
                 </p>

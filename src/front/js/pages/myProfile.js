@@ -2,13 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
+import { EditableDealCard } from "../component/editableDealCard";
+import { DealCard } from "../component/dealCard";
+
 import { Context } from "../store/appContext";
 
-export const Profile = (props) => {
+export const MyProfile = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  const [username, setUsername] = useState("@Pere");
+  const [username, setUsername] = useState("Pere");
   const [email, setEmail] = useState("pereayats@email.com");
   const [steamUsername, setSteamUsername] = useState("");
   const [twitchUsername, setTwitchUsername] = useState("");
@@ -57,7 +60,7 @@ export const Profile = (props) => {
                   {usernameClicked ? (
                     <input className="form-control border-0 text-white bg-transparent" />
                   ) : (
-                    <p className="fw-bold mb-0">{username}</p>
+                    <p className="fw-bold mb-0">@{username}</p>
                   )}
                 </div>
                 <div className="ms-auto">
@@ -102,21 +105,21 @@ export const Profile = (props) => {
               </li>
               {/*---------------------------------------Password---------------------------------*/}
               {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>
-                Password
-              </div>
+              <div style={{ fontSize: "12px", color: "#992899" }}>Password</div>
               <div className="d-flex flex-row">
                 <li className="list-group-item rounded-5 my-2 text-white bg-transparent">
                   <div className="me-auto">
                     <p className="fw-bold mb-0">*********</p>
                   </div>
                 </li>
+                <Link to="/password/recovery/:username">
                 <button
                   className="btn text-white rounded-5 ms-3"
                   style={{ background: "#992899" }}
                 >
                   Change
                 </button>
+                </Link>
               </div>
               {/*---------------------------------------Platforms usernames---------------------------------*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>Link</div>
@@ -334,33 +337,78 @@ export const Profile = (props) => {
         <div className="tab-content text-white" id="nav-tabContent">
           {/*---------------------------------------My deals---------------------------------*/}
           <div
-            className="tab-pane fade show active d-flex justify-content-center"
+            className="tab-pane fade show active"
             id="nav-my-posts"
             role="tabpanel"
             aria-labelledby="nav-my-posts-tab"
             tabIndex="0"
           >
-            Grid with deal cards
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <EditableDealCard />
+                </div>
+              </div>
+            </div>
           </div>
           {/*---------------------------------------Saved---------------------------------*/}
           <div
-            className="tab-pane fade d-flex justify-content-center"
+            className="tab-pane fade"
             id="nav-saved"
             role="tabpanel"
             aria-labelledby="nav-saved-tab"
             tabIndex="0"
           >
-            Grid with saved deals
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+              </div>
+            </div>
           </div>
           {/*---------------------------------------Alerts---------------------------------*/}
           <div
-            className="tab-pane fade d-flex justify-content-center"
+            className="tab-pane fade"
             id="nav-alerts"
             role="tabpanel"
             aria-labelledby="nav-alerts-tab"
             tabIndex="0"
           >
-            Grid with deal cards based on interests
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+                <div className="col mx-2 my-4">
+                  <DealCard />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

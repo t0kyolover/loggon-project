@@ -224,7 +224,7 @@ export const Navbar = () => {
                         style={{ fontSize: "10px" }}
                       >
                         I have read and accept the{" "}
-                        <Link to="/" className="form-check-label btn btn-link">
+                        <Link to="/privacy_policy" className="form-check-label btn btn-link">
                           Terms & Conditions of Use and Privacy Policy
                         </Link>
                       </label>
@@ -380,7 +380,7 @@ export const Navbar = () => {
         <div className="d-flex flex-column ms-4 my-3">
           <Link
             className="text-white text-decoration-none mb-2"
-            to={"/profile/:username"}
+            to={"/myprofile/:username"}
           >
             My profile
           </Link>
