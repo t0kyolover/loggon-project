@@ -7,11 +7,11 @@ import { DealCard } from "../component/dealCard";
 
 import { Context } from "../store/appContext";
 
-export const Profile = (props) => {
+export const MyProfile = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  const [username, setUsername] = useState("@Pere");
+  const [username, setUsername] = useState("Pere");
   const [email, setEmail] = useState("pereayats@email.com");
   const [steamUsername, setSteamUsername] = useState("");
   const [twitchUsername, setTwitchUsername] = useState("");
@@ -60,7 +60,7 @@ export const Profile = (props) => {
                   {usernameClicked ? (
                     <input className="form-control border-0 text-white bg-transparent" />
                   ) : (
-                    <p className="fw-bold mb-0">{username}</p>
+                    <p className="fw-bold mb-0">@{username}</p>
                   )}
                 </div>
                 <div className="ms-auto">

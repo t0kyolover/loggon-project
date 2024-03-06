@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Profile } from "./pages/profile";
+import { MyProfile } from "./pages/myProfile";
+import { UserProfile } from "./pages/userProfile";
 import { SingleDeal } from "./pages/singleDeal";
 import { PostDeal } from "./pages/postDeal";
 import { SearchResults } from "./pages/searchResults";
@@ -31,11 +32,12 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Feed />} path="/" />
-                        <Route element={<Profile />} path="/profile/:username" />
+                        <Route element={<MyProfile />} path="/myprofile/:username" />
                         <Route element={<SingleDeal />} path="/post/:id" />
                         <Route element={<Games />} path="/games" />
                         <Route element={<SearchResults />} path="/search/results" />
                         <Route element={<PostDeal />} path="/postdeal/:username" />
+                        <Route element={<UserProfile />} path="/profile/:username" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
