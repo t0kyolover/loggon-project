@@ -10,6 +10,7 @@ import { SearchResults } from "./pages/searchResults";
 import { Games } from "./pages/games";
 import { Feed } from "./pages/feed";
 import { RecoveryPassword } from "./pages/recoveryPassword";
+import { PrivacyPolicy } from "./pages/privacyPolicy";
 
 import injectContext from "./store/appContext";
 
@@ -38,6 +39,7 @@ const Layout = () => {
                         <Route element={<Games />} path="/games" />
                         <Route element={<SearchResults />} path="/search/results" />
                         <Route element={<PostDeal />} path="/postdeal/:username" />
+                        <Route element={<PrivacyPolicy />} path="/privacyPolicy" />
                         <Route element={<RecoveryPassword />} path="/password_recovery/:username" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
