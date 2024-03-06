@@ -9,11 +9,13 @@ import { PostDeal } from "./pages/postDeal";
 import { SearchResults } from "./pages/searchResults";
 import { Games } from "./pages/games";
 import { Feed } from "./pages/feed";
+import { RecoveryPassword } from "./pages/recoveryPassword";
 
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+
 
 
 //create your first component
@@ -36,6 +38,7 @@ const Layout = () => {
                         <Route element={<Games />} path="/games" />
                         <Route element={<SearchResults />} path="/search/results" />
                         <Route element={<PostDeal />} path="/postdeal/:username" />
+                        <Route element={<RecoveryPassword />} path="/password_recovery/:username" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
