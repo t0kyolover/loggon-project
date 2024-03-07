@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { DealCard } from "../component/dealCard";
+import { Filters } from "../component/filters";
 
 import { Context } from "../store/appContext";
 
@@ -23,6 +24,9 @@ export const Feed = () => {
           the one in previous versions of Bootstrap. Check out the examples
           below for how you can remix and restyle it to your liking.
         </p>
+      </div>
+      <div className="d-flex justify-content-end pt-4">
+        <Filters />
       </div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
       <div className="container mt-5 ">
