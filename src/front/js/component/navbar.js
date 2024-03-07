@@ -223,7 +223,7 @@ export const Navbar = () => {
                         style={{ fontSize: "10px" }}
                       >
                         I have read and accept the{" "}
-                        <Link to="/privacy_policy" className="form-check-label btn btn-link">
+                        <Link to="/privacy_policy" className="form-check-label btn btn-link" target="_blank">
                           Terms & Conditions of Use and Privacy Policy
                         </Link>
                       </label>
