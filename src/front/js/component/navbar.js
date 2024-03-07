@@ -44,6 +44,7 @@ export const Navbar = () => {
                 alt="Bootstrap"
                 width="40"
                 height="34"
+                className="rounded-circle"
               />
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
@@ -161,10 +162,7 @@ export const Navbar = () => {
                     </div>
 
                     <div className="mb-1">
-                      <label
-                        htmlFor="signupEmailInput"
-                        className="form-label"
-                      >
+                      <label htmlFor="signupEmailInput" className="form-label">
                         Email
                       </label>
                       <input
@@ -176,7 +174,10 @@ export const Navbar = () => {
                     </div>
 
                     <div className="mb-1">
-                      <label htmlFor="signupPasswordInput" className="form-label">
+                      <label
+                        htmlFor="signupPasswordInput"
+                        className="form-label"
+                      >
                         Password
                       </label>
                       <input
@@ -224,7 +225,11 @@ export const Navbar = () => {
                         style={{ fontSize: "10px" }}
                       >
                         I have read and accept the{" "}
-                        <Link to="/privacy_policy" className="form-check-label btn btn-link" target="_blank">
+                        <Link
+                          to="/privacy_policy"
+                          target="_blank"
+                          className="form-check-label btn btn-link"
+                        >
                           Terms & Conditions of Use and Privacy Policy
                         </Link>
                       </label>
@@ -298,10 +303,7 @@ export const Navbar = () => {
                 {/*---------------------------------------Login modal form---------------------------------*/}
                 <form>
                   <div className="mb-3">
-                    <label
-                      htmlFor="loginEmailInput"
-                      className="form-label"
-                    >
+                    <label htmlFor="loginEmailInput" className="form-label">
                       Email
                     </label>
                     <input
@@ -338,16 +340,19 @@ export const Navbar = () => {
                       Remember me
                     </label>
                   </div>
-                  {/*---------------------------------------Login Modal buttons---------------------------------*/}
+
+                  {/*------------------------Forgot Password Modal Trigger Button------------------------*/}
                   <div className="text-center">
                     <button
                       className="btn btn-sm btn-link "
-                      data-bs-target="#loginModalToggle"
+                      data-bs-target="#forgotPasswordModalToggle"
                       data-bs-toggle="modal"
+                      onClick={(e) => e.preventDefault()}
                     >
                       Forgot my password
                     </button>
-                  </div>{" "}
+                  </div>
+                  {/*---------------------------------------Login Modal buttons---------------------------------*/}
                   <div className="modal-footer border-0 flex-column">
                     <button
                       className="btn text-white"
@@ -365,6 +370,54 @@ export const Navbar = () => {
                     </button>
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/*---------------------------------------Forgot Password Modal---------------------------------*/}
+        <div
+          className="modal fade"
+          id="forgotPasswordModalToggle"
+          aria-hidden="true"
+          aria-labelledby="forgotPasswordModalToggleLabel"
+          tabIndex="-1"
+        >
+          <div className="modal-dialog modal-sm modal-dialog-centered">
+            <div className="modal-content bg-dark text-white">
+              <div className="modal-header border-0">
+                <h1
+                  className="modal-title fs-5"
+                  id="forgotPasswordModalToggleLabel"
+                >
+                  Recover password
+                </h1>
+              </div>
+              <div className="modal-body">
+                <input
+                  type="email"
+                  className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
+                  placeholder="Email"
+                />
+                <input
+                  type="email"
+                  className="form-control rounded-5 text-white bg-transparent h-100"
+                  placeholder="Confirm your email"
+                />
+              </div>
+              <div className="modal-footer border-0">
+                <button
+                  className="btn btn-primary"
+                  data-bs-target="#loginModalToggle"
+                  data-bs-toggle="modal"
+                >
+                  Back
+                </button>
+                <button
+                  className="btn text-white"
+                  style={{ background: "#992899" }}
+                >
+                  Confirm
+                </button>
               </div>
             </div>
           </div>
