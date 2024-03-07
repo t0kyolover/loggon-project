@@ -49,6 +49,7 @@ export const SingleDeal = (props) => {
             <a
               role="button"
               className="btn text-white rounded-5"
+              target="_blank"
               style={{ background: "#992899", alignSelf: "start" }}
               href={offerLink}
             >
