@@ -53,7 +53,7 @@ export const Navbar = () => {
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
-                  className="btn p-0"
+                  className="btn p-0 mt-2"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseSearch"
@@ -74,8 +74,8 @@ export const Navbar = () => {
                   <form>
                     <input
                       type="search"
-                      className="form-control rounded-5 w-auto text-white bg-transparent"
-                      style={{ maxHeight: "30px" }}
+                      className="form-control rounded-5 w-auto text-white bg-transparent mt-2"
+                      style={{ maxHeight: "30px"}}
                       aria-label="Búsqueda"
                       value={searchTerm}
                       onChange={handleInputChange}

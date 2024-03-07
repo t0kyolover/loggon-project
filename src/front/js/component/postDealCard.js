@@ -15,7 +15,8 @@ export const PostDealCard = (props) => {
       {/*---------------------------------------DEAL INPUT FORM---------------------------------*/}
       <form>
         <div className="row g-0">
-          <div className="col-md-4">
+          <div className="col-md-4 m-auto text-dark"> {/*---texto del mismo color que el fondo para que sea invisible,
+           pero tenemos que cambiarlo correctamente ----*/}
             <input type="file" className="img-fluid rounded-start" />
           </div>
           <div className="col-md-8">
@@ -35,11 +36,11 @@ export const PostDealCard = (props) => {
                 </li>
                 {/*---------------------------------------Platform---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <select
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-dark h-100 p-0"
                     
                   >
                     <option value="PC">PC</option>
@@ -50,11 +51,11 @@ export const PostDealCard = (props) => {
                 </li>
                 {/*---------------------------------------Type---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <select
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-dark h-100 p-0"
                     placeholder="Type"
                     
                   >
@@ -100,19 +101,19 @@ export const PostDealCard = (props) => {
                 </li>
                 {/*---------------------------------------Original Price---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <input
                     type="number"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent h-100 p-1"
                     placeholder="Original price"
                     
                   />
                 </li>
                 {/*---------------------------------------Promo Price---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <input
@@ -124,18 +125,18 @@ export const PostDealCard = (props) => {
                 </li>
                 {/*---------------------------------------Exp Date---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <input
                     type="date"
                     placeholder="Expiration date"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent p-0"
                   />
                 </li>
                 {/*---------------------------------------Promo Code---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <input
@@ -146,7 +147,7 @@ export const PostDealCard = (props) => {
                 </li>
                 {/*---------------------------------------Offer Link---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <input

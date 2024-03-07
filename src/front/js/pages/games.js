@@ -16,52 +16,36 @@ export const Games = () => {
 
   return (
     <div>
-      <div className="text-center text-white m-5">
+      <div className="text-center text-white m-3">
         <h1 style={{ fontSize: "50px" }}>Games</h1>
       </div>
-      <div className="d-flex justify-content-end pt-4">
+      <div className="d-flex justify-content-end">
         <Filters />
       </div>
       <div className="container text-center">
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-          <div className="col">
+        <div className="row row-cols-auto">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
-          <div className="col">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
-          <div className="col">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
-          <div className="col">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
-        </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-          <div className="col">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
-          <div className="col">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
-          <div className="col">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
-          <div className="col">
-            <GameCard />
-          </div>
-        </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-          <div className="col">
-            <GameCard />
-          </div>
-          <div className="col">
-            <GameCard />
-          </div>
-          <div className="col">
-            <GameCard />
-          </div>
-          <div className="col">
+          <div className="col m-auto my-4">
             <GameCard />
           </div>
         </div>

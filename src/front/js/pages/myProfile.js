@@ -25,10 +25,10 @@ export const MyProfile = (props) => {
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-column text-white">
-          <h3 className="ms-3">My Profile</h3>
+          <h3 className="m-auto my-4 ps-4">My Profile</h3> {/*--------falta de centralización----------*/}
 
           <form className="d-flex flex-row flex-wrap">
-            <div>
+            <div className="m-auto">
               <button
                 className="btn py-0"
                 onClick={(e) => {
@@ -37,7 +37,7 @@ export const MyProfile = (props) => {
                 }}
               >
                 <i
-                  className="fa-solid fa-pencil fa-flip-horizontal"
+                  className="fa-solid fa-pencil fa-flip-horizontal position-absolute translate-middle"
                   style={{ color: "#992899" }}
                 ></i>
               </button>
@@ -52,7 +52,7 @@ export const MyProfile = (props) => {
               )}
             </div>
 
-            <ul className="list-group">
+            <ul className="list-group m-auto">
               {/*---------------------------------------Username---------------------------------*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>Username</div>
               <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
@@ -345,16 +345,16 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <EditableDealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <EditableDealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <EditableDealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <EditableDealCard />
                 </div>
               </div>
@@ -370,16 +370,16 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
               </div>
@@ -395,16 +395,16 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col mx-2 my-4">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
               </div>
