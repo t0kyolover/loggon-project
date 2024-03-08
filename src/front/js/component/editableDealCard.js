@@ -3,27 +3,19 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const EditableDealCard = () => {
+export const EditableDealCard = (props) => {
   const { store, actions } = useContext(Context);
 
-  const [gameTitle, setGameTitle] = useState("Game Title");
-  const [format, setFormat] = useState("Digital");
-  const [offerPrice, setOfferPrice] = useState(100);
-  const [rating, setRating] = useState(10);
-  const [expirationDate, setExpirationDate] = useState("");
-  const [promoCode, setPromoCode] = useState("");
   const [scheduled, setScheduled] = useState(false);
-  const [scheduledDate, setScheduledDate] = useState("");
-  const [scheduledTime, setScheduledTime] = useState("");
-
+  
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src="https://picsum.photos/200" className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex">
         <div>
-          <h5 className="card-title">{gameTitle}</h5>
-          <p className="card-text">{format}</p>
-          <p className="card-text">{offerPrice} €</p>
+          <h5 className="card-title">{props.gameTitle}</h5>
+          <p className="card-text">{props.format}</p>
+          <p className="card-text">{props.offerPrice} €</p>
           <Link className="btn btn-link" to="/post/:id">
             Details
           </Link>
@@ -75,8 +67,8 @@ export const EditableDealCard = () => {
                               <input
                                 type="number"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={offerPrice}
-                                onChange={(e) => setOfferPrice(e.target.value)}
+                                value={props.offerPrice}
+                                onChange={props.setOfferPrice}
                                 required
                               />
                             </li>
@@ -88,10 +80,8 @@ export const EditableDealCard = () => {
                               <input
                                 type="date"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={expirationDate}
-                                onChange={(e) =>
-                                  setExpirationDate(e.target.value)
-                                }
+                                value={props.expirationDate}
+                                onChange={props.setExpirationDate}
                               />
                             </li>
                             {/*---------------------------------------Promo Code---------------------------------*/}
@@ -102,8 +92,8 @@ export const EditableDealCard = () => {
                               <input
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={promoCode}
-                                onChange={(e) => setPromoCode(e.target.value)}
+                                value={props.promoCode}
+                                onChange={props.setPromoCode}
                               />
                             </li>
                             {/*------------------------------------Schedule Post---------------------------------*/}
@@ -167,14 +157,14 @@ export const EditableDealCard = () => {
                   <input
                     type="date"
                     className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
-                    value={scheduledDate}
-                    onChange={(e) => setScheduledDate(e.target.value)}
+                    value={props.scheduledDate}
+                    onChange={props.setScheduledDate}
                   />
                   <input
                     type="time"
                     className="form-control rounded-5 text-white bg-transparent h-100"
-                    value={scheduledTime}
-                    onChange={(e) => setScheduledTime(e.target.value)}
+                    value={props.scheduledTime}
+                    onChange={props.setScheduledTime}
                   />
                 </div>
                 <div className="modal-footer border-0">
@@ -198,7 +188,7 @@ export const EditableDealCard = () => {
           >
             <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
           </button>
-          <p>Rating {rating}</p>
+          <p>Rating {props.rating}</p>
         </div>
       </div>
     </div>

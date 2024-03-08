@@ -41,6 +41,14 @@ export const MyProfile = (props) => {
     "Alert3",
     "Alert4",
   ]);
+  const [gameTitle, setGameTitle] = useState("GTA");
+  const [format, setFormat] = useState("Digital");
+  const [offerPrice, setOfferPrice] = useState(100);
+  const [rating, setRating] = useState(10);
+  const [expirationDate, setExpirationDate] = useState("");
+  const [promoCode, setPromoCode] = useState("");
+  const [scheduledDate, setScheduledDate] = useState("");
+  const [scheduledTime, setScheduledTime] = useState("");
 
   useEffect(() => {}, [interests]);
 
@@ -432,7 +440,21 @@ export const MyProfile = (props) => {
                 ) : (
                   myPosts.map((post, index) => (
                     <div className="col mx-2 my-4" key={index}>
-                      <EditableDealCard />
+                      <EditableDealCard
+                        gameTitle={gameTitle}
+                        format={format}
+                        rating={rating}
+                        offerPrice={offerPrice}
+                        setOfferPrice={(e) => setOfferPrice(e.target.value)}
+                        expirationDate={expirationDate}
+                        setExpirationDate={(e) => setExpirationDate(e.target.value)}
+                        promoCode={promoCode}
+                        setPromoCode={(e) => setPromoCode(e.target.value)}
+                        scheduledDate={scheduledDate}
+                        setScheduledDate={(e) => setScheduledDate(e.target.value)}
+                        scheduledTime={scheduledTime}
+                        setScheduledTime={(e) => setScheduledTime(e.target.value)}
+                      />
                     </div>
                   ))
                 )}
