@@ -37,10 +37,10 @@ export const Filters = () => {
               className="form-select mb-2 bg-transparent text-white"
               aria-label="Default select example"
             >
-              <option selected>By type</option>
-              <option value="1">Game</option>
-              <option value="2">DLC</option>
-              <option value="3">In-game Purchase</option>
+              <option defaultValue="By Type">By Type</option>
+              <option value="Game">Game</option>
+              <option value="DLC">DLC</option>
+              <option value="In-game Purchase">In-game Purchase</option>
             </select>
             <div className="my-3">
               <div className="form-check form-switch">
@@ -50,7 +50,7 @@ export const Filters = () => {
                   role="switch"
                   id="dateFilterSwitch"
                 />
-                <label className="form-check-label" for="dateFilterSwitch">
+                <label className="form-check-label" htmlFor="dateFilterSwitch">
                   newest
                 </label>
               </div>
@@ -61,7 +61,7 @@ export const Filters = () => {
                   role="switch"
                   id="ratingFilterSwitch"
                 />
-                <label className="form-check-label" for="ratingFilterSwitch">
+                <label className="form-check-label" htmlFor="ratingFilterSwitch">
                   highest rating
                 </label>
               </div>
@@ -76,7 +76,7 @@ export const Filters = () => {
                   id="formatDigitalFilter"
                   value="Digital"
                 />
-                <label className="form-check-label" for="formatDigitalFilter">
+                <label className="form-check-label" htmlFor="formatDigitalFilter">
                   Digital
                 </label>
               </div>
@@ -88,7 +88,7 @@ export const Filters = () => {
                   id="formatCDFilter"
                   value="CD"
                 />
-                <label className="form-check-label" for="formatCDFilter">
+                <label className="form-check-label" htmlFor="formatCDFilter">
                   CD
                 </label>
               </div>

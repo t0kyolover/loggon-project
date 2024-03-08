@@ -11,40 +11,20 @@ export const MyProfile = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  const [username, setUsername] = useState("Pere");
-  const [email, setEmail] = useState("pereayats@email.com");
-  const [imageUrl, setImageUrl] = useState(
-    "https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116"
-  );
-  const [steamUsername, setSteamUsername] = useState("pereayts");
-  const [twitchUsername, setTwitchUsername] = useState("pereayts");
-  const [interests, setInterests] = useState([
-    "Single Player",
-    "Horror",
-    "Survival",
-    "Third Person",
-    "Action-Adventure",
-    "3D",
-  ]);
+  const [username, setUsername] = useState(store.user.username);
+  const [email, setEmail] = useState(store.user.email);
+  const [imageUrl, setImageUrl] = useState(store.user.image_url);
+  const [steamUsername, setSteamUsername] = useState(store.user.steam_username);
+  const [twitchUsername, setTwitchUsername] = useState(store.user.twitch_username);
+  const [interests, setInterests] = useState(store.user.interests);
   const [newInterest, setNewInterest] = useState("");
   const [clicked, setClicked] = useState("");
-  const [myPosts, setMyPosts] = useState(["Post1", "Post2", "Post3", "Post4"]);
-  const [savedDeals, setSavedDeals] = useState([
-    "Saved1",
-    "Saved2",
-    "Saved3",
-    "Saved4",
-  ]);
-  const [myAlerts, setMyAlerts] = useState([
-    "Alert1",
-    "Alert2",
-    "Alert3",
-    "Alert4",
-  ]);
-  const [gameTitle, setGameTitle] = useState("GTA");
-  const [format, setFormat] = useState("Digital");
-  const [offerPrice, setOfferPrice] = useState(100);
-  const [rating, setRating] = useState(10);
+  const [myPosts, setMyPosts] = useState(store.user.posts);
+  const [savedDeals, setSavedDeals] = useState(store.user.saved);
+  const [myAlerts, setMyAlerts] = useState(store.user.alerts);
+  
+  
+  const [offerPrice, setOfferPrice] = useState();
   const [expirationDate, setExpirationDate] = useState("");
   const [promoCode, setPromoCode] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
@@ -64,7 +44,6 @@ export const MyProfile = (props) => {
     console.log(interests);
   }
 
-  /*Conectar useStates con sus useEffects*/
   return (
     /*Put store.loggedIn variable here*/
     <div className="container-fluid m-auto">
@@ -441,19 +420,25 @@ export const MyProfile = (props) => {
                   myPosts.map((post, index) => (
                     <div className="col mx-2 my-4" key={index}>
                       <EditableDealCard
-                        gameTitle={gameTitle}
-                        format={format}
-                        rating={rating}
-                        offerPrice={offerPrice}
+                        gameTitle={post.game_title}
+                        format={post.format}
+                        rating={post.rating}
+                        offerPrice={post.offer_price}
                         setOfferPrice={(e) => setOfferPrice(e.target.value)}
-                        expirationDate={expirationDate}
-                        setExpirationDate={(e) => setExpirationDate(e.target.value)}
-                        promoCode={promoCode}
+                        expirationDate={post.expiration_date}
+                        setExpirationDate={(e) =>
+                          setExpirationDate(e.target.value)
+                        }
+                        promoCode={post.promo_code}
                         setPromoCode={(e) => setPromoCode(e.target.value)}
-                        scheduledDate={scheduledDate}
-                        setScheduledDate={(e) => setScheduledDate(e.target.value)}
-                        scheduledTime={scheduledTime}
-                        setScheduledTime={(e) => setScheduledTime(e.target.value)}
+                        scheduledDate={post.sheduled_date}
+                        setScheduledDate={(e) =>
+                          setScheduledDate(e.target.value)
+                        }
+                        scheduledTime={post.sheduled_time}
+                        setScheduledTime={(e) =>
+                          setScheduledTime(e.target.value)
+                        }
                       />
                     </div>
                   ))
