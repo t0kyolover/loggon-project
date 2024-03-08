@@ -121,7 +121,7 @@ export const MyProfile = (props) => {
                   {clicked == "username" ? (
                     <input
                       className="form-control border-0 text-white bg-transparent"
-                      value={`@${username}`}
+                      value={username}
                       onChange={(e) => setUsername(e.target.value)}
                     />
                   ) : (
