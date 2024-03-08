@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const DealCard = () => {
+export const DealCard = (props) => {
   const { store, actions } = useContext(Context);
 
   const [gameTitle, setGameTitle] = useState("Game Title");

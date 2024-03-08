@@ -11,8 +11,8 @@ export const UserProfile = (props) => {
   const params = useParams();
 
   const [username, setUsername] = useState("Pere");
-  const [steamUsername, setSteamUsername] = useState("");
-  const [twitchUsername, setTwitchUsername] = useState("");
+  const [steamUsername, setSteamUsername] = useState("DomBobomb");
+  const [twitchUsername, setTwitchUsername] = useState("illojuan");
 
   return (
     <div className="container-fluid m-auto">
@@ -38,10 +38,17 @@ export const UserProfile = (props) => {
               <li className="list-group-item border-0 p-0 my-2 text-white bg-transparent">
                 <div className="d-grid d-md-flex">
                   <div className="p-2 g-col-6">
-                    <i className="fa-brands fa-steam text-white fs-3"></i>
+                    <a
+                      href={`https://steamcommunity.com/id/${steamUsername}`}
+                      target="_blank"
+                    >
+                      <i className="fa-brands fa-steam text-white fs-3"></i>
+                    </a>
                   </div>
                   <div className="p-2 g-col-6">
-                  <i className="fa-brands fa-twitch text-white fs-3"></i>
+                    <a href={`https://www.twitch.tv/${twitchUsername}`} target="_blank">
+                      <i className="fa-brands fa-twitch text-white fs-3"></i>
+                    </a>
                   </div>
                 </div>
               </li>
@@ -52,7 +59,7 @@ export const UserProfile = (props) => {
       {/*---------------------------------------POSTS---------------------------------*/}
       <div className="row m-3">
         <div className="container text-center">
-            <h3 className="text-white">{username}'s deals</h3>
+          <h3 className="text-white">{username}'s deals</h3>
           <div className="row row-cols-auto">
             <div className="col mx-2 my-4">
               <DealCard />

@@ -3,23 +3,19 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const EditableDealCard = () => {
+export const EditableDealCard = (props) => {
   const { store, actions } = useContext(Context);
 
-  const [gameTitle, setGameTitle] = useState("Game Title");
-  const [format, setFormat] = useState("Digital");
-  const [offerPrice, setOfferPrice] = useState(100);
-  const [rating, setRating] = useState(10);
   const [scheduled, setScheduled] = useState(false);
-
+  
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src="https://picsum.photos/200" className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex">
         <div>
-          <h5 className="card-title">{gameTitle}</h5>
-          <p className="card-text">{format}</p>
-          <p className="card-text">{offerPrice} €</p>
+          <h5 className="card-title">{props.gameTitle}</h5>
+          <p className="card-text">{props.format}</p>
+          <p className="card-text">{props.offerPrice} €</p>
           <Link className="btn btn-link" to="/post/:id">
             Details
           </Link>
@@ -63,7 +59,7 @@ export const EditableDealCard = () => {
                       <div className="col-md-8">
                         <div className="card-body">
                           <ul className="list-group">
-                            {/*---------------------------------------Original Price---------------------------------*/}
+                            {/*---------------------------------------Offer Price---------------------------------*/}
                             <li
                               className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
                               style={{ maxHeight: "35px" }}
@@ -71,19 +67,8 @@ export const EditableDealCard = () => {
                               <input
                                 type="number"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                placeholder="Original price"
-                                required
-                              />
-                            </li>
-                            {/*---------------------------------------Promo Price---------------------------------*/}
-                            <li
-                              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
-                              style={{ maxHeight: "35px" }}
-                            >
-                              <input
-                                type="number"
-                                className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                placeholder="Offer price"
+                                value={props.offerPrice}
+                                onChange={props.setOfferPrice}
                                 required
                               />
                             </li>
@@ -94,8 +79,9 @@ export const EditableDealCard = () => {
                             >
                               <input
                                 type="date"
-                                placeholder="Expiration date"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
+                                value={props.expirationDate}
+                                onChange={props.setExpirationDate}
                               />
                             </li>
                             {/*---------------------------------------Promo Code---------------------------------*/}
@@ -106,19 +92,8 @@ export const EditableDealCard = () => {
                               <input
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                placeholder="Promocode"
-                              />
-                            </li>
-                            {/*---------------------------------------Offer Link---------------------------------*/}
-                            <li
-                              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
-                              style={{ maxHeight: "35px" }}
-                            >
-                              <input
-                                type="text"
-                                className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                placehoolder="Offer link"
-                                required
+                                value={props.promoCode}
+                                onChange={props.setPromoCode}
                               />
                             </li>
                             {/*------------------------------------Schedule Post---------------------------------*/}
@@ -141,12 +116,13 @@ export const EditableDealCard = () => {
                                 {/*-------------------------Schedule Post Modal Trigger Button-----------------------*/}
                                 {scheduled && (
                                   <button
-                                className="btn btn-link btn-sm"
-                                data-bs-target="#editScheduleModalToggle"
-                                data-bs-toggle="modal"
-                              >
-                                Choose date and time
-                              </button>
+                                    className="btn btn-link btn-sm"
+                                    data-bs-target="#editScheduleModalToggle"
+                                    data-bs-toggle="modal"
+                                    onClick={(e) => e.preventDefault()}
+                                  >
+                                    Choose date and time
+                                  </button>
                                 )}
                               </div>
                             </li>
@@ -181,25 +157,24 @@ export const EditableDealCard = () => {
                   <input
                     type="date"
                     className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
+                    value={props.scheduledDate}
+                    onChange={props.setScheduledDate}
                   />
                   <input
                     type="time"
                     className="form-control rounded-5 text-white bg-transparent h-100"
+                    value={props.scheduledTime}
+                    onChange={props.setScheduledTime}
                   />
                 </div>
                 <div className="modal-footer border-0">
                   <button
-                    className="btn btn-primary"
+                    className="btn"
+                    style={{ background: "#992899" }}
                     data-bs-target="#editDealModalToggle"
                     data-bs-toggle="modal"
                   >
                     Back
-                  </button>
-                  <button
-                    className="btn text-white"
-                    style={{ background: "#992899" }}
-                  >
-                    Save
                   </button>
                 </div>
               </div>
@@ -213,7 +188,7 @@ export const EditableDealCard = () => {
           >
             <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
           </button>
-          <p>Rating {rating}</p>
+          <p>Rating {props.rating}</p>
         </div>
       </div>
     </div>
