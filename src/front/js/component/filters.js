@@ -16,7 +16,7 @@ export const Filters = () => {
         data-bs-target="#offcanvasDark"
         aria-controls="offcanvasDark"
       >
-        <i className="fa-solid fa-filter"></i>
+        <i className="fa-solid fa-filter"></i> Filters
       </button>
 
       <div

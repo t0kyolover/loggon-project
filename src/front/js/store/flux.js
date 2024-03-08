@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      loggedIn: false,
+      loggedIn: true,
       user: {
         id: 1,
         email: "pereayats@email.com",
@@ -25,6 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             user_id: 1,
             date_of_creation: "",
             game_title: "GTA V",
+            image_url: "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
             item_type: "DLC",
             platform: "Xbox",
             format: "Digital",
@@ -32,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             original_price: 79.99,
             offer_price: 35.99,
             expiration_date: "12/03/2024",
-            promo_code: "",
+            promo_code: "HDGUDS",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
@@ -43,6 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             user_id: 1,
             date_of_creation: "",
             game_title: "Atomic Heart",
+            image_url: "https://image.api.playstation.com/vulcan/ap/rnd/202209/2815/ghdxLSLpUl24o2Q1eq3yTaji.jpg",
             item_type: "Game",
             platform: "PC",
             format: "CD",
@@ -50,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             original_price: 79.99,
             offer_price: 60.99,
             expiration_date: "12/03/2024",
-            promo_code: "",
+            promo_code: "DJIODP",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
@@ -60,7 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             id: 3,
             user_id: 1,
             date_of_creation: "",
-            game_title: "Overwatch",
+            game_title: "Overwatch 2",
+            image_url: "https://xxboxnews.blob.core.windows.net/prod/sites/2/2022/10/OW2-be9287b234afbe7898ac.jpg",
             item_type: "In-Game Purchase",
             platform: "PS4",
             format: "Digital",
@@ -68,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             original_price: 15,
             offer_price: 9.99,
             expiration_date: "12/03/2024",
-            promo_code: "",
+            promo_code: "DFJISOP",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
@@ -78,7 +81,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             id: 4,
             user_id: 1,
             date_of_creation: "",
-            game_title: "Pokemon",
+            game_title: "Pokemon Violet",
+            image_url: "https://assets-prd.ignimgs.com/2022/08/03/pokemon-violet-1659542326365.jpg",
             item_type: "Game",
             platform: "Nintendo",
             format: "CD",
@@ -86,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             original_price: 65,
             offer_price: 49,
             expiration_date: "12/03/2024",
-            promo_code: "",
+            promo_code: "DFJSIF",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
@@ -99,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
     },
     actions: {
-      // LOGIN 
+      //--------------------------LOGIN/LOGOUT/SIGNUP----------------------//
       login: () => {
         setStore({ loggedIn: true });
       },
@@ -107,6 +111,43 @@ const getState = ({ getStore, getActions, setStore }) => {
       logout: () => {
         setStore({ loggedIn: false });
       },
+      //--------------------------INTERSTS ACTIONS----------------------//
+      modifyPost: (imageUrl, offerPrice, expirationDate, promoCode, scheduledDate, scheduledTime, scheduled) => {
+        setStore(prevStore => ({
+          user: {
+            ...prevStore.user,
+            posts: prevStore.user.posts.map((post, i) => {
+              if (i === 0) {
+                return {
+                  ...post,
+                  image_url: imageUrl,
+                  offer_price: offerPrice,
+                  expiration_date: expirationDate,
+                  promo_code: promoCode,
+                  scheduled_date: scheduledDate,
+                  scheduled_time: scheduledTime,
+                  scheduled: scheduled
+                }
+              }
+              return post;
+            })
+          }
+        }));
+      },
+      //--------------------------INTERSTS ACTIONS----------------------//
+      addInterest: (newInterest) => {
+        const store = getStore();
+        setStore({user: {interests: [...store.user.interests, newInterest]}})
+      },
+      deleteInterest: (index) => {
+        setStore(prevStore => ({
+          user: {
+            ...prevStore.user,
+            interests: prevStore.user.interests.filter((_, i) => i !== index)
+          }
+        }));
+        console.log("Interest deleted");
+      }
     },
   };
 };

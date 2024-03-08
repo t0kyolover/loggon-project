@@ -139,7 +139,7 @@ export const Navbar = () => {
                           className="btn text-white"
                           data-bs-dismiss="modal"
                           style={{ background: "#992899" }}
-                          onClick={actions.logout}
+                          /*onClick={actions.logout*/
                         >
                           Logout
                         </button>
@@ -469,7 +469,7 @@ export const Navbar = () => {
                     <button
                       className="btn text-white"
                       style={{ background: "#992899" }}
-                      onClick={actions.login}
+                      /*onClick={actions.login}*/
                     >
                       Login
                     </button>
