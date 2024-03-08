@@ -26,14 +26,34 @@ export const MyProfile = (props) => {
     "Action-Adventure",
     "3D",
   ]);
+  const [newInterest, setNewInterest] = useState("");
   const [clicked, setClicked] = useState("");
   const [myPosts, setMyPosts] = useState(["Post1", "Post2", "Post3", "Post4"]);
-  const [savedDeals, setSavedDeals] = useState(["Saved1", "Saved2", "Saved3", "Saved4"]);
-  const [myAlerts, setMyAlerts] = useState(["Alert1", "Alert2", "Alert3", "Alert4"]);
+  const [savedDeals, setSavedDeals] = useState([
+    "Saved1",
+    "Saved2",
+    "Saved3",
+    "Saved4",
+  ]);
+  const [myAlerts, setMyAlerts] = useState([
+    "Alert1",
+    "Alert2",
+    "Alert3",
+    "Alert4",
+  ]);
+
+  useEffect(() => {}, [interests]);
 
   function resetClicked(e) {
     e.preventDefault();
     setClicked("");
+  }
+
+  function updateInterests(e) {
+    e.preventDefault();
+    setInterests((prevInterests) => [...prevInterests, newInterest]);
+    setNewInterest("");
+    console.log(interests);
   }
 
   /*Conectar useStates con sus useEffects*/
@@ -242,6 +262,7 @@ export const MyProfile = (props) => {
                 Interests
               </div>
               <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
+                {/*!!!!!BUG!!!!!!!--------Creo que el problema cuando se añade más intereses y la página empieza a bailar está aquí */}
                 <div className="d-flex flex-wrap gap-2">
                   {interests.length === 0 ? (
                     <p className="bg-transparent p-2">No Interests Added</p>
@@ -297,10 +318,16 @@ export const MyProfile = (props) => {
                         </div>
                       </div>
                       <div className="modal-body">
-                        <input
-                          type="search"
-                          className="form-control rounded-5 bg-transparent text-white mb-3"
-                        ></input>
+                        <form onSubmit={updateInterests}>
+                          <input
+                            type="search"
+                            className="form-control rounded-5 bg-transparent text-white mb-3"
+                            value={newInterest}
+                            onChange={(e) => {
+                              setNewInterest(e.target.value);
+                            }}
+                          ></input>
+                        </form>
                         <small>My interests</small>
                         <ul className="list-group border-0 my-2 bg-transparent d-flex flex-row">
                           <div className="d-flex flex-wrap gap-2 justify-content-center">
@@ -315,20 +342,24 @@ export const MyProfile = (props) => {
                                   key={index}
                                 >
                                   {interest}
+                                  <button
+                                    className="btn border-0 p-0 ms-2"
+                                    onClick={() =>
+                                      setInterests(
+                                        interests.filter(
+                                          (interest, currentIndex) =>
+                                            index != currentIndex
+                                        )
+                                      )
+                                    }
+                                  >
+                                    <i className="fa-solid fa-xmark"></i>
+                                  </button>
                                 </li>
                               ))
                             )}
                           </div>
                         </ul>
-                      </div>
-                      <div className="modal-footer border-0">
-                        <button
-                          type="button"
-                          className="btn"
-                          style={{ background: "#992899" }}
-                        >
-                          Save changes
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -417,7 +448,7 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              {savedDeals.length === 0 ? (
+                {savedDeals.length === 0 ? (
                   <p className="bg-transparent p-2">No saved deals</p>
                 ) : (
                   savedDeals.map((deal, index) => (
@@ -439,7 +470,7 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              {myAlerts.length === 0 ? (
+                {myAlerts.length === 0 ? (
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (
                   myAlerts.map((alert, index) => (
