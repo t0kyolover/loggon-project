@@ -50,6 +50,7 @@ export const SingleDeal = (props) => {
               target="_blank"
               role="button"
               className="btn text-white rounded-5"
+              taget="_blank"
               style={{ background: "#992899", alignSelf: "start" }}
               href={offerLink}
             >
@@ -66,7 +67,8 @@ export const SingleDeal = (props) => {
           </div>
         </div>
       </div>
-      {/*------------------------------------INFO API---------------------------------*/}
+
+      {/*---------------------- description (data from 3rd party API) --------------------*/}
       <div className="d-flex justify-content-center w-100">
         <div className="row">
           <div className="col-10 bg-light rounded-3 p-3 m-auto my-3">

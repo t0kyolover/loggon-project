@@ -71,7 +71,7 @@ export const MyProfile = (props) => {
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-column text-white">
-          <h3 className="ms-3">My Profile</h3>
+          <h3 className="m-auto my-4 ps-4">My Profile</h3> {/*--------falta de centralización----------*/}
 
           <div className="d-flex flex-row flex-wrap">
             <form>
@@ -113,7 +113,7 @@ export const MyProfile = (props) => {
               )}
             </form>
 
-            <ul className="list-group">
+            <ul className="list-group m-auto">
               {/*---------------------------------------Username---------------------------------*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>Username</div>
               <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">

@@ -29,8 +29,8 @@ export const Feed = () => {
         <Filters />
       </div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
-      <div className="container mt-5 ">
-        <nav>
+      <div className="row mt-3">
+        <nav className="d-flex justify-content-center">
           <div className="nav nav-tabs" id="nav-tab" role="tablist">
             <button
               className="nav-link active"
@@ -76,7 +76,7 @@ export const Feed = () => {
               type="button"
               role="tab"
               aria-controls="nav-nintendo"
-              aria-selected="true"
+              aria-selected="faalse"
             >
               Nintendo
             </button>
@@ -93,31 +93,29 @@ export const Feed = () => {
             tabIndex="0"
           >
             <div className="container text-center">
-              <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-                <div className="col">
+              <div className="row row-cols-auto">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-              </div>
-              <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-                <div className="col">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
-                <div className="col">
+                <div className="col m-auto my-4">
                   <DealCard />
                 </div>
               </div>
@@ -131,8 +129,33 @@ export const Feed = () => {
             aria-labelledby="nav-xbox-tab"
             tabIndex="0"
           >
-            <div className="mt-4">
-              <DealCard />
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+              <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+            </div>
             </div>
           </div>
           {/*---------------------------------------PC---------------------------------*/}
@@ -143,8 +166,33 @@ export const Feed = () => {
             aria-labelledby="nav-pc-tab"
             tabIndex="0"
           >
-            <div className="mt-4">
-              <DealCard />
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+              <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+                <div className="col m-auto my-4">
+                  <DealCard />
+                </div>
+            </div>
             </div>
           </div>
           {/*---------------------------------------NINTENDO---------------------------------*/}
@@ -155,12 +203,28 @@ export const Feed = () => {
             aria-labelledby="nav-nintendo-tab"
             tabIndex="0"
           >
-            <div className="mt-4">
+            <div className="container text-center">
+              <div className="row row-cols-auto">
+            <div className="col mx-2 my-4">
               <DealCard />
+            </div>
+            <div className="ccol mx-2 my-4">
+              <DealCard />
+            </div>
+            <div className="col mx-2 my-4">
+              <DealCard />
+            </div>
+            <div className="col mx-2 my-4">
+              <DealCard />
+            </div>
+            <div className="col mx-2 my-4">
+              <DealCard />
+            </div>
+            </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 };
