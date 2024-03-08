@@ -27,7 +27,7 @@ export const PostDeal = (props) => {
     <div className="container-fluid">
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-column text-white">
-          <h3 className="m-3 ms-0">Post Deal</h3>
+          <h3 className="m-auto my-3">Post Deal</h3>
           <PostDealCard />
           {additionalDeals.map((deal, index) => (
             <PostDealCard key={index} onClick={(e) => deleteDeal(index, e)} isAdditional={true}/>
