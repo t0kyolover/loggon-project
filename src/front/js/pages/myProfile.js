@@ -58,6 +58,7 @@ export const MyProfile = (props) => {
 
   /*Conectar useStates con sus useEffects*/
   return (
+    /*Put store.loggedIn variable here*/
     <div className="container-fluid m-auto">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
