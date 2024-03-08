@@ -16,7 +16,9 @@ export const PasswordRecovery = (props) => {
 
   function resetPassword(e) {
     e.preventDefault();
-    if (newPassword !== newPasswordConfirmation) {
+    if (!newPassword || !newPasswordConfirmation) {
+      alert("Missing fields");
+    } else if (newPassword !== newPasswordConfirmation) {
       alert("Passwords don't match");
     } else if (newPassword == currentPassword) {
       alert("New password can't be the same as current password");
@@ -29,7 +31,13 @@ export const PasswordRecovery = (props) => {
 
   function changePassword(e) {
     e.preventDefault();
-    if (currentPassword !== currentPasswordConfirmation) {
+    if (
+      !newPassword ||
+      !newPasswordConfirmation ||
+      !currentPasswordConfirmation
+    ) {
+      alert("Missing fields");
+    } else if (currentPassword !== currentPasswordConfirmation) {
       alert("Incorrect current password");
     } else if (newPassword !== newPasswordConfirmation) {
       alert("Passwords don't match");
