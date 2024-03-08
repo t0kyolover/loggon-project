@@ -7,8 +7,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  
   useEffect(() => {
     if (!searchTerm) {
       setSuggestions([]);
@@ -85,7 +84,7 @@ export const Navbar = () => {
             </div>
           </div>
           {/*---------------------------------------SIGNUP MODAL TRIGGER BUTTON---------------------------------*/}
-          {!loggedIn && (
+          {!store.loggedIn && (
             <button
               type="button"
               className="mx-3 btn"
@@ -451,7 +450,7 @@ export const Navbar = () => {
         </div>
         {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
         <div className="ms-4 mb-3">
-          {!loggedIn ? (
+          {!store.loggedIn ? (
             <button
               type="button"
               className="btn text-white"
