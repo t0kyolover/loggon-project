@@ -11,28 +11,28 @@ export const MyProfile = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  const [user, setUser] = useState({
-    username: store.user.username,
-    email: store.user.email,
-    image_url: store.user.image_url,
-    steam_username: store.user.steam_username,
-    twitch_username: store.user.twitch_username,
-    interests: store.user.interests,
-    posts: store.user.posts,
-    saved: store.user.saved,
-    alerts: store.user.alerts,
-  });
+  const [user, setUser] = useState(store.user);
 
   const [newInterest, setNewInterest] = useState("");
   const [clicked, setClicked] = useState("");
 
   /*useEffect(() => {
-    setUser({ interests: store.user.interests });
+    setUser(store.user);
   }, [store.user]);*/
 
   function resetClicked(e) {
     e.preventDefault();
     setClicked("");
+  }
+
+  function updateUserImage(e) {
+    resetClicked(e);
+    actions.updateUserImage(user.image_url);
+  }
+
+  function updateUsername(e) {
+    resetClicked(e);
+    actions.updateUsername(user.username);
   }
 
   function updateInterests(e) {
@@ -54,7 +54,7 @@ export const MyProfile = (props) => {
             <form>
               {clicked == "image" ? (
                 <div>
-                  <button className="btn py-0" onClick={resetClicked}>
+                  <button className="btn py-0" onClick={updateUserImage}>
                     <i
                       className="fa-solid fa-circle-check"
                       style={{ color: "#992899" }}
@@ -64,7 +64,10 @@ export const MyProfile = (props) => {
                     type="text"
                     className="img-fluid"
                     value={user.image_url}
-                    onChange={(e) => setUser({ image_url: e.target.value })}
+                    onChange={(e) => setUser((prevState) => ({
+                      ...prevState,
+                      image_url: e.target.value 
+                  }))}
                   />
                 </div>
               ) : (
@@ -99,7 +102,10 @@ export const MyProfile = (props) => {
                     <input
                       className="form-control border-0 text-white bg-transparent"
                       value={user.username}
-                      onChange={(e) => setUser({ username: e.target.value })}
+                      onChange={(e) => setUser((prevState) => ({
+                        ...prevState,
+                        username: e.target.value 
+                    }))}
                     />
                   ) : (
                     <p className="fw-bold mb-0">@{user.username}</p>
@@ -107,7 +113,7 @@ export const MyProfile = (props) => {
                 </div>
                 <div className="ms-auto">
                   {clicked == "username" ? (
-                    <button className="btn py-0" onClick={resetClicked}>
+                    <button className="btn py-0" onClick={updateUsername}>
                       <i
                         className="fa-solid fa-circle-check"
                         style={{ color: "#992899" }}
@@ -137,7 +143,10 @@ export const MyProfile = (props) => {
                     <input
                       className="form-control border-0 text-white bg-transparent"
                       value={user.email}
-                      onChange={(e) => setUser({ email: e.target.value })}
+                      onChange={(e) => setUser((prevState) => ({
+                        ...prevState,
+                        email: e.target.value 
+                    }))}
                     />
                   ) : (
                     <p className="fw-bold mb-0">{user.email}</p>
@@ -212,7 +221,10 @@ export const MyProfile = (props) => {
                       style={{ maxHeight: "30px" }}
                       value={user.steam_username}
                       onChange={(e) =>
-                        setUser({ steam_username: e.target.value })
+                        setUser((prevState) => ({
+                          ...prevState,
+                          steam_username: e.target.value 
+                      }))
                       }
                     />
                   </div>
@@ -241,7 +253,10 @@ export const MyProfile = (props) => {
                       style={{ maxHeight: "30px" }}
                       value={user.twitch_username}
                       onChange={(e) =>
-                        setUser({ twitch_username: e.target.value })
+                        setUser((prevState) => ({
+                          ...prevState,
+                          twitch_username: e.target.value 
+                      }))
                       }
                     />
                   </div>
@@ -254,7 +269,7 @@ export const MyProfile = (props) => {
               <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
                 {/*!!!!!BUG!!!!!!!--------Creo que el problema cuando se añade más intereses y la página empieza a bailar está aquí */}
                 <div className="d-flex flex-wrap gap-2">
-                  {user.interests.length === 0 ? (
+                  {user.interests.length == 0 ? (
                     <p className="bg-transparent p-2">No Interests Added</p>
                   ) : (
                     user.interests.map((interest, index) => (

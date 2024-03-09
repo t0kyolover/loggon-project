@@ -6,42 +6,40 @@ import { Context } from "../store/appContext";
 export const EditableDealCard = (props) => {
   const { store, actions } = useContext(Context);
 
-  const [imageUrl, setImageUrl] = useState(props.imageUrl);
-  const [offerPrice, setOfferPrice] = useState(props.offerPrice);
-  const [expirationDate, setExpirationDate] = useState(props.expirationDate);
-  const [promoCode, setPromoCode] = useState(props.promoCode);
-  const [scheduledDate, setScheduledDate] = useState(props.scheduledDate);
-  const [scheduledTime, setScheduledTime] = useState(props.scheduledTime);
+  const [deal, setDeal] = useState({
+    game_title: props.gameTitle,
+    format: props.format,
+    rating: props.rating,
+    image_url: props.imageUrl,
+    offer_price: props.offerPrice,
+    expiration_date: props.expirationDate,
+    promo_code: props.promoCode,
+    scheduled_date: props.scheduledDate,
+    scheduled_time: props.scheduledTime,
+  });
+
   const [scheduled, setScheduled] = useState(false);
 
-  function modifyPost(
-    e,
-    imageUrl,
-    offerPrice,
-    expirationDate,
-    promoCode,
-    scheduledDate,
-    scheduledTime
-  ) {
+  function modifyPost(e) {
     e.preventDefault();
     actions.modifyPost(
-      imageUrl,
-      offerPrice,
-      expirationDate,
-      promoCode,
-      scheduledDate,
-      scheduledTime
+      deal.image_url,
+      deal.offer_price,
+      deal.expiration_date,
+      deal.promo_code,
+      deal.scheduled_date,
+      deal.scheduled_time
     );
   }
 
   return (
     <div className="card" style={{ width: "18rem" }}>
-      <img src={imageUrl} className="card-img-top" alt="..." />
+      <img src={deal.image_url} className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex">
         <div>
-          <h5 className="card-title">{props.gameTitle}</h5>
-          <p className="card-text">{props.format}</p>
-          <p className="card-text">{offerPrice} €</p>
+          <h5 className="card-title">{deal.game_title}</h5>
+          <p className="card-text">{deal.format}</p>
+          <p className="card-text">{deal.offer_price} €</p>
           <Link className="btn btn-link" to="/post/:id">
             Details
           </Link>
@@ -80,6 +78,9 @@ export const EditableDealCard = (props) => {
                         <div className="card-body">
                           <ul className="list-group">
                             {/*---------------------------------------Image Url---------------------------------*/}
+                            <div style={{ fontSize: "12px", color: "#992899" }}>
+                              Image
+                            </div>
                             <li
                               className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
                               style={{ maxHeight: "35px" }}
@@ -87,12 +88,20 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={imageUrl}
-                                onChange={(e) => setImageUrl(e.target.value)}
+                                value={deal.image_url}
+                                onChange={(e) =>
+                                  setDeal((prevState) => ({
+                                      ...prevState,
+                                      image_url: e.target.value 
+                                  }))
+                              }
                                 required
                               />
                             </li>
                             {/*---------------------------------------Offer Price---------------------------------*/}
+                            <div style={{ fontSize: "12px", color: "#992899" }}>
+                              Offer Price
+                            </div>
                             <li
                               className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
                               style={{ maxHeight: "35px" }}
@@ -100,12 +109,20 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="number"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={offerPrice}
-                                onChange={(e) => setOfferPrice(e.target.value)}
+                                value={deal.offer_price}
+                                onChange={(e) =>
+                                  setDeal((prevState) => ({
+                                    ...prevState,
+                                    offer_price: e.target.value 
+                                }))
+                                }
                                 required
                               />
                             </li>
                             {/*---------------------------------------Exp Date---------------------------------*/}
+                            <div style={{ fontSize: "12px", color: "#992899" }}>
+                              Deal ends
+                            </div>
                             <li
                               className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
                               style={{ maxHeight: "35px" }}
@@ -113,13 +130,19 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="date"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={expirationDate}
+                                value={deal.expiration_date}
                                 onChange={(e) =>
-                                  setExpirationDate(e.target.value)
+                                  setDeal((prevState) => ({
+                                    ...prevState,
+                                    expiration_date: e.target.value 
+                                }))
                                 }
                               />
                             </li>
                             {/*---------------------------------------Promo Code---------------------------------*/}
+                            <div style={{ fontSize: "12px", color: "#992899" }}>
+                              Promocode
+                            </div>
                             <li
                               className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
                               style={{ maxHeight: "35px" }}
@@ -127,8 +150,13 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={promoCode}
-                                onChange={(e) => setPromoCode(e.target.value)}
+                                value={deal.promo_code}
+                                onChange={(e) =>
+                                  setDeal((prevState) => ({
+                                    ...prevState,
+                                    promo_code: e.target.value 
+                                }))
+                                }
                               />
                             </li>
 
@@ -204,14 +232,24 @@ export const EditableDealCard = (props) => {
                   <input
                     type="date"
                     className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
-                    value={scheduledDate}
-                    onChange={(e) => setScheduledDate(e.target.value)}
+                    value={deal.scheduled_date}
+                    onChange={(e) =>
+                      setDeal((prevState) => ({
+                        ...prevState,
+                        scheduled_date: e.target.value 
+                    }))
+                    }
                   />
                   <input
                     type="time"
                     className="form-control rounded-5 text-white bg-transparent h-100"
-                    value={scheduledTime}
-                    onChange={(e) => setScheduledTime(e.target.value)}
+                    value={deal.scheduled_time}
+                    onChange={(e) =>
+                      setDeal((prevState) => ({
+                        ...prevState,
+                        scheduled_time: e.target.value 
+                    }))
+                    }
                   />
                 </div>
                 <div className="modal-footer border-0">
@@ -235,7 +273,7 @@ export const EditableDealCard = (props) => {
           >
             <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
           </button>
-          <p>Rating {props.rating}</p>
+          <p>Rating {deal.rating}</p>
         </div>
       </div>
     </div>
