@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  
+
   useEffect(() => {
     if (!searchTerm) {
       setSuggestions([]);
@@ -28,14 +28,127 @@ export const Navbar = () => {
             <button
               className="btn"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbar-menu"
-              aria-expanded="false"
-              aria-controls="navbar-menu"
-              data-bs-auto-close="outside"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#menuOffcanvas"
+              aria-controls="menuOffcanvas"
             >
               <i className="fa-solid fa-bars" style={{ color: "#992899" }}></i>
             </button>
+            <div
+              className="offcanvas offcanvas-start text-bg-dark"
+              tabIndex="-1"
+              id="menuOffcanvas"
+              aria-labelledby="menuOffcanvasLabel"
+              style={{ width: "15%" }}
+            >
+              {/*---------------------------------------MENU CONTENTS---------------------------------*/}
+              <div className="offcanvas-header">
+                <h5 className="offcanvas-title" id="menuOffcanvasLabel">
+                  Menu
+                </h5>
+              </div>
+              <div className="offcanvas-body">
+                <div className="d-flex flex-column ms-4 my-3">
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/myprofile/:username"}
+                  >
+                    My profile
+                  </Link>
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/postdeal/:username"}
+                  >
+                    Post deal
+                  </Link>
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/games"}
+                  >
+                    Games
+                  </Link>
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/"}
+                  >
+                    Deals
+                  </Link>
+
+                  {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
+                  <div className="ms-4 mb-3">
+                    {!store.loggedIn ? (
+                      <button
+                        type="button"
+                        className="btn text-white"
+                        style={{ background: "#992899" }}
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModalToggle"
+                      >
+                        Login
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn text-white"
+                        style={{ background: "#992899" }}
+                        data-bs-toggle="modal"
+                        data-bs-target="#logoutModal"
+                      >
+                        Logout
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="ms-4 mb-3">
+              {/*---------------------------------------LOGOUT MODAL---------------------------------*/}
+              <div
+                className="modal fade"
+                id="logoutModal"
+                aria-hidden="true"
+                aria-labelledby="logoutModalLabel"
+                tabIndex="-1"
+              >
+                <div className="modal-dialog modal-sm modal-dialog-centered">
+                  <div className="modal-content bg-dark text-white">
+                    <div className="modal-header border-0">
+                      <h1 className="modal-title fs-5" id="logoutModalLabel">
+                        Are you sure?
+                      </h1>
+                      <div className="ms-auto" data-bs-theme="dark">
+                        <button
+                          type="button"
+                          className="btn-close "
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                    </div>
+                    <div className="modal-footer border-0">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <Link to="/">
+                        {" "}
+                        <button
+                          className="btn text-white"
+                          data-bs-dismiss="modal"
+                          style={{ background: "#992899" }}
+                          /*onClick={actions.logout*/
+                        >
+                          Logout
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             {/*---------------------------------------LOGO---------------------------------*/}
             <Link to={"/"} className="navbar-brand mx-3">
               <img
@@ -356,6 +469,7 @@ export const Navbar = () => {
                     <button
                       className="btn text-white"
                       style={{ background: "#992899" }}
+                      /*onClick={actions.login}*/
                     >
                       Login
                     </button>
@@ -422,103 +536,6 @@ export const Navbar = () => {
           </div>
         </div>
       </nav>
-      {/*---------------------------------------MENU CONTENTS---------------------------------*/}
-      {/*Cuando haces click fuera del menu tiene que cerrar, ahora no lo hace y no se abre por encima de todo lo demas*/}
-      <div
-        className="collapse bg-dark bg-gradient text-white position-absolute"
-        id="navbar-menu"
-        style={{ width: "140px", height: "100%" }}
-      >
-        <div className="d-flex flex-column ms-4 my-3">
-          <Link
-            className="text-white text-decoration-none mb-2"
-            to={"/myprofile/:username"}
-          >
-            My profile
-          </Link>
-          <Link
-            className="text-white text-decoration-none mb-2"
-            to={"/postdeal/:username"}
-          >
-            Post deal
-          </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/games"}>
-            Games
-          </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/"}>
-            Deals
-          </Link>
-        </div>
-        {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
-        <div className="ms-4 mb-3">
-          {!store.loggedIn ? (
-            <button
-              type="button"
-              className="btn text-white"
-              style={{ background: "#992899" }}
-              data-bs-toggle="modal"
-              data-bs-target="#loginModalToggle"
-            >
-              Login
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn text-white"
-              style={{ background: "#992899" }}
-              data-bs-toggle="modal"
-              data-bs-target="#logoutModal"
-            >
-              Logout
-            </button>
-          )}
-          {/*---------------------------------------LOGOUT MODAL---------------------------------*/}
-          <div
-            className="modal fade"
-            id="logoutModal"
-            aria-hidden="true"
-            aria-labelledby="logoutModalLabel"
-            tabIndex="-1"
-          >
-            <div className="modal-dialog modal-sm modal-dialog-centered">
-              <div className="modal-content bg-dark text-white">
-                <div className="modal-header border-0">
-                  <h1 className="modal-title fs-5" id="logoutModalLabel">
-                    Are you sure?
-                  </h1>
-                  <div className="ms-auto" data-bs-theme="dark">
-                    <button
-                      type="button"
-                      className="btn-close "
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                </div>
-                <div className="modal-footer border-0">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <Link to="/">
-                    {" "}
-                    <button
-                      className="btn text-white"
-                      data-bs-dismiss="modal"
-                      style={{ background: "#992899" }}
-                    >
-                      Logout
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

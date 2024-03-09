@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
 import { EditableDealCard } from "../component/editableDealCard";
@@ -11,60 +11,44 @@ export const MyProfile = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
 
-  const [username, setUsername] = useState("Pere");
-  const [email, setEmail] = useState("pereayats@email.com");
-  const [imageUrl, setImageUrl] = useState(
-    "https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116"
-  );
-  const [steamUsername, setSteamUsername] = useState("pereayts");
-  const [twitchUsername, setTwitchUsername] = useState("pereayts");
-  const [interests, setInterests] = useState([
-    "Single Player",
-    "Horror",
-    "Survival",
-    "Third Person",
-    "Action-Adventure",
-    "3D",
-  ]);
+  const [user, setUser] = useState(store.user);
+  const [newUsername, setNewUsername] = useState("");
+
   const [newInterest, setNewInterest] = useState("");
   const [clicked, setClicked] = useState("");
-  const [myPosts, setMyPosts] = useState(["Post1", "Post2", "Post3", "Post4"]);
-  const [savedDeals, setSavedDeals] = useState([
-    "Saved1",
-    "Saved2",
-    "Saved3",
-    "Saved4",
-  ]);
-  const [myAlerts, setMyAlerts] = useState([
-    "Alert1",
-    "Alert2",
-    "Alert3",
-    "Alert4",
-  ]);
-  const [gameTitle, setGameTitle] = useState("GTA");
-  const [format, setFormat] = useState("Digital");
-  const [offerPrice, setOfferPrice] = useState(100);
-  const [rating, setRating] = useState(10);
-  const [expirationDate, setExpirationDate] = useState("");
-  const [promoCode, setPromoCode] = useState("");
-  const [scheduledDate, setScheduledDate] = useState("");
-  const [scheduledTime, setScheduledTime] = useState("");
 
-  useEffect(() => {}, [interests]);
+  /*useEffect(() => {
+    setUser(store.user);
+  }, [store.user]);*/
 
   function resetClicked(e) {
     e.preventDefault();
     setClicked("");
   }
 
-  function updateInterests(e) {
-    e.preventDefault();
-    setInterests((prevInterests) => [...prevInterests, newInterest]);
-    setNewInterest("");
-    console.log(interests);
+  function updateUserImage(e) {
+    resetClicked(e);
+    actions.updateUserImage(user.image_url);
   }
 
-  /*Conectar useStates con sus useEffects*/
+  /*USERNAME IS EXAMPLE, REPLICATE*/
+  function updateUsername(e) {
+    //if input is empty, don't do anything
+    resetClicked(e);
+    setUser((prevState) => ({
+      ...prevState,
+      username: newUsername 
+  }))
+    actions.updateUsername(newUsername);
+  }
+
+  function updateInterests(e) {
+    e.preventDefault();
+    actions.addInterest(newInterest);
+    console.log(store.user.interests);
+    setNewInterest("");
+  }
+
   return (
     /*Put store.loggedIn variable here*/
     <div className="container-fluid m-auto">
@@ -77,7 +61,7 @@ export const MyProfile = (props) => {
             <form>
               {clicked == "image" ? (
                 <div>
-                  <button className="btn py-0" onClick={resetClicked}>
+                  <button className="btn py-0" onClick={updateUserImage}>
                     <i
                       className="fa-solid fa-circle-check"
                       style={{ color: "#992899" }}
@@ -86,8 +70,11 @@ export const MyProfile = (props) => {
                   <input
                     type="text"
                     className="img-fluid"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
+                    value={user.image_url}
+                    onChange={(e) => setUser((prevState) => ({
+                      ...prevState,
+                      image_url: e.target.value 
+                  }))}
                   />
                 </div>
               ) : (
@@ -107,7 +94,7 @@ export const MyProfile = (props) => {
                   <img
                     style={{ maxWidth: "500px", maxHeight: "500px" }}
                     className="rounded-circle img-fluid m-5"
-                    src={imageUrl}
+                    src={user.image_url}
                   />
                 </div>
               )}
@@ -121,16 +108,16 @@ export const MyProfile = (props) => {
                   {clicked == "username" ? (
                     <input
                       className="form-control border-0 text-white bg-transparent"
-                      value={`@${username}`}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={newUsername}
+                      onChange={(e) => setNewUsername(e.target.value)}
                     />
                   ) : (
-                    <p className="fw-bold mb-0">@{username}</p>
+                    <p className="fw-bold mb-0">@{user.username}</p>
                   )}
                 </div>
                 <div className="ms-auto">
                   {clicked == "username" ? (
-                    <button className="btn py-0" onClick={resetClicked}>
+                    <button className="btn py-0" onClick={updateUsername}>
                       <i
                         className="fa-solid fa-circle-check"
                         style={{ color: "#992899" }}
@@ -159,11 +146,14 @@ export const MyProfile = (props) => {
                   {clicked == "email" ? (
                     <input
                       className="form-control border-0 text-white bg-transparent"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={user.email}
+                      onChange={(e) => setUser((prevState) => ({
+                        ...prevState,
+                        email: e.target.value 
+                    }))}
                     />
                   ) : (
-                    <p className="fw-bold mb-0">{email}</p>
+                    <p className="fw-bold mb-0">{user.email}</p>
                   )}
                 </div>
                 <div className="ms-auto">
@@ -199,7 +189,7 @@ export const MyProfile = (props) => {
                     <p className="fw-bold mb-0">*********</p>
                   </div>
                 </li>
-                <Link to="/password/recovery/:username">
+                <Link to="/password_recovery">
                   <button
                     className="btn text-white rounded-5 ms-3"
                     style={{ background: "#992899" }}
@@ -233,8 +223,13 @@ export const MyProfile = (props) => {
                       type="text"
                       className="form-control rounded-5 text-black w-auto"
                       style={{ maxHeight: "30px" }}
-                      value={steamUsername}
-                      onChange={(e) => setSteamUsername(e.target.value)}
+                      value={user.steam_username}
+                      onChange={(e) =>
+                        setUser((prevState) => ({
+                          ...prevState,
+                          steam_username: e.target.value 
+                      }))
+                      }
                     />
                   </div>
                 </div>
@@ -260,8 +255,13 @@ export const MyProfile = (props) => {
                       type="text"
                       className="form-control rounded-5 text-black w-auto"
                       style={{ maxHeight: "30px" }}
-                      value={twitchUsername}
-                      onChange={(e) => setTwitchUsername(e.target.value)}
+                      value={user.twitch_username}
+                      onChange={(e) =>
+                        setUser((prevState) => ({
+                          ...prevState,
+                          twitch_username: e.target.value 
+                      }))
+                      }
                     />
                   </div>
                 </div>
@@ -273,10 +273,10 @@ export const MyProfile = (props) => {
               <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
                 {/*!!!!!BUG!!!!!!!--------Creo que el problema cuando se añade más intereses y la página empieza a bailar está aquí */}
                 <div className="d-flex flex-wrap gap-2">
-                  {interests.length === 0 ? (
+                  {user.interests.length == 0 ? (
                     <p className="bg-transparent p-2">No Interests Added</p>
                   ) : (
-                    interests.map((interest, index) => (
+                    user.interests.map((interest, index) => (
                       <p
                         className="bg-transparent rounded-5 border-white border p-2"
                         key={index}
@@ -340,12 +340,12 @@ export const MyProfile = (props) => {
                         <small>My interests</small>
                         <ul className="list-group border-0 my-2 bg-transparent d-flex flex-row">
                           <div className="d-flex flex-wrap gap-2 justify-content-center">
-                            {interests.length === 0 ? (
+                            {user.interests.length === 0 ? (
                               <p className="bg-transparent p-2">
                                 No Interests Added
                               </p>
                             ) : (
-                              interests.map((interest, index) => (
+                              user.interests.map((interest, index) => (
                                 <li
                                   className="list-group-item bg-transparent text-white rounded-5 border-white border p-2"
                                   key={index}
@@ -354,12 +354,7 @@ export const MyProfile = (props) => {
                                   <button
                                     className="btn border-0 p-0 ms-2"
                                     onClick={() =>
-                                      setInterests(
-                                        interests.filter(
-                                          (interest, currentIndex) =>
-                                            index != currentIndex
-                                        )
-                                      )
+                                      actions.deleteInterest(index)
                                     }
                                   >
                                     <i className="fa-solid fa-xmark"></i>
@@ -435,25 +430,21 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                {myPosts.length === 0 ? (
+                {user.posts.length === 0 ? (
                   <p className="bg-transparent p-2">No posts</p>
                 ) : (
-                  myPosts.map((post, index) => (
+                  user.posts.map((post, index) => (
                     <div className="col mx-2 my-4" key={index}>
                       <EditableDealCard
-                        gameTitle={gameTitle}
-                        format={format}
-                        rating={rating}
-                        offerPrice={offerPrice}
-                        setOfferPrice={(e) => setOfferPrice(e.target.value)}
-                        expirationDate={expirationDate}
-                        setExpirationDate={(e) => setExpirationDate(e.target.value)}
-                        promoCode={promoCode}
-                        setPromoCode={(e) => setPromoCode(e.target.value)}
-                        scheduledDate={scheduledDate}
-                        setScheduledDate={(e) => setScheduledDate(e.target.value)}
-                        scheduledTime={scheduledTime}
-                        setScheduledTime={(e) => setScheduledTime(e.target.value)}
+                        gameTitle={post.game_title}
+                        format={post.format}
+                        rating={post.rating}
+                        imageUrl={post.image_url}
+                        offerPrice={post.offer_price}
+                        expirationDate={post.expiration_date}
+                        promoCode={post.promo_code}
+                        scheduledDate={post.sheduled_date}
+                        scheduledTime={post.sheduled_time}
                       />
                     </div>
                   ))
@@ -471,10 +462,10 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                {savedDeals.length === 0 ? (
+                {user.saved.length === 0 ? (
                   <p className="bg-transparent p-2">No saved deals</p>
                 ) : (
-                  savedDeals.map((deal, index) => (
+                  user.saved.map((deal, index) => (
                     <div className="col mx-2 my-4" key={index}>
                       <DealCard />
                     </div>
@@ -493,10 +484,10 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                {myAlerts.length === 0 ? (
+                {user.alerts.length === 0 ? (
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (
-                  myAlerts.map((alert, index) => (
+                  user.alerts.map((alert, index) => (
                     <div className="col mx-2 my-4" key={index}>
                       <DealCard />
                     </div>
