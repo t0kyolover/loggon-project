@@ -27,9 +27,16 @@ export const MyProfile = (props) => {
     setTwitchUsername(store.user.twitch_username);
   }, []);
 
+  useEffect(() => {
+    setUser((prevState) => ({
+      ...prevState,
+      interests: store.user.interests,
+    }));
+  }, [store.user.interests]);
+
   function updateItem(e, newItem, itemType) {
     e.preventDefault();
-    if (newItem.trim() == "") {
+    if (newItem.trim() == "" && (itemType != "steam_username" || itemType != "twitch_username")) {
       setUser(store.user);
       setClicked("");
     }
@@ -41,26 +48,9 @@ export const MyProfile = (props) => {
     setClicked("");
   }
 
-
-
-  function updateSteamUsername(e) {
-    e.preventDefault();
-    actions.updateSteamUsername(newSteamUsername);
-    setClicked("");
-  }
-
-  function updateTwitchUsername(e) {
-    e.preventDefault();
-    actions.updateTwitchUsername(newTwitchUsername);
-    setClicked("");
-  }
-
+  //The interests get updated in the store but the page doesn't re-render when deleted, function in line 346
   function updateInterests(e) {
     e.preventDefault();
-    setUser((prevState) => ({
-      ...prevState,
-      interest: [...user.interests, newInterest],
-    }));
     actions.addInterest(newInterest);
     setNewInterest("");
   }
@@ -212,7 +202,7 @@ export const MyProfile = (props) => {
                         data-bs-target="#collapseSteam"
                         aria-expanded="false"
                         aria-controls="collapseSteam"
-                        onClick={updateSteamUsername}
+                        onClick={(e) => {updateItem(e, newSteamUsername, "steam_username")}}
                       >
                         <i
                           className="fa-solid fa-circle-check"
@@ -254,7 +244,7 @@ export const MyProfile = (props) => {
                         data-bs-target="#collapseTwitch"
                         aria-expanded="false"
                         aria-controls="collapseTwitch"
-                        onClick={updateTwitchUsername}
+                        onClick={(e) => {updateItem(e, newTwitchUsername, "twitch_username")}}
                       >
                         <i
                           className="fa-solid fa-circle-check"

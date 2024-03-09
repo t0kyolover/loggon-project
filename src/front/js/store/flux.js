@@ -122,33 +122,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }));
         console.log(`${itemType} updated successfully!`);
       },
-      /*updateUserImage: (imageUrl) => {
-        setStore((prevStore) => ({
-          user: { ...prevStore.user, image_url: imageUrl },
-        }));
-        console.log("Image updated successfully!");
-      },
-
-      updateUsername: (username) => {
-        setStore((prevStore) => ({
-          user: { ...prevStore.user, username: username },
-        }));
-        console.log("Username updated successfully!");
-      },
-
-      updateSteamUsername: (steamUsername) => {
-        setStore((prevStore) => ({
-          user: { ...prevStore.user, steam_username: steamUsername },
-        }));
-        console.log("Steam username updated successfully!");
-      },
-
-      updateTwitchUsername: (twitchUsername) => {
-        setStore((prevStore) => ({
-          user: { ...prevStore.user, twitch_username: twitchUsername },
-        }));
-        console.log("Twitch username updated successfully!");
-      },*/
+     
 
       //--------------------------INTERSTS ACTIONS----------------------//
       addInterest: (newInterest) => {
