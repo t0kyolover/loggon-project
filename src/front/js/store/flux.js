@@ -122,7 +122,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         }));
         console.log(`${itemType} updated successfully!`);
       },
-     
+      updatePassword: (newPassword) => {
+        setStore((prevStore) => ({
+          user: { ...prevStore.user, password: newPassword },
+        }));
+        console.log("Password updated successfully!");
+      },
 
       //--------------------------INTERSTS ACTIONS----------------------//
       addInterest: (newInterest) => {

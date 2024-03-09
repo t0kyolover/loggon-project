@@ -24,7 +24,7 @@ export const PasswordRecovery = (props) => {
     } else if (newPassword == currentPassword) {
       alert("New password can't be the same as current password");
     } else {
-      setCurrentPassword(newPassword);
+      actions.updatePassword(newPassword);
       alert("Password changed successfully");
       navigate("/login");
     }
@@ -45,7 +45,7 @@ export const PasswordRecovery = (props) => {
     } else if (newPassword == currentPassword) {
       alert("New password can't be the same as current password");
     } else {
-      setCurrentPassword(newPassword);
+      actions.updatePassword(newPassword);
       alert("Password changed successfully");
       navigate(-1);
     }
