@@ -36,15 +36,19 @@ export const MyProfile = (props) => {
 
   function updateItem(e, newItem, itemType) {
     e.preventDefault();
-    if (newItem.trim() == "" && (itemType != "steam_username" || itemType != "twitch_username")) {
+    if (
+      newItem.trim() == "" &&
+      (itemType != "steam_username" || itemType != "twitch_username")
+    ) {
       setUser(store.user);
       setClicked("");
+    } else {
+      setUser((prevState) => ({
+        ...prevState,
+        [itemType]: newItem,
+      }));
+      actions.updateItem(newItem, itemType);
     }
-    setUser((prevState) => ({
-      ...prevState,
-      [itemType]: newItem,
-    }));
-    actions.updateItem(newItem, itemType);
     setClicked("");
   }
 
@@ -67,7 +71,12 @@ export const MyProfile = (props) => {
             <form>
               {clicked == "image" ? (
                 <div>
-                  <button className="btn py-0" onClick={(e) => {updateItem(e, newUserImage, "image_url")}}>
+                  <button
+                    className="btn py-0"
+                    onClick={(e) => {
+                      updateItem(e, newUserImage, "image_url");
+                    }}
+                  >
                     <i
                       className="fa-solid fa-circle-check"
                       style={{ color: "#992899" }}
@@ -120,7 +129,12 @@ export const MyProfile = (props) => {
                 </div>
                 <div className="ms-auto">
                   {clicked == "username" ? (
-                    <button className="btn py-0" onClick={(e) => {updateItem(e, newUsername, "username")}}>
+                    <button
+                      className="btn py-0"
+                      onClick={(e) => {
+                        updateItem(e, newUsername, "username");
+                      }}
+                    >
                       <i
                         className="fa-solid fa-circle-check"
                         style={{ color: "#992899" }}
@@ -202,7 +216,9 @@ export const MyProfile = (props) => {
                         data-bs-target="#collapseSteam"
                         aria-expanded="false"
                         aria-controls="collapseSteam"
-                        onClick={(e) => {updateItem(e, newSteamUsername, "steam_username")}}
+                        onClick={(e) => {
+                          updateItem(e, newSteamUsername, "steam_username");
+                        }}
                       >
                         <i
                           className="fa-solid fa-circle-check"
@@ -244,7 +260,9 @@ export const MyProfile = (props) => {
                         data-bs-target="#collapseTwitch"
                         aria-expanded="false"
                         aria-controls="collapseTwitch"
-                        onClick={(e) => {updateItem(e, newTwitchUsername, "twitch_username")}}
+                        onClick={(e) => {
+                          updateItem(e, newTwitchUsername, "twitch_username");
+                        }}
                       >
                         <i
                           className="fa-solid fa-circle-check"
