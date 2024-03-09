@@ -92,14 +92,36 @@ export const PasswordRecovery = (props) => {
                 emoji.
               </div>
               <div className="d-flex justify-content-end">
-                <button
-                  className="btn btn-primary me-md-2 border-0 mb-3"
-                  style={{ background: "#992899" }}
-                  type="button"
-                  onClick={store.loggedIn ? changePassword : resetPassword}
-                >
-                  Reset Password
-                </button>
+                {store.loggedIn ? (
+                  <div>
+                    <button
+                      type="button"
+                      className="btn btn-danger me-md-2 border-0 mb-3"
+                      onClick={() => {
+                        navigate(-1);
+                      }}
+                    >
+                      Back
+                    </button>
+                    <button
+                      className="btn text-white me-md-2 border-0 mb-3"
+                      style={{ background: "#992899" }}
+                      type="button"
+                      onClick={changePassword}
+                    >
+                      Change Password
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="btn text-white me-md-2 border-0 mb-3"
+                    style={{ background: "#992899" }}
+                    type="button"
+                    onClick={resetPassword}
+                  >
+                    Reset Password
+                  </button>
+                )}
               </div>
             </div>
           </form>
