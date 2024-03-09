@@ -20,6 +20,20 @@ export const EditableDealCard = (props) => {
 
   const [scheduled, setScheduled] = useState(false);
 
+  useEffect(() => {
+    setDeal({
+      game_title: props.gameTitle,
+      format: props.format,
+      rating: props.rating,
+      image_url: props.imageUrl,
+      offer_price: props.offerPrice,
+      expiration_date: props.expirationDate,
+      promo_code: props.promoCode,
+      scheduled_date: props.scheduledDate,
+      scheduled_time: props.scheduledTime,
+    });
+  }, [store.user.posts]);
+
   function modifyPost(e) {
     e.preventDefault();
     actions.modifyPost(

@@ -15,6 +15,10 @@ export const PasswordRecovery = (props) => {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
 
+  useEffect(()=>{
+    setCurrentPassword(store.user.password);
+  }, [])
+
   function resetPassword(e) {
     e.preventDefault();
     if (!newPassword || !newPasswordConfirmation) {
