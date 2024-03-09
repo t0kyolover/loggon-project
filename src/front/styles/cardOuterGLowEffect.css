@@ -133,7 +133,7 @@
   .container .card{
     position: relative;
   background: transparent; /* Definir o fundo como transparente */
-  border:none; /* Remover a borda */
+  border: none; /* Remover a borda */
   /* background: #212529; 
   }
   
