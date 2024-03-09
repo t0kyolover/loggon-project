@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         email: "pereayats@email.com",
         password: "1234",
         image_url:
-          "https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116",
+          "https://pbs.twimg.com/profile_images/1615039426530316288/jhcrsFcg_400x400.jpg",
         username: "pere",
         steam_username: "pereayts",
         twitch_username: "pereayats",
@@ -110,23 +110,46 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: () => {
         setStore({ loggedIn: true });
       },
+
       // LOGOUT
       logout: () => {
         setStore({ loggedIn: false });
-      }, 
+      },
       //------------------------USER DETAILS ACTIONS--------------------//
-      updateUserImage: (imageUrl) => {
+      updateItem: (newItem, itemType) => {
+        setStore((prevStore) => ({
+          user: { ...prevStore.user, [itemType]: newItem },
+        }));
+        console.log(`${itemType} updated successfully!`);
+      },
+      /*updateUserImage: (imageUrl) => {
         setStore((prevStore) => ({
           user: { ...prevStore.user, image_url: imageUrl },
         }));
         console.log("Image updated successfully!");
       },
+
       updateUsername: (username) => {
         setStore((prevStore) => ({
           user: { ...prevStore.user, username: username },
         }));
-        console.log("Image updated successfully!");
+        console.log("Username updated successfully!");
       },
+
+      updateSteamUsername: (steamUsername) => {
+        setStore((prevStore) => ({
+          user: { ...prevStore.user, steam_username: steamUsername },
+        }));
+        console.log("Steam username updated successfully!");
+      },
+
+      updateTwitchUsername: (twitchUsername) => {
+        setStore((prevStore) => ({
+          user: { ...prevStore.user, twitch_username: twitchUsername },
+        }));
+        console.log("Twitch username updated successfully!");
+      },*/
+
       //--------------------------INTERSTS ACTIONS----------------------//
       addInterest: (newInterest) => {
         const store = getStore();
@@ -135,6 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         console.log("New interest added successfully!");
       },
+
       deleteInterest: (index) => {
         setStore((prevStore) => ({
           user: {

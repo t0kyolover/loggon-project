@@ -13,39 +13,55 @@ export const MyProfile = (props) => {
 
   const [user, setUser] = useState(store.user);
   const [newUsername, setNewUsername] = useState("");
-
+  const [newUserImage, setNewUserImage] = useState("");
+  const [newSteamUsername, setNewSteamUsername] = useState("");
+  const [newTwitchUsername, setTwitchUsername] = useState("");
   const [newInterest, setNewInterest] = useState("");
   const [clicked, setClicked] = useState("");
 
-  /*useEffect(() => {
+  useEffect(() => {
     setUser(store.user);
-  }, [store.user]);*/
+    setNewUsername(store.user.username);
+    setNewUserImage(store.user.image_url);
+    setNewSteamUsername(store.user.steam_username);
+    setTwitchUsername(store.user.twitch_username);
+  }, []);
 
-  function resetClicked(e) {
+  function updateItem(e, newItem, itemType) {
     e.preventDefault();
+    if (newItem.trim() == "") {
+      setUser(store.user);
+      setClicked("");
+    }
+    setUser((prevState) => ({
+      ...prevState,
+      [itemType]: newItem,
+    }));
+    actions.updateItem(newItem, itemType);
     setClicked("");
   }
 
-  function updateUserImage(e) {
-    resetClicked(e);
-    actions.updateUserImage(user.image_url);
+
+
+  function updateSteamUsername(e) {
+    e.preventDefault();
+    actions.updateSteamUsername(newSteamUsername);
+    setClicked("");
   }
 
-  /*USERNAME IS EXAMPLE, REPLICATE*/
-  function updateUsername(e) {
-    //if input is empty, don't do anything
-    resetClicked(e);
-    setUser((prevState) => ({
-      ...prevState,
-      username: newUsername 
-  }))
-    actions.updateUsername(newUsername);
+  function updateTwitchUsername(e) {
+    e.preventDefault();
+    actions.updateTwitchUsername(newTwitchUsername);
+    setClicked("");
   }
 
   function updateInterests(e) {
     e.preventDefault();
+    setUser((prevState) => ({
+      ...prevState,
+      interest: [...user.interests, newInterest],
+    }));
     actions.addInterest(newInterest);
-    console.log(store.user.interests);
     setNewInterest("");
   }
 
@@ -55,13 +71,13 @@ export const MyProfile = (props) => {
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-column text-white">
-          <h3 className="m-auto my-4 ps-4">My Profile</h3> {/*--------falta de centralización----------*/}
-
+          <h3 className="m-auto my-4 ps-4">My Profile</h3>{" "}
+          {/*--------falta de centralización----------*/}
           <div className="d-flex flex-row flex-wrap">
             <form>
               {clicked == "image" ? (
                 <div>
-                  <button className="btn py-0" onClick={updateUserImage}>
+                  <button className="btn py-0" onClick={(e) => {updateItem(e, newUserImage, "image_url")}}>
                     <i
                       className="fa-solid fa-circle-check"
                       style={{ color: "#992899" }}
@@ -70,11 +86,8 @@ export const MyProfile = (props) => {
                   <input
                     type="text"
                     className="img-fluid"
-                    value={user.image_url}
-                    onChange={(e) => setUser((prevState) => ({
-                      ...prevState,
-                      image_url: e.target.value 
-                  }))}
+                    value={newUserImage}
+                    onChange={(e) => setNewUserImage(e.target.value)}
                   />
                 </div>
               ) : (
@@ -117,7 +130,7 @@ export const MyProfile = (props) => {
                 </div>
                 <div className="ms-auto">
                   {clicked == "username" ? (
-                    <button className="btn py-0" onClick={updateUsername}>
+                    <button className="btn py-0" onClick={(e) => {updateItem(e, newUsername, "username")}}>
                       <i
                         className="fa-solid fa-circle-check"
                         style={{ color: "#992899" }}
@@ -143,41 +156,7 @@ export const MyProfile = (props) => {
               <div style={{ fontSize: "12px", color: "#992899" }}>Email</div>
               <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
                 <div className="w-100">
-                  {clicked == "email" ? (
-                    <input
-                      className="form-control border-0 text-white bg-transparent"
-                      value={user.email}
-                      onChange={(e) => setUser((prevState) => ({
-                        ...prevState,
-                        email: e.target.value 
-                    }))}
-                    />
-                  ) : (
-                    <p className="fw-bold mb-0">{user.email}</p>
-                  )}
-                </div>
-                <div className="ms-auto">
-                  {clicked == "email" ? (
-                    <button className="btn py-0" onClick={resetClicked}>
-                      <i
-                        className="fa-solid fa-circle-check"
-                        style={{ color: "#992899" }}
-                      ></i>
-                    </button>
-                  ) : (
-                    <button
-                      className="btn py-0"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setClicked("email");
-                      }}
-                    >
-                      <i
-                        className="fa-solid fa-pencil"
-                        style={{ color: "#992899" }}
-                      ></i>
-                    </button>
-                  )}
+                  <p className="fw-bold mb-0">{user.email}</p>
                 </div>
               </li>
               {/*---------------------------------------Password---------------------------------*/}
@@ -219,18 +198,28 @@ export const MyProfile = (props) => {
                     className="collapse collapse-horizontal"
                     id="collapseSteam"
                   >
-                    <input
-                      type="text"
-                      className="form-control rounded-5 text-black w-auto"
-                      style={{ maxHeight: "30px" }}
-                      value={user.steam_username}
-                      onChange={(e) =>
-                        setUser((prevState) => ({
-                          ...prevState,
-                          steam_username: e.target.value 
-                      }))
-                      }
-                    />
+                    <div className="d-flex flex-row">
+                      <input
+                        type="text"
+                        className="form-control rounded-5 text-black w-auto"
+                        style={{ maxHeight: "30px" }}
+                        value={newSteamUsername}
+                        onChange={(e) => setNewSteamUsername(e.target.value)}
+                      />
+                      <button
+                        className="btn py-0"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseSteam"
+                        aria-expanded="false"
+                        aria-controls="collapseSteam"
+                        onClick={updateSteamUsername}
+                      >
+                        <i
+                          className="fa-solid fa-circle-check"
+                          style={{ color: "#992899" }}
+                        ></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
                 {/*---------------------------------------Twitch---------------------------------*/}
@@ -251,18 +240,28 @@ export const MyProfile = (props) => {
                     className="collapse collapse-horizontal"
                     id="collapseTwitch"
                   >
-                    <input
-                      type="text"
-                      className="form-control rounded-5 text-black w-auto"
-                      style={{ maxHeight: "30px" }}
-                      value={user.twitch_username}
-                      onChange={(e) =>
-                        setUser((prevState) => ({
-                          ...prevState,
-                          twitch_username: e.target.value 
-                      }))
-                      }
-                    />
+                    <div className="d-flex flex-row">
+                      <input
+                        type="text"
+                        className="form-control rounded-5 text-black w-auto"
+                        style={{ maxHeight: "30px" }}
+                        value={newTwitchUsername}
+                        onChange={(e) => setTwitchUsername(e.target.value)}
+                      />
+                      <button
+                        className="btn py-0"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwitch"
+                        aria-expanded="false"
+                        aria-controls="collapseTwitch"
+                        onClick={updateTwitchUsername}
+                      >
+                        <i
+                          className="fa-solid fa-circle-check"
+                          style={{ color: "#992899" }}
+                        ></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </li>
