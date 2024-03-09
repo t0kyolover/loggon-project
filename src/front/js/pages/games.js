@@ -1,6 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/cardOuterGLowEffect.css";
+
+import { CardOuterGlow } from "../component/cardOuterGlow";
 import { GameCard } from "../component/gameCard";
 import { Filters } from "../component/filters";
 
@@ -24,8 +27,14 @@ export const Games = () => {
       </div>
       <div className="container text-center">
         <div className="row row-cols-auto">
-          <div className="col m-auto my-4">
-            <GameCard />
+          <div className="col ">
+            <CardOuterGlow />
+          </div>
+          <div className="col ">
+            <CardOuterGlow />
+          </div>
+          <div className="col ">
+            <CardOuterGlow />
           </div>
           <div className="col m-auto my-4">
             <GameCard />

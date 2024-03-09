@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/cardOuterGLowEffect.css";
+
 import { Context } from "../store/appContext";
 
 export const GameCard = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card face face1" style={{ width: "18rem" }}>
       <img
         src="https://picsum.photos/id/1/200"
         className="card-img-top"
