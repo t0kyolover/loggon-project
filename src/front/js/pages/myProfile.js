@@ -12,6 +12,7 @@ export const MyProfile = (props) => {
   const params = useParams();
 
   const [user, setUser] = useState(store.user);
+  const [newUsername, setNewUsername] = useState("");
 
   const [newInterest, setNewInterest] = useState("");
   const [clicked, setClicked] = useState("");
@@ -30,9 +31,15 @@ export const MyProfile = (props) => {
     actions.updateUserImage(user.image_url);
   }
 
+  /*USERNAME IS EXAMPLE, REPLICATE*/
   function updateUsername(e) {
+    //if input is empty, don't do anything
     resetClicked(e);
-    actions.updateUsername(user.username);
+    setUser((prevState) => ({
+      ...prevState,
+      username: newUsername 
+  }))
+    actions.updateUsername(newUsername);
   }
 
   function updateInterests(e) {
@@ -101,11 +108,8 @@ export const MyProfile = (props) => {
                   {clicked == "username" ? (
                     <input
                       className="form-control border-0 text-white bg-transparent"
-                      value={user.username}
-                      onChange={(e) => setUser((prevState) => ({
-                        ...prevState,
-                        username: e.target.value 
-                    }))}
+                      value={newUsername}
+                      onChange={(e) => setNewUsername(e.target.value)}
                     />
                   ) : (
                     <p className="fw-bold mb-0">@{user.username}</p>
