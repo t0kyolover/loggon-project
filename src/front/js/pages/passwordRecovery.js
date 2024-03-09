@@ -7,8 +7,9 @@ import { Context } from "../store/appContext";
 export const PasswordRecovery = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const navigate = useNavigate();
 
-  const [currentPassword, setCurrentPassword] = useState("1234");
+  const [currentPassword, setCurrentPassword] = useState(store.user.password);
   const [currentPasswordConfirmation, setCurrentPasswordConfirmation] =
     useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -25,7 +26,7 @@ export const PasswordRecovery = (props) => {
     } else {
       setCurrentPassword(newPassword);
       alert("Password changed successfully");
-      //useHistory().push("/home") if came from link in email
+      navigate("/login");
     }
   }
 
@@ -46,7 +47,7 @@ export const PasswordRecovery = (props) => {
     } else {
       setCurrentPassword(newPassword);
       alert("Password changed successfully");
-      //useHistory().push("/home") if came from link in email
+      navigate(-1);
     }
   }
 

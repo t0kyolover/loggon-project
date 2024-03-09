@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      loggedIn: true,
+      loggedIn: false,
       user: {
         id: 1,
         email: "pereayats@email.com",
