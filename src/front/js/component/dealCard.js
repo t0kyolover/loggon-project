@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/cardEffect.css"
+
 import { Context } from "../store/appContext";
 
 export const DealCard = (props) => {
@@ -12,7 +14,7 @@ export const DealCard = (props) => {
   const [rating, setRating] = useState(10);
 
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card card-effect" style={{ width: "18rem" }}>
       <img src="https://picsum.photos/200" className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex">
         <div>
