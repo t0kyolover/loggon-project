@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
 import { Context } from "../store/appContext";
@@ -7,12 +7,17 @@ import { Context } from "../store/appContext";
 export const PasswordRecovery = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const navigate = useNavigate();
 
-  const [currentPassword, setCurrentPassword] = useState("1234");
+  const [currentPassword, setCurrentPassword] = useState(store.user.password);
   const [currentPasswordConfirmation, setCurrentPasswordConfirmation] =
     useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
+
+  useEffect(()=>{
+    setCurrentPassword(store.user.password);
+  }, [])
 
   function resetPassword(e) {
     e.preventDefault();
@@ -23,9 +28,9 @@ export const PasswordRecovery = (props) => {
     } else if (newPassword == currentPassword) {
       alert("New password can't be the same as current password");
     } else {
-      setCurrentPassword(newPassword);
+      actions.updatePassword(newPassword);
       alert("Password changed successfully");
-      //useHistory().push("/home") if came from link in email
+      navigate("/login");
     }
   }
 
@@ -44,9 +49,9 @@ export const PasswordRecovery = (props) => {
     } else if (newPassword == currentPassword) {
       alert("New password can't be the same as current password");
     } else {
-      setCurrentPassword(newPassword);
+      actions.updatePassword(newPassword);
       alert("Password changed successfully");
-      //useHistory().push("/home") if came from link in email
+      navigate(-1);
     }
   }
 
@@ -91,14 +96,36 @@ export const PasswordRecovery = (props) => {
                 emoji.
               </div>
               <div className="d-flex justify-content-end">
-                <button
-                  className="btn btn-primary me-md-2 border-0 mb-3"
-                  style={{ background: "#992899" }}
-                  type="button"
-                  onClick={store.loggedIn ? changePassword : resetPassword}
-                >
-                  Reset Password
-                </button>
+                {store.loggedIn ? (
+                  <div>
+                    <button
+                      type="button"
+                      className="btn btn-danger me-md-2 border-0 mb-3"
+                      onClick={() => {
+                        navigate(-1);
+                      }}
+                    >
+                      Back
+                    </button>
+                    <button
+                      className="btn text-white me-md-2 border-0 mb-3"
+                      style={{ background: "#992899" }}
+                      type="button"
+                      onClick={changePassword}
+                    >
+                      Change Password
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="btn text-white me-md-2 border-0 mb-3"
+                    style={{ background: "#992899" }}
+                    type="button"
+                    onClick={resetPassword}
+                  >
+                    Reset Password
+                  </button>
+                )}
               </div>
             </div>
           </form>
