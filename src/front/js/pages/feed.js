@@ -41,7 +41,7 @@ export const Feed = () => {
               aria-controls="nav-ps"
               aria-selected="true"
             >
-            <img className="ps-effect rounded-4" width="60" height="60" src="https://img.icons8.com/ios-glyphs/60/228BE6/play-station.png" alt="play-station"/>
+            <img className="ps-effect rounded-4" src="https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png" alt="play-station"/>
             </button>
             <button
               className="nav-link"
@@ -53,7 +53,7 @@ export const Feed = () => {
               aria-controls="nav-xbox"
               aria-selected="false"
             >
-              <img className="xbox-effect rounded-4" width="60" height="60" src="https://img.icons8.com/ios/50/40C057/xbox.png" alt="xbox"/>
+              <img className="xbox-effect rounded-4" src="https://img.icons8.com/ios/50/40C057/xbox.png" alt="xbox"/>
             </button>
             <button
               className="nav-link"
@@ -65,7 +65,7 @@ export const Feed = () => {
               aria-controls="nav-pc"
               aria-selected="false"
             >
-              <img className="pc-effect rounded-4" width="60" height="60" src="https://img.icons8.com/ios-glyphs/60/FD7E14/windows-10.png" alt="windows-10"/>
+              <img className="pc-effect rounded-4 img-fluid" src="https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png" alt="windows-10"/>
             </button>
             <button
               className="nav-link"
@@ -77,7 +77,7 @@ export const Feed = () => {
               aria-controls="nav-nintendo"
               aria-selected="faalse"
             >
-              <img className="nintendo-effect rounded-4" width="60" height="60" src="https://img.icons8.com/ios-filled/50/FA5252/nintendo.png" alt="nintendo"/>
+              <img className="nintendo-effect rounded-4 img-fluid"  src="https://img.icons8.com/ios-filled/50/FA5252/nintendo.png" alt="nintendo"/>
             </button>
           </div>
         </nav>

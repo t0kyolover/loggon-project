@@ -70,7 +70,7 @@ export const SingleDeal = (props) => {
         </div>
       {/*---------------------- description (data from 3rd party API) --------------------*/}
         <div className="row">
-          <div className="col-12 bg-light rounded-3 p-3 m-auto my-3">
+          <div className="col-12 bg-light rounded-3 p-3 m-auto my-5">
             <p>
               Grand Theft Auto Online Explore GTA Online, um universo online
               dinâmico em constante evolução para até 30 jogadores incluindo
