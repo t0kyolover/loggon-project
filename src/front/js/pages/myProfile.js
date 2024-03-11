@@ -360,9 +360,13 @@ export const MyProfile = (props) => {
                                   {interest}
                                   <button
                                     className="btn border-0 p-0 ms-2"
-                                    onClick={() =>
-                                      actions.deleteInterest(index)
-                                    }
+                                    onClick={() => {
+                                      actions.deleteInterest(index);
+                                      setUser((prevState) => ({
+                                        ...prevState,
+                                        interests: prevState.interests.filter((_, i) => i !== index),
+                                      }));
+                                    }}
                                   >
                                     <i className="fa-solid fa-xmark"></i>
                                   </button>
