@@ -6,18 +6,20 @@ db = SQLAlchemy()
 #--------------------------------------------------------User------------------------------------------------------------------------ 
 #-----------------------------------Notas: Antes de popular base de datos, incluso test,---------------------------------------------
 #----------------------------------------  asegurar de no modifcar models               ---------------------------------------------
+#----------------------------------------  Katia tenemos que hablar de un error               ---------------------------------------
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    image = db.Column(db.String)
+    image_url = db.Column(db.String)
     username = db.Column(db.String(30), nullable=False)
-    steam_profile = db.Column(db.String(40))
-    twitch_profile = db.Column(db.String(40))
-    interest = db.relationship('Interest', backref='user', lazy=True)
+    steam_username = db.Column(db.String(40))
+    twitch_username = db.Column(db.String(40))
+    interests = db.relationship('Interest', backref='user', lazy=True)
     saved = db.relationship('Saved', backref='user', lazy=True)
-    posts = db.Column(db.String)
+    posts = db.Column(db.String) #hablar con katia
+    alerts = db.Column(db.String)
     newsletter = db.Column(db.Boolean())
     
 
@@ -48,15 +50,19 @@ class Deal(db.Model):
     game_title = db.Column(db.String(200), nullable=False)
     platform = db.Column(db.Enum('PC', 'Xbox', 'PS5', 'Nintendo', name='Platform_options'), nullable=False)
     date_of_creation = db.Column(db.DateTime, nullable=False)
-    end_date = db.Column(db.DateTime)
+    expiration_date = db.Column(db.DateTime)
     original_price = db.Column(db.Float, nullable=False)
     offer_price = db.Column(db.Float, nullable=False)
     format = db.Column(db.Enum('Digital', 'CD', name='Format_options'), nullable=False)
     item_type = db.Column(db.Enum('opcion1','opcion2','opcion3','opcion4','opcion5', name='Type_options'), nullable=False)
     promo_code = db.Column(db.String(250))
     scheduled = db.Column(db.Boolean())
-    url = db.Column(db.String(200), unique=True, nullable=False)
-    img_url = db.Column(db.String(200))
+    scheduled_date = db.Column(db.DateTime)
+    scheduled_time = db.Column(db.DateTime)
+    offer_link = db.Column(db.String(200), unique=True, nullable=False)
+    image_url = db.Column(db.String(200))
+    rating = db.Column(db.String(5))
+    
     
     
 
