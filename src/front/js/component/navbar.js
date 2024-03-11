@@ -6,6 +6,7 @@ import { Context } from "../store/appContext";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const location = useLocation();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -64,25 +65,25 @@ export const Navbar = () => {
                     className="text-white text-decoration-none mb-2"
                     to={"/myprofile/:username"}
                   >
-                    My profile
+                    <div data-bs-dismiss="offcanvas">My profile</div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/postdeal/:username"}
                   >
-                    Post deal
+                    <div data-bs-dismiss="offcanvas">Post deal</div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/games"}
                   >
-                    Games
+                    <div data-bs-dismiss="offcanvas">Games</div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/"}
                   >
-                    Deals
+                    <div data-bs-dismiss="offcanvas">Deals</div>
                   </Link>
 
                   {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
