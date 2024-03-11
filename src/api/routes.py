@@ -174,7 +174,7 @@ def update_user(user_id):
         
         data = request.get_json()
 
-        # Modificar solo los campos que necesitas actualizar
+        # Modificar solo los campos que necesitemos actualizar
         user.email = data.get('email', user.email)
         user.password = data.get('password', user.password)
         user.username = data.get('username', user.username)
@@ -220,7 +220,7 @@ def get_user(user_id):
 
 def create_deal():
     try:
-        # Obtener los datos del cuerpo de la solicitud
+        
         data = request.get_json()
 
         # Crear una nueva instancia de Deal
@@ -263,7 +263,7 @@ def update_deal(deal_id):
         if not deal:
             return jsonify({"error": "Deal not found"}), 404
 
-        # Actualizar los campos según los datos recibidos en el cuerpo de la solicitud
+        
         data = request.get_json()
 
         # Modificar solo los campos que necesitemos actualizar
