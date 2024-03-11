@@ -107,9 +107,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
     },
     actions: {
-      //--------------------------LOGIN/LOGOUT/SIGNUP----------------------//
+      //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
       login: () => {
         setStore({ loggedIn: true });
+      },
+
+      forgotPassword: (email) => {
+        console.log("Password recovery email sent successfully!");
       },
 
       // LOGOUT
