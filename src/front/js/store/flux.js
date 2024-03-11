@@ -197,7 +197,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const allItems = [].concat(store.deals, store.games);
         const results = allItems.filter((item) =>
-          item.game_tags.some((tag) =>
+          item.game_tags.filter((tag) =>
             tag.toLowerCase().includes(searchTerm.toLowerCase())
           )
         );
@@ -206,6 +206,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else {
           setStore({ searchResults: results });
           console.log("Search results updated successfully!");
+          console.log(results)
         }
       },
     },
