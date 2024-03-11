@@ -38,7 +38,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled: false,
             scheduled_date: "",
-            sheduled_time: ""
+            sheduled_time: "",
+            game_tags: ["multiplayer", "action", "adventure", "open-world"]
           },
           {
             id: 2,
@@ -59,6 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
             sheduled_time: "",
+            game_tags: ["singleplayer", "action", "adventure"]
           },
           {
             id: 3,
@@ -79,6 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
             sheduled_time: "",
+            game_tags: ["multiplayer", "action", "shooter"]
           },
           {
             id: 4,
@@ -99,6 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
             sheduled_time: "",
+            game_tags: ["singleplayer", "adventure", "open-world"]
           },
         ],
         saved: ["Saved1", "Saved2", "Saved3", "Saved4"],
@@ -106,7 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         newsletter: false,
       },
       deals: [],
-      games: [],
+      games: [{ game_tags: ["multiplayer", "action", "adventure", "open-world"] }],
       searchResults: []
     },
     actions: {
@@ -189,13 +193,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("Deal has been modified successfully!");
       },
       //--------------------------SEARCHES----------------------//
-      searchInNavbar: (searchTerm) => {
+      searchInNavbar: (searchTerm, navigate) => {
         const store = getStore();
         const allItems = [].concat(store.deals, store.games);
         const results = allItems.filter((item) =>
-          item.game_title.toLowerCase().includes(searchTerm.toLowerCase())
+          item.game_tags.some((tag) =>
+            tag.toLowerCase().includes(searchTerm.toLowerCase())
+          )
         );
-        setStore({ searchResults: results });
+        if (results.length === 0) {
+          alert("No results found!");
+        } else {
+          setStore({ searchResults: results });
+          console.log("Search results updated successfully!");
+        }
       },
     },
   };

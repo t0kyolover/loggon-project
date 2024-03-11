@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [loginEmailInput, setLoginEmailInput] = useState("");
   const [loginPasswordInput, setLoginPasswordInput] = useState("");
@@ -47,6 +48,12 @@ export const Navbar = () => {
     } else if (forgotPasswordEmailInput !== forgotPasswordEmailInput2) {
       alert("Emails do not match!");
     }
+  }
+
+  function performSearch(e) {
+    actions.searchInNavbar(searchTerm, navigate);
+    setSearchTerm("");
+    navigate("/search_results");
   }
 
   const handleInputChange = (e) => {
@@ -375,8 +382,7 @@ export const Navbar = () => {
               />
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
-            {/*Añadir display de sugerencias, search handle con enter, centrar la barra de búsqueda
-            (el problema está en bottom margin de <p>, pero a sobreescribirlo el campo de input se descuadra)*/}
+            
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
@@ -398,14 +404,14 @@ export const Navbar = () => {
                   className="collapse collapse-horizontal"
                   id="collapseSearch"
                 >
-                  <form>
+                  <form onSubmit={performSearch}>
                     <input
                       type="search"
                       className="form-control rounded-5 w-auto text-white bg-transparent mt-2"
                       style={{ maxHeight: "30px" }}
                       aria-label="Búsqueda"
                       value={searchTerm}
-                      onChange={handleInputChange}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                     />
                   </form>
                 </div>
