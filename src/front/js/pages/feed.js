@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import loggonBn from '/workspaces/loggon-dak-final-project-v2/src/front/img/loggonBn.png';
+
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/icons.css"
+
 import { DealCard } from "../component/dealCard";
 import { Filters } from "../component/filters";
 
@@ -17,13 +21,8 @@ export const Feed = () => {
   return (
     <div>
       {/*------------------------------------LOGO---------------------------------*/}
-      <div className="container mt-2 py-5 bg-light">
-        <h1 className="display-5 fw-bold">Custom jumbotron</h1>
-        <p className="col-md-8 fs-4">
-          Using a series of utilities, you can create this jumbotron, just like
-          the one in previous versions of Bootstrap. Check out the examples
-          below for how you can remix and restyle it to your liking.
-        </p>
+      <div className="container mt-2 py-5 ">
+      <img src={loggonBn} alt="Descrição da Imagem" className="img-fluid"/>
       </div>
       <div className="d-flex justify-content-end pt-4">
         <Filters />
@@ -42,7 +41,7 @@ export const Feed = () => {
               aria-controls="nav-ps"
               aria-selected="true"
             >
-              PS
+            <img className="ps-effect rounded-4" src="https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png" alt="play-station"/>
             </button>
             <button
               className="nav-link"
@@ -54,7 +53,7 @@ export const Feed = () => {
               aria-controls="nav-xbox"
               aria-selected="false"
             >
-              XBOX
+              <img className="xbox-effect rounded-4" src="https://img.icons8.com/ios/50/40C057/xbox.png" alt="xbox"/>
             </button>
             <button
               className="nav-link"
@@ -66,7 +65,7 @@ export const Feed = () => {
               aria-controls="nav-pc"
               aria-selected="false"
             >
-              PC
+              <img className="pc-effect rounded-4 img-fluid" src="https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png" alt="windows-10"/>
             </button>
             <button
               className="nav-link"
@@ -78,7 +77,7 @@ export const Feed = () => {
               aria-controls="nav-nintendo"
               aria-selected="faalse"
             >
-              Nintendo
+              <img className="nintendo-effect rounded-4 img-fluid"  src="https://img.icons8.com/ios-filled/50/FA5252/nintendo.png" alt="nintendo"/>
             </button>
           </div>
         </nav>
@@ -92,7 +91,7 @@ export const Feed = () => {
             aria-labelledby="nav-ps-tab"
             tabIndex="0"
           >
-            <div className="container text-center">
+            <div className="container text-center pb-5">
               <div className="row row-cols-auto">
                 <div className="col m-auto my-4">
                   <DealCard />

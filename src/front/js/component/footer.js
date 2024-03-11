@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 export const Footer = () => (
   <footer
-    className="footer mt-auto pt-2 text-center bg-dark bg-gradient text-white align-items-center"
-    style={{ height: "40px" }}
+    className="footer pt-3  bg-dark bg-gradient mt-auto fixed-bottom"
+    
   >
-    <p style={{ color: "#992899" }}>
+    <p className= " text-center"style={{ color: "#992899" }}>
       Made by DKA <i className="fa-solid fa-skull-crossbones"></i>
     </p>
   </footer>

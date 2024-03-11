@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 import { GameCard } from "../component/gameCard";
 import { Filters } from "../component/filters";
 
@@ -24,28 +25,25 @@ export const Games = () => {
       </div>
       <div className="container text-center">
         <div className="row row-cols-auto">
-          <div className="col m-auto my-4">
+         <div className="col m-auto">
             <GameCard />
           </div>
-          <div className="col m-auto my-4">
+          <div className="col m-auto">
             <GameCard />
           </div>
-          <div className="col m-auto my-4">
+          <div className="col m-auto">
             <GameCard />
           </div>
-          <div className="col m-auto my-4">
+          <div className="col m-auto">
             <GameCard />
           </div>
-          <div className="col m-auto my-4">
+          <div className="col m-auto">
             <GameCard />
           </div>
-          <div className="col m-auto my-4">
+          <div className="col m-auto ">
             <GameCard />
           </div>
-          <div className="col m-auto my-4">
-            <GameCard />
-          </div>
-          <div className="col m-auto my-4">
+          <div className="col m-auto ">
             <GameCard />
           </div>
         </div>

@@ -1,0 +1,72 @@
+.play-station{
+    background-image: url('https://img.icons8.com/ios-glyphs/60/228BE6/play-station.png');
+}
+
+.nintendo{
+    background-image: url('https://img.icons8.com/ios-filled/50/FA5252/nintendo.png');
+}
+
+.xbox{
+    background-image: url('https://img.icons8.com/ios/50/40C057/xbox.png');
+}
+
+.pc{
+    background-image: url('https://img.icons8.com/ios-glyphs/60/FD7E14/windows-10.png');
+}
+
+.ps-effect:hover{
+    transform: translateY(0);
+    box-shadow:
+      inset 0 0 60px whitesmoke,
+      inset 20px 0 80px rgb(0, 204, 255),
+      inset -20px 0 80px rgb(0, 78, 204),
+      inset 20px 0 300px rgb(0, 204, 255),
+      inset -20px 0 300px rgb(0, 78, 204),
+      0 0 50px #fff,
+      -10px 0 80px rgb(0, 204, 255),
+      10px 0 80px rgb(0, 78, 204);
+     
+  }
+
+.xbox-effect:hover{
+    transform: translateY(0);
+    box-shadow:
+      inset 0 0 60px whitesmoke,
+      inset 20px 0 80px rgb(145, 255, 0),
+      inset -20px 0 80px rgb(28, 195, 2),
+      inset 20px 0 300px rgb(145, 255, 0),
+      inset -20px 0 300px rgb(28, 195, 2),
+      0 0 50px #fff,
+      -10px 0 80px rgb(145, 255, 0),
+      10px 0 80px rgb(28, 195, 2);
+     
+  }
+
+  .pc-effect:hover{
+    transform: translateY(0);
+    box-shadow:
+      inset 0 0 60px whitesmoke,
+      inset 20px 0 80px rgb(255, 213, 0),
+      inset -20px 0 80px rgb(227, 125, 0),
+      inset 20px 0 300px rgb(255, 213, 0),
+      inset -20px 0 300px rgb(227, 125, 0),
+      0 0 50px #fff,
+      -10px 0 80px rgb(255, 213, 0),
+      10px 0 80px rgb(227, 125, 0);
+      
+     
+  }
+
+  .nintendo-effect:hover{
+    transform: translateY(0);
+    box-shadow:
+      inset 0 0 60px whitesmoke,
+      inset 20px 0 80px rgb(255, 81, 68),
+      inset -20px 0 80px rgb(255, 0, 0),
+      inset 20px 0 300px rgb(255, 81, 68),
+      inset -20px 0 300px rgb(255, 0, 0),
+      0 0 50px #fff,
+      -10px 0 80px rgb(255, 81, 68),
+      10px 0 80px rgb(255, 0, 0);
+     
+  }
