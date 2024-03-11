@@ -266,13 +266,13 @@ def update_deal(deal_id):
         # Actualizar los campos según los datos recibidos en el cuerpo de la solicitud
         data = request.get_json()
 
-        # Modificar solo los campos que necesitas actualizar
+        # Modificar solo los campos que necesitemos actualizar
         deal.promo_code = data.get('promo_code', deal.promo_code)
         deal.image_url = data.get('image_url', deal.image_url)
         deal.expiration_date = data.get('expiration_date', deal.expiration_date)
         deal.offer_price = data.get('offer_price', deal.offer_price)
         deal.scheduled_date = data.get('scheduled_date', deal.scheduled_date)
-        #  Actualiza otros campos según sea necesario ...
+        #  Actualiza otros campos según sea necesario
 
         # Guardar los cambios en la base de datos
         db.session.commit()
@@ -343,12 +343,6 @@ def get_deal(deal_id):
     
 #--------------------------------------------------------------Ver todos los Deals(probarlo)-----------------------------------------------------------
     
-from flask import jsonify, Blueprint
-from api.models import Deal
-
-deal_api = Blueprint('deal_api', __name__)
-
-# ... Otras rutas ...
 
 @api.route('/deals', methods=['GET'])
 def get_all_deals():
