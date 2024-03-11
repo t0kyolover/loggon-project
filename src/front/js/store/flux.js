@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled: false,
             scheduled_date: "",
-            sheduled_time: "",
+            sheduled_time: ""
           },
           {
             id: 2,

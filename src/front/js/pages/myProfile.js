@@ -445,14 +445,18 @@ export const MyProfile = (props) => {
                       <EditableDealCard
                         id={post.id}
                         gameTitle={post.game_title}
+                        itemType={post.item_type}
                         format={post.format}
                         rating={post.rating}
                         imageUrl={post.image_url}
+                        offerLink={post.offer_link}
+                        originalPrice={post.original_price}
                         offerPrice={post.offer_price}
                         expirationDate={post.expiration_date}
                         promoCode={post.promo_code}
                         scheduledDate={post.sheduled_date}
                         scheduledTime={post.sheduled_time}
+                        userId={post.user_id}
                       />
                     </div>
                   ))

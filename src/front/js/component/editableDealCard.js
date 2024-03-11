@@ -8,10 +8,13 @@ export const EditableDealCard = (props) => {
 
   const [deal, setDeal] = useState({
     id: props.id,
+    user_id: props.userId,
     game_title: props.gameTitle,
+    item_type: props.itemType,
     format: props.format,
     rating: props.rating,
     image_url: props.imageUrl,
+    offer_link: props.offerLink,
     offer_price: props.offerPrice,
     expiration_date: props.expirationDate,
     promo_code: props.promoCode,
@@ -41,17 +44,22 @@ export const EditableDealCard = (props) => {
 
   useEffect(() => {
     setDeal({
+      id: props.id,
+      user_id: props.userId,
       game_title: props.gameTitle,
+      item_type: props.itemType,
       format: props.format,
       rating: props.rating,
       image_url: props.imageUrl,
+      offer_link: props.offerLink,
+      original_price: props.originalPrice,
       offer_price: props.offerPrice,
       expiration_date: props.expirationDate,
       promo_code: props.promoCode,
       scheduled_date: props.scheduledDate,
       scheduled_time: props.scheduledTime,
     });
-  }, [store.user]);
+  }, [store.user, props.user]);
 
   function handleInputChange(e, item) {
     e.persist();
@@ -80,11 +88,27 @@ export const EditableDealCard = (props) => {
       <div className="card-body flex-row d-flex">
         <div>
           <h5 className="card-title">{deal.game_title}</h5>
+          {deal.item_type && <p className="card-text">{deal.item_type}</p>}
           <p className="card-text">{deal.format}</p>
+          <p className="card-text text-decoration-line-through">
+            {deal.original_price}
+          </p>
           <p className="card-text">{deal.offer_price} €</p>
+          <p className="card-text">{deal.promo_code}</p>
+          {deal.expiration_date && (
+            <p className="card-text">{deal.expiration_date}</p>
+          )}
           <Link className="btn btn-link" to="/post/:id">
             Details
           </Link>
+          <button
+            className="btn text-white rounded-5 ms-3"
+            style={{ background: "#992899" }}
+          >
+            <a className="text-white" href={deal.offer_link} target="_blank">
+              Offer Link
+            </a>
+          </button>
         </div>
         <div className="ms-auto">
           {/*--------------------------MODIFY DEAL MODAL----------------------*/}
@@ -131,7 +155,9 @@ export const EditableDealCard = (props) => {
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
                                 value={newPostData.imageUrl}
-                                onChange={(e) => {handleInputChange(e, "imageUrl")}}
+                                onChange={(e) => {
+                                  handleInputChange(e, "imageUrl");
+                                }}
                                 required
                               />
                             </li>
@@ -147,8 +173,9 @@ export const EditableDealCard = (props) => {
                                 type="number"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
                                 value={newPostData.offerPrice}
-                                onChange={(e) => {handleInputChange(e, "offerPrice")}
-                                }
+                                onChange={(e) => {
+                                  handleInputChange(e, "offerPrice");
+                                }}
                                 required
                               />
                             </li>
@@ -164,8 +191,9 @@ export const EditableDealCard = (props) => {
                                 type="date"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
                                 value={newPostData.expirationDate}
-                                onChange={(e) => {handleInputChange(e, "expirationDate")}
-                                }
+                                onChange={(e) => {
+                                  handleInputChange(e, "expirationDate");
+                                }}
                               />
                             </li>
                             {/*---------------------------------------Promo Code---------------------------------*/}
@@ -180,8 +208,9 @@ export const EditableDealCard = (props) => {
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
                                 value={newPostData.promoCode}
-                                onChange={(e) => {handleInputChange(e, "promoCode")}
-                                }
+                                onChange={(e) => {
+                                  handleInputChange(e, "promoCode");
+                                }}
                               />
                             </li>
 
@@ -260,15 +289,17 @@ export const EditableDealCard = (props) => {
                     type="date"
                     className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
                     value={newPostData.scheduledDate}
-                    onChange={(e) => {handleInputChange(e, "scheduledDate")}
-                    }
+                    onChange={(e) => {
+                      handleInputChange(e, "scheduledDate");
+                    }}
                   />
                   <input
                     type="time"
                     className="form-control rounded-5 text-white bg-transparent h-100"
                     value={newPostData.scheduledTime}
-                    onChange={(e) => {handleInputChange(e, "scheduledTime")}
-                    }
+                    onChange={(e) => {
+                      handleInputChange(e, "scheduledTime");
+                    }}
                   />
                 </div>
                 <div className="modal-footer border-0">
@@ -293,6 +324,12 @@ export const EditableDealCard = (props) => {
             <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
           </button>
           <p>Rating {deal.rating}</p>
+          {deal.scheduled && (
+            <div>
+              <p>{deal.scheduled_date}</p>
+              <p>{deal.scheduled_date}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
