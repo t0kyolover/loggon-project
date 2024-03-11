@@ -6,6 +6,7 @@ from api.models import db, User, Deal, Saved, Interest, Vote
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
+from flask_oauthlib.client import OAuth
 
 
 api = Blueprint('api', __name__)
@@ -54,15 +55,6 @@ def signup():
 
 #----------------------------------------------------------Google----------------------------------------------------------------------------
 
-('''
-from flask import request, jsonify, url_for, Blueprint, session, redirect
-from api.models import db, User
-from api.utils import APIException
-from flask_cors import CORS
-from flask_oauthlib.client import OAuth
-
-# Asegúrate de tener tu instancia de Blueprint configurada
-api = Blueprint('api', __name__)
 
 # Configura la instancia de OAuth
 oauth = OAuth()
@@ -70,7 +62,7 @@ oauth = OAuth()
 # Configura el proveedor de autenticación de Google
 google = oauth.remote_app(
     'google',
-    consumer_key='your_google_client_id',
+    consumer_key='your_gooegl_client_id',
     consumer_secret='your_google_client_secret',
     request_token_params={
         'scope': 'email',
@@ -94,6 +86,7 @@ def login():
 def logout():
     session.pop('google_token', None)
     return redirect(url_for('api.index'))
+
 
 @api.route('/login/google/authorized')
 def authorized():
@@ -123,7 +116,7 @@ def authorized():
 @google.tokengetter
 def get_google_oauth_token():
     return session.get('google_token')
-    ''')
+    
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 

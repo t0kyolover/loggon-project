@@ -6,7 +6,7 @@ db = SQLAlchemy()
 #--------------------------------------------------------User------------------------------------------------------------------------ 
 #-----------------------------------Notas: Antes de popular base de datos, incluso test,---------------------------------------------
 #----------------------------------------  asegurar de no modifcar models               ---------------------------------------------
-#----------------------------------------  Katia tenemos que hablar de un error               ---------------------------------------
+#----------------------------------------  Katia tenemos que hablar de un error         ---------------------------------------------
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,11 +16,15 @@ class User(db.Model):
     username = db.Column(db.String(30), nullable=False)
     steam_username = db.Column(db.String(40))
     twitch_username = db.Column(db.String(40))
-    interests = db.relationship('Interest', backref='user', lazy=True)
+    interests = db.Column(db.String(20)) #array
     saved = db.relationship('Saved', backref='user', lazy=True)
-    posts = db.Column(db.String) #hablar con katia
+    posts = db.Column(db.String) 
     alerts = db.Column(db.String)
     newsletter = db.Column(db.Boolean())
+    
+    # interests = db.relationship('Interest', backref='user', lazy=True)
+
+    #  interests = db.Column(db.ARRAY(db.String(20)))
     
 
     def __repr__(self):
@@ -35,7 +39,7 @@ class User(db.Model):
             "image": self.image,
             "steam_profile": self.steam_profile,
             "twitch_profile": self.twitch_profile,
-            "interests": [interest.serialize() for interest in self.interest],
+            "interests": [interest.serialize() for interest in self.interest], # preguntar a pere
             "saved" : [saved.serialize() for saved in self.saved],
             "posts": self.posts,
             "newsletter": self.newsletter,
