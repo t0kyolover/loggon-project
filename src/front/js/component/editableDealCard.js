@@ -7,64 +7,116 @@ export const EditableDealCard = (props) => {
   const { store, actions } = useContext(Context);
 
   const [deal, setDeal] = useState({
+    id: props.id,
+    user_id: props.userId,
     game_title: props.gameTitle,
+    item_type: props.itemType,
     format: props.format,
     rating: props.rating,
     image_url: props.imageUrl,
+    offer_link: props.offerLink,
     offer_price: props.offerPrice,
     expiration_date: props.expirationDate,
     promo_code: props.promoCode,
     scheduled_date: props.scheduledDate,
     scheduled_time: props.scheduledTime,
   });
+  const [newPostData, setNewPostData] = useState({
+    imageUrl: "",
+    offerPrice: "",
+    expirationDate: "",
+    promoCode: "",
+    scheduledDate: "",
+    scheduledTime: "",
+  });
+  const [scheduledButton, setScheduledButton] = useState(false);
 
-  const [scheduled, setScheduled] = useState(false);
+  useEffect(() => {
+    setNewPostData({
+      imageUrl: deal.image_url,
+      offerPrice: deal.offer_price,
+      expirationDate: deal.expiration_date,
+      promoCode: deal.promo_code,
+      scheduledDate: deal.scheduled_date,
+      scheduledTime: deal.scheduled_time,
+    });
+  }, []);
 
   useEffect(() => {
     setDeal({
+      id: props.id,
+      user_id: props.userId,
       game_title: props.gameTitle,
+      item_type: props.itemType,
       format: props.format,
       rating: props.rating,
       image_url: props.imageUrl,
+      offer_link: props.offerLink,
+      original_price: props.originalPrice,
       offer_price: props.offerPrice,
       expiration_date: props.expirationDate,
       promo_code: props.promoCode,
       scheduled_date: props.scheduledDate,
       scheduled_time: props.scheduledTime,
     });
-  }, [store.user.posts]);
+  }, [store.user, props.user]);
+
+  function handleInputChange(e, item) {
+    e.persist();
+    setNewPostData((prevState) => ({
+      ...prevState,
+      [item]: e.target.value,
+    }));
+  }
 
   function modifyPost(e) {
     e.preventDefault();
     actions.modifyPost(
-      deal.image_url,
-      deal.offer_price,
-      deal.expiration_date,
-      deal.promo_code,
-      deal.scheduled_date,
-      deal.scheduled_time
+      newPostData.imageUrl,
+      newPostData.offerPrice,
+      newPostData.expirationDate,
+      newPostData.promoCode,
+      newPostData.scheduledDate,
+      newPostData.scheduledTime,
+      newPostData.scheduled
     );
   }
-
+  /*No actualiza los datos al modificar en la card, pero si que los modifica a nivel de datos */
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src={deal.image_url} className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex">
         <div>
           <h5 className="card-title">{deal.game_title}</h5>
+          {deal.item_type && <p className="card-text">{deal.item_type}</p>}
           <p className="card-text">{deal.format}</p>
+          <p className="card-text text-decoration-line-through">
+            {deal.original_price}
+          </p>
           <p className="card-text">{deal.offer_price} €</p>
+          <p className="card-text">{deal.promo_code}</p>
+          {deal.expiration_date && (
+            <p className="card-text">{deal.expiration_date}</p>
+          )}
           <Link className="btn btn-link" to="/post/:id">
             Details
           </Link>
+          <button
+            className="btn text-white rounded-5 ms-3"
+            style={{ background: "#992899" }}
+          >
+            <a className="text-white" href={deal.offer_link} target="_blank">
+              Offer Link
+            </a>
+          </button>
         </div>
         <div className="ms-auto">
           {/*--------------------------MODIFY DEAL MODAL----------------------*/}
           <div
             className="modal fade"
-            id="editDealModalToggle"
+            id={`editDealModalToggle-${props.id}`}
             aria-hidden="true"
-            aria-labelledby="editDealModalToggleLabel"
+            aria-labelledby={`editDealModalToggleLabel-${props.id}`}
             tabIndex="-1"
           >
             <div className="modal-dialog modal-dialog-centered">
@@ -72,7 +124,7 @@ export const EditableDealCard = (props) => {
                 <div className="modal-header border-0">
                   <h1
                     className="modal-title fs-5"
-                    id="editDealModalToggleLabel"
+                    id={`editDealModalToggleLabel-${props.id}`}
                   >
                     Modify Post
                   </h1>
@@ -102,13 +154,10 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={deal.image_url}
-                                onChange={(e) =>
-                                  setDeal((prevState) => ({
-                                      ...prevState,
-                                      image_url: e.target.value 
-                                  }))
-                              }
+                                value={newPostData.imageUrl}
+                                onChange={(e) => {
+                                  handleInputChange(e, "imageUrl");
+                                }}
                                 required
                               />
                             </li>
@@ -123,13 +172,10 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="number"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={deal.offer_price}
-                                onChange={(e) =>
-                                  setDeal((prevState) => ({
-                                    ...prevState,
-                                    offer_price: e.target.value 
-                                }))
-                                }
+                                value={newPostData.offerPrice}
+                                onChange={(e) => {
+                                  handleInputChange(e, "offerPrice");
+                                }}
                                 required
                               />
                             </li>
@@ -144,13 +190,10 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="date"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={deal.expiration_date}
-                                onChange={(e) =>
-                                  setDeal((prevState) => ({
-                                    ...prevState,
-                                    expiration_date: e.target.value 
-                                }))
-                                }
+                                value={newPostData.expirationDate}
+                                onChange={(e) => {
+                                  handleInputChange(e, "expirationDate");
+                                }}
                               />
                             </li>
                             {/*---------------------------------------Promo Code---------------------------------*/}
@@ -164,13 +207,10 @@ export const EditableDealCard = (props) => {
                               <input
                                 type="text"
                                 className="form-control border-0 text-white bg-transparent h-100 p-0"
-                                value={deal.promo_code}
-                                onChange={(e) =>
-                                  setDeal((prevState) => ({
-                                    ...prevState,
-                                    promo_code: e.target.value 
-                                }))
-                                }
+                                value={newPostData.promoCode}
+                                onChange={(e) => {
+                                  handleInputChange(e, "promoCode");
+                                }}
                               />
                             </li>
 
@@ -181,7 +221,9 @@ export const EditableDealCard = (props) => {
                             >
                               <div className="form-check d-flex flex-row align-items-center">
                                 <input
-                                  onChange={(e) => setScheduled(!scheduled)}
+                                  onChange={(e) =>
+                                    setScheduledButton(!scheduledButton)
+                                  }
                                   className="form-check-input"
                                   type="checkbox"
                                 />
@@ -192,10 +234,10 @@ export const EditableDealCard = (props) => {
                                   Schedule
                                 </label>
                                 {/*-------------------------Schedule Post Modal Trigger Button-----------------------*/}
-                                {scheduled && (
+                                {scheduledButton && (
                                   <button
                                     className="btn btn-link btn-sm"
-                                    data-bs-target="#editScheduleModalToggle"
+                                    data-bs-target={`#editScheduleModalToggle-${props.id}`}
                                     data-bs-toggle="modal"
                                     onClick={(e) => e.preventDefault()}
                                   >
@@ -227,9 +269,9 @@ export const EditableDealCard = (props) => {
           {/*---------------------------------------Schedule Post Modal---------------------------------*/}
           <div
             className="modal fade"
-            id="editScheduleModalToggle"
+            id={`editScheduleModalToggle-${props.id}`}
             aria-hidden="true"
-            aria-labelledby="editScheduleModalToggleLabel"
+            aria-labelledby={`editScheduleModalToggleLabel-${props.id}`}
             tabIndex="-1"
           >
             <div className="modal-dialog modal-sm modal-dialog-centered">
@@ -237,7 +279,7 @@ export const EditableDealCard = (props) => {
                 <div className="modal-header border-0">
                   <h1
                     className="modal-title fs-5"
-                    id="editScheduleModalToggleLabel"
+                    id={`editScheduleModalToggleLabel-${props.id}`}
                   >
                     Schedule Post
                   </h1>
@@ -246,31 +288,25 @@ export const EditableDealCard = (props) => {
                   <input
                     type="date"
                     className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
-                    value={deal.scheduled_date}
-                    onChange={(e) =>
-                      setDeal((prevState) => ({
-                        ...prevState,
-                        scheduled_date: e.target.value 
-                    }))
-                    }
+                    value={newPostData.scheduledDate}
+                    onChange={(e) => {
+                      handleInputChange(e, "scheduledDate");
+                    }}
                   />
                   <input
                     type="time"
                     className="form-control rounded-5 text-white bg-transparent h-100"
-                    value={deal.scheduled_time}
-                    onChange={(e) =>
-                      setDeal((prevState) => ({
-                        ...prevState,
-                        scheduled_time: e.target.value 
-                    }))
-                    }
+                    value={newPostData.scheduledTime}
+                    onChange={(e) => {
+                      handleInputChange(e, "scheduledTime");
+                    }}
                   />
                 </div>
                 <div className="modal-footer border-0">
                   <button
                     className="btn"
                     style={{ background: "#992899" }}
-                    data-bs-target="#editDealModalToggle"
+                    data-bs-target={`#editDealModalToggle-${props.id}`}
                     data-bs-toggle="modal"
                   >
                     Back
@@ -282,12 +318,18 @@ export const EditableDealCard = (props) => {
           {/*--------------------------MODIFY DEAL MODAL TRIGGER BUTTON----------------------*/}
           <button
             className="btn py-0"
-            data-bs-target="#editDealModalToggle"
+            data-bs-target={`#editDealModalToggle-${props.id}`}
             data-bs-toggle="modal"
           >
             <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
           </button>
           <p>Rating {deal.rating}</p>
+          {deal.scheduled && (
+            <div>
+              <p>{deal.scheduled_date}</p>
+              <p>{deal.scheduled_date}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
