@@ -81,7 +81,7 @@ export const EditableDealCard = (props) => {
       newPostData.scheduled
     );
   }
-
+  /*No actualiza los datos al modificar en la card, pero si que los modifica a nivel de datos */
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src={deal.image_url} className="card-img-top" alt="..." />
