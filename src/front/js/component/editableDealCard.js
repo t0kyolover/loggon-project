@@ -80,6 +80,16 @@ export const EditableDealCard = (props) => {
       newPostData.scheduledTime,
       newPostData.scheduled
     );
+    console.log(newPostData);
+    setDeal((prevState) => ({
+      ...prevState,
+      image_url: newPostData.imageUrl,
+      offer_price: newPostData.offerPrice,
+      expiration_date: newPostData.expirationDate,
+      promo_code: newPostData.promoCode,
+      scheduled_date: newPostData.scheduledDate,
+      scheduled_time: newPostData.scheduledTime,
+    }));
   }
   /*No actualiza los datos al modificar en la card, pero si que los modifica a nivel de datos */
   return (

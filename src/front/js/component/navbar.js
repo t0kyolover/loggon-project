@@ -6,14 +6,22 @@ import { Context } from "../store/appContext";
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const location = useLocation();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
 
-  useEffect(() => {
+  const [loginEmailInput, setLoginEmailInput] = useState("");
+  const [loginPasswordInput, setLoginPasswordInput] = useState("");
+  const [signupEmailInput, setSignupEmailInput] = useState("");
+  const [signupPasswordInput, setSignupPasswordInput] = useState("");
+  const [forgotPasswordEmailInput, setForgotPasswordEmailInput] = useState("");
+  const [forgotPasswordEmailInput2, setForgotPasswordEmailInput2] =
+    useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  
+
+ /* useEffect(() => {
     if (!searchTerm) {
       setSuggestions([]);
     }
-  }, [searchTerm]);
+  }, [searchTerm]);*/
 
   useEffect(() => {
     if (location.pathname === "/login") {
@@ -24,6 +32,22 @@ export const Navbar = () => {
       }
     }
   }, [location.pathname]);
+
+  // Some the input doesn't restrict to email format
+  function sendRecoveryEmail() {
+    if (
+      forgotPasswordEmailInput.trim() &&
+      forgotPasswordEmailInput2.trim() &&
+      forgotPasswordEmailInput === forgotPasswordEmailInput2
+    ) {
+      actions.forgotPassword(forgotPasswordEmailInput);
+      alert("Password recovery email sent successfully!");
+    } else if (!forgotPasswordEmailInput || !forgotPasswordEmailInput2) {
+      alert("Missing fields!");
+    } else if (forgotPasswordEmailInput !== forgotPasswordEmailInput2) {
+      alert("Emails do not match!");
+    }
+  }
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -64,25 +88,25 @@ export const Navbar = () => {
                     className="text-white text-decoration-none mb-2"
                     to={"/myprofile/:username"}
                   >
-                    My profile
+                    <div data-bs-dismiss="offcanvas">My profile</div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/postdeal/:username"}
                   >
-                    Post deal
+                    <div data-bs-dismiss="offcanvas">Post deal</div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/games"}
                   >
-                    Games
+                    <div data-bs-dismiss="offcanvas">Games</div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/"}
                   >
-                    Deals
+                    <div data-bs-dismiss="offcanvas">Deals</div>
                   </Link>
 
                   {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
@@ -95,7 +119,7 @@ export const Navbar = () => {
                         data-bs-toggle="modal"
                         data-bs-target="#loginModalToggle"
                       >
-                        Login
+                        <div data-bs-dismiss="offcanvas">Login</div>
                       </button>
                     ) : (
                       <button
@@ -105,7 +129,7 @@ export const Navbar = () => {
                         data-bs-toggle="modal"
                         data-bs-target="#logoutModal"
                       >
-                        Logout
+                        <div data-bs-dismiss="offcanvas">Logout</div>
                       </button>
                     )}
                   </div>
@@ -249,7 +273,7 @@ export const Navbar = () => {
                       className="modal-title fs-5"
                       id="forgotPasswordModalToggleLabel"
                     >
-                      Recover password
+                      Please input your email
                     </h1>
                   </div>
                   <div className="modal-body">
@@ -257,11 +281,19 @@ export const Navbar = () => {
                       type="email"
                       className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
                       placeholder="Email"
+                      value={forgotPasswordEmailInput}
+                      onChange={(e) =>
+                        setForgotPasswordEmailInput(e.target.value)
+                      }
                     />
                     <input
                       type="email"
                       className="form-control rounded-5 text-white bg-transparent h-100"
                       placeholder="Confirm your email"
+                      value={forgotPasswordEmailInput2}
+                      onChange={(e) =>
+                        setForgotPasswordEmailInput2(e.target.value)
+                      }
                     />
                   </div>
                   <div className="modal-footer border-0">
@@ -275,6 +307,8 @@ export const Navbar = () => {
                     <button
                       className="btn text-white"
                       style={{ background: "#992899" }}
+                     /* data-bs-dismiss="modal"*/
+                      onClick={sendRecoveryEmail}
                     >
                       Confirm
                     </button>

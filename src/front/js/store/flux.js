@@ -105,11 +105,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         alerts: ["Alert1", "Alert2", "Alert3", "Alert4"],
         newsletter: false,
       },
+      deals: [],
+      games: [],
+      searchResults: []
     },
     actions: {
-      //--------------------------LOGIN/LOGOUT/SIGNUP----------------------//
+      //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
       login: () => {
         setStore({ loggedIn: true });
+      },
+
+      forgotPassword: (email) => {
+        console.log("Password recovery email sent successfully!");
       },
 
       // LOGOUT
@@ -180,6 +187,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         }));
         console.log("Deal has been modified successfully!");
+      },
+      //--------------------------SEARCHES----------------------//
+      searchInNavbar: (searchTerm) => {
+        const store = getStore();
+        const allItems = [].concat(store.deals, store.games);
+        const results = allItems.filter((item) =>
+          item.game_title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setStore({ searchResults: results });
       },
     },
   };
