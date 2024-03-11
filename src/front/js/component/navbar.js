@@ -1,18 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  
+
   useEffect(() => {
     if (!searchTerm) {
       setSuggestions([]);
     }
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (location.pathname === "/login") {
+      const loginModal = document.getElementById("loginModalToggle");
+      if (loginModal) {
+        const modal = new bootstrap.Modal(loginModal);
+        modal.show();
+      }
+    }
+  }, [location.pathname]);
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -28,14 +39,297 @@ export const Navbar = () => {
             <button
               className="btn"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbar-menu"
-              aria-expanded="false"
-              aria-controls="navbar-menu"
-              data-bs-auto-close="outside"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#menuOffcanvas"
+              aria-controls="menuOffcanvas"
             >
               <i className="fa-solid fa-bars" style={{ color: "#992899" }}></i>
             </button>
+            <div
+              className="offcanvas offcanvas-start text-bg-dark"
+              tabIndex="-1"
+              id="menuOffcanvas"
+              aria-labelledby="menuOffcanvasLabel"
+              style={{ width: "15%" }}
+            >
+              {/*---------------------------------------MENU CONTENTS---------------------------------*/}
+              <div className="offcanvas-header">
+                <h5 className="offcanvas-title" id="menuOffcanvasLabel">
+                  Menu
+                </h5>
+              </div>
+              <div className="offcanvas-body">
+                <div className="d-flex flex-column ms-4 my-3">
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/myprofile/:username"}
+                  >
+                    My profile
+                  </Link>
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/postdeal/:username"}
+                  >
+                    Post deal
+                  </Link>
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/games"}
+                  >
+                    Games
+                  </Link>
+                  <Link
+                    className="text-white text-decoration-none mb-2"
+                    to={"/"}
+                  >
+                    Deals
+                  </Link>
+
+                  {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
+                  <div className="ms-4 mb-3">
+                    {!store.loggedIn ? (
+                      <button
+                        type="button"
+                        className="btn text-white"
+                        style={{ background: "#992899" }}
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModalToggle"
+                      >
+                        Login
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn text-white"
+                        style={{ background: "#992899" }}
+                        data-bs-toggle="modal"
+                        data-bs-target="#logoutModal"
+                      >
+                        Logout
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/*---------------------------------------LOGIN MODAL---------------------------------*/}
+
+            <div
+              className="modal fade"
+              id="loginModalToggle"
+              aria-hidden="true"
+              aria-labelledby="loginModalToggleLabel"
+              tabIndex="-1"
+            >
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content bg-dark text-white">
+                  <div className="modal-header border-0">
+                    <h1 className="modal-title fs-5" id="loginModalToggleLabel">
+                      Login
+                    </h1>
+                    <div className="ms-auto" data-bs-theme="dark">
+                      <button
+                        type="button"
+                        className="btn-close "
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                  </div>
+                  <div className="modal-body">
+                    {/*---------------------------------------Login modal 3rd party buttons---------------------------------*/}
+
+                    <div className="text-center mt-4 p-3">
+                      <button className="mt-2 rounded-circle mx-2">
+                        <i className="fa-brands fa-steam text-dark fs-3"></i>
+                      </button>
+
+                      <button className="mt-2 rounded-circle mx-2">
+                        <i className="fa-brands fa-twitch text-dark fs-3"></i>
+                      </button>
+
+                      <button className="mt-2 rounded-circle mx-2">
+                        <i className="fa-brands fa-google text-dark fs-3"></i>
+                      </button>
+                    </div>
+
+                    <div className="text-center mt-3">
+                      <h1>oR</h1>
+                    </div>
+                    {/*---------------------------------------Login modal form---------------------------------*/}
+                    <form>
+                      <div className="mb-3">
+                        <label htmlFor="loginEmailInput" className="form-label">
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control text-white bg-transparent"
+                          id="loginEmailInput"
+                          placeholder=""
+                        />
+                      </div>
+                      <label
+                        htmlFor="loginPasswordInput"
+                        className="form-label"
+                      >
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        id="loginPasswordInput"
+                        className="form-control text-white bg-transparent"
+                        aria-describedby="passwordHelpBlock"
+                      />
+                      <div
+                        id="passwordHelpBlock"
+                        className="form-text text-white"
+                      ></div>
+                      <div className="mb-3 form-check m-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="rememberMeCheck"
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="rememberMeCheck"
+                          style={{ fontSize: "15px" }}
+                        >
+                          Remember me
+                        </label>
+                      </div>
+
+                      {/*------------------------Forgot Password Modal Trigger Button------------------------*/}
+                      <div className="text-center">
+                        <button
+                          className="btn btn-sm btn-link "
+                          data-bs-target="#forgotPasswordModalToggle"
+                          data-bs-toggle="modal"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Forgot my password
+                        </button>
+                      </div>
+                      {/*---------------------------------------Login Modal buttons---------------------------------*/}
+                      <div className="modal-footer border-0 flex-column">
+                        <button
+                          className="btn text-white"
+                          style={{ background: "#992899" }}
+                          /*onClick={actions.login}*/
+                        >
+                          Login
+                        </button>
+                        <button
+                          className="btn btn-sm btn-link"
+                          data-bs-target="#signupModalToggle"
+                          data-bs-toggle="modal"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Not registered yet?
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/*---------------------------------------Forgot Password Modal---------------------------------*/}
+            <div
+              className="modal fade"
+              id="forgotPasswordModalToggle"
+              aria-hidden="true"
+              aria-labelledby="forgotPasswordModalToggleLabel"
+              tabIndex="-1"
+            >
+              <div className="modal-dialog modal-sm modal-dialog-centered">
+                <div className="modal-content bg-dark text-white">
+                  <div className="modal-header border-0">
+                    <h1
+                      className="modal-title fs-5"
+                      id="forgotPasswordModalToggleLabel"
+                    >
+                      Recover password
+                    </h1>
+                  </div>
+                  <div className="modal-body">
+                    <input
+                      type="email"
+                      className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
+                      placeholder="Email"
+                    />
+                    <input
+                      type="email"
+                      className="form-control rounded-5 text-white bg-transparent h-100"
+                      placeholder="Confirm your email"
+                    />
+                  </div>
+                  <div className="modal-footer border-0">
+                    <button
+                      className="btn btn-primary"
+                      data-bs-target="#loginModalToggle"
+                      data-bs-toggle="modal"
+                    >
+                      Back
+                    </button>
+                    <button
+                      className="btn text-white"
+                      style={{ background: "#992899" }}
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="ms-4 mb-3">
+              {/*---------------------------------------LOGOUT MODAL---------------------------------*/}
+              <div
+                className="modal fade"
+                id="logoutModal"
+                aria-hidden="true"
+                aria-labelledby="logoutModalLabel"
+                tabIndex="-1"
+              >
+                <div className="modal-dialog modal-sm modal-dialog-centered">
+                  <div className="modal-content bg-dark text-white">
+                    <div className="modal-header border-0">
+                      <h1 className="modal-title fs-5" id="logoutModalLabel">
+                        Are you sure?
+                      </h1>
+                      <div className="ms-auto" data-bs-theme="dark">
+                        <button
+                          type="button"
+                          className="btn-close "
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                    </div>
+                    <div className="modal-footer border-0">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <Link to="/">
+                        {" "}
+                        <button
+                          className="btn text-white"
+                          data-bs-dismiss="modal"
+                          style={{ background: "#992899" }}
+                          /*onClick={actions.logout*/
+                        >
+                          Logout
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             {/*---------------------------------------LOGO---------------------------------*/}
             <Link to={"/"} className="navbar-brand mx-3">
               <img
@@ -74,7 +368,7 @@ export const Navbar = () => {
                     <input
                       type="search"
                       className="form-control rounded-5 w-auto text-white bg-transparent mt-2"
-                      style={{ maxHeight: "30px"}}
+                      style={{ maxHeight: "30px" }}
                       aria-label="Búsqueda"
                       value={searchTerm}
                       onChange={handleInputChange}
@@ -256,269 +550,7 @@ export const Navbar = () => {
             </div>
           </div>
         </div>
-        {/*---------------------------------------LOGIN MODAL---------------------------------*/}
-        <div
-          className="modal fade"
-          id="loginModalToggle"
-          aria-hidden="true"
-          aria-labelledby="loginModalToggleLabel"
-          tabIndex="-1"
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content bg-dark text-white">
-              <div className="modal-header border-0">
-                <h1 className="modal-title fs-5" id="loginModalToggleLabel">
-                  Login
-                </h1>
-                <div className="ms-auto" data-bs-theme="dark">
-                  <button
-                    type="button"
-                    className="btn-close "
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-              </div>
-              <div className="modal-body">
-                {/*---------------------------------------Login modal 3rd party buttons---------------------------------*/}
-
-                <div className="text-center mt-4 p-3">
-                  <button className="mt-2 rounded-circle mx-2">
-                    <i className="fa-brands fa-steam text-dark fs-3"></i>
-                  </button>
-
-                  <button className="mt-2 rounded-circle mx-2">
-                    <i className="fa-brands fa-twitch text-dark fs-3"></i>
-                  </button>
-
-                  <button className="mt-2 rounded-circle mx-2">
-                    <i className="fa-brands fa-google text-dark fs-3"></i>
-                  </button>
-                </div>
-
-                <div className="text-center mt-3">
-                  <h1>oR</h1>
-                </div>
-                {/*---------------------------------------Login modal form---------------------------------*/}
-                <form>
-                  <div className="mb-3">
-                    <label htmlFor="loginEmailInput" className="form-label">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      className="form-control text-white bg-transparent"
-                      id="loginEmailInput"
-                      placeholder=""
-                    />
-                  </div>
-                  <label htmlFor="loginPasswordInput" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    id="loginPasswordInput"
-                    className="form-control text-white bg-transparent"
-                    aria-describedby="passwordHelpBlock"
-                  />
-                  <div
-                    id="passwordHelpBlock"
-                    className="form-text text-white"
-                  ></div>
-                  <div className="mb-3 form-check m-3">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id="rememberMeCheck"
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="rememberMeCheck"
-                      style={{ fontSize: "15px" }}
-                    >
-                      Remember me
-                    </label>
-                  </div>
-
-                  {/*------------------------Forgot Password Modal Trigger Button------------------------*/}
-                  <div className="text-center">
-                    <button
-                      className="btn btn-sm btn-link "
-                      data-bs-target="#forgotPasswordModalToggle"
-                      data-bs-toggle="modal"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Forgot my password
-                    </button>
-                  </div>
-                  {/*---------------------------------------Login Modal buttons---------------------------------*/}
-                  <div className="modal-footer border-0 flex-column">
-                    <button
-                      className="btn text-white"
-                      style={{ background: "#992899" }}
-                    >
-                      Login
-                    </button>
-                    <button
-                      className="btn btn-sm btn-link"
-                      data-bs-target="#signupModalToggle"
-                      data-bs-toggle="modal"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Not registered yet?
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/*---------------------------------------Forgot Password Modal---------------------------------*/}
-        <div
-          className="modal fade"
-          id="forgotPasswordModalToggle"
-          aria-hidden="true"
-          aria-labelledby="forgotPasswordModalToggleLabel"
-          tabIndex="-1"
-        >
-          <div className="modal-dialog modal-sm modal-dialog-centered">
-            <div className="modal-content bg-dark text-white">
-              <div className="modal-header border-0">
-                <h1
-                  className="modal-title fs-5"
-                  id="forgotPasswordModalToggleLabel"
-                >
-                  Recover password
-                </h1>
-              </div>
-              <div className="modal-body">
-                <input
-                  type="email"
-                  className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
-                  placeholder="Email"
-                />
-                <input
-                  type="email"
-                  className="form-control rounded-5 text-white bg-transparent h-100"
-                  placeholder="Confirm your email"
-                />
-              </div>
-              <div className="modal-footer border-0">
-                <button
-                  className="btn btn-primary"
-                  data-bs-target="#loginModalToggle"
-                  data-bs-toggle="modal"
-                >
-                  Back
-                </button>
-                <button
-                  className="btn text-white"
-                  style={{ background: "#992899" }}
-                >
-                  Confirm
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </nav>
-      {/*---------------------------------------MENU CONTENTS---------------------------------*/}
-      {/*Cuando haces click fuera del menu tiene que cerrar, ahora no lo hace y no se abre por encima de todo lo demas*/}
-      <div
-        className="collapse bg-dark bg-gradient text-white position-absolute"
-        id="navbar-menu"
-        style={{ width: "140px", height: "100%" }}
-      >
-        <div className="d-flex flex-column ms-4 my-3">
-          <Link
-            className="text-white text-decoration-none mb-2"
-            to={"/myprofile/:username"}
-          >
-            My profile
-          </Link>
-          <Link
-            className="text-white text-decoration-none mb-2"
-            to={"/postdeal/:username"}
-          >
-            Post deal
-          </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/games"}>
-            Games
-          </Link>
-          <Link className="text-white text-decoration-none mb-2" to={"/"}>
-            Deals
-          </Link>
-        </div>
-        {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
-        <div className="ms-4 mb-3">
-          {!store.loggedIn ? (
-            <button
-              type="button"
-              className="btn text-white"
-              style={{ background: "#992899" }}
-              data-bs-toggle="modal"
-              data-bs-target="#loginModalToggle"
-            >
-              Login
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn text-white"
-              style={{ background: "#992899" }}
-              data-bs-toggle="modal"
-              data-bs-target="#logoutModal"
-            >
-              Logout
-            </button>
-          )}
-          {/*---------------------------------------LOGOUT MODAL---------------------------------*/}
-          <div
-            className="modal fade"
-            id="logoutModal"
-            aria-hidden="true"
-            aria-labelledby="logoutModalLabel"
-            tabIndex="-1"
-          >
-            <div className="modal-dialog modal-sm modal-dialog-centered">
-              <div className="modal-content bg-dark text-white">
-                <div className="modal-header border-0">
-                  <h1 className="modal-title fs-5" id="logoutModalLabel">
-                    Are you sure?
-                  </h1>
-                  <div className="ms-auto" data-bs-theme="dark">
-                    <button
-                      type="button"
-                      className="btn-close "
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                </div>
-                <div className="modal-footer border-0">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <Link to="/">
-                    {" "}
-                    <button
-                      className="btn text-white"
-                      data-bs-dismiss="modal"
-                      style={{ background: "#992899" }}
-                    >
-                      Logout
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

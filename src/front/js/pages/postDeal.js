@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
 import { PostDealCard } from "../component/postDealCard";
