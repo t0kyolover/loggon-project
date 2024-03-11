@@ -443,6 +443,7 @@ export const MyProfile = (props) => {
                   user.posts.map((post, index) => (
                     <div className="col mx-2 my-4" key={index}>
                       <EditableDealCard
+                        id={post.id}
                         gameTitle={post.game_title}
                         format={post.format}
                         rating={post.rating}

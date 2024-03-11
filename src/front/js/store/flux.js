@@ -36,6 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             promo_code: "HDGUDS",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
+            scheduled: false,
             scheduled_date: "",
             sheduled_time: "",
           },
