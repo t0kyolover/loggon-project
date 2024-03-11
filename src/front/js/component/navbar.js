@@ -15,13 +15,13 @@ export const Navbar = () => {
   const [forgotPasswordEmailInput2, setForgotPasswordEmailInput2] =
     useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  
 
-  useEffect(() => {
+ /* useEffect(() => {
     if (!searchTerm) {
       setSuggestions([]);
     }
-  }, [searchTerm]);
+  }, [searchTerm]);*/
 
   useEffect(() => {
     if (location.pathname === "/login") {

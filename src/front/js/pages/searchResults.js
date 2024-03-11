@@ -10,9 +10,7 @@ export const SearchResults = () => {
   const { store, actions } = useContext(Context);
   const [activeTab, setActiveTab] = useState("grid1");
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
+
 
   return (
     <div>
