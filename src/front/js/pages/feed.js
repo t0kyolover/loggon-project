@@ -116,7 +116,7 @@ export const Feed = () => {
                 {psDeals.map((deal, index) => (
                   <div className="col m-auto my-4">
                     <DealCard
-                      key={index}
+                      key={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}
                       itemType={deal.item_type}
@@ -149,6 +149,7 @@ export const Feed = () => {
                   <div className="col m-auto my-4">
                     <DealCard
                       key={index}
+                      id={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}
                       itemType={deal.item_type}
@@ -181,6 +182,7 @@ export const Feed = () => {
                   <div className="col m-auto my-4">
                     <DealCard
                       key={index}
+                      id={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}
                       itemType={deal.item_type}
@@ -213,6 +215,7 @@ export const Feed = () => {
                   <div className="col m-auto my-4">
                     <DealCard
                       key={index}
+                      id={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}
                       itemType={deal.item_type}

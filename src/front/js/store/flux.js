@@ -108,7 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         saved: [],
         alerts: [
           {
-            id: 1,
+            id: 5,
             user_id: 2,
             date_of_creation: "",
             game_title: "GTA V",
@@ -131,7 +131,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         ],
         newsletter: false,
       },
-      newPosts: [],
       deals: [
         {
           id: 1,
@@ -321,8 +320,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         }));
         console.log("Deal has been modified successfully!");
       },
+
       //--------------------------SEARCHES----------------------//
-      searchInNavbar: (searchTerm, navigate) => {
+      searchInNavbar: (searchTerm) => {
         const store = getStore();
         const allItems = [].concat(store.deals, store.games);
         const results = allItems.filter((item) =>
@@ -337,6 +337,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Search results updated successfully!");
           console.log(results);
         }
+      },
+      //--------------------------GET ITEMS----------------------//
+      openItem: (id, setDetails) => {
+        const store = getStore();
+        const deal = store.deals.find((deal) => deal.id === id);
+        if (!deal) {
+          console.log("Deal not found!");
+          return;
+        }
+        setDetails(deal);
+        console.log("Deal details found successfully!");
       },
     },
   };

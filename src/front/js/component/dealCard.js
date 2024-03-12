@@ -9,6 +9,7 @@ export const DealCard = (props) => {
   const { store, actions } = useContext(Context);
 
   const [deal, setDeal] = useState({
+    id: props.id,
     game_title: props.gameTitle,
     image_url: props.imageUrl,
     item_type: props.itemType,
@@ -22,7 +23,7 @@ export const DealCard = (props) => {
     game_tags: props.gameTags,
     rating: props.rating,
   });
-
+  
   return (
     <div
       className="card card-effect sombra text-white"
@@ -48,7 +49,7 @@ export const DealCard = (props) => {
             key={index}
           > {tag}</li>
           ))}
-          <Link className="btn btn-link" to="/post/:id">
+          <Link className="btn btn-link" to={`/post/${props.id}`}>
             Details
           </Link>
           <button
