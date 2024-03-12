@@ -71,7 +71,7 @@ export const MyProfile = (props) => {
     navigate("/login");
   }
 
-  return (    
+  return (
     <div className="container-fluid m-auto">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
@@ -327,7 +327,10 @@ export const MyProfile = (props) => {
                   aria-hidden="true"
                 >
                   <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content" style={{ background: "#020D19" }}>
+                    <div
+                      className="modal-content"
+                      style={{ background: "#020D19" }}
+                    >
                       <div className="modal-header border-0">
                         <h1
                           className="modal-title fs-5"
@@ -375,7 +378,9 @@ export const MyProfile = (props) => {
                                       actions.deleteInterest(index);
                                       setUser((prevState) => ({
                                         ...prevState,
-                                        interests: prevState.interests.filter((_, i) => i !== index),
+                                        interests: prevState.interests.filter(
+                                          (_, i) => i !== index
+                                        ),
                                       }));
                                     }}
                                   >
@@ -493,8 +498,22 @@ export const MyProfile = (props) => {
                   <p className="bg-transparent p-2">No saved deals</p>
                 ) : (
                   user.saved.map((deal, index) => (
-                    <div className="col mx-2 my-4" key={index}>
-                      <DealCard />
+                    <div className="col mx-2 my-4">
+                      <DealCard
+                        key={index}
+                        gameTitle={deal.game_title}
+                        imageUrl={deal.image_url}
+                        itemType={deal.item_type}
+                        platform={deal.platform}
+                        format={deal.format}
+                        originalPrice={deal.original_price}
+                        offerPrice={deal.offer_price}
+                        expirationDate={deal.expiration_date}
+                        promoCode={deal.promo_code}
+                        offerLink={deal.offer_link}
+                        gameTags={deal.game_tags}
+                        rating={deal.rating}
+                      />
                     </div>
                   ))
                 )}
@@ -515,8 +534,22 @@ export const MyProfile = (props) => {
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (
                   user.alerts.map((alert, index) => (
-                    <div className="col mx-2 my-4" >
-                      <DealCard key={index}/>
+                    <div className="col mx-2 my-4">
+                      <DealCard
+                        key={index}
+                        gameTitle={alert.game_title}
+                        imageUrl={alert.image_url}
+                        itemType={alert.item_type}
+                        platform={alert.platform}
+                        format={alert.format}
+                        originalPrice={alert.original_price}
+                        offerPrice={alert.offer_price}
+                        expirationDate={alert.expiration_date}
+                        promoCode={alert.promo_code}
+                        offerLink={alert.offer_link}
+                        gameTags={alert.game_tags}
+                        rating={alert.rating}
+                      />
                     </div>
                   ))
                 )}

@@ -42,7 +42,12 @@ export const DealCard = (props) => {
           {deal.expiration_date && (
             <p className="card-text">{deal.expiration_date}</p>
           )}
-          <p className="card-text">{deal.game_tags} €</p> {/* Map de tags */}
+          {deal.game_tags.map((tag, index) => (
+            <li
+            className="list-group-item bg-transparent text-white rounded-5 border-white border m-1"
+            key={index}
+          > {tag}</li>
+          ))}
           <Link className="btn btn-link" to="/post/:id">
             Details
           </Link>
