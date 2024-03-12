@@ -3,6 +3,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/button.css"
+
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const closeSignUpButton = useRef(null);
@@ -174,8 +176,8 @@ export const Navbar = () => {
                     {!store.loggedIn ? (
                       <button
                         type="button"
-                        className="btn text-white"
-                        style={{ background: "#992899" }}
+                        className="btn text-white btn-effect m-auto mt-4"
+                        // style={{ background: "#992899" }}
                         data-bs-toggle="modal"
                         data-bs-target="#loginModalToggle"
                       >
@@ -184,8 +186,8 @@ export const Navbar = () => {
                     ) : (
                       <button
                         type="button"
-                        className="btn text-white"
-                        style={{ background: "#992899" }}
+                        className="btn text-white btn-effect"
+                        // style={{ background: "#992899" }}
                         data-bs-toggle="modal"
                         data-bs-target="#logoutModal"
                       >
@@ -252,7 +254,7 @@ export const Navbar = () => {
                         </label>
                         <input
                           type="email"
-                          className="form-control text-white bg-transparent"
+                          className="form-control rounded-5 text-white bg-transparent"
                           id="loginEmailInput"
                           placeholder="Email"
                           value={login.email}
@@ -270,7 +272,7 @@ export const Navbar = () => {
                       <input
                         type="password"
                         id="loginPasswordInput"
-                        className="form-control text-white bg-transparent"
+                        className="form-control rounded-5 text-white bg-transparent"
                         aria-describedby="passwordHelpBlock"
                         placeholder="Password"
                         value={login.password}
@@ -319,8 +321,8 @@ export const Navbar = () => {
                       {/*---------------------------------------Login Modal buttons---------------------------------*/}
                       <div className="modal-footer border-0 flex-column">
                         <button
-                          className="btn text-white"
-                          style={{ background: "#992899" }}
+                          className="btn text-white btn-effect" 
+                          
                           data-bs-toggle={`${store.loggedIn ? "modal" : ""}`}
                           onClick={handleLogin}
                         >
@@ -389,16 +391,16 @@ export const Navbar = () => {
                   </div>
                   <div className="modal-footer border-0">
                     <button
-                      className="btn btn-primary"
+                      className="btn text-white btn-effect-blue"
                       data-bs-target="#loginModalToggle"
                       data-bs-toggle="modal"
                     >
                       Back
                     </button>
                     <button
-                      className="btn text-white"
+                      className="btn text-white btn-effect"
                       type="submit"
-                      style={{ background: "#992899" }}
+                      // style={{ background: "#992899" }}
                       /* data-bs-dismiss="modal"*/
                       onClick={sendRecoveryEmail}
                     >
@@ -535,7 +537,7 @@ export const Navbar = () => {
               style={{ background: "#020D19" }}
             >
               <div className="modal-header border-0">
-                <h1 className="modal-title fs-5" id="signupModalToggleLabel">
+                <h1 className="modal-title fs-5 " id="signupModalToggleLabel">
                   Signup
                 </h1>
                 <div className="ms-auto" data-bs-theme="dark">
@@ -548,15 +550,15 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="modal-body">
-                <div className="d-flex flex-row">
-                  <div className="mb-3 col-6 m-4">
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
+                  <div className="mb-3 col-md-6 m-4">
                     <img
                       src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C"
                       className="img-fluid rounded-circle"
                       alt="Logo"
                     />
                     {/*---------------------------------------Signup modal 3rd party buttons---------------------------------*/}
-                    <div className="text-center mt-4">
+                    <div className="text-center mt-4 d-none d-md-block">
                       <button className="mt-2 rounded-circle mx-2">
                         <i className="fa-brands fa-steam text-dark fs-3"></i>
                       </button>
@@ -569,14 +571,29 @@ export const Navbar = () => {
                     </div>
                   </div>
                   {/*---------------------------------------Signup modal registration form---------------------------------*/}
-                  <form className="col-5 m-3">
+                  <form className="col-md-6 m-auto p-4">
+                    <div className="mb-1">
+                      <label
+                        htmlFor="signupUsernameInput"
+                        className="form-label"
+                      >
+                        Username
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control rounded-5 text-white bg-transparent"
+                        id="signupUsernameInput"
+                        placeholder=""
+                      />
+                    </div>
+
                     <div className="mb-1">
                       <label htmlFor="signupEmailInput" className="form-label">
                         Email
                       </label>
                       <input
                         type="email"
-                        className="form-control text-white bg-transparent"
+                        className="form-control rounded-5 text-white bg-transparent"
                         id="signupEmailInput"
                         placeholder="Email"
                         value={signup.email}
@@ -615,7 +632,7 @@ export const Navbar = () => {
                       <input
                         type="password"
                         id="signupPasswordInput2"
-                        className="form-control text-white bg-transparent"
+                        className="form-control rounded-5 text-white bg-transparent"
                         aria-describedby="passwordHelpBlock"
                         placeholder="Confirm Password"
                         value={signup.password2}

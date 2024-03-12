@@ -16,22 +16,13 @@ export const GameCard = () => {
             <img src="https://picsum.photos/200" className="card-img-top rounded-2 " alt="..." />
           </div>
         </div>
-        <div className="face face2">
-          <div className="content ">
-          <h3>Title</h3>
-            <p>
-              Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
-            </p>
-            {/*---------------------------------------DETAILS MODAL TRIGGER BUTTON---------------------------------*/}
-            <button
-              type="button"
-              className="btn btn-primary position-absolute bottom-0 end-0"
-              data-bs-toggle="modal"
-              data-bs-target="#detailsModal"
-            >
-              Details
-            </button>
-
+        <div className="face face2 d-flex flex-column justify-content-end">
+          <div className="content m-auto p-2">
+            <a href="#detailsModal" className="content m-auto pt-auto text-decoration-none" data-bs-toggle="modal" data-bs-target="#detailsModal">
+              <h3>Title dsasdasdda sdhasdasd
+                a
+                 sdasdsa</h3>
+            </a>
           </div>
         </div>
       </div>

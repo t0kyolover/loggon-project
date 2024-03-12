@@ -446,7 +446,7 @@ export const MyProfile = (props) => {
           </div>
         </nav>
         {/*---------------------------------------TABS CONTENT---------------------------------*/}
-        <div className="tab-content text-white" id="nav-tabContent">
+        <div className="tab-content text-white" id="nav-tabContent pb-4">
           {/*---------------------------------------My deals---------------------------------*/}
           <div
             className="tab-pane fade show active"
