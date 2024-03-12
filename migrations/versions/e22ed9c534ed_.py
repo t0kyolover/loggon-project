@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f3f2122e3d4a
+Revision ID: e22ed9c534ed
 Revises: 
-Create Date: 2024-03-07 23:56:41.186594
+Create Date: 2024-03-12 10:53:48.661492
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f3f2122e3d4a'
+revision = 'e22ed9c534ed'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,11 +22,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=200), nullable=False),
     sa.Column('password', sa.String(length=128), nullable=False),
-    sa.Column('image', sa.String(), nullable=True),
+    sa.Column('image_url', sa.String(), nullable=True),
     sa.Column('username', sa.String(length=30), nullable=False),
-    sa.Column('steam_profile', sa.String(length=40), nullable=True),
-    sa.Column('twitch_profile', sa.String(length=40), nullable=True),
+    sa.Column('steam_username', sa.String(length=40), nullable=True),
+    sa.Column('twitch_username', sa.String(length=40), nullable=True),
+    sa.Column('interests', sa.String(length=20), nullable=True),
     sa.Column('posts', sa.String(), nullable=True),
+    sa.Column('alerts', sa.String(), nullable=True),
     sa.Column('newsletter', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
@@ -37,18 +39,22 @@ def upgrade():
     sa.Column('game_title', sa.String(length=200), nullable=False),
     sa.Column('platform', sa.Enum('PC', 'Xbox', 'PS5', 'Nintendo', name='Platform_options'), nullable=False),
     sa.Column('date_of_creation', sa.DateTime(), nullable=False),
-    sa.Column('end_date', sa.DateTime(), nullable=True),
+    sa.Column('expiration_date', sa.DateTime(), nullable=True),
     sa.Column('original_price', sa.Float(), nullable=False),
     sa.Column('offer_price', sa.Float(), nullable=False),
     sa.Column('format', sa.Enum('Digital', 'CD', name='Format_options'), nullable=False),
     sa.Column('item_type', sa.Enum('opcion1', 'opcion2', 'opcion3', 'opcion4', 'opcion5', name='Type_options'), nullable=False),
     sa.Column('promo_code', sa.String(length=250), nullable=True),
     sa.Column('scheduled', sa.Boolean(), nullable=True),
-    sa.Column('url', sa.String(length=200), nullable=False),
-    sa.Column('img_url', sa.String(length=200), nullable=True),
+    sa.Column('scheduled_date', sa.DateTime(), nullable=True),
+    sa.Column('scheduled_time', sa.DateTime(), nullable=True),
+    sa.Column('offer_link', sa.String(length=200), nullable=False),
+    sa.Column('image_url', sa.String(length=200), nullable=True),
+    sa.Column('rating', sa.String(length=5), nullable=True),
+    sa.Column('game_tags', sa.String(length=5), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('url')
+    sa.UniqueConstraint('offer_link')
     )
     op.create_table('interest',
     sa.Column('id', sa.Integer(), nullable=False),

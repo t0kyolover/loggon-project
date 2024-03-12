@@ -66,6 +66,7 @@ class Deal(db.Model):
     offer_link = db.Column(db.String(200), unique=True, nullable=False)
     image_url = db.Column(db.String(200))
     rating = db.Column(db.String(5))
+    game_tags = db.Column(db.String(5)) #array
     
     
     

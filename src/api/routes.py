@@ -62,10 +62,10 @@ oauth = OAuth()
 # Configura el proveedor de autenticación de Google
 google = oauth.remote_app(
     'google',
-    consumer_key='your_gooegl_client_id',
-    consumer_secret='your_google_client_secret',
+    consumer_key='141396503593-5ucoa6ughl6iobs8tmks7rjmvp27die2.apps.googleusercontent.com',
+    consumer_secret='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',
     request_token_params={
-        'scope': 'email',
+        'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
     },
     base_url='https://www.googleapis.com/plus/v1/',
     request_token_url=None,
@@ -74,44 +74,38 @@ google = oauth.remote_app(
     authorize_url='https://accounts.google.com/o/oauth2/auth',
 )
 
-@api.route('/')
-def index():
-    return 'Welcome to the Flask App!'
+# cuando pasemos a render comentar linea 82 y descomentar linea 81
+@api.route('/google_login')
+def google_login():
+    print(url_for('api.authorized', _external=True))
+    # return google.authorize(callback=url_for('api.authorized', _external=True))
+    return google.authorize(callback="https://curly-palm-tree-5gqrjj97pq4rc7gg7-3001.app.github.dev/api/google_login/google/authorized")
 
-@api.route('/login')
-def login():
-    return google.authorize(callback=url_for('api.authorized', _external=True))
-
-@api.route('/logout')
-def logout():
-    session.pop('google_token', None)
-    return redirect(url_for('api.index'))
-
-
-@api.route('/login/google/authorized')
+@api.route('/google_login/google/authorized')
 def authorized():
     response = google.authorized_response()
+    
+    
     if response is None or response.get('access_token') is None:
-        return 'Access denied: reason={} error={}'.format(
-            request.args['error_reason'],
-            request.args['error_description']
-        )
+        return jsonify({"msg": "Google login Failed"}), 401
 
     session['google_token'] = (response['access_token'], '')
-    user_info = google.get('people/me')
+    user_info = google.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses')
+    
 
     # Verificar si el usuario ya existe en la base de datos
-    user = User.query.filter_by(email=user_info.data['emails'][0]['value']).first()
+    user = User.query.filter_by(email=user_info.data['emailAddresses'][0]['value']).first()
 
     if not user:
         # Si no existe, crear un nuevo usuario
-        user = User(email=user_info.data['emails'][0]['value'])
+        user = User(email=user_info.data['emailAddresses'][0]['value'], username=user_info.data['names'][0]['displayName'], password=user_info.data['resourceName'])
         db.session.add(user)
         db.session.commit()
 
     # Puedes iniciar sesión al usuario aquí si lo deseas
 
-    return 'Logged in as: ' + user.email
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token })
 
 @google.tokengetter
 def get_google_oauth_token():
