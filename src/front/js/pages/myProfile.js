@@ -10,6 +10,7 @@ import { Context } from "../store/appContext";
 export const MyProfile = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState(store.user);
   const [newUsername, setNewUsername] = useState("");
@@ -59,8 +60,13 @@ export const MyProfile = (props) => {
     setNewInterest("");
   }
 
+  if (store.loggedIn === false) {
+    navigate("/login");
+  }
+
   return (
     /*Put store.loggedIn variable here*/
+    
     <div className="container-fluid m-auto">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">

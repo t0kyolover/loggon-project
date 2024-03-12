@@ -8,21 +8,34 @@ export const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [loginEmailInput, setLoginEmailInput] = useState("");
-  const [loginPasswordInput, setLoginPasswordInput] = useState("");
-  const [signupEmailInput, setSignupEmailInput] = useState("");
-  const [signupPasswordInput, setSignupPasswordInput] = useState("");
-  const [forgotPasswordEmailInput, setForgotPasswordEmailInput] = useState("");
-  const [forgotPasswordEmailInput2, setForgotPasswordEmailInput2] =
-    useState("");
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+    remember_me: false
+  });
+  const [signup, setSignup] = useState({
+    email: "",
+    password: "",
+    password2: "",
+    privacy: false,
+    newsletter: false
+  });
+  const [forgotPassword, setForgotPassword] = useState({
+    email: "",
+    email2: ""
+  });
   const [searchTerm, setSearchTerm] = useState("");
-  
 
- /* useEffect(() => {
-    if (!searchTerm) {
-      setSuggestions([]);
-    }
-  }, [searchTerm]);*/
+
+  useEffect(() => {
+    console.log(login.remember_me);
+  }, [login.remember_me]);
+
+  /* useEffect(() => {
+     if (!searchTerm) {
+       setSuggestions([]);
+     }
+   }, [searchTerm]);*/
 
   useEffect(() => {
     if (location.pathname === "/login") {
@@ -34,18 +47,43 @@ export const Navbar = () => {
     }
   }, [location.pathname]);
 
-  // Some the input doesn't restrict to email format
+  //No modal toggle upon success
+  function handleSignup(e) {
+    e.preventDefault();
+    if (signup.password !== signup.password2) {
+      alert("Passwords do not match!");
+      return;
+    } else if (!signup.email || !signup.password || !signup.password2) {
+      alert("Missing fields!");
+      return;
+    } else if (!signup.privacy) {
+      alert("You must accept the privacy policy!");
+      return;
+    } else {
+      actions.signup(signup.email, signup.password, signup.newsletter, signup.privacy);
+      navigate("/login");
+    }
+  }
+
+  //No modal suspend after success
+  function handleLogin(e) {
+    e.preventDefault();
+    actions.login(login.email, login.password);
+    navigate("/");
+  }
+
+  // Somehow the input doesn't restrict to email format
   function sendRecoveryEmail() {
     if (
-      forgotPasswordEmailInput.trim() &&
-      forgotPasswordEmailInput2.trim() &&
-      forgotPasswordEmailInput === forgotPasswordEmailInput2
+      forgotPassword.email.trim() &&
+      forgotPassword.email2.trim() &&
+      forgotPassword.email === forgotPassword.email2
     ) {
-      actions.forgotPassword(forgotPasswordEmailInput);
+      actions.forgotPassword(forgotPassword.email);
       alert("Password recovery email sent successfully!");
-    } else if (!forgotPasswordEmailInput || !forgotPasswordEmailInput2) {
+    } else if (!forgotPassword.email || !forgotPassword.email2) {
       alert("Missing fields!");
-    } else if (forgotPasswordEmailInput !== forgotPasswordEmailInput2) {
+    } else if (forgotPassword.email !== forgotPassword.email2) {
       alert("Emails do not match!");
     }
   }
@@ -57,10 +95,10 @@ export const Navbar = () => {
     navigate("/search_results");
   }
 
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
-    setSuggestions(actions.getSuggestions(e.target.value));
-  };
+  /*const handleInputChange = (e) => {
+     setSearchTerm(e.target.value);
+     setSuggestions(actions.getSuggestions(e.target.value));
+   };*/
 
   return (
     <div className="position-relative">
@@ -198,7 +236,9 @@ export const Navbar = () => {
                           type="email"
                           className="form-control text-white bg-transparent"
                           id="loginEmailInput"
-                          placeholder=""
+                          placeholder="Email"
+                          value={login.email}
+                          onChange={(e) => setLogin({ ...login, email: e.target.value })}
                         />
                       </div>
                       <label
@@ -212,6 +252,9 @@ export const Navbar = () => {
                         id="loginPasswordInput"
                         className="form-control text-white bg-transparent"
                         aria-describedby="passwordHelpBlock"
+                        placeholder="Password"
+                        value={login.password}
+                        onChange={(e) => setLogin({ ...login, password: e.target.value })}
                       />
                       <div
                         id="passwordHelpBlock"
@@ -222,6 +265,11 @@ export const Navbar = () => {
                           type="checkbox"
                           className="form-check-input"
                           id="rememberMeCheck"
+                          value={login.remember_me}
+                          onChange={(e) => {
+                            setLogin((prevState) => ({ ...prevState, remember_me: !login.remember_me }))
+                            console.log(login.remember_me)
+                          }}
                         />
                         <label
                           className="form-check-label"
@@ -248,14 +296,14 @@ export const Navbar = () => {
                         <button
                           className="btn text-white"
                           style={{ background: "#992899" }}
-                          /*onClick={actions.login}*/
+                          data-bs-toggle={`${store.loggedIn ? "modal" : ("")}`}
+                          onClick={handleLogin}
                         >
                           Login
                         </button>
                         <button
                           className="btn btn-sm btn-link"
                           data-bs-target="#signupModalToggle"
-                          data-bs-toggle="modal"
                           onClick={(e) => e.preventDefault()}
                         >
                           Not registered yet?
@@ -289,19 +337,15 @@ export const Navbar = () => {
                       type="email"
                       className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
                       placeholder="Email"
-                      value={forgotPasswordEmailInput}
-                      onChange={(e) =>
-                        setForgotPasswordEmailInput(e.target.value)
-                      }
+                      value={forgotPassword.email}
+                      onChange={(e) => setForgotPassword({ ...forgotPassword, email: e.target.value })}
                     />
                     <input
                       type="email"
                       className="form-control rounded-5 text-white bg-transparent h-100"
                       placeholder="Confirm your email"
-                      value={forgotPasswordEmailInput2}
-                      onChange={(e) =>
-                        setForgotPasswordEmailInput2(e.target.value)
-                      }
+                      value={forgotPassword.email2}
+                      onChange={(e) => setForgotPassword({ ...forgotPassword, email2: e.target.value })}
                     />
                   </div>
                   <div className="modal-footer border-0">
@@ -315,7 +359,7 @@ export const Navbar = () => {
                     <button
                       className="btn text-white"
                       style={{ background: "#992899" }}
-                     /* data-bs-dismiss="modal"*/
+                      /* data-bs-dismiss="modal"*/
                       onClick={sendRecoveryEmail}
                     >
                       Confirm
@@ -362,7 +406,7 @@ export const Navbar = () => {
                           className="btn text-white"
                           data-bs-dismiss="modal"
                           style={{ background: "#992899" }}
-                          /*onClick={actions.logout*/
+                        /*onClick={actions.logout}*/
                         >
                           Logout
                         </button>
@@ -375,15 +419,15 @@ export const Navbar = () => {
             {/*---------------------------------------LOGO---------------------------------*/}
             <Link to={"/"} className="navbar-brand mx-3">
               <img
-                src="https://cdn.discordapp.com/attachments/1200818313421398017/1208775421672292382/allanrogerhaze_Create_an_impactful_and_memorable_logo_for_a_gam_4523fdda-cff8-4f99-8771-dca36d9acbfc.png?ex=65edbd56&is=65db4856&hm=240bb1292bef08ee14f51727418fd731fb104e9bbf8e759aa3b8d7ac273f81c5&"
-                alt="Bootstrap"
+                src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C"
+                alt="loGGon"
                 width="40"
                 height="34"
-                className="rounded-circle"
+                className="rounded-circle text-white"
               />
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
-            
+
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
@@ -482,43 +526,50 @@ export const Navbar = () => {
                   <form className="col-5 m-3">
                     <div className="mb-1">
                       <label
-                        htmlFor="signupUsernameInput"
+                        htmlFor="signupEmailInput"
                         className="form-label"
                       >
-                        Username
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control text-white bg-transparent"
-                        id="signupUsernameInput"
-                        placeholder=""
-                      />
-                    </div>
-
-                    <div className="mb-1">
-                      <label htmlFor="signupEmailInput" className="form-label">
                         Email
                       </label>
                       <input
                         type="email"
                         className="form-control text-white bg-transparent"
                         id="signupEmailInput"
-                        placeholder=""
+                        placeholder="Email"
+                        value={signup.email}
+                        onChange={(e) => setSignup({ ...signup, email: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="mb-1">
+                      <label htmlFor="signupPasswordInput" className="form-label">
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        className="form-control text-white bg-transparent"
+                        id="signupPasswordInput"
+                        placeholder="Password"
+                        value={signup.password}
+                        onChange={(e) => setSignup({ ...signup, password: e.target.value })}
                       />
                     </div>
 
                     <div className="mb-1">
                       <label
-                        htmlFor="signupPasswordInput"
+                        htmlFor="signupPasswordInput2"
                         className="form-label"
                       >
-                        Password
+                        Confirm Password
                       </label>
                       <input
                         type="password"
-                        id="signupPasswordInput"
+                        id="signupPasswordInput2"
                         className="form-control text-white bg-transparent"
                         aria-describedby="passwordHelpBlock"
+                        placeholder="Confirm Password"
+                        value={signup.password2}
+                        onChange={(e) => setSignup({ ...signup, password2: e.target.value })}
                       />
                     </div>
 
@@ -536,6 +587,8 @@ export const Navbar = () => {
                         type="checkbox"
                         className="form-check-input"
                         id="newsletterCheck"
+                        value={signup.newsletter}
+                        onChange={() => setSignup({ ...signup, newsletter: !signup.newsletter })}
                       />
                       <label
                         className="form-check-label"
@@ -552,6 +605,8 @@ export const Navbar = () => {
                         type="checkbox"
                         className="form-check-input"
                         id="privacyCheck"
+                        value={signup.privacy}
+                        onChange={() => setSignup({ ...signup, privacy: !signup.privacy })}
                       />
                       <label
                         className="form-check-label"
@@ -573,6 +628,7 @@ export const Navbar = () => {
                       <button
                         className="btn text-white"
                         style={{ background: "#992899" }}
+                        onClick={handleSignup}
                       >
                         Signup
                       </button>

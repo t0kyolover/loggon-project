@@ -9,6 +9,7 @@ import { Context } from "../store/appContext";
 export const PostDeal = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const navigate = useNavigate();
 
   const [additionalDeals, setAdditionalDeals] = useState([]);
 
@@ -22,6 +23,10 @@ export const PostDeal = (props) => {
     const updatedDeals = additionalDeals.filter((_, i) => i !== index);
     setAdditionalDeals(updatedDeals);
   };
+
+  if (store.loggedIn === false) {
+    navigate("/login");
+  }
 
   return (
     <div className="container-fluid">

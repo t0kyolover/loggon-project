@@ -115,8 +115,18 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
-      login: () => {
-        setStore({ loggedIn: true });
+      signup: (email, password) => {
+        console.log("User registered successfully!");
+      },
+
+      login: (email, password) => {
+        const store = getStore();
+        if (store.user.email === email && store.user.password === password) {
+          setStore({ loggedIn: true });
+          console.log("Logged in successfully!");
+        } else {
+          alert("Email or password incorrect!");
+        }
       },
 
       forgotPassword: (email) => {
