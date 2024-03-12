@@ -1,0 +1,11 @@
+
+body {
+    /* Estilos para o body */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "nove", sans-serif;
+    font-weight: 20; /* Ou outro valor mais fino, dependendo das opções disponíveis */
+    font-style: normal;
+    letter-spacing: 1px; 
+}

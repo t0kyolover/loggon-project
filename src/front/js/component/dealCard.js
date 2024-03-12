@@ -31,22 +31,5 @@ export const DealCard = (props) => {
   </div>
 </div>
 
-    
-    // <div className="card card-effect sombra text-white" style={{ width: "18rem" }}>
-    //   <img src="https://picsum.photos/200" className="card-img-top" alt="..." />
-    //   <div className="card-body flex-row d-flex">
-    //     <div>
-    //       <h5 className="card-title">{gameTitle}</h5>
-    //       <p className="card-text">{format}</p>
-    //       <p className="card-text">{offerPrice} €</p>
-    //       <Link className="btn btn-link" to="/post/:id">
-    //         Details
-    //       </Link>
-    //     </div>
-    //     <div className="ms-auto">
-    //       <p>Rating {rating}</p>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
