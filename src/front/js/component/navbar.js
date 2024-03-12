@@ -123,15 +123,15 @@ export const Navbar = () => {
               <i className="fa-solid fa-bars" style={{ color: "#992899" }}></i>
             </button>
             <div
-              className="offcanvas offcanvas-start text-bg-dark"
+              className="offcanvas offcanvas-start"
               tabIndex="-1"
               id="menuOffcanvas"
               aria-labelledby="menuOffcanvasLabel"
-              style={{ width: "15%" }}
+              style={{ width: "15%", background: "#020D19"}}
             >
               {/*---------------------------------------MENU CONTENTS---------------------------------*/}
               <div className="offcanvas-header">
-                <h5 className="offcanvas-title" id="menuOffcanvasLabel">
+                <h5 className="offcanvas-title text-white" id="menuOffcanvasLabel">
                   Menu
                 </h5>
               </div>
