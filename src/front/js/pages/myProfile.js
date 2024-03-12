@@ -515,8 +515,8 @@ export const MyProfile = (props) => {
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (
                   user.alerts.map((alert, index) => (
-                    <div className="col mx-2 my-4" key={index}>
-                      <DealCard />
+                    <div className="col mx-2 my-4" >
+                      <DealCard key={index}/>
                     </div>
                   ))
                 )}

@@ -98,13 +98,13 @@ export const EditableDealCard = (props) => {
       <div className="card-body flex-row d-flex">
         <div>
           <h5 className="card-title">{deal.game_title}</h5>
-          {deal.item_type && <p className="card-text">{deal.item_type}</p>}
+           <p className="card-text">{deal.item_type}</p>
           <p className="card-text">{deal.format}</p>
           <p className="card-text text-decoration-line-through">
             {deal.original_price}
           </p>
           <p className="card-text">{deal.offer_price} €</p>
-          <p className="card-text">{deal.promo_code}</p>
+          {deal.promo_code && <p className="card-text">{deal.promo_code}</p>}
           {deal.expiration_date && (
             <p className="card-text">{deal.expiration_date}</p>
           )}
