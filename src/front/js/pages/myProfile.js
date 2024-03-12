@@ -13,6 +13,13 @@ export const MyProfile = (props) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(store.user);
+  /*const [newUserData, setNewUserData] = useState({
+    username: "",
+    imageUrl: "",
+    steamUsername: "",
+    twitchUsername: "",
+    newInterest: "",
+  });*/
   const [newUsername, setNewUsername] = useState("");
   const [newUserImage, setNewUserImage] = useState("");
   const [newSteamUsername, setNewSteamUsername] = useState("");

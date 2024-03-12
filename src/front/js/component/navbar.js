@@ -11,21 +11,20 @@ export const Navbar = () => {
   const [login, setLogin] = useState({
     email: "",
     password: "",
-    remember_me: false
+    remember_me: false,
   });
   const [signup, setSignup] = useState({
     email: "",
     password: "",
     password2: "",
     privacy: false,
-    newsletter: false
+    newsletter: false,
   });
   const [forgotPassword, setForgotPassword] = useState({
     email: "",
-    email2: ""
+    email2: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
-
 
   useEffect(() => {
     console.log(login.remember_me);
@@ -60,7 +59,12 @@ export const Navbar = () => {
       alert("You must accept the privacy policy!");
       return;
     } else {
-      actions.signup(signup.email, signup.password, signup.newsletter, signup.privacy);
+      actions.signup(
+        signup.email,
+        signup.password,
+        signup.newsletter,
+        signup.privacy
+      );
       navigate("/login");
     }
   }
@@ -102,7 +106,10 @@ export const Navbar = () => {
 
   return (
     <div className="position-relative">
-      <nav className="navbar bg-dark bg-gradient justify-content-evenly flex-row">
+      <nav
+        className="navbar bg-gradient justify-content-evenly flex-row"
+        style={{ background: "#020D19" }}
+      >
         <div className="container-fluid ">
           <div className="d-flex flex-row w-50">
             {/*---------------------------------------MENU ICON---------------------------------*/}
@@ -238,7 +245,9 @@ export const Navbar = () => {
                           id="loginEmailInput"
                           placeholder="Email"
                           value={login.email}
-                          onChange={(e) => setLogin({ ...login, email: e.target.value })}
+                          onChange={(e) =>
+                            setLogin({ ...login, email: e.target.value })
+                          }
                         />
                       </div>
                       <label
@@ -254,7 +263,9 @@ export const Navbar = () => {
                         aria-describedby="passwordHelpBlock"
                         placeholder="Password"
                         value={login.password}
-                        onChange={(e) => setLogin({ ...login, password: e.target.value })}
+                        onChange={(e) =>
+                          setLogin({ ...login, password: e.target.value })
+                        }
                       />
                       <div
                         id="passwordHelpBlock"
@@ -267,8 +278,11 @@ export const Navbar = () => {
                           id="rememberMeCheck"
                           value={login.remember_me}
                           onChange={(e) => {
-                            setLogin((prevState) => ({ ...prevState, remember_me: !login.remember_me }))
-                            console.log(login.remember_me)
+                            setLogin((prevState) => ({
+                              ...prevState,
+                              remember_me: !login.remember_me,
+                            }));
+                            console.log(login.remember_me);
                           }}
                         />
                         <label
@@ -296,7 +310,7 @@ export const Navbar = () => {
                         <button
                           className="btn text-white"
                           style={{ background: "#992899" }}
-                          data-bs-toggle={`${store.loggedIn ? "modal" : ("")}`}
+                          data-bs-toggle={`${store.loggedIn ? "modal" : ""}`}
                           onClick={handleLogin}
                         >
                           Login
@@ -338,14 +352,24 @@ export const Navbar = () => {
                       className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
                       placeholder="Email"
                       value={forgotPassword.email}
-                      onChange={(e) => setForgotPassword({ ...forgotPassword, email: e.target.value })}
+                      onChange={(e) =>
+                        setForgotPassword({
+                          ...forgotPassword,
+                          email: e.target.value,
+                        })
+                      }
                     />
                     <input
                       type="email"
                       className="form-control rounded-5 text-white bg-transparent h-100"
                       placeholder="Confirm your email"
                       value={forgotPassword.email2}
-                      onChange={(e) => setForgotPassword({ ...forgotPassword, email2: e.target.value })}
+                      onChange={(e) =>
+                        setForgotPassword({
+                          ...forgotPassword,
+                          email2: e.target.value,
+                        })
+                      }
                     />
                   </div>
                   <div className="modal-footer border-0">
@@ -525,10 +549,7 @@ export const Navbar = () => {
                   {/*---------------------------------------Signup modal registration form---------------------------------*/}
                   <form className="col-5 m-3">
                     <div className="mb-1">
-                      <label
-                        htmlFor="signupEmailInput"
-                        className="form-label"
-                      >
+                      <label htmlFor="signupEmailInput" className="form-label">
                         Email
                       </label>
                       <input
@@ -537,12 +558,17 @@ export const Navbar = () => {
                         id="signupEmailInput"
                         placeholder="Email"
                         value={signup.email}
-                        onChange={(e) => setSignup({ ...signup, email: e.target.value })}
+                        onChange={(e) =>
+                          setSignup({ ...signup, email: e.target.value })
+                        }
                       />
                     </div>
 
                     <div className="mb-1">
-                      <label htmlFor="signupPasswordInput" className="form-label">
+                      <label
+                        htmlFor="signupPasswordInput"
+                        className="form-label"
+                      >
                         Password
                       </label>
                       <input
@@ -551,7 +577,9 @@ export const Navbar = () => {
                         id="signupPasswordInput"
                         placeholder="Password"
                         value={signup.password}
-                        onChange={(e) => setSignup({ ...signup, password: e.target.value })}
+                        onChange={(e) =>
+                          setSignup({ ...signup, password: e.target.value })
+                        }
                       />
                     </div>
 
@@ -569,7 +597,9 @@ export const Navbar = () => {
                         aria-describedby="passwordHelpBlock"
                         placeholder="Confirm Password"
                         value={signup.password2}
-                        onChange={(e) => setSignup({ ...signup, password2: e.target.value })}
+                        onChange={(e) =>
+                          setSignup({ ...signup, password2: e.target.value })
+                        }
                       />
                     </div>
 
@@ -588,7 +618,12 @@ export const Navbar = () => {
                         className="form-check-input"
                         id="newsletterCheck"
                         value={signup.newsletter}
-                        onChange={() => setSignup({ ...signup, newsletter: !signup.newsletter })}
+                        onChange={() =>
+                          setSignup({
+                            ...signup,
+                            newsletter: !signup.newsletter,
+                          })
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -606,7 +641,9 @@ export const Navbar = () => {
                         className="form-check-input"
                         id="privacyCheck"
                         value={signup.privacy}
-                        onChange={() => setSignup({ ...signup, privacy: !signup.privacy })}
+                        onChange={() =>
+                          setSignup({ ...signup, privacy: !signup.privacy })
+                        }
                       />
                       <label
                         className="form-check-label"
