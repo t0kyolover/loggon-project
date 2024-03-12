@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/button.css"
+
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const location = useLocation();
@@ -90,8 +92,8 @@ export const Navbar = () => {
                     {!store.loggedIn ? (
                       <button
                         type="button"
-                        className="btn text-white"
-                        style={{ background: "#992899" }}
+                        className="btn text-white btn-effect m-auto mt-4"
+                        // style={{ background: "#992899" }}
                         data-bs-toggle="modal"
                         data-bs-target="#loginModalToggle"
                       >
@@ -100,8 +102,8 @@ export const Navbar = () => {
                     ) : (
                       <button
                         type="button"
-                        className="btn text-white"
-                        style={{ background: "#992899" }}
+                        className="btn text-white btn-effect"
+                        // style={{ background: "#992899" }}
                         data-bs-toggle="modal"
                         data-bs-target="#logoutModal"
                       >
@@ -214,8 +216,8 @@ export const Navbar = () => {
                       {/*---------------------------------------Login Modal buttons---------------------------------*/}
                       <div className="modal-footer border-0 flex-column">
                         <button
-                          className="btn text-white"
-                          style={{ background: "#992899" }}
+                          className="btn text-white btn-effect" 
+                          
                           /*onClick={actions.login}*/
                         >
                           Login
@@ -266,15 +268,15 @@ export const Navbar = () => {
                   </div>
                   <div className="modal-footer border-0">
                     <button
-                      className="btn btn-primary"
+                      className="btn text-white btn-effect-blue"
                       data-bs-target="#loginModalToggle"
                       data-bs-toggle="modal"
                     >
                       Back
                     </button>
                     <button
-                      className="btn text-white"
-                      style={{ background: "#992899" }}
+                      className="btn text-white btn-effect"
+                      // style={{ background: "#992899" }}
                     >
                       Confirm
                     </button>

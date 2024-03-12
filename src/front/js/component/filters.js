@@ -9,8 +9,8 @@ export const Filters = () => {
   return (
     <div>
       <button
-        className="btn text-white"
-        style={{ background: "#992899" }}
+        className="btn text-white btn-effect"
+        // style={{ background: "#992899" }}
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasDark"

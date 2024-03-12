@@ -16,6 +16,7 @@ import { PrivacyPolicy } from "./pages/privacyPolicy";
 import injectContext from "./store/appContext";
 
 import "/workspaces/loggon-dak-final-project-v2/src/front/styles/fontNove.css"
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/button.css"
 
 
 import { Navbar } from "./component/navbar";
