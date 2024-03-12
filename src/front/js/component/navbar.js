@@ -199,7 +199,7 @@ export const Navbar = () => {
               tabIndex="-1"
             >
               <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content bg-dark text-white">
+                <div className="modal-content text-white" style={{ background: "#020D19" }}>
                   <div className="modal-header border-0">
                     <h1 className="modal-title fs-5" id="loginModalToggleLabel">
                       Login
@@ -337,7 +337,7 @@ export const Navbar = () => {
               tabIndex="-1"
             >
               <div className="modal-dialog modal-sm modal-dialog-centered">
-                <div className="modal-content bg-dark text-white">
+                <div className="modal-content text-white" style={{ background: "#020D19" }}>
                   <div className="modal-header border-0">
                     <h1
                       className="modal-title fs-5"
@@ -402,7 +402,7 @@ export const Navbar = () => {
                 tabIndex="-1"
               >
                 <div className="modal-dialog modal-sm modal-dialog-centered">
-                  <div className="modal-content bg-dark text-white">
+                  <div className="modal-content text-white" style={{ background: "#020D19" }}>
                     <div className="modal-header border-0">
                       <h1 className="modal-title fs-5" id="logoutModalLabel">
                         Are you sure?
@@ -511,7 +511,7 @@ export const Navbar = () => {
           tabIndex="-1"
         >
           <div className="modal-dialog modal-lg modal-dialog-centered">
-            <div className="modal-content bg-dark text-white">
+            <div className="modal-content text-white" style={{ background: "#020D19" }}>
               <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="signupModalToggleLabel">
                   Signup
