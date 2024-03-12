@@ -11,6 +11,8 @@ export const PostDeal = (props) => {
   const params = useParams();
   const navigate = useNavigate();
 
+
+
   const [additionalDeals, setAdditionalDeals] = useState([]);
 
   const addDeal = () => {

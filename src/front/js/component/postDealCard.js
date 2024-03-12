@@ -5,7 +5,28 @@ import { Context } from "../store/appContext";
 
 export const PostDealCard = (props) => {
   const { store, actions } = useContext(Context);
+
+  //not all inputs work
+
+  const [postDeal, setPostDeal] = useState({
+    image_url: "",
+    game_title: "",
+    platform: "",
+    type: "",
+    format: "Digital",
+    original_price: "",
+    promo_price: "",
+    exp_date: "",
+    promo_code: "",
+    offer_link: "",
+    scheduled_date: "",
+    scheduled_time: 0,
+  });
   const [scheduled, setScheduled] = useState(false);
+
+  useEffect(() => {
+    console.log(postDeal);
+  }, [postDeal]);
 
   return (
     <div
@@ -15,9 +36,28 @@ export const PostDealCard = (props) => {
       {/*---------------------------------------DEAL INPUT FORM---------------------------------*/}
       <form>
         <div className="row g-0">
-          <div className="col-md-4 m-auto text-dark"> {/*---texto del mismo color que el fondo para que sea invisible,
+          <div className="col-md-4 m-auto text-dark">
+            {" "}
+            {/*---texto del mismo color que el fondo para que sea invisible,
            pero tenemos que cambiarlo correctamente ----*/}
-            <input type="file" className="img-fluid rounded-start" />
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="text"
+                className="form-control border-0 text-white bg-transparent h-100 p-0"
+                placeholder="Image URL"
+                value={postDeal.image_url}
+                onChange={(e) => {
+                  setPostDeal((prevState) => ({
+                    ...prevState,
+                    image_url: e.target.value,
+                  }));
+                }}
+              />
+              <img src={postDeal.image_url} alt="..." />
+            </li>
           </div>
           <div className="col-md-8">
             <div className="card-body">
@@ -31,7 +71,13 @@ export const PostDealCard = (props) => {
                     type="search"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placeholder="Game title"
-                    
+                    value={postDeal.game_title}
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        game_title: e.target.value,
+                      }));
+                    }}
                   />
                 </li>
                 {/*---------------------------------------Platform---------------------------------*/}
@@ -41,7 +87,12 @@ export const PostDealCard = (props) => {
                 >
                   <select
                     className="form-control border-0 text-white bg-dark h-100 p-0"
-                    
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        platform: e.target.value,
+                      }));
+                    }}
                   >
                     <option value="PC">PC</option>
                     <option value="PC">PS4</option>
@@ -57,7 +108,12 @@ export const PostDealCard = (props) => {
                   <select
                     className="form-control border-0 text-white bg-dark h-100 p-0"
                     placeholder="Type"
-                    
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        type: e.target.value,
+                      }));
+                    }}
                   >
                     <option value="PC">Game</option>
                     <option value="PC">DLC</option>
@@ -76,6 +132,13 @@ export const PostDealCard = (props) => {
                       name="flexRadioFormat"
                       id="flexRadioDigital"
                       checked
+                      value="Digital"
+                      onChange={(e) => {
+                        setPostDeal((prevState) => ({
+                          ...prevState,
+                          format: e.target.value,
+                        }));
+                      }}
                     />
                     <label
                       className="form-check-label"
@@ -90,6 +153,13 @@ export const PostDealCard = (props) => {
                       type="radio"
                       name="flexRadioFormat"
                       id="flexRadioPhysical"
+                      value="CD"
+                      onChange={(e) => {
+                        setPostDeal((prevState) => ({
+                          ...prevState,
+                          format: e.target.value,
+                        }));
+                      }}
                     />
                     <label
                       className="form-check-label"
@@ -108,10 +178,16 @@ export const PostDealCard = (props) => {
                     type="number"
                     className="form-control border-0 text-white bg-transparent h-100 p-1"
                     placeholder="Original price"
-                    
+                    value={postDeal.original_price}
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        original_price: e.target.value,
+                      }));
+                    }}
                   />
                 </li>
-                {/*---------------------------------------Promo Price---------------------------------*/}
+                {/*---------------------------------------Offer Price---------------------------------*/}
                 <li
                   className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
@@ -120,7 +196,13 @@ export const PostDealCard = (props) => {
                     type="number"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placeholder="Offer price"
-                    
+                    value={postDeal.promo_price}
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        promo_price: e.target.value,
+                      }));
+                    }}
                   />
                 </li>
                 {/*---------------------------------------Exp Date---------------------------------*/}
@@ -132,6 +214,13 @@ export const PostDealCard = (props) => {
                     type="date"
                     placeholder="Expiration date"
                     className="form-control border-0 text-white bg-transparent p-0"
+                    value={postDeal.exp_date}
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        exp_date: e.target.value,
+                      }));
+                    }}
                   />
                 </li>
                 {/*---------------------------------------Promo Code---------------------------------*/}
@@ -143,6 +232,13 @@ export const PostDealCard = (props) => {
                     type="text"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placeholder="Promocode"
+                    value={postDeal.promo_code}
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        promo_code: e.target.value,
+                      }));
+                    }}
                   />
                 </li>
                 {/*---------------------------------------Offer Link---------------------------------*/}
@@ -154,7 +250,13 @@ export const PostDealCard = (props) => {
                     type="text"
                     className="form-control border-0 text-white bg-transparent h-100 p-0"
                     placehoolder="Offer link"
-                    
+                    value={postDeal.offer_link}
+                    onChange={(e) => {
+                      setPostDeal((prevState) => ({
+                        ...prevState,
+                        offer_link: e.target.value,
+                      }));
+                    }}
                   />
                 </li>
                 {/*---------------------------------------Schedule Post---------------------------------*/}
@@ -227,10 +329,24 @@ export const PostDealCard = (props) => {
                         <input
                           type="date"
                           className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
+                          value={postDeal.scheduled_date}
+                          onChange={(e) => {
+                            setPostDeal((prevState) => ({
+                              ...prevState,
+                              scheduled_date: e.target.value,
+                            }));
+                          }}
                         />
                         <input
                           type="time"
                           className="form-control rounded-5 text-white bg-transparent h-100"
+                          value={postDeal.scheduled_time}
+                          onChange={(e) => {
+                            setPostDeal((prevState) => ({
+                              ...prevState,
+                              scheduled_time: e.target.value,
+                            }));
+                          }}
                         />
                       </div>
                       <div className="modal-footer border-0 flex-column">

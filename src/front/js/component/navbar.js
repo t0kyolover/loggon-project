@@ -406,7 +406,7 @@ export const Navbar = () => {
                           className="btn text-white"
                           data-bs-dismiss="modal"
                           style={{ background: "#992899" }}
-                        /*onClick={actions.logout}*/
+                          onClick={actions.logout}
                         >
                           Logout
                         </button>

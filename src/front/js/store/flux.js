@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      loggedIn: false,
+      loggedIn: true,
       user: {
         id: 1,
         email: "pereayats@email.com",
@@ -32,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 8,
             original_price: 79.99,
             offer_price: 35.99,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-27",
             promo_code: "HDGUDS",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 10,
             original_price: 79.99,
             offer_price: 60.99,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-28",
             promo_code: "DJIODP",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 10,
             original_price: 15,
             offer_price: 9.99,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-26",
             promo_code: "DFJISOP",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
@@ -96,7 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 10,
             original_price: 65,
             offer_price: 49,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-29",
             promo_code: "DFJSIF",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
@@ -136,6 +136,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       // LOGOUT
       logout: () => {
         setStore({ loggedIn: false });
+        console.log("Logged out successfully!");
       },
       //------------------------USER DETAILS ACTIONS--------------------//
       updateItem: (newItem, itemType) => {
