@@ -62,8 +62,8 @@ oauth = OAuth()
 # Configura el proveedor de autenticación de Google
 google = oauth.remote_app(
     'google',
-    consumer_key='your_gooegl_client_id',
-    consumer_secret='your_google_client_secret',
+    consumer_key='141396503593-5ucoa6ughl6iobs8tmks7rjmvp27die2.apps.googleusercontent.com',
+    consumer_secret='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',
     request_token_params={
         'scope': 'email',
     },
