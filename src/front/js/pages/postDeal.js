@@ -11,20 +11,55 @@ export const PostDeal = (props) => {
   const params = useParams();
   const navigate = useNavigate();
 
-
-
+  const [deal, setDeal] = useState({
+    image_url: "",
+    game_title: "",
+    platform: "PC",
+    type: "Game",
+    format: "Digital",
+    original_price: "",
+    offer_price: "",
+    expiration_date: "",
+    promo_code: "",
+    offer_link: "",
+    scheduled_date: "",
+    scheduled_time: "",
+  });
   const [additionalDeals, setAdditionalDeals] = useState([]);
 
-  const addDeal = () => {
-    setAdditionalDeals([...additionalDeals, {}]);
-  };
+  function handleInputChange(e, item) {
+    setDeal({ ...deal, [item]: e.target.value });
+  }
 
-  const deleteDeal = (index, e) => {
+  function addDeal() {
+    setAdditionalDeals([...additionalDeals, {}]);
+  }
+
+  function deleteDeal(index, e) {
     e.preventDefault();
-    console.log(index);
     const updatedDeals = additionalDeals.filter((_, i) => i !== index);
     setAdditionalDeals(updatedDeals);
-  };
+  }
+
+  function handlePostDeal(e, deal) {
+    console.log(deal);
+    e.preventDefault();
+    if (
+      deal.game_title == "" ||
+      deal.platform == "" ||
+      deal.type == "" ||
+      deal.format == "" ||
+      deal.original_price == "" ||
+      deal.offer_price == "" ||
+      deal.offer_link == ""
+    ) {
+      alert("Please fill out all required fields");
+      return;
+    } else {
+      actions.postDeal(deal);
+      navigate("/myprofile/:username");
+    }
+  }
 
   if (store.loggedIn === false) {
     navigate("/login");
@@ -35,9 +70,16 @@ export const PostDeal = (props) => {
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-column text-white">
           <h3 className="m-auto my-3">Post Deal</h3>
-          <PostDealCard />
+          <PostDealCard
+            gameTitle={deal.game_title}
+            onInputChange={handleInputChange}
+          />
           {additionalDeals.map((deal, index) => (
-            <PostDealCard key={index} onClick={(e) => deleteDeal(index, e)} isAdditional={true}/>
+            <PostDealCard
+              key={index}
+              onClick={(e) => deleteDeal(index, e)}
+              isAdditional={true}
+            />
           ))}
           {/*---------------------------------------BUTTONS---------------------------------*/}
           <div className="grid gap-3 d-flex justify-content-end mb-4">
@@ -53,6 +95,7 @@ export const PostDeal = (props) => {
               type="button"
               className="btn text-white"
               style={{ background: "#992899" }}
+              onClick={(e) => handlePostDeal(e, deal)}
             >
               Post
             </button>

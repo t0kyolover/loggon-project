@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export const Footer = () => (
   <footer
-    className="footer pt-3 bg-gradient mt-auto fixed-bottom"
+    className="footer pt-3 bg-gradient mt-auto opacity-75"
     style={{ background: "#020D19" }}
   >
     <p className= "text-center" style={{ color: "#992899" }}>

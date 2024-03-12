@@ -71,9 +71,7 @@ export const MyProfile = (props) => {
     navigate("/login");
   }
 
-  return (
-    /*Put store.loggedIn variable here*/
-    
+  return (    
     <div className="container-fluid m-auto">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
@@ -329,7 +327,7 @@ export const MyProfile = (props) => {
                   aria-hidden="true"
                 >
                   <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content bg-dark">
+                    <div className="modal-content" style={{ background: "#020D19" }}>
                       <div className="modal-header border-0">
                         <h1
                           className="modal-title fs-5"

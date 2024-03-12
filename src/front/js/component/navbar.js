@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const closeSignUpButton = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,10 +26,6 @@ export const Navbar = () => {
     email2: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    console.log(login.remember_me);
-  }, [login.remember_me]);
 
   /* useEffect(() => {
      if (!searchTerm) {
@@ -59,12 +56,16 @@ export const Navbar = () => {
       alert("You must accept the privacy policy!");
       return;
     } else {
+      closeSignUpButton.current.click();
+      closeSignUpButton.current.click();
       actions.signup(
         signup.email,
         signup.password,
         signup.newsletter,
         signup.privacy
       );
+      alert("Successfully registered!");
+
       navigate("/login");
     }
   }
@@ -106,11 +107,12 @@ export const Navbar = () => {
 
   return (
     <div className="position-relative">
+      {/*Me gusta opacity-75 y top-fixed pero todo lo de mas se pone con opacidad y disabled no se puede tocar*/}
       <nav
         className="navbar bg-gradient justify-content-evenly flex-row"
         style={{ background: "#020D19" }}
       >
-        <div className="container-fluid ">
+        <div className="container-fluid">
           <div className="d-flex flex-row w-50">
             {/*---------------------------------------MENU ICON---------------------------------*/}
             <button
@@ -127,22 +129,28 @@ export const Navbar = () => {
               tabIndex="-1"
               id="menuOffcanvas"
               aria-labelledby="menuOffcanvasLabel"
-              style={{ width: "15%", background: "#020D19"}}
+              style={{ width: "15%", background: "#020D19" }}
             >
               {/*---------------------------------------MENU CONTENTS---------------------------------*/}
               <div className="offcanvas-header">
-                <h5 className="offcanvas-title text-white" id="menuOffcanvasLabel">
+                <h5
+                  className="offcanvas-title text-white"
+                  id="menuOffcanvasLabel"
+                >
                   Menu
                 </h5>
               </div>
               <div className="offcanvas-body">
                 <div className="d-flex flex-column ms-4 my-3">
-                  <Link
-                    className="text-white text-decoration-none mb-2"
-                    to={"/myprofile/:username"}
-                  >
-                    <div data-bs-dismiss="offcanvas">My profile</div>
-                  </Link>
+                  {store.loggedIn && (
+                    <Link
+                      className="text-white text-decoration-none mb-2"
+                      to={"/myprofile/:username"}
+                    >
+                      <div data-bs-dismiss="offcanvas">My profile</div>
+                    </Link>
+                  )}
+
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/postdeal/:username"}
@@ -199,7 +207,10 @@ export const Navbar = () => {
               tabIndex="-1"
             >
               <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content text-white" style={{ background: "#020D19" }}>
+                <div
+                  className="modal-content text-white "
+                  style={{ background: "#020D19" }}
+                >
                   <div className="modal-header border-0">
                     <h1 className="modal-title fs-5" id="loginModalToggleLabel">
                       Login
@@ -210,6 +221,7 @@ export const Navbar = () => {
                         className="btn-close "
                         data-bs-dismiss="modal"
                         aria-label="Close"
+                        ref={closeSignUpButton}
                       ></button>
                     </div>
                   </div>
@@ -316,9 +328,10 @@ export const Navbar = () => {
                           Login
                         </button>
                         <button
+                          type="button"
                           className="btn btn-sm btn-link"
                           data-bs-target="#signupModalToggle"
-                          onClick={(e) => e.preventDefault()}
+                          data-bs-toggle="modal"
                         >
                           Not registered yet?
                         </button>
@@ -337,7 +350,10 @@ export const Navbar = () => {
               tabIndex="-1"
             >
               <div className="modal-dialog modal-sm modal-dialog-centered">
-                <div className="modal-content text-white" style={{ background: "#020D19" }}>
+                <div
+                  className="modal-content text-white"
+                  style={{ background: "#020D19" }}
+                >
                   <div className="modal-header border-0">
                     <h1
                       className="modal-title fs-5"
@@ -382,6 +398,7 @@ export const Navbar = () => {
                     </button>
                     <button
                       className="btn text-white"
+                      type="submit"
                       style={{ background: "#992899" }}
                       /* data-bs-dismiss="modal"*/
                       onClick={sendRecoveryEmail}
@@ -402,7 +419,10 @@ export const Navbar = () => {
                 tabIndex="-1"
               >
                 <div className="modal-dialog modal-sm modal-dialog-centered">
-                  <div className="modal-content text-white" style={{ background: "#020D19" }}>
+                  <div
+                    className="modal-content text-white"
+                    style={{ background: "#020D19" }}
+                  >
                     <div className="modal-header border-0">
                       <h1 className="modal-title fs-5" id="logoutModalLabel">
                         Are you sure?
@@ -511,7 +531,10 @@ export const Navbar = () => {
           tabIndex="-1"
         >
           <div className="modal-dialog modal-lg modal-dialog-centered">
-            <div className="modal-content text-white" style={{ background: "#020D19" }}>
+            <div
+              className="modal-content text-white"
+              style={{ background: "#020D19" }}
+            >
               <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="signupModalToggleLabel">
                   Signup
