@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      loggedIn: true,
+      loggedIn: false,
       user: {
         id: 1,
         email: "pereayats@email.com",
@@ -341,12 +341,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       //--------------------------GET ITEMS----------------------//
       openItem: (id, setDetails) => {
         const store = getStore();
-        const deal = store.deals.find((deal) => deal.id === id);
+        const deal = store.deals.filter((deal) => deal.id === id);
         if (!deal) {
           console.log("Deal not found!");
           return;
         }
-        setDetails(deal);
+        setDetails({deal}); //This is not wortking
         console.log("Deal details found successfully!");
       },
     },

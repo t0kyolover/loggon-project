@@ -65,7 +65,6 @@ export const Navbar = () => {
         signup.privacy
       );
       alert("Successfully registered!");
-
       navigate("/login");
     }
   }
@@ -107,7 +106,7 @@ export const Navbar = () => {
 
   return (
     <div className="position-relative">
-      {/*Me gusta opacity-75 y top-fixed pero todo lo de mas se pone con opacidad y disabled no se puede tocar*/}
+      {/*Me gusta opacity-75 y fixed-top pero todo lo de mas se pone con opacidad y disabled no se puede tocar*/}
       <nav
         className="navbar bg-gradient justify-content-evenly flex-row"
         style={{ background: "#020D19" }}

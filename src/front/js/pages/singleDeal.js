@@ -28,7 +28,7 @@ export const SingleDeal = (props) => {
 
   useEffect(() => {
     actions.openItem(params.id, setDeal);
-  }, [params.id, store.deals]);
+  }, []);
 
   console.log(params.id)
 

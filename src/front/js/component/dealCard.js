@@ -24,6 +24,7 @@ export const DealCard = (props) => {
     rating: props.rating,
   });
   
+  console.log(deal.id)
   return (
     <div
       className="card card-effect sombra text-white"
