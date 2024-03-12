@@ -69,7 +69,7 @@ export const EditableDealCard = (props) => {
     }));
   }
 
-  function modifyPost(e) {
+  function modifyPostHandler(e) {
     e.preventDefault();
     actions.modifyPost(
       newPostData.imageUrl,
@@ -98,13 +98,13 @@ export const EditableDealCard = (props) => {
       <div className="card-body flex-row d-flex">
         <div>
           <h5 className="card-title">{deal.game_title}</h5>
-          {deal.item_type && <p className="card-text">{deal.item_type}</p>}
+           <p className="card-text">{deal.item_type}</p>
           <p className="card-text">{deal.format}</p>
           <p className="card-text text-decoration-line-through">
             {deal.original_price}
           </p>
           <p className="card-text">{deal.offer_price} €</p>
-          <p className="card-text">{deal.promo_code}</p>
+          {deal.promo_code && <p className="card-text">{deal.promo_code}</p>}
           {deal.expiration_date && (
             <p className="card-text">{deal.expiration_date}</p>
           )}
@@ -130,7 +130,7 @@ export const EditableDealCard = (props) => {
             tabIndex="-1"
           >
             <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content bg-dark text-white">
+              <div className="modal-content text-white" style={{ background: "#020D19" }}>
                 <div className="modal-header border-0">
                   <h1
                     className="modal-title fs-5"
@@ -260,7 +260,7 @@ export const EditableDealCard = (props) => {
                                   style={{ background: "#992899" }}
                                   data-bs-dismiss="modal"
                                   onClick={(e) => {
-                                    modifyPost(e);
+                                    modifyPostHandler(e);
                                   }}
                                 >
                                   Modify
@@ -285,7 +285,7 @@ export const EditableDealCard = (props) => {
             tabIndex="-1"
           >
             <div className="modal-dialog modal-sm modal-dialog-centered">
-              <div className="modal-content bg-dark text-white">
+              <div className="modal-content text-white" style={{ background: "#020D19" }}>
                 <div className="modal-header border-0">
                   <h1
                     className="modal-title fs-5"

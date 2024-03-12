@@ -32,13 +32,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 8,
             original_price: 79.99,
             offer_price: 35.99,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-27",
             promo_code: "HDGUDS",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled: false,
             scheduled_date: "",
-            sheduled_time: ""
+            sheduled_time: "",
+            game_tags: ["multiplayer", "action", "adventure", "open-world"],
           },
           {
             id: 2,
@@ -53,12 +54,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 10,
             original_price: 79.99,
             offer_price: 60.99,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-28",
             promo_code: "DJIODP",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
             sheduled_time: "",
+            game_tags: ["singleplayer", "action", "adventure"],
           },
           {
             id: 3,
@@ -73,12 +75,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 10,
             original_price: 15,
             offer_price: 9.99,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-26",
             promo_code: "DFJISOP",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
             sheduled_time: "",
+            game_tags: ["multiplayer", "action", "shooter"],
           },
           {
             id: 4,
@@ -93,35 +96,155 @@ const getState = ({ getStore, getActions, setStore }) => {
             rating: 10,
             original_price: 65,
             offer_price: 49,
-            expiration_date: "12/03/2024",
+            expiration_date: "2024-03-29",
             promo_code: "DFJSIF",
             offer_link:
               "https://store.steampowered.com/app/397540/Borderlands_3/",
             scheduled_date: "",
             sheduled_time: "",
+            game_tags: ["singleplayer", "adventure", "open-world"],
           },
         ],
-        saved: ["Saved1", "Saved2", "Saved3", "Saved4"],
-        alerts: ["Alert1", "Alert2", "Alert3", "Alert4"],
+        saved: [],
+        alerts: [
+          {
+            id: 5,
+            user_id: 2,
+            date_of_creation: "",
+            game_title: "GTA V",
+            image_url: "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
+            item_type: "DLC",
+            platform: "Xbox",
+            format: "Digital",
+            rating: 8,
+            original_price: 79.99,
+            offer_price: 35.99,
+            expiration_date: "2024-03-27",
+            promo_code: "HDGUDS",
+            offer_link:
+              "https://store.steampowered.com/app/397540/Borderlands_3/",
+            scheduled: false,
+            scheduled_date: "",
+            sheduled_time: "",
+            game_tags: ["multiplayer", "action", "adventure", "open-world"],
+          },
+        ],
         newsletter: false,
       },
-      deals: [],
-      games: [],
-      searchResults: []
+      deals: [
+        {
+          id: 1,
+          user_id: 1,
+          date_of_creation: "",
+          game_title: "GTA V",
+          image_url: "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
+          item_type: "DLC",
+          platform: "Xbox",
+          format: "Digital",
+          rating: 8,
+          original_price: 79.99,
+          offer_price: 35.99,
+          expiration_date: "2024-03-27",
+          promo_code: "HDGUDS",
+          offer_link:
+            "https://store.steampowered.com/app/397540/Borderlands_3/",
+          scheduled: false,
+          scheduled_date: "",
+          sheduled_time: "",
+          game_tags: ["multiplayer", "action", "adventure", "open-world"],
+        },
+        {
+          id: 2,
+          user_id: 1,
+          date_of_creation: "",
+          game_title: "Atomic Heart",
+          image_url:
+            "https://image.api.playstation.com/vulcan/ap/rnd/202209/2815/ghdxLSLpUl24o2Q1eq3yTaji.jpg",
+          item_type: "Game",
+          platform: "PC",
+          format: "CD",
+          rating: 10,
+          original_price: 79.99,
+          offer_price: 60.99,
+          expiration_date: "2024-03-28",
+          promo_code: "DJIODP",
+          offer_link:
+            "https://store.steampowered.com/app/397540/Borderlands_3/",
+          scheduled_date: "",
+          sheduled_time: "",
+          game_tags: ["singleplayer", "action", "adventure"],
+        },
+        {
+          id: 3,
+          user_id: 1,
+          date_of_creation: "",
+          game_title: "Overwatch 2",
+          image_url:
+            "https://xxboxnews.blob.core.windows.net/prod/sites/2/2022/10/OW2-be9287b234afbe7898ac.jpg",
+          item_type: "In-Game Purchase",
+          platform: "PS4",
+          format: "Digital",
+          rating: 10,
+          original_price: 15,
+          offer_price: 9.99,
+          expiration_date: "2024-03-26",
+          promo_code: "DFJISOP",
+          offer_link:
+            "https://store.steampowered.com/app/397540/Borderlands_3/",
+          scheduled_date: "",
+          sheduled_time: "",
+          game_tags: ["multiplayer", "action", "shooter"],
+        },
+        {
+          id: 4,
+          user_id: 1,
+          date_of_creation: "",
+          game_title: "Pokemon Violet",
+          image_url:
+            "https://assets-prd.ignimgs.com/2022/08/03/pokemon-violet-1659542326365.jpg",
+          item_type: "Game",
+          platform: "Nintendo",
+          format: "CD",
+          rating: 10,
+          original_price: 65,
+          offer_price: 49,
+          expiration_date: "2024-03-29",
+          promo_code: "DFJSIF",
+          offer_link:
+            "https://store.steampowered.com/app/397540/Borderlands_3/",
+          scheduled_date: "",
+          sheduled_time: "",
+          game_tags: ["singleplayer", "adventure", "open-world"],
+        },
+      ],
+      games: [
+        { game_tags: ["multiplayer", "action", "adventure", "open-world"] },
+      ],
+      searchResults: [],
     },
     actions: {
       //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
-      login: () => {
-        setStore({ loggedIn: true });
+      signup: (email, password) => {
+        console.log("User registered successfully!");
+      },
+
+      login: (email, password) => {
+        const store = getStore();
+        if (store.user.email === email && store.user.password === password) {
+          setStore({ loggedIn: true });
+          console.log("Logged in successfully!");
+        } else {
+          alert("Email or password incorrect!");
+        }
       },
 
       forgotPassword: (email) => {
         console.log("Password recovery email sent successfully!");
       },
 
-      // LOGOUT
       logout: () => {
         setStore({ loggedIn: false });
+        console.log("Logged out successfully!");
       },
       //------------------------USER DETAILS ACTIONS--------------------//
       updateItem: (newItem, itemType) => {
@@ -130,6 +253,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }));
         console.log(`${itemType} updated successfully!`);
       },
+
       updatePassword: (newPassword) => {
         setStore((prevStore) => ({
           user: { ...prevStore.user, password: newPassword },
@@ -157,6 +281,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       //--------------------------POSTS ACTIONS----------------------//
+
+      postDeal: (deal) => {
+        setStore((prevStore) => ({
+          user: { ...prevStore.user, posts: [...prevStore.user.posts, deal] },
+        }));
+        console.log("Deal posted successfully!");
+      },
+
       modifyPost: (
         imageUrl,
         offerPrice,
@@ -188,14 +320,34 @@ const getState = ({ getStore, getActions, setStore }) => {
         }));
         console.log("Deal has been modified successfully!");
       },
+
       //--------------------------SEARCHES----------------------//
       searchInNavbar: (searchTerm) => {
         const store = getStore();
         const allItems = [].concat(store.deals, store.games);
         const results = allItems.filter((item) =>
-          item.game_title.toLowerCase().includes(searchTerm.toLowerCase())
+          item.game_tags.filter((tag) =>
+            tag.toLowerCase().includes(searchTerm.toLowerCase())
+          )
         );
-        setStore({ searchResults: results });
+        if (results.length === 0) {
+          alert("No results found!");
+        } else {
+          setStore({ searchResults: results });
+          console.log("Search results updated successfully!");
+          console.log(results);
+        }
+      },
+      //--------------------------GET ITEMS----------------------//
+      openItem: (id, setDetails) => {
+        const store = getStore();
+        const deal = store.deals.filter((deal) => deal.id === id);
+        if (!deal) {
+          console.log("Deal not found!");
+          return;
+        }
+        setDetails({deal}); //This is not wortking
+        console.log("Deal details found successfully!");
       },
     },
   };

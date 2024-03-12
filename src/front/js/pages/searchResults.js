@@ -8,56 +8,23 @@ import { Context } from "../store/appContext";
 
 export const SearchResults = () => {
   const { store, actions } = useContext(Context);
-  const [activeTab, setActiveTab] = useState("grid1");
 
-
+ /* useEffect(() => {
+    console.log(store.searchResults);
+  }, [store.searchResults]);*/
 
   return (
     <div>
       <div className="text-center text-white m-5">
-        <h1 style={{ fontSize: "50px" }}>Games</h1>
       </div>
       <div className="container text-center">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
           <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-        </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-        </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
-          </div>
-          <div className="col">
-            <DealCard />
+            <p className="text-white">Hello I am results</p>
+            {store.SearchResults && store.SearchResults.map((item, index) => {
+              return <DealCard key={index} game_tags={item.game_tags} />;
+            })}
+
           </div>
         </div>
       </div>

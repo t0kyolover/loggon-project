@@ -20,14 +20,14 @@ export const Filters = () => {
       </button>
 
       <div
-        className="offcanvas offcanvas-end text-bg-dark"
+        className="offcanvas offcanvas-end"
         tabIndex="-1"
         id="offcanvasDark"
         aria-labelledby="offcanvasDarkLabel"
-        style={{ width: "15%" }}
+        style={{ width: "15%", background: "#020D19" }}
       >
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasDarkLabel">
+          <h5 className="offcanvas-title text-white" id="offcanvasDarkLabel">
             Filter by
           </h5>
         </div>
@@ -50,7 +50,7 @@ export const Filters = () => {
                   role="switch"
                   id="dateFilterSwitch"
                 />
-                <label className="form-check-label" htmlFor="dateFilterSwitch">
+                <label className="form-check-label text-white" htmlFor="dateFilterSwitch">
                   newest
                 </label>
               </div>
@@ -61,7 +61,7 @@ export const Filters = () => {
                   role="switch"
                   id="ratingFilterSwitch"
                 />
-                <label className="form-check-label" htmlFor="ratingFilterSwitch">
+                <label className="form-check-label text-white" htmlFor="ratingFilterSwitch">
                   highest rating
                 </label>
               </div>
@@ -76,7 +76,7 @@ export const Filters = () => {
                   id="formatDigitalFilter"
                   value="Digital"
                 />
-                <label className="form-check-label" htmlFor="formatDigitalFilter">
+                <label className="form-check-label text-white" htmlFor="formatDigitalFilter">
                   Digital
                 </label>
               </div>
@@ -88,7 +88,7 @@ export const Filters = () => {
                   id="formatCDFilter"
                   value="CD"
                 />
-                <label className="form-check-label" htmlFor="formatCDFilter">
+                <label className="form-check-label text-white" htmlFor="formatCDFilter">
                   CD
                 </label>
               </div>

@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import loggonBn from '/workspaces/loggon-dak-final-project-v2/src/front/img/loggonBn.png';
+import loggonBn from "/workspaces/loggon-dak-final-project-v2/src/front/img/loggonBn.png";
 
-import "/workspaces/loggon-dak-final-project-v2/src/front/styles/icons.css"
+import "/workspaces/loggon-dak-final-project-v2/src/front/styles/icons.css";
 
 import { DealCard } from "../component/dealCard";
 import { Filters } from "../component/filters";
@@ -12,11 +12,15 @@ import { Context } from "../store/appContext";
 
 export const Feed = () => {
   const { store, actions } = useContext(Context);
-  const [activeTab, setActiveTab] = useState("grid1");
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
+  const psDeals = store.deals.filter(
+    (deal) => deal.platform === "PS4" || deal.platform === "PS5"
+  );
+  const xboxDeals = store.deals.filter((deal) => deal.platform === "Xbox");
+  const pcDeals = store.deals.filter((deal) => deal.platform === "PC");
+  const nintendoDeals = store.deals.filter(
+    (deal) => deal.platform === "Nintendo"
+  );
 
   useEffect(() => {
     let activeElement = null;
@@ -40,7 +44,7 @@ export const Feed = () => {
     <div>
       {/*------------------------------------LOGO---------------------------------*/}
       <div className="container mt-2 py-5 ">
-      <img src={loggonBn} alt="Descrição da Imagem" className="img-fluid"/>
+        <img src={loggonBn} alt="Descrição da Imagem" className="img-fluid" />
       </div>
       <div className="d-flex justify-content-end pt-4">
         <Filters />
@@ -83,7 +87,11 @@ export const Feed = () => {
               aria-controls="nav-pc"
               
             >
-              <img className="pc-effect rounded-4 img-fluid" src="https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png" alt="windows-10"/>
+              <img
+                className="pc-effect rounded-4 img-fluid"
+                src="https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png"
+                alt="windows-10"
+              />
             </button>
             <button
               className="bg-dark border-0"
@@ -101,7 +109,7 @@ export const Feed = () => {
         </nav>
         {/*---------------------------------------PLATFORMS TABS CONTENT---------------------------------*/}
         <div className="tab-content" id="nav-tabContent">
-            {/*---------------------------------------PS---------------------------------*/}
+          {/*---------------------------------------PS---------------------------------*/}
           <div
             className="tab-pane fade show active"
             id="nav-ps"
@@ -111,30 +119,25 @@ export const Feed = () => {
           >
             <div className="container text-center pb-5">
               <div className="row row-cols-auto">
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
+                {psDeals.map((deal, index) => (
+                  <div className="col m-auto my-4">
+                    <DealCard
+                      key={deal.id}
+                      gameTitle={deal.game_title}
+                      imageUrl={deal.image_url}
+                      itemType={deal.item_type}
+                      platform={deal.platform}
+                      format={deal.format}
+                      originalPrice={deal.original_price}
+                      offerPrice={deal.offer_price}
+                      expirationDate={deal.expiration_date}
+                      promoCode={deal.promo_code}
+                      offerLink={deal.offer_link}
+                      gameTags={deal.game_tags}
+                      rating={deal.rating}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -148,31 +151,27 @@ export const Feed = () => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-            </div>
+              {xboxDeals.map((deal, index) => (
+                  <div className="col m-auto my-4">
+                    <DealCard
+                      key={index}
+                      id={deal.id}
+                      gameTitle={deal.game_title}
+                      imageUrl={deal.image_url}
+                      itemType={deal.item_type}
+                      platform={deal.platform}
+                      format={deal.format}
+                      originalPrice={deal.original_price}
+                      offerPrice={deal.offer_price}
+                      expirationDate={deal.expiration_date}
+                      promoCode={deal.promo_code}
+                      offerLink={deal.offer_link}
+                      gameTags={deal.game_tags}
+                      rating={deal.rating}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           {/*---------------------------------------PC---------------------------------*/}
@@ -185,31 +184,27 @@ export const Feed = () => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-                <div className="col m-auto my-4">
-                  <DealCard />
-                </div>
-            </div>
+              {pcDeals.map((deal, index) => (
+                  <div className="col m-auto my-4">
+                    <DealCard
+                      key={index}
+                      id={deal.id}
+                      gameTitle={deal.game_title}
+                      imageUrl={deal.image_url}
+                      itemType={deal.item_type}
+                      platform={deal.platform}
+                      format={deal.format}
+                      originalPrice={deal.original_price}
+                      offerPrice={deal.offer_price}
+                      expirationDate={deal.expiration_date}
+                      promoCode={deal.promo_code}
+                      offerLink={deal.offer_link}
+                      gameTags={deal.game_tags}
+                      rating={deal.rating}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           {/*---------------------------------------NINTENDO---------------------------------*/}
@@ -222,26 +217,31 @@ export const Feed = () => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-            <div className="col mx-2 my-4">
-              <DealCard />
-            </div>
-            <div className="ccol mx-2 my-4">
-              <DealCard />
-            </div>
-            <div className="col mx-2 my-4">
-              <DealCard />
-            </div>
-            <div className="col mx-2 my-4">
-              <DealCard />
-            </div>
-            <div className="col mx-2 my-4">
-              <DealCard />
-            </div>
-            </div>
+              {nintendoDeals.map((deal, index) => (
+                  <div className="col m-auto my-4">
+                    <DealCard
+                      key={index}
+                      id={deal.id}
+                      gameTitle={deal.game_title}
+                      imageUrl={deal.image_url}
+                      itemType={deal.item_type}
+                      platform={deal.platform}
+                      format={deal.format}
+                      originalPrice={deal.original_price}
+                      offerPrice={deal.offer_price}
+                      expirationDate={deal.expiration_date}
+                      promoCode={deal.promo_code}
+                      offerLink={deal.offer_link}
+                      gameTags={deal.game_tags}
+                      rating={deal.rating}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 };

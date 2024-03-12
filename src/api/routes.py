@@ -6,7 +6,7 @@ from api.models import db, User, Deal, Saved, Interest, Vote
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
-from flask_oauthlib.client import OAuth
+#from flask_oauthlib.client import OAuth
 
 
 api = Blueprint('api', __name__)
@@ -57,7 +57,7 @@ def signup():
 
 
 # Configura la instancia de OAuth
-oauth = OAuth()
+('''oauth = OAuth()
 
 # Configura el proveedor de autenticación de Google
 google = oauth.remote_app(
@@ -109,7 +109,7 @@ def authorized():
 
 @google.tokengetter
 def get_google_oauth_token():
-    return session.get('google_token')
+    return session.get('google_token')''')
     
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------

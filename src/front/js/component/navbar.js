@@ -1,27 +1,37 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const closeSignUpButton = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const [loginEmailInput, setLoginEmailInput] = useState("");
-  const [loginPasswordInput, setLoginPasswordInput] = useState("");
-  const [signupEmailInput, setSignupEmailInput] = useState("");
-  const [signupPasswordInput, setSignupPasswordInput] = useState("");
-  const [forgotPasswordEmailInput, setForgotPasswordEmailInput] = useState("");
-  const [forgotPasswordEmailInput2, setForgotPasswordEmailInput2] =
-    useState("");
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+    remember_me: false,
+  });
+  const [signup, setSignup] = useState({
+    email: "",
+    password: "",
+    password2: "",
+    privacy: false,
+    newsletter: false,
+  });
+  const [forgotPassword, setForgotPassword] = useState({
+    email: "",
+    email2: "",
+  });
   const [searchTerm, setSearchTerm] = useState("");
-  
 
- /* useEffect(() => {
-    if (!searchTerm) {
-      setSuggestions([]);
-    }
-  }, [searchTerm]);*/
+  /* useEffect(() => {
+     if (!searchTerm) {
+       setSuggestions([]);
+     }
+   }, [searchTerm]);*/
 
   useEffect(() => {
     if (location.pathname === "/login") {
@@ -33,31 +43,75 @@ export const Navbar = () => {
     }
   }, [location.pathname]);
 
-  // Some the input doesn't restrict to email format
+  //No modal toggle upon success
+  function handleSignup(e) {
+    e.preventDefault();
+    if (signup.password !== signup.password2) {
+      alert("Passwords do not match!");
+      return;
+    } else if (!signup.email || !signup.password || !signup.password2) {
+      alert("Missing fields!");
+      return;
+    } else if (!signup.privacy) {
+      alert("You must accept the privacy policy!");
+      return;
+    } else {
+      closeSignUpButton.current.click();
+      closeSignUpButton.current.click();
+      actions.signup(
+        signup.email,
+        signup.password,
+        signup.newsletter,
+        signup.privacy
+      );
+      alert("Successfully registered!");
+      navigate("/login");
+    }
+  }
+
+  //No modal suspend after success
+  function handleLogin(e) {
+    e.preventDefault();
+    actions.login(login.email, login.password);
+    navigate("/");
+  }
+
+  // Somehow the input doesn't restrict to email format
   function sendRecoveryEmail() {
     if (
-      forgotPasswordEmailInput.trim() &&
-      forgotPasswordEmailInput2.trim() &&
-      forgotPasswordEmailInput === forgotPasswordEmailInput2
+      forgotPassword.email.trim() &&
+      forgotPassword.email2.trim() &&
+      forgotPassword.email === forgotPassword.email2
     ) {
-      actions.forgotPassword(forgotPasswordEmailInput);
+      actions.forgotPassword(forgotPassword.email);
       alert("Password recovery email sent successfully!");
-    } else if (!forgotPasswordEmailInput || !forgotPasswordEmailInput2) {
+    } else if (!forgotPassword.email || !forgotPassword.email2) {
       alert("Missing fields!");
-    } else if (forgotPasswordEmailInput !== forgotPasswordEmailInput2) {
+    } else if (forgotPassword.email !== forgotPassword.email2) {
       alert("Emails do not match!");
     }
   }
 
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
-    setSuggestions(actions.getSuggestions(e.target.value));
-  };
+  function performSearch(e) {
+    e.preventDefault();
+    actions.searchInNavbar(searchTerm, navigate);
+    setSearchTerm("");
+    navigate("/search_results");
+  }
+
+  /*const handleInputChange = (e) => {
+     setSearchTerm(e.target.value);
+     setSuggestions(actions.getSuggestions(e.target.value));
+   };*/
 
   return (
     <div className="position-relative">
-      <nav className="navbar bg-dark bg-gradient justify-content-evenly flex-row">
-        <div className="container-fluid ">
+      {/*Me gusta opacity-75 y fixed-top pero todo lo de mas se pone con opacidad y disabled no se puede tocar*/}
+      <nav
+        className="navbar bg-gradient justify-content-evenly flex-row"
+        style={{ background: "#020D19" }}
+      >
+        <div className="container-fluid">
           <div className="d-flex flex-row w-50">
             {/*---------------------------------------MENU ICON---------------------------------*/}
             <button
@@ -70,26 +124,32 @@ export const Navbar = () => {
               <i className="fa-solid fa-bars" style={{ color: "#992899" }}></i>
             </button>
             <div
-              className="offcanvas offcanvas-start text-bg-dark"
+              className="offcanvas offcanvas-start"
               tabIndex="-1"
               id="menuOffcanvas"
               aria-labelledby="menuOffcanvasLabel"
-              style={{ width: "15%" }}
+              style={{ width: "15%", background: "#020D19" }}
             >
               {/*---------------------------------------MENU CONTENTS---------------------------------*/}
               <div className="offcanvas-header">
-                <h5 className="offcanvas-title" id="menuOffcanvasLabel">
+                <h5
+                  className="offcanvas-title text-white"
+                  id="menuOffcanvasLabel"
+                >
                   Menu
                 </h5>
               </div>
               <div className="offcanvas-body">
                 <div className="d-flex flex-column ms-4 my-3">
-                  <Link
-                    className="text-white text-decoration-none mb-2"
-                    to={"/myprofile/:username"}
-                  >
-                    <div data-bs-dismiss="offcanvas">My profile</div>
-                  </Link>
+                  {store.loggedIn && (
+                    <Link
+                      className="text-white text-decoration-none mb-2"
+                      to={"/myprofile/:username"}
+                    >
+                      <div data-bs-dismiss="offcanvas">My profile</div>
+                    </Link>
+                  )}
+
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/postdeal/:username"}
@@ -146,7 +206,10 @@ export const Navbar = () => {
               tabIndex="-1"
             >
               <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content bg-dark text-white">
+                <div
+                  className="modal-content text-white "
+                  style={{ background: "#020D19" }}
+                >
                   <div className="modal-header border-0">
                     <h1 className="modal-title fs-5" id="loginModalToggleLabel">
                       Login
@@ -157,6 +220,7 @@ export const Navbar = () => {
                         className="btn-close "
                         data-bs-dismiss="modal"
                         aria-label="Close"
+                        ref={closeSignUpButton}
                       ></button>
                     </div>
                   </div>
@@ -190,7 +254,11 @@ export const Navbar = () => {
                           type="email"
                           className="form-control text-white bg-transparent"
                           id="loginEmailInput"
-                          placeholder=""
+                          placeholder="Email"
+                          value={login.email}
+                          onChange={(e) =>
+                            setLogin({ ...login, email: e.target.value })
+                          }
                         />
                       </div>
                       <label
@@ -204,6 +272,11 @@ export const Navbar = () => {
                         id="loginPasswordInput"
                         className="form-control text-white bg-transparent"
                         aria-describedby="passwordHelpBlock"
+                        placeholder="Password"
+                        value={login.password}
+                        onChange={(e) =>
+                          setLogin({ ...login, password: e.target.value })
+                        }
                       />
                       <div
                         id="passwordHelpBlock"
@@ -214,6 +287,14 @@ export const Navbar = () => {
                           type="checkbox"
                           className="form-check-input"
                           id="rememberMeCheck"
+                          value={login.remember_me}
+                          onChange={(e) => {
+                            setLogin((prevState) => ({
+                              ...prevState,
+                              remember_me: !login.remember_me,
+                            }));
+                            console.log(login.remember_me);
+                          }}
                         />
                         <label
                           className="form-check-label"
@@ -240,15 +321,16 @@ export const Navbar = () => {
                         <button
                           className="btn text-white"
                           style={{ background: "#992899" }}
-                          /*onClick={actions.login}*/
+                          data-bs-toggle={`${store.loggedIn ? "modal" : ""}`}
+                          onClick={handleLogin}
                         >
                           Login
                         </button>
                         <button
+                          type="button"
                           className="btn btn-sm btn-link"
                           data-bs-target="#signupModalToggle"
                           data-bs-toggle="modal"
-                          onClick={(e) => e.preventDefault()}
                         >
                           Not registered yet?
                         </button>
@@ -267,7 +349,10 @@ export const Navbar = () => {
               tabIndex="-1"
             >
               <div className="modal-dialog modal-sm modal-dialog-centered">
-                <div className="modal-content bg-dark text-white">
+                <div
+                  className="modal-content text-white"
+                  style={{ background: "#020D19" }}
+                >
                   <div className="modal-header border-0">
                     <h1
                       className="modal-title fs-5"
@@ -281,18 +366,24 @@ export const Navbar = () => {
                       type="email"
                       className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
                       placeholder="Email"
-                      value={forgotPasswordEmailInput}
+                      value={forgotPassword.email}
                       onChange={(e) =>
-                        setForgotPasswordEmailInput(e.target.value)
+                        setForgotPassword({
+                          ...forgotPassword,
+                          email: e.target.value,
+                        })
                       }
                     />
                     <input
                       type="email"
                       className="form-control rounded-5 text-white bg-transparent h-100"
                       placeholder="Confirm your email"
-                      value={forgotPasswordEmailInput2}
+                      value={forgotPassword.email2}
                       onChange={(e) =>
-                        setForgotPasswordEmailInput2(e.target.value)
+                        setForgotPassword({
+                          ...forgotPassword,
+                          email2: e.target.value,
+                        })
                       }
                     />
                   </div>
@@ -306,8 +397,9 @@ export const Navbar = () => {
                     </button>
                     <button
                       className="btn text-white"
+                      type="submit"
                       style={{ background: "#992899" }}
-                     /* data-bs-dismiss="modal"*/
+                      /* data-bs-dismiss="modal"*/
                       onClick={sendRecoveryEmail}
                     >
                       Confirm
@@ -326,7 +418,10 @@ export const Navbar = () => {
                 tabIndex="-1"
               >
                 <div className="modal-dialog modal-sm modal-dialog-centered">
-                  <div className="modal-content bg-dark text-white">
+                  <div
+                    className="modal-content text-white"
+                    style={{ background: "#020D19" }}
+                  >
                     <div className="modal-header border-0">
                       <h1 className="modal-title fs-5" id="logoutModalLabel">
                         Are you sure?
@@ -354,7 +449,7 @@ export const Navbar = () => {
                           className="btn text-white"
                           data-bs-dismiss="modal"
                           style={{ background: "#992899" }}
-                          /*onClick={actions.logout*/
+                          onClick={actions.logout}
                         >
                           Logout
                         </button>
@@ -367,16 +462,15 @@ export const Navbar = () => {
             {/*---------------------------------------LOGO---------------------------------*/}
             <Link to={"/"} className="navbar-brand mx-3">
               <img
-                src="https://cdn.discordapp.com/attachments/1200818313421398017/1208775421672292382/allanrogerhaze_Create_an_impactful_and_memorable_logo_for_a_gam_4523fdda-cff8-4f99-8771-dca36d9acbfc.png?ex=65edbd56&is=65db4856&hm=240bb1292bef08ee14f51727418fd731fb104e9bbf8e759aa3b8d7ac273f81c5&"
-                alt="Bootstrap"
+                src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C"
+                alt="loGGon"
                 width="40"
                 height="34"
-                className="rounded-circle"
+                className="rounded-circle text-white"
               />
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
-            {/*Añadir display de sugerencias, search handle con enter, centrar la barra de búsqueda
-            (el problema está en bottom margin de <p>, pero a sobreescribirlo el campo de input se descuadra)*/}
+
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
@@ -398,14 +492,14 @@ export const Navbar = () => {
                   className="collapse collapse-horizontal"
                   id="collapseSearch"
                 >
-                  <form>
+                  <form onSubmit={performSearch}>
                     <input
                       type="search"
                       className="form-control rounded-5 w-auto text-white bg-transparent mt-2"
                       style={{ maxHeight: "30px" }}
                       aria-label="Búsqueda"
                       value={searchTerm}
-                      onChange={handleInputChange}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                     />
                   </form>
                 </div>
@@ -436,7 +530,10 @@ export const Navbar = () => {
           tabIndex="-1"
         >
           <div className="modal-dialog modal-lg modal-dialog-centered">
-            <div className="modal-content bg-dark text-white">
+            <div
+              className="modal-content text-white"
+              style={{ background: "#020D19" }}
+            >
               <div className="modal-header border-0">
                 <h1 className="modal-title fs-5" id="signupModalToggleLabel">
                   Signup
@@ -474,21 +571,6 @@ export const Navbar = () => {
                   {/*---------------------------------------Signup modal registration form---------------------------------*/}
                   <form className="col-5 m-3">
                     <div className="mb-1">
-                      <label
-                        htmlFor="signupUsernameInput"
-                        className="form-label"
-                      >
-                        Username
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control text-white bg-transparent"
-                        id="signupUsernameInput"
-                        placeholder=""
-                      />
-                    </div>
-
-                    <div className="mb-1">
                       <label htmlFor="signupEmailInput" className="form-label">
                         Email
                       </label>
@@ -496,7 +578,11 @@ export const Navbar = () => {
                         type="email"
                         className="form-control text-white bg-transparent"
                         id="signupEmailInput"
-                        placeholder=""
+                        placeholder="Email"
+                        value={signup.email}
+                        onChange={(e) =>
+                          setSignup({ ...signup, email: e.target.value })
+                        }
                       />
                     </div>
 
@@ -509,9 +595,33 @@ export const Navbar = () => {
                       </label>
                       <input
                         type="password"
+                        className="form-control text-white bg-transparent"
                         id="signupPasswordInput"
+                        placeholder="Password"
+                        value={signup.password}
+                        onChange={(e) =>
+                          setSignup({ ...signup, password: e.target.value })
+                        }
+                      />
+                    </div>
+
+                    <div className="mb-1">
+                      <label
+                        htmlFor="signupPasswordInput2"
+                        className="form-label"
+                      >
+                        Confirm Password
+                      </label>
+                      <input
+                        type="password"
+                        id="signupPasswordInput2"
                         className="form-control text-white bg-transparent"
                         aria-describedby="passwordHelpBlock"
+                        placeholder="Confirm Password"
+                        value={signup.password2}
+                        onChange={(e) =>
+                          setSignup({ ...signup, password2: e.target.value })
+                        }
                       />
                     </div>
 
@@ -529,6 +639,13 @@ export const Navbar = () => {
                         type="checkbox"
                         className="form-check-input"
                         id="newsletterCheck"
+                        value={signup.newsletter}
+                        onChange={() =>
+                          setSignup({
+                            ...signup,
+                            newsletter: !signup.newsletter,
+                          })
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -545,6 +662,10 @@ export const Navbar = () => {
                         type="checkbox"
                         className="form-check-input"
                         id="privacyCheck"
+                        value={signup.privacy}
+                        onChange={() =>
+                          setSignup({ ...signup, privacy: !signup.privacy })
+                        }
                       />
                       <label
                         className="form-check-label"
@@ -566,6 +687,7 @@ export const Navbar = () => {
                       <button
                         className="btn text-white"
                         style={{ background: "#992899" }}
+                        onClick={handleSignup}
                       >
                         Signup
                       </button>
