@@ -612,7 +612,7 @@ export const Navbar = () => {
                       </label>
                       <input
                         type="password"
-                        className="form-control text-white bg-transparent"
+                        className="form-control rounded-5 text-white bg-transparent"
                         id="signupPasswordInput"
                         placeholder="Password"
                         value={signup.password}

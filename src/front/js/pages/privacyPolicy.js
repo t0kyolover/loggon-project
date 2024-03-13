@@ -10,7 +10,7 @@ export const PrivacyPolicy = () => {
     <div className="container">
       <div className="card mt-5 border-0">
         <div className="card-header" style={{ background: "#992899" }}></div>
-        <div className="card-body bg-dark">
+        <div className="card-body" style={{ background: "#020D19" }}>
           <h5 className="card-title text-white text-center m-3">
             <strong>Privacy Policy</strong>
           </h5>

@@ -108,7 +108,7 @@ export const GameCard = (props) => {
                       {tag}
                     </p>
                   ))}
-                  <a href={game.website}>Website</a>
+                  <a href={game.website} target="_blank">Website</a>
                   <p className="text-white m-auto">{game.description}</p>
                 </div>
                 <button
