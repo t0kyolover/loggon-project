@@ -220,6 +220,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       games: [],
       gamesWithDetails: [],
       users: [],
+      tags: [],
       searchResults: [],
     },
     actions: {
@@ -329,7 +330,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const allItems = [].concat(store.deals, store.games);
         const results = allItems.filter((item) =>
-          item.game_tags.some((tag) =>
+          item.game_tags.find((tag) =>
             tag.toLowerCase().includes(searchTerm.toLowerCase())
           )
         );
@@ -412,6 +413,43 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((error) => console.error("Error:", error));
       },
+      loadTags: () => {
+        fetch(
+          "https://api.rawg.io/api/tags?key=d84269170ddc4af0b9a74f60a2fc7b91"
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw Error("Failed to get tags");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.results);
+            setStore({ tags: data.results.map((tag) => tag.name) });
+            console.log("Tags loaded successfully!");
+          });
+      },
+
+      setDescription: () => {
+        const store = getStore();
+        console.log("Trying to set description")
+        store.games.map((game) => {
+          setStore((prevState) => ({
+            games: prevState.games.map((g) => {
+              if (g.id === game.id) {
+                return {
+                  ...g,
+                  description: getActions().extractEnglishDescription(
+                    game.description
+                  ),
+                };
+              }
+              console.log(g)
+              return g;
+            }),
+          }))
+        });
+      },
 
       //-----------UTILITIES-----------//
       extractEnglishDescription: (description) => {
@@ -427,6 +465,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           .match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           );
+      },
+      validatePassword: (password) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+        return passwordRegex.test(password);
       },
     },
   };

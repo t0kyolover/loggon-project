@@ -16,6 +16,7 @@ export const Games = () => {
 
  useEffect(() => {
     actions.loadGamesWithDetails();
+    actions.setDescription()
   }, [store.games])
 
   if (store.gamesWithDetails.length === 0) {
