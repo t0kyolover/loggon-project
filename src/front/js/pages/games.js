@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 import { GameCard } from "../component/gameCard";
 import { Filters } from "../component/filters";
 
@@ -9,11 +8,16 @@ import { Context } from "../store/appContext";
 
 export const Games = () => {
   const { store, actions } = useContext(Context);
-  const [activeTab, setActiveTab] = useState("grid1");
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
+  useEffect(() => {
+    // actions.getGames();
+    //https://api.rawg.io/api/games?key=d84269170ddc4af0b9a74f60a2fc7b91
+    //https://api.rawg.io/api/games/3498?key=d84269170ddc4af0b9a74f60a2fc7b91
+  }, []);
+
+  useEffect(() => {
+    // actions.getGames();
+  }, [store.games]);
 
   return (
     <div>
@@ -25,26 +29,23 @@ export const Games = () => {
       </div>
       <div className="container text-center">
         <div className="row row-cols-auto">
-         <div className="col m-auto">
-            <GameCard />
-          </div>
           <div className="col m-auto">
-            <GameCard />
-          </div>
-          <div className="col m-auto">
-            <GameCard />
-          </div>
-          <div className="col m-auto">
-            <GameCard />
-          </div>
-          <div className="col m-auto">
-            <GameCard />
-          </div>
-          <div className="col m-auto ">
-            <GameCard />
-          </div>
-          <div className="col m-auto ">
-            <GameCard />
+            {store.games.map((game, index) => (
+              <GameCard
+                key={game.id}
+                id={game.id}
+                rawgId={game.rawg_id}
+                name={game.name}
+                description={game.description}
+                released={game.released}
+                tba={game.tba}
+                website={game.website}
+                backgroundImage={game.background_image}
+                backgroundImageAdditional={game.background_image_additional}
+                platforms={game.platforms}
+                gameTags={game.game_tags}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -193,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "https://store.steampowered.com/app/397540/Borderlands_3/",
           scheduled_date: "",
           sheduled_time: "",
-          game_tags: ["multiplayer", "action", "shooter"]
+          game_tags: ["multiplayer", "action", "shooter"],
         },
         {
           id: 4,
@@ -218,15 +218,32 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       games: [
-        { game_tags: ["multiplayer", "action", "adventure", "open-world"] },
+        {
+          id: 1,
+          rawg_id: 1,
+          name: "GTA V",
+          description:
+            "Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the first main entry in the Grand Theft Auto series since 2008's Grand Theft Auto IV.",
+          released: "2013-09-17",
+          tba: false,
+          website: "https://www.rockstargames.com/V/",
+          background_image:
+            "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
+            background_image_additional:
+            "https://media.rawg.io/media/screenshots/5f5/5f5a38a222252d996b18962806eed707.jpg",
+          platforms: ["PC", "PS4", "Xbox"],
+          game_tags: ["multiplayer", "action", "adventure", "open-world"],
+        },
       ],
-      users: [{
-        id: 1,
-        username: "pere",
-        steam_username: "pereayats",
-        twitch_username: "pereayats",
-        posts: []
-      }],
+      users: [
+        {
+          id: 1,
+          username: "pere",
+          steam_username: "pereayats",
+          twitch_username: "pereayats",
+          posts: [],
+        },
+      ],
       searchResults: [],
     },
     actions: {
