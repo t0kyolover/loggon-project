@@ -5,8 +5,8 @@ from flask import Flask, request, jsonify, url_for, Blueprint, session
 from api.models import db, User, Deal, Saved, Interest, Vote
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-from flask_jwt_extended import create_access_token
-#from flask_oauthlib.client import OAuth
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_oauthlib.client import OAuth
 
 
 api = Blueprint('api', __name__)
@@ -112,10 +112,12 @@ def get_google_oauth_token():
     return session.get('google_token')
 
 
-#--------------------------------------------------------------------Login Steam----------------------------------------------------------------------
+#-------------------------------------------------Login Steam (Esperando por autorizacion de steam)----------------------------------------------------------------------
 
-('''steam = oauth.remote_app(
+steam = oauth.remote_app(
     'steam',
+    consumer_key='DC6C64C101D47449665EB173CF4E9A62',
+    consumer_secret='https://steamcommunity.com/oauth/login?response_type=token&client_id=&state=lo_que_quieras',
     base_url='https://api.steampowered.com',
     request_token_params=None,
     request_token_url=None,
@@ -136,7 +138,7 @@ def authorized_steam():
 
     steam_id = response['openid.claimed_id'].split('/')[-1]
     # Aquí puedes usar el steam_id para identificar y manejar al usuario en tu aplicación
-
+    print(steam_id)
      # Verificar si el usuario ya existe en la base de datos
     user = User.query.filter_by(steam_id=steam_id).first()
 
@@ -151,7 +153,7 @@ def authorized_steam():
 @steam.tokengetter
 def get_steam_oauth_token():
     return session.get('steam_token')
- ''')
+
 
 
 
@@ -160,7 +162,7 @@ def get_steam_oauth_token():
 ('''
 
 
-Que nos Falta?
+Que nos Falta? dinero
 
 
 
@@ -181,6 +183,7 @@ def Login():
 
     if user is None:
         return jsonify({"msg": "Bad email or password"}), 401
+    
 
     # Crea un nuevo token con el id de usuario dentro
 
@@ -190,7 +193,9 @@ def Login():
 #---------------------------------------------------------------Modificar usuario-------------------------------------------------------------------
 
 @api.route('/user/<int:user_id>', methods=['PUT'])
+@jwt_required()
 def update_user(user_id):
+    id = get_jwt_identity()
     try:
         # Obtener el usuario existente por su ID
         user = User.query.get(user_id)
@@ -218,7 +223,9 @@ def update_user(user_id):
 #---------------------------------------------------------------Ver un usuario(probarlo)-------------------------------------------------------------------
 
 @api.route('/user/<int:user_id>', methods=['GET'])
+@jwt_required()
 def get_user(user_id):
+    id = get_jwt_identity()
     try:
         # Obtener el usuario por su ID
         user = User.query.get(user_id)
@@ -244,8 +251,9 @@ def get_user(user_id):
 
 
 @api.route('/deal', methods=['POST'])
-
+@jwt_required()
 def create_deal():
+    id = get_jwt_identity()
     try:
         
         data = request.get_json()
@@ -282,7 +290,9 @@ def create_deal():
 #---------------------------------------------------------------Modificar Post-------------------------------------------------------------------------
     
 @api.route('/deal/<int:deal_id>', methods=['PUT'])
+@jwt_required()
 def update_deal(deal_id):
+    id = get_jwt_identity()
     try:
         # Obtener el post existente por su ID
         deal = Deal.query.get(deal_id)
@@ -312,7 +322,9 @@ def update_deal(deal_id):
 #---------------------------------------------------------------------Eliminar un Deal-----------------------------------------------------------------
 
 @api.route('/deal/<int:deal_id>', methods=['DELETE'])
+@jwt_required()
 def delete_deal(deal_id):
+    id = get_jwt_identity()
     try:
         # Obtener el post existente por su ID
         deal = Deal.query.get(deal_id)
@@ -330,10 +342,12 @@ def delete_deal(deal_id):
         return jsonify({"error": str(e)}), 500
     
     
-#---------------------------------------------------------------------Ver un Deal(probarlo)-----------------------------------------------------------------
+#---------------------------------------------------------------------Ver un Deal-----------------------------------------------------------------------
     
 @api.route('/deal/<int:deal_id>', methods=['GET'])
+@jwt_required()
 def get_deal(deal_id):
+    id = get_jwt_identity()
     try:
         # Obtener el deal por su ID
         deal = Deal.query.get(deal_id)
@@ -368,11 +382,13 @@ def get_deal(deal_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-#--------------------------------------------------------------Ver todos los Deals(probarlo)-----------------------------------------------------------
+#--------------------------------------------------------------Ver todos los Deals------------------------------------------------------------------
     
 
 @api.route('/deals', methods=['GET'])
+@jwt_required()
 def get_all_deals():
+    id = get_jwt_identity()
     try:
         # Obtener todos los deals de la base de datos
         deals = Deal.query.all()
@@ -409,8 +425,10 @@ def get_all_deals():
     
 #---------------------------------------------------------Recuperar Contraseña(chequear)-----------------------------------------------------
     
-@api.route('/reset-password', methods=['POST'])
+('''@api.route('/reset-password', methods=['POST'])
+@jwt_required()
 def reset_password_request():
+    id = get_jwt_identity()
     try:
         # Obtener el correo electrónico del cuerpo de la solicitud
         data = request.get_json()
@@ -429,20 +447,42 @@ def reset_password_request():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+    ''')
 #-------------------------------------------------------- Rating (chequear)--------------------------------------------------------------------
     
-@api.route('/deal/Rating/<int:item_id>', methods=['POST'])
+@api.route('/deal/up_rating/<int:item_id>', methods=['PATCH'])
+@jwt_required()
 def like_item(item_id):
+    id = get_jwt_identity()
     try:
         # Obtener el elemento por su ID
-        item = Rating.query.get(item_id)
+        item = Deal.query.get(item_id)
 
         if not item:
             return jsonify({"error": "Item not found"}), 404
 
         # Incrementar el contador de likes
-        item.likes += 1
+        item.rating += 10
+        db.session.commit()
+
+        return jsonify({"message": "Item liked successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+@api.route('/deal/down_rating/<int:item_id>', methods=['PATCH'])
+@jwt_required()
+def dislike_item(item_id):
+    id = get_jwt_identity()
+    try:
+        # Obtener el elemento por su ID
+        item = Deal.query.get(item_id)
+
+        if not item:
+            return jsonify({"error": "Item not found"}), 404
+
+        # Incrementar el contador de likes
+        item.rating -= 10
         db.session.commit()
 
         return jsonify({"message": "Item liked successfully"}), 200
@@ -450,20 +490,3 @@ def like_item(item_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@api.route('/deal/down_rating/<int:item_id>', methods=['POST'])
-def unlike_item(item_id):
-    try:
-        # Obtener el elemento por su ID
-        item = Rating.query.get(item_id)
-
-        if not item:
-            return jsonify({"error": "Item not found"}), 404
-
-        # Decrementar el contador de likes
-        item.likes -= 1
-        db.session.commit()
-
-        return jsonify({"message": "Item unliked successfully"}), 200
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500

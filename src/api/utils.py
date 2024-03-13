@@ -1,19 +1,5 @@
 from flask import jsonify, url_for
-from flask_mail import Message
 
-
-
-def send_password_reset_email(user):
-    token = user.get_reset_password_token()
-    msg = Message('Password Reset Request',
-                  sender='noreply@example.com',
-                  recipients=[user.email])
-    msg.body = f'''Para restablecer su contraseña, visite el siguiente enlace:
-{url_for('user_api.reset_password', token=token, _external=True)}
-
-Si no solicitó esto, simplemente ignore este correo electrónico y no se realizarán cambios.
-'''
-    mail.send(msg)
 
 class APIException(Exception):
     status_code = 400

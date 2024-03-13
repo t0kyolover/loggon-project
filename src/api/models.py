@@ -6,7 +6,7 @@ db = SQLAlchemy()
 #--------------------------------------------------------User------------------------------------------------------------------------ 
 #-----------------------------------Notas: Antes de popular base de datos, incluso test,---------------------------------------------
 #----------------------------------------  asegurar de no modifcar models               ---------------------------------------------
-#----------------------------------------  Katia tenemos que hablar de un error         ---------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------------
 
 class User(db.Model): #( todo)
     id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +16,7 @@ class User(db.Model): #( todo)
     username = db.Column(db.String(30), nullable=False)
     steam_username = db.Column(db.String(40))
     twitch_username = db.Column(db.String(40))
-    interests = db.Column(db.String(20)) #array
+    interests = db.Column(db.String(20)) 
     saved = db.relationship('Saved', backref='user', lazy=True)
     posts = db.Column(db.String) 
     alerts = db.Column(db.String)
@@ -24,7 +24,7 @@ class User(db.Model): #( todo)
     
     # interests = db.relationship('Interest', backref='user', lazy=True)
 
-    #  interests = db.Column(db.ARRAY(db.String(20)))
+    # interests = db.Column(db.ARRAY(db.String(20)))
     
 
     def __repr__(self):
@@ -35,13 +35,14 @@ class User(db.Model): #( todo)
         return {
             "id": self.id,
             "email": self.email,
+            "image_url": self.image_url,
             "username": self.username,
-            "image": self.image,
-            "steam_profile": self.steam_profile,
-            "twitch_profile": self.twitch_profile,
+            "steam_username": self.steam_username,
+            "twitch_username": self.twitch_username,
             "interests": [interest.serialize() for interest in self.interest], # preguntar a pere
             "saved" : [saved.serialize() for saved in self.saved],
             "posts": self.posts,
+            "alerts": self.alerts,
             "newsletter": self.newsletter,
     
         }
@@ -65,7 +66,7 @@ class Deal(db.Model):
     scheduled_time = db.Column(db.DateTime)
     offer_link = db.Column(db.String(200), unique=True, nullable=False)
     image_url = db.Column(db.String(200))
-    rating = db.Column(db.String(5)) # serializar diferencias
+    rating = db.Column(db.Integer) # serializar diferencias
     game_tags = db.Column(db.String(5)) #array (datos de otra)
     
     
@@ -82,14 +83,19 @@ class Deal(db.Model):
             "game_title": self.game_title,
             "platform": self.platform,
             "date_of_creation": self.date_of_creation,
-            "end_date": self.end_date,
+            "expiration_date": self.expiration_date,
             "original_price": self.original_price,
+            "offer_price": self.offer_price,
             "format": self.format,
             "item_type": self.item_type,
             "promo_code": self.promo_code,
             "scheduled": self.scheduled,
-            "url": self.url,
-            "img_url": self.img_url,
+            "scheduled_date": self.scheduled_date,
+            "scheduled_time": self.scheduled_time,
+            "offer_link": self.offer_link,
+            "image_url": self.image_urlurl,
+            "rating": self.rating,
+            "game_tags": self.game_tags
     
         }
     
@@ -141,7 +147,7 @@ class Vote(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     deal_id = db.Column(db.Integer,db.ForeignKey("deal.id"), nullable=False)
-    upvote = db.Column(db.Boolean(), nullable=False)
+    
     
     
 
@@ -152,8 +158,8 @@ class Vote(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "deal_id": self.deal_id,
-            "upvote": self.upvote
+            "deal_id": self.deal_id
+            
             
             
            

@@ -6,23 +6,24 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db
+from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, create_access_token
+from flask_mail import Mail, Message
+from flask_cors import CORS
 
 
 # from models import Person
-
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
-app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this "super secret" to something else!
-jwt = JWTManager(app)
+CORS(app)
+
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -46,6 +47,21 @@ setup_commands(app)
 app.register_blueprint(api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
+
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this "super secret" to something else!
+jwt = JWTManager(app)
+
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT": 465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME": 'teest4geeks12@gmail.com',
+    "MAIL_PASSWORD": 'ahyz rgmy igtb yclg'
+}
+
+app.config.update(mail_settings)
+mail = Mail(app)
 
 
 @app.errorhandler(APIException)
@@ -71,6 +87,29 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0  # avoid cache memory
     return response
+
+@app.route('/reset-password', methods=['POST'])
+def send_email():
+     email = request.json.get("email", None)
+
+     user = User.query.filter_by(email=email).first()
+
+     if user is None:
+         return jsonify({"error": "Este usuario se esfumo" }), 401
+     
+     token = create_access_token(identity=user.id)
+    
+
+
+     message = Message(
+         subject="Reset you password",
+         sender=app.config.get("MAIL_USERNAME"),
+         recipients=[email],
+         html='<a href="https://curly-palm-tree-5gqrjj97pq4rc7gg7-3000.app.github.dev/password_recovery/' + token +'">Forgot my passworito</a>'
+     )
+
+
+
 
 
 # this only runs if `$ python src/main.py` is executed
