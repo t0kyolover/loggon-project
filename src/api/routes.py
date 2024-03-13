@@ -57,7 +57,7 @@ def signup():
 
 
 # Configura la instancia de OAuth
-('''oauth = OAuth()
+oauth = OAuth()
 
 # Configura el proveedor de autenticación de Google
 google = oauth.remote_app(
