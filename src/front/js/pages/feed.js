@@ -2,9 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import loggonBn from "/workspaces/loggon-dak-final-project-v2/src/front/img/loggonBn.png";
-
 import "/workspaces/loggon-dak-final-project-v2/src/front/styles/icons.css";
 
+import { LoadingSpinner } from "../component/loadingSpinner";
 import { DealCard } from "../component/dealCard";
 import { Filters } from "../component/filters";
 
@@ -13,6 +13,7 @@ import { Context } from "../store/appContext";
 export const Feed = () => {
   const { store, actions } = useContext(Context);
 
+  //Cambiar strings segun los datos de API
   const psDeals = store.deals.filter(
     (deal) => deal.platform === "PS4" || deal.platform === "PS5"
   );
@@ -24,7 +25,6 @@ export const Feed = () => {
 
   useEffect(() => {
     let activeElement = null;
-
     const handleClick = (event) => {
       if (activeElement) activeElement.classList.remove("active");
       if (
@@ -36,13 +36,15 @@ export const Feed = () => {
         activeElement.classList.add("active");
       }
     };
-
     document.addEventListener("click", handleClick);
-
     return () => {
       document.removeEventListener("click", handleClick);
     };
   }, []);
+
+  if (store.deals.length === 0) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>

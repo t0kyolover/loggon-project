@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { LoadingSpinner } from "../component/loadingSpinner";
 import { GameCard } from "../component/gameCard";
 import { Filters } from "../component/filters";
 
@@ -16,6 +17,12 @@ export const Games = () => {
  useEffect(() => {
     actions.loadGamesWithDetails();
   }, [store.games])
+
+  if (store.gamesWithDetails.length === 0) {
+    return (
+      <LoadingSpinner />
+    );
+  }
 
   return (
     <div>
