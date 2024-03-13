@@ -8,7 +8,7 @@ db = SQLAlchemy()
 #----------------------------------------  asegurar de no modifcar models               ---------------------------------------------
 #----------------------------------------  Katia tenemos que hablar de un error         ---------------------------------------------
 
-class User(db.Model):
+class User(db.Model): #( todo)
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
@@ -65,8 +65,8 @@ class Deal(db.Model):
     scheduled_time = db.Column(db.DateTime)
     offer_link = db.Column(db.String(200), unique=True, nullable=False)
     image_url = db.Column(db.String(200))
-    rating = db.Column(db.String(5))
-    game_tags = db.Column(db.String(5)) #array
+    rating = db.Column(db.String(5)) # serializar diferencias
+    game_tags = db.Column(db.String(5)) #array (datos de otra)
     
     
     
@@ -75,7 +75,7 @@ class Deal(db.Model):
         return f'<Deal {Deal.user_id}>'
     
 
-    def serialize(self):
+    def serialize(self): #( todo)
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -98,7 +98,7 @@ class Deal(db.Model):
 class Interest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    tag_id = db.Column(db.Integer, nullable=False)
+    tag_name = db.Column(db.Integer, nullable=False)
     
 
     def __repr__(self):
@@ -108,7 +108,7 @@ class Interest(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "tag_id": self.tag_id
+            "tag_name": self.tag_name
             
             
            
@@ -142,6 +142,7 @@ class Vote(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     deal_id = db.Column(db.Integer,db.ForeignKey("deal.id"), nullable=False)
     upvote = db.Column(db.Boolean(), nullable=False)
+    
     
 
     def __repr__(self):

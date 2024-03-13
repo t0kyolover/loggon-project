@@ -110,18 +110,58 @@ def authorized():
 @google.tokengetter
 def get_google_oauth_token():
     return session.get('google_token')
-    
+
+
+#--------------------------------------------------------------------Login Steam----------------------------------------------------------------------
+
+('''steam = oauth.remote_app(
+    'steam',
+    base_url='https://api.steampowered.com',
+    request_token_params=None,
+    request_token_url=None,
+    access_token_method='POST',
+    access_token_url='https://steamcommunity.com/openid/login',
+    authorize_url='https://steamcommunity.com/openid/login',
+)
+
+@api.route('/login_steam/steam')
+def login_steam():
+    return steam.authorize(callback=url_for('api.authorized_steam', _external=True))
+
+@api.route('/login_steam/steam/authorized')
+def authorized_steam():
+    response = steam.authorized_response()
+    if response is None or 'openid.claimed_id' not in response:
+        return 'Access denied: Unable to authorize via Steam.'
+
+    steam_id = response['openid.claimed_id'].split('/')[-1]
+    # Aquí puedes usar el steam_id para identificar y manejar al usuario en tu aplicación
+
+     # Verificar si el usuario ya existe en la base de datos
+    user = User.query.filter_by(steam_id=steam_id).first()
+
+    if not user:
+        # Si no existe, crear un nuevo usuario
+        user = User(steam_id=steam_id)
+        db.session.add(user)
+        db.session.commit()
+
+    return 'Logged in via Steam with SteamID: ' + steam_id
+
+@steam.tokengetter
+def get_steam_oauth_token():
+    return session.get('steam_token')
+ ''')
+
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 
 ('''
 
 
-vote
+Que nos Falta?
 
-guardar post
-
-recuperar contrasena
 
 
 ''')
@@ -367,3 +407,63 @@ def get_all_deals():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+#---------------------------------------------------------Recuperar Contraseña(chequear)-----------------------------------------------------
+    
+@api.route('/reset-password', methods=['POST'])
+def reset_password_request():
+    try:
+        # Obtener el correo electrónico del cuerpo de la solicitud
+        data = request.get_json()
+        email = data.get('email')
+
+        # Verificar si el correo electrónico está asociado a un usuario
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        # Generar un token de restablecimiento de contraseña y enviar un correo electrónico al usuario
+        send_password_reset_email(user)
+
+        return jsonify({"message": "Password reset email sent successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+#-------------------------------------------------------- Rating (chequear)--------------------------------------------------------------------
+    
+@api.route('/deal/Rating/<int:item_id>', methods=['POST'])
+def like_item(item_id):
+    try:
+        # Obtener el elemento por su ID
+        item = Rating.query.get(item_id)
+
+        if not item:
+            return jsonify({"error": "Item not found"}), 404
+
+        # Incrementar el contador de likes
+        item.likes += 1
+        db.session.commit()
+
+        return jsonify({"message": "Item liked successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@api.route('/deal/down_rating/<int:item_id>', methods=['POST'])
+def unlike_item(item_id):
+    try:
+        # Obtener el elemento por su ID
+        item = Rating.query.get(item_id)
+
+        if not item:
+            return jsonify({"error": "Item not found"}), 404
+
+        # Decrementar el contador de likes
+        item.likes -= 1
+        db.session.commit()
+
+        return jsonify({"message": "Item unliked successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
