@@ -33,10 +33,10 @@ export const Games = () => {
       <div className="d-flex justify-content-end">
         <Filters />
       </div>
-      <div className="container text-center">
-        <div className="row row-cols-auto">
-          <div className="col m-auto">
+      <div className="container text-center ">
+        <div className="row row-cols-auto justify-content-center">
             {store.gamesWithDetails.map((game, index) => (
+              <div key={game.id} className="col">
               <GameCard
                 key={game.id}
                 id={game.id}
@@ -51,8 +51,8 @@ export const Games = () => {
                 platforms={game.platforms}
                 gameTags={game.game_tags}
               />
+              </div>
             ))}
-          </div>
         </div>
       </div>
     </div>

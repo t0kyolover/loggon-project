@@ -68,7 +68,7 @@ export const PostDeal = (props) => {
   return (
     <div className="container-fluid">
       <div className="d-flex justify-content-center w-100 mt-3">
-        <div className="d-flex flex-column text-white">
+        <div className="d-flex flex-column  text-white">
           <h3 className="m-auto my-3">Post Deal</h3>
           <PostDealCard
             gameTitle={deal.game_title}

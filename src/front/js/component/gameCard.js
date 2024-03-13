@@ -38,17 +38,19 @@ export const GameCard = (props) => {
   return (
     <div className="container1">
       <div className="card">
-        <div className="face face1">
-          <div className="content ">
+        <div className="face face1 " >
+          <div className="content " >
+            <div> 
             <img
               src={game.background_image} 
               //src="https://picsum.photos/id/1/200"
-              className="card-img-top rounded-2 "
+              className="card-img-top rounded-2 img-fluid" 
               alt="..."
             />
+            </div>
           </div>
         </div>
-        <div className="face face2 d-flex flex-column justify-content-end">
+        <div className="face face2 d-flex flex-column">
           <div className="content m-auto p-2">
             <a
               href={`#detailsModal${game.id}`}
@@ -70,7 +72,7 @@ export const GameCard = (props) => {
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content bg-transparent text-white">
-            <div className="ms-auto" data-bs-theme="dark">
+            <div className="m-auto" data-bs-theme="dark">
               <button
                 type="button"
                 className="btn-close"
@@ -85,7 +87,8 @@ export const GameCard = (props) => {
                   backgroundImage: `url(${game.background_image_additional})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                  minHeight: "500px",
+                  minHeight: "1000px",
+                  minWidth: "1000px",
                 }}
               >
                 {/* Gradiente preto sólido na parte inferior */}

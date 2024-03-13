@@ -54,7 +54,7 @@ export const DealCard = (props) => {
             Details
           </Link>
           <button
-            className="btn text-white rounded-5 ms-3"
+            className="btn text-white rounded- ms-3"
             style={{ background: "#992899" }}
           >
             <a className="text-white" href={deal.offer_link} target="_blank">

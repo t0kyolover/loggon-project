@@ -232,7 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: (email, password) => {
         const store = getStore();
         if (store.user.email === email && store.user.password === password) {
-          setStore({ loggedIn: true });
+          setStore({ loggedIn: false});
           console.log("Logged in successfully!");
         } else {
           alert("Email or password incorrect!");
