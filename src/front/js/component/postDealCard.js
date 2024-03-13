@@ -15,12 +15,12 @@ export const PostDealCard = (props) => {
     >
       {/*---------------------------------------DEAL INPUT FORM---------------------------------*/}
       <form>
-        <div className="row g-0">
-          <div className="col-md-6 m-auto text-dark">
+        <div className="row flex-row">
+          <div className="col-md-6 text-center m-auto">
             {" "}
             {/*---texto del mismo color que el fondo para que sea invisible,
            pero tenemos que cambiarlo correctamente ----*/}
-            <img
+            <img className="rounded-circle img-fluid "
               src={
                 props.image_url ||
                 "https://img.freepik.com/premium-photo/cyberpunk-gaming-controller-gamepad-joystick-illustration_691560-5812.jpg?size=338&ext=jpg&ga=GA1.1.1700460183.1710115200&semt=sph"

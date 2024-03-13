@@ -16,10 +16,11 @@
     padding: 4px 4px;
     z-index: 1;
     overflow: hidden;
-    transition: color 1s, box-shadow 1s;
+    transition: color 0.5s, box-shadow 1s;
 }
+
 .btn-effect:hover {
-    transition-delay: 0s, 1s;
+    transition-delay: 0s, 0.2s;
     color: #fff;
     box-shadow:
         0 0 10px #992899,
@@ -38,11 +39,13 @@
     background: #992899;
     transform: skewX(35deg);
     z-index: -1;
-    transition: 1s;
+    transition: 0.5s;
 }
 .btn-effect:hover:before {
     width: 100%;
 }
+
+
 
 .btn-effect-blue {
     position: relative;
@@ -56,10 +59,10 @@
     padding: 4px 4px;
     z-index: 1;
     overflow: hidden;
-    transition: color 1s, box-shadow 1s;
+    transition: color 0.5s, box-shadow 1s;
 }
 .btn-effect-blue:hover {
-    transition-delay: 0s, 1s;
+    transition-delay: 0s, 0.2s;
     color: #fff;
     box-shadow:
         0 0 10px #14aae6,
@@ -78,7 +81,7 @@
     background: #14aae6;
     transform: skewX(35deg);
     z-index: -1;
-    transition: 1s;
+    transition: 0.5s;
 }
 .btn-effect-blue:hover:before {
     width: 100%;

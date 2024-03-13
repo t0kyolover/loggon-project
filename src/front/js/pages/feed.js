@@ -49,7 +49,7 @@ export const Feed = () => {
   return (
     <div>
       {/*------------------------------------LOGO---------------------------------*/}
-      <div className="container mt-2 py-5 ">
+      <div className="container mt-2 py-5">
         <img src={loggonBn} alt="Descrição da Imagem" className="img-fluid" />
       </div>
       <div className="d-flex justify-content-end pt-4">
@@ -57,8 +57,8 @@ export const Feed = () => {
       </div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
       <div className="row m-auto">
-        <nav className="d-flex justify-content-center ">
-          <div className="nav nav-tabs " id="nav-tab" role="tablist">
+        <nav className="d-flex justify-content-center">
+          <div className="nav nav-tabs" id="nav-tab" role="tablist">
             <button
               className="bg-color border-0 "
               id="nav-ps-tab"
@@ -69,7 +69,7 @@ export const Feed = () => {
               aria-controls="nav-ps"
             >
               <img
-                className="ps-effect rounded-circle"
+                className="ps-effect rounded-circle mx-1"
                 src="https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png"
                 alt="play-station"
               />
@@ -84,7 +84,7 @@ export const Feed = () => {
               aria-controls="nav-xbox"
             >
               <img
-                className="xbox-effect rounded-circle"
+                className="xbox-effect rounded-circle mx-1"
                 src="https://img.icons8.com/ios/50/40C057/xbox.png"
                 alt="xbox"
               />
@@ -99,7 +99,7 @@ export const Feed = () => {
               aria-controls="nav-pc"
             >
               <img
-                className="pc-effect rounded-4 img-fluid"
+                className="pc-effect rounded-4 img-fluid mx-1"
                 src="https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png"
                 alt="windows-10"
               />
@@ -114,7 +114,7 @@ export const Feed = () => {
               aria-controls="nav-nintendo"
             >
               <img
-                className="nintendo-effect rounded-4 img-fluid"
+                className="nintendo-effect rounded-4 img-fluid mx-1"
                 src="https://img.icons8.com/ios-filled/50/FA5252/nintendo-switch-logo.png"
                 alt="nintendo-switch-logo"
               />
@@ -131,7 +131,7 @@ export const Feed = () => {
             aria-labelledby="nav-ps-tab"
             tabIndex="0"
           >
-            <div className="container text-center pb-5">
+            <div className="container text-center">
               <div className="row row-cols-auto">
                 {psDeals.map((deal, index) => (
                   <div className="col m-auto my-4" key={index}>
