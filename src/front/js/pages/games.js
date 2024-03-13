@@ -16,6 +16,7 @@ export const Games = () => {
 
  useEffect(() => {
     actions.loadGamesWithDetails();
+    
   }, [store.games])
 
   if (store.gamesWithDetails.length === 0) {
@@ -41,7 +42,7 @@ export const Games = () => {
                 id={game.id}
                 rawgId={game.rawg_id}
                 name={game.name}
-                description={game.description}
+                description={(game.description)}
                 released={game.released}
                 tba={game.tba}
                 website={game.website}

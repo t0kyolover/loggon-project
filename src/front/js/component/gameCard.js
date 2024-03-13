@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "/workspaces/loggon-dak-final-project-v2/src/front/styles/cardOuterGLowEffect.css";
@@ -22,14 +22,27 @@ export const GameCard = (props) => {
     game_tags: props.gameTags,
   });
 
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    setDescription(game.description);
+  }, [game]);
+
+  useEffect(() => {
+    const fixedDescription = actions.extractEnglishDescription(game.description);
+    setDescription(fixedDescription);
+    console.log(fixedDescription);
+    console.log("estoy aqui", description);
+  }, [game]);
+
   return (
     <div className="container1">
       <div className="card">
         <div className="face face1">
           <div className="content ">
             <img
-              //src={game.background_image} Tiene que ser así, pero se descudran las cards
-              src="https://picsum.photos/id/1/200"
+              src={game.background_image} 
+              //src="https://picsum.photos/id/1/200"
               className="card-img-top rounded-2 "
               alt="..."
             />
@@ -38,10 +51,10 @@ export const GameCard = (props) => {
         <div className="face face2 d-flex flex-column justify-content-end">
           <div className="content m-auto p-2">
             <a
-              href="#detailsModal"
+              href={`#detailsModal${game.id}`}
               className="content m-auto pt-auto text-decoration-none"
               data-bs-toggle="modal"
-              data-bs-target="#detailsModal"
+              data-bs-target={`#detailsModal${game.id}`}
             >
               <h3>{game.name}</h3>
             </a>
@@ -51,7 +64,7 @@ export const GameCard = (props) => {
       {/*---------------------------------------DETAILS MODAL---------------------------------*/}
       <div
         className="modal fade"
-        id="detailsModal"
+        id={`detailsModal${game.id}`}
         tabIndex="-1"
         aria-hidden="true"
       >
@@ -104,18 +117,18 @@ export const GameCard = (props) => {
                     </p>
                   ))}
                   <div className="d-flex">
-                    {/* SE DESCUADRA TODO CON LOS TAGS
+                    {
                     game.game_tags.map((tag, index) => (
                     <p key={index} className="text-white m-auto" style={{fontSize: "10px"}}>
                       {tag}
                     </p>
-                    ))*/}
+                    ))}
                   </div>
-                  
-                  <a href={game.website} target="_blank">Website</a>
-                  <div>
-                    {game.description}
-                  </div>
+
+                  <a href={game.website} target="_blank">
+                    Website
+                  </a>
+                  <div>{description}</div>
                 </div>
                 <button
                   type="button"
