@@ -193,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "https://store.steampowered.com/app/397540/Borderlands_3/",
           scheduled_date: "",
           sheduled_time: "",
-          game_tags: ["multiplayer", "action", "shooter"],
+          game_tags: ["multiplayer", "action", "shooter"]
         },
         {
           id: 4,
@@ -220,7 +220,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       games: [
         { game_tags: ["multiplayer", "action", "adventure", "open-world"] },
       ],
-      users: [],
+      users: [{
+        id: 1,
+        username: "pere",
+        steam_username: "pereayats",
+        twitch_username: "pereayats",
+        posts: []
+      }],
       searchResults: [],
     },
     actions: {
@@ -340,14 +346,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       //--------------------------GET ITEMS----------------------//
-      openItem: (id, setDetails) => {
+      openItem: (id, setDetails, itemType) => {
         const store = getStore();
-        const deal = store.deals.filter((deal) => deal.id == id);
-        if (!deal) {
+        const item = store[itemType + "s"].filter((deal) => deal.id == id);
+        if (!item) {
           console.log("Deal not found!");
           return;
         }
-        setDetails(deal);
+        console.log(item);
+        setDetails(item);
         console.log("Deal details found successfully!");
       },
     },

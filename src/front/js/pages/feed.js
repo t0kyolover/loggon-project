@@ -26,17 +26,21 @@ export const Feed = () => {
     let activeElement = null;
 
     const handleClick = (event) => {
-      if (activeElement) activeElement.classList.remove('active');
-      if (event.target.matches('.ps-effect, .xbox-effect, .pc-effect, .nintendo-effect')) {
+      if (activeElement) activeElement.classList.remove("active");
+      if (
+        event.target.matches(
+          ".ps-effect, .xbox-effect, .pc-effect, .nintendo-effect"
+        )
+      ) {
         activeElement = event.target;
-        activeElement.classList.add('active');
+        activeElement.classList.add("active");
       }
     };
 
-    document.addEventListener('click', handleClick);
+    document.addEventListener("click", handleClick);
 
     return () => {
-      document.removeEventListener('click', handleClick);
+      document.removeEventListener("click", handleClick);
     };
   }, []);
 
@@ -61,9 +65,12 @@ export const Feed = () => {
               type="button"
               role="tab"
               aria-controls="nav-ps"
-              
             >
-            <img className="ps-effect rounded-circle" src="https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png" alt="play-station"/>
+              <img
+                className="ps-effect rounded-circle"
+                src="https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png"
+                alt="play-station"
+              />
             </button>
             <button
               className="bg-dark border-0"
@@ -73,9 +80,12 @@ export const Feed = () => {
               type="button"
               role="tab"
               aria-controls="nav-xbox"
-              
             >
-              <img className="xbox-effect rounded-circle" src="https://img.icons8.com/ios/50/40C057/xbox.png" alt="xbox"/>
+              <img
+                className="xbox-effect rounded-circle"
+                src="https://img.icons8.com/ios/50/40C057/xbox.png"
+                alt="xbox"
+              />
             </button>
             <button
               className="bg-dark border-0"
@@ -85,7 +95,6 @@ export const Feed = () => {
               type="button"
               role="tab"
               aria-controls="nav-pc"
-              
             >
               <img
                 className="pc-effect rounded-4 img-fluid"
@@ -101,9 +110,12 @@ export const Feed = () => {
               type="button"
               role="tab"
               aria-controls="nav-nintendo"
-              
             >
-              <img className="nintendo-effect rounded-4 img-fluid" src="https://img.icons8.com/ios-filled/50/FA5252/nintendo-switch-logo.png" alt="nintendo-switch-logo"/>
+              <img
+                className="nintendo-effect rounded-4 img-fluid"
+                src="https://img.icons8.com/ios-filled/50/FA5252/nintendo-switch-logo.png"
+                alt="nintendo-switch-logo"
+              />
             </button>
           </div>
         </nav>
@@ -151,7 +163,7 @@ export const Feed = () => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              {xboxDeals.map((deal, index) => (
+                {xboxDeals.map((deal, index) => (
                   <div className="col m-auto my-4">
                     <DealCard
                       key={index}
@@ -184,7 +196,7 @@ export const Feed = () => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              {pcDeals.map((deal, index) => (
+                {pcDeals.map((deal, index) => (
                   <div className="col m-auto my-4">
                     <DealCard
                       key={index}
@@ -217,7 +229,7 @@ export const Feed = () => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-              {nintendoDeals.map((deal, index) => (
+                {nintendoDeals.map((deal, index) => (
                   <div className="col m-auto my-4">
                     <DealCard
                       key={index}

@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
@@ -10,11 +9,21 @@ export const SingleDeal = (props) => {
   const { id } = useParams();
 
   const [deal, setDeal] = useState({});
+  const [publisher, setPublisher] = useState({});
 
   useEffect(() => {
-    actions.openItem(id, ([fetchedDeal]) => setDeal(fetchedDeal));
+    actions.openItem(id, ([fetchedDeal]) => setDeal(fetchedDeal), "deal");
   }, []);
-  console.log(deal);
+
+  useEffect(() => {
+    actions.openItem(
+      deal.user_id,
+      ([fetchedPublisher]) => setPublisher(fetchedPublisher),
+      "user"
+    );
+  }, [deal]);
+
+  console.log(publisher);
 
   return (
     <div className="container-fluid">
@@ -42,8 +51,10 @@ export const SingleDeal = (props) => {
                   </h5>
                   <h5 className="pb-3">{deal.offer_price} €</h5>
                   <p className="pb-3">{deal.expiration_date}</p>
-                  <Link to={`/profile/:${deal.user_id}`}>
-                    <h5 className="pb-3">@username{deal.user_id}</h5>
+                  <Link to={`/profile/${deal.user_id}`}>
+                    {publisher && (
+                      <h5 className="pb-3">@{publisher.username}</h5>
+                    )}
                   </Link>
                 </div>
                 {/*------------------------------------OFFER LINK---------------------------------*/}
@@ -58,14 +69,15 @@ export const SingleDeal = (props) => {
                   Deal
                 </a>
                 <h5 className="pb-3">{deal.promo_code}</h5>
-                {deal.game_tags && deal.game_tags.map((tag, index) => (
-                  <li
-                    className="list-group-item bg-transparent text-white rounded-5 border-white border m-1"
-                    key={index}
-                  >
-                    {tag}
-                  </li>
-                ))}
+                {deal.game_tags &&
+                  deal.game_tags.map((tag, index) => (
+                    <li
+                      className="list-group-item bg-transparent text-white rounded-5 border-white border m-1"
+                      key={index}
+                    >
+                      {tag}
+                    </li>
+                  ))}
               </div>
               {/*------------------------------------RATING---------------------------------*/}
               <div className="p-5 col-4 col-md-2 d-flex align-items-end">
@@ -93,8 +105,4 @@ export const SingleDeal = (props) => {
       </div>
     </div>
   );
-};
-
-SingleDeal.propTypes = {
-  match: PropTypes.object,
 };
