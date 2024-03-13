@@ -220,6 +220,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       games: [
         { game_tags: ["multiplayer", "action", "adventure", "open-world"] },
       ],
+      users: [],
       searchResults: [],
     },
     actions: {
@@ -341,12 +342,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       //--------------------------GET ITEMS----------------------//
       openItem: (id, setDetails) => {
         const store = getStore();
-        const deal = store.deals.filter((deal) => deal.id === id);
+        const deal = store.deals.filter((deal) => deal.id == id);
         if (!deal) {
           console.log("Deal not found!");
           return;
         }
-        setDetails({deal}); //This is not wortking
+        setDetails(deal);
         console.log("Deal details found successfully!");
       },
     },

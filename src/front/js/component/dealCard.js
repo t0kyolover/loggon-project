@@ -50,7 +50,7 @@ export const DealCard = (props) => {
             key={index}
           > {tag}</li>
           ))}
-          <Link className="btn btn-link" to={`/post/${props.id}`}>
+          <Link className="btn btn-link" to={`/post/${deal.id}`}>
             Details
           </Link>
           <button

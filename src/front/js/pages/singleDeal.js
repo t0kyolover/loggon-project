@@ -7,30 +7,14 @@ import { Context } from "../store/appContext";
 
 export const SingleDeal = (props) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
+  const { id } = useParams();
 
-  const [deal, setDeal] = useState({
-    id: "",
-    game_title: "",
-    image_url: "",
-    item_type: "",
-    platform: "",
-    format: "",
-    original_price: "",
-    offer_price: "",
-    expiration_date: "",
-    promo_code: "",
-    offer_link: "",
-    game_tags: "",
-    rating: "",
-    publisher: "",
-  });
+  const [deal, setDeal] = useState({});
 
   useEffect(() => {
-    actions.openItem(params.id, setDeal);
+    actions.openItem(id, ([fetchedDeal]) => setDeal(fetchedDeal));
   }, []);
-
-  console.log(params.id)
+  console.log(deal);
 
   return (
     <div className="container-fluid">
@@ -42,7 +26,7 @@ export const SingleDeal = (props) => {
               <div className="col-12 col-md-6 d-flex justify-content-center">
                 <img
                   className="img-fluid "
-                  src="https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/mYn2ETBKFct26V9mJnZi4aSS.png?w=440&thumb=false"
+                  src={deal.image_url}
                   alt="Game Image"
                 />
               </div>
@@ -50,14 +34,16 @@ export const SingleDeal = (props) => {
               <div className="d-flex flex-column text-white justify-content-between p-2 col-8 col-md-4">
                 <div>
                   <h3 className="pb-3">{deal.game_title}</h3>
-                  <h5 className="pb-3">{deal.type}</h5>
+                  <h5 className="pb-3">{deal.platform}</h5>
+                  <h5 className="pb-3">{deal.item_type}</h5>
                   <h5 className="pb-3">{deal.format}</h5>
                   <h5 className="pb-3 text-decoration-line-through">
                     {deal.original_price} €
                   </h5>
                   <h5 className="pb-3">{deal.offer_price} €</h5>
-                  <Link to="/profile/:username">
-                    <h5 className="pb-3">@{deal.publisher}</h5>
+                  <p className="pb-3">{deal.expiration_date}</p>
+                  <Link to={`/profile/:${deal.user_id}`}>
+                    <h5 className="pb-3">@username{deal.user_id}</h5>
                   </Link>
                 </div>
                 {/*------------------------------------OFFER LINK---------------------------------*/}
@@ -71,6 +57,15 @@ export const SingleDeal = (props) => {
                 >
                   Deal
                 </a>
+                <h5 className="pb-3">{deal.promo_code}</h5>
+                {deal.game_tags && deal.game_tags.map((tag, index) => (
+                  <li
+                    className="list-group-item bg-transparent text-white rounded-5 border-white border m-1"
+                    key={index}
+                  >
+                    {tag}
+                  </li>
+                ))}
               </div>
               {/*------------------------------------RATING---------------------------------*/}
               <div className="p-5 col-4 col-md-2 d-flex align-items-end">
@@ -101,5 +96,5 @@ export const SingleDeal = (props) => {
 };
 
 SingleDeal.propTypes = {
-	match: PropTypes.object
+  match: PropTypes.object,
 };
