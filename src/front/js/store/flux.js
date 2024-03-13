@@ -108,8 +108,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         saved: [],
         alerts: [
           {
-            id: 5,
-            user_id: 2,
+            id: 1,
+            user_id: 1,
             date_of_creation: "",
             game_title: "GTA V",
             image_url: "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
@@ -229,21 +229,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           website: "https://www.rockstargames.com/V/",
           background_image:
             "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
-            background_image_additional:
+          background_image_additional:
             "https://media.rawg.io/media/screenshots/5f5/5f5a38a222252d996b18962806eed707.jpg",
           platforms: ["PC", "PS4", "Xbox"],
           game_tags: ["multiplayer", "action", "adventure", "open-world"],
         },
       ],
-      users: [
-        {
-          id: 1,
-          username: "pere",
-          steam_username: "pereayats",
-          twitch_username: "pereayats",
-          posts: [],
-        },
-      ],
+      users: [],
       searchResults: [],
     },
     actions: {
@@ -311,7 +303,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore((prevStore) => ({
           user: { ...prevStore.user, posts: [...prevStore.user.posts, deal] },
         }));
-        console.log(deal)
+        console.log(deal);
         console.log("Deal posted successfully!");
         console.log(store.user);
       },

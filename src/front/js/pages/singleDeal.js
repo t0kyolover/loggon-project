@@ -16,6 +16,10 @@ export const SingleDeal = (props) => {
   }, []);
 
   useEffect(() => {
+    actions.openItem(id, ([fetchedDeal]) => setDeal(fetchedDeal), "deal");
+  }, [id]);
+
+  useEffect(() => {
     actions.openItem(
       deal.user_id,
       ([fetchedPublisher]) => setPublisher(fetchedPublisher),
@@ -26,6 +30,7 @@ export const SingleDeal = (props) => {
   console.log(publisher);
 
   return (
+    
     <div className="container-fluid">
       <div className="d-flex justify-content-center mt-3">
         <div className="row">

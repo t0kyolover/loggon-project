@@ -18,6 +18,8 @@ export const UserProfile = (props) => {
       id: 1,
       username: "pere",
       steam_username: "pereayats",
+      image_url:
+        "https://pbs.twimg.com/profile_images/1615039426530316288/jhcrsFcg_400x400.jpg",
       twitch_username: "pereayats",
       posts: [
         {
@@ -56,7 +58,7 @@ export const UserProfile = (props) => {
             <img
               style={{ maxWidth: "500px", maxHeight: "500px" }}
               className="rounded-circle img-fluid m-5 mb-0"
-              src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429857093_437082848988064_3333411511087179117_n.png?_nc_cat=108&ccb=1-7&_nc_sid=510075&_nc_ohc=oB8UaK6zJUcAX8DG7Pj&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRI6WYkb2BOpkY2dEyd2AVYZqf9FUYaKcFlToeIgOBLiQ&oe=66087116"
+              src={user.image_url}
             />
             <ul className="list-group mt-4">
               {/*---------------------------------------Username---------------------------------*/}
@@ -97,9 +99,9 @@ export const UserProfile = (props) => {
           {user.posts &&
             user.posts.map((deal, index) => {
               return (
-                <div className="col m-auto my-4">
+                <div className="col m-auto my-4" key={index}>
                   <DealCard
-                    key={deal.id}
+                    id={deal.id}
                     gameTitle={deal.game_title}
                     imageUrl={deal.image_url}
                     itemType={deal.item_type}

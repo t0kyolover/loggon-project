@@ -108,7 +108,7 @@ export const EditableDealCard = (props) => {
           {deal.expiration_date && (
             <p className="card-text">{deal.expiration_date}</p>
           )}
-          <Link className="btn btn-link" to="/post/:id">
+          <Link className="btn btn-link" to={`/post/${deal.id}`}>
             Details
           </Link>
           <button
