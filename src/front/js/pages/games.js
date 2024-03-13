@@ -10,14 +10,12 @@ export const Games = () => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
-    // actions.getGames();
-    //https://api.rawg.io/api/games?key=d84269170ddc4af0b9a74f60a2fc7b91
-    //https://api.rawg.io/api/games/3498?key=d84269170ddc4af0b9a74f60a2fc7b91
+    actions.loadGames();
   }, []);
 
-  useEffect(() => {
-    // actions.getGames();
-  }, [store.games]);
+ useEffect(() => {
+    actions.loadGamesWithDetails();
+  }, [store.games])
 
   return (
     <div>
@@ -30,7 +28,7 @@ export const Games = () => {
       <div className="container text-center">
         <div className="row row-cols-auto">
           <div className="col m-auto">
-            {store.games.map((game, index) => (
+            {store.gamesWithDetails.map((game, index) => (
               <GameCard
                 key={game.id}
                 id={game.id}

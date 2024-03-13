@@ -103,13 +103,19 @@ export const GameCard = (props) => {
                       {platform}
                     </p>
                   ))}
-                  {game.game_tags.map((tag, index) => (
-                    <p key={index} className="text-white m-auto">
+                  <div className="d-flex">
+                    {/* SE DESCUADRA TODO CON LOS TAGS
+                    game.game_tags.map((tag, index) => (
+                    <p key={index} className="text-white m-auto" style={{fontSize: "10px"}}>
                       {tag}
                     </p>
-                  ))}
+                    ))*/}
+                  </div>
+                  
                   <a href={game.website} target="_blank">Website</a>
-                  <p className="text-white m-auto">{game.description}</p>
+                  <div>
+                    {game.description}
+                  </div>
                 </div>
                 <button
                   type="button"

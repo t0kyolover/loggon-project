@@ -217,24 +217,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           game_tags: ["singleplayer", "adventure", "open-world"],
         },
       ],
-      games: [
-        {
-          id: 1,
-          rawg_id: 1,
-          name: "GTA V",
-          description:
-            "Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the first main entry in the Grand Theft Auto series since 2008's Grand Theft Auto IV.",
-          released: "2013-09-17",
-          tba: false,
-          website: "https://www.rockstargames.com/V/",
-          background_image:
-            "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
-          background_image_additional:
-            "https://media.rawg.io/media/screenshots/5f5/5f5a38a222252d996b18962806eed707.jpg",
-          platforms: ["PC", "PS4", "Xbox"],
-          game_tags: ["multiplayer", "action", "adventure", "open-world"],
-        },
-      ],
+      games: [],
+      gamesWithDetails: [],
       users: [],
       searchResults: [],
     },
@@ -368,6 +352,81 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(item);
         setDetails(item);
         console.log("Deal details found successfully!");
+      },
+      //-GAMES-
+      loadGames: () => {
+        fetch(
+          "https://api.rawg.io/api/games?key=d84269170ddc4af0b9a74f60a2fc7b91"
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw Error("Failed to get games");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.results);
+            setStore({ games: data.results });
+            console.log("Games loaded successfully!");
+          });
+      },
+
+      loadGamesWithDetails: () => {
+        const store = getStore();
+        const actions = getActions();
+        Promise.all(
+          store.games.map((game, index) =>
+            fetch(
+              `https://api.rawg.io/api/games/${game.id}?key=d84269170ddc4af0b9a74f60a2fc7b91`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw Error(`Failed to get details for game ${game.id}`);
+                }
+                return response.json();
+              })
+              .then((gameDetails) => {
+                return {
+                  id: index + 1,
+                  rawg_id: gameDetails.id,
+                  name: gameDetails.name,
+                  description: gameDetails.description,
+                  released: gameDetails.released,
+                  tba: gameDetails.tba,
+                  website: gameDetails.website,
+                  background_image: gameDetails.background_image,
+                  background_image_additional:
+                    gameDetails.background_image_additional,
+                  platforms: gameDetails.platforms.map(
+                    (platform) => platform.platform.name
+                  ),
+                  game_tags: gameDetails.tags.map((tag) => tag.name),
+                };
+              })
+          )
+        )
+          .then((gamesWithDetails) => {
+            console.log(gamesWithDetails);
+            setStore({ gamesWithDetails });
+            console.log("Game details loaded successfully!");
+          })
+          .catch((error) => console.error("Error:", error));
+      },
+
+      //-----------UTILITIES-----------//
+      extractEnglishDescription: (description) => {
+        const cleanedString = description.replace(/<[^>]+>/g, "");
+        const englishRegex = /English(.*?)Español/s;
+        const match = englishRegex.exec(cleanedString);
+        return match ? match[1].trim() : "";
+      },
+
+      validateEmail: (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
       },
     },
   };
