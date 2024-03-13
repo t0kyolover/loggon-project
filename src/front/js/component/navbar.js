@@ -96,9 +96,9 @@ export const Navbar = () => {
 
   function performSearch(e) {
     e.preventDefault();
-    actions.searchInNavbar(searchTerm, navigate);
+    actions.searchInNavbar(searchTerm);
     setSearchTerm("");
-    navigate("/search_results");
+    navigate(`/search_results/${searchTerm}`);
   }
 
   /*const handleInputChange = (e) => {

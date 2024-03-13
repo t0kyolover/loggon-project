@@ -326,7 +326,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const allItems = [].concat(store.deals, store.games);
         const results = allItems.filter((item) =>
-          item.game_tags.filter((tag) =>
+          item.game_tags.some((tag) =>
             tag.toLowerCase().includes(searchTerm.toLowerCase())
           )
         );

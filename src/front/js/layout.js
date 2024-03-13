@@ -42,7 +42,7 @@ const Layout = () => {
                         <Route element={<MyProfile />} path="/myprofile/:username" />
                         <Route element={<SingleDeal />} path="/post/:id" />
                         <Route element={<Games />} path="/games" />
-                        <Route element={<SearchResults />} path="/search_results" />
+                        <Route element={<SearchResults />} path="/search_results/:keyword" />
                         <Route element={<PostDeal />} path="/postdeal/:username" />
                         <Route element={<UserProfile />} path="/profile/:username" />
                         <Route element={<PasswordRecovery />} path="/password_recovery" />
