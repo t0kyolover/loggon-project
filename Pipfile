@@ -21,6 +21,7 @@ typing-extensions = "*"
 flask-jwt-extended = "*"
 flask-oauthlib = "*"
 werkzeug = "==2.3.0"
+flask-mail = "*"
 
 [requires]
 python_version = "3.10"
