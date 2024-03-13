@@ -56,11 +56,11 @@ export const Feed = () => {
         <Filters />
       </div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
-      <div className="row mt-3">
+      <div className="row m-auto">
         <nav className="d-flex justify-content-center ">
           <div className="nav nav-tabs " id="nav-tab" role="tablist">
             <button
-              className="bg-dark border-0 "
+              className="bg-color border-0 "
               id="nav-ps-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-ps"
@@ -75,7 +75,7 @@ export const Feed = () => {
               />
             </button>
             <button
-              className="bg-dark border-0"
+              className="bg-color border-0" 
               id="nav-xbox-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-xbox"
@@ -90,7 +90,7 @@ export const Feed = () => {
               />
             </button>
             <button
-              className="bg-dark border-0"
+              className="bg-color border-0"
               id="nav-pc-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-pc"
@@ -105,7 +105,7 @@ export const Feed = () => {
               />
             </button>
             <button
-              className="bg-dark border-0"
+              className="bg-color border-0"
               id="nav-nintendo-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-nintendo"

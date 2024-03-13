@@ -5,7 +5,7 @@ export const Footer = () => (
     className="footer pt-3 bg-gradient mt-auto "
     style={{ background: "#020D19" }}
   >
-    <p className= "text-center" style={{ color: "#992899" }}>
+    <p className= "text-center pb-3 text-white">
       Made by DKA <i className="fa-solid fa-skull-crossbones"></i>
     </p>
   </footer>

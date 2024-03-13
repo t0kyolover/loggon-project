@@ -82,9 +82,9 @@ export const MyProfile = (props) => {
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-column text-white">
-          <h3 className="m-auto my-4 ps-4">My Profile</h3>{" "}
+          <h3 className="m-auto ps-4">My Profile</h3>{" "}
           {/*--------falta de centralización----------*/}
-          <div className="d-flex flex-row flex-wrap">
+          <div className="d-flex flex-row flex-wrap ">
             <form>
               {clicked == "image" ? (
                 <div>
@@ -122,7 +122,7 @@ export const MyProfile = (props) => {
                   </button>
                   <img
                     style={{ maxWidth: "500px", maxHeight: "500px" }}
-                    className="rounded-circle img-fluid m-5"
+                    className="rounded-circle img-fluid p-5 image-container"
                     src={user.image_url}
                   />
                 </div>
@@ -407,7 +407,7 @@ export const MyProfile = (props) => {
         </div>
       </div>
       {/*---------------------------------------TABS---------------------------------*/}
-      <div className="row mt-3">
+      <div className="row mt-3 m-auto">
         <nav className="d-flex justify-content-center">
           <div className="nav nav-tabs" id="nav-tab" role="tablist">
             <button
@@ -455,14 +455,14 @@ export const MyProfile = (props) => {
         <div className="tab-content text-white" id="nav-tabContent pb-4">
           {/*---------------------------------------My deals---------------------------------*/}
           <div
-            className="tab-pane fade show active"
+            className="tab-pane fade show active "
             id="nav-my-posts"
             role="tabpanel"
             aria-labelledby="nav-my-posts-tab"
             tabIndex="0"
           >
-            <div className="container text-center">
-              <div className="row row-cols-auto">
+            <div className="container text-center ">
+              <div className="row row-cols-auto justify-content-center">
                 {user.posts.length === 0 ? (
                   <p className="bg-transparent p-2">No posts</p>
                 ) : (
