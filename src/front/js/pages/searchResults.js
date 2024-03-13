@@ -11,11 +11,13 @@ export const SearchResults = () => {
   const { store, actions } = useContext(Context);
   const { keyword } = useParams();
 
-  //No se puede realizar la busqueda otra vez, useEffect en navbar?
   useEffect(() => {
-    console.log(keyword);
     actions.searchInNavbar(keyword);
   }, []);
+
+  useEffect(() => {
+    actions.searchInNavbar(keyword);
+  }, [keyword]);
 
   const deals = store.searchResults.filter((item) => item.user_id);
   const games = store.searchResults.filter((item) => item.rawg_id);
@@ -28,10 +30,9 @@ export const SearchResults = () => {
           <h5 className="text-white">Deals</h5>
           {deals.length > 0 &&
             deals.map((deal, index) => (
-              <div>
-                <div className="col">
+              <div key={index}>
+                <div className="col" >
                   <DealCard
-                    key={index}
                     id={deal.id}
                     gameTitle={deal.game_title}
                     imageUrl={deal.image_url}
@@ -55,10 +56,9 @@ export const SearchResults = () => {
           <h5 className="text-white">Games</h5>
           {games.length > 0 &&
             games.map((game, index) => (
-              <div>
-                <div className="col">
+              <div key={index}>
+                <div className="col" >
                   <GameCard
-                    key={game.id}
                     id={game.id}
                     rawgId={game.rawg_id}
                     name={game.name}

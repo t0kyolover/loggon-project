@@ -40,7 +40,13 @@ export const MyProfile = (props) => {
       ...prevState,
       interests: store.user.interests,
     }));
-  }, [store.user.interests]);
+    setUser((prevState) => ({
+      ...prevState,
+      posts: store.user.posts,
+    }));
+  }, [store.user]);
+
+ 
 
   function updateItem(e, newItem, itemType) {
     e.preventDefault();
@@ -183,7 +189,7 @@ export const MyProfile = (props) => {
                     <p className="fw-bold mb-0">*********</p>
                   </div>
                 </li>
-                <Link to="/password_recovery">
+                <Link to={`/password_recovery/${user.username}`}>
                   <button
                     className="btn text-white rounded-5 ms-3"
                     style={{ background: "#992899" }}
@@ -498,9 +504,9 @@ export const MyProfile = (props) => {
                   <p className="bg-transparent p-2">No saved deals</p>
                 ) : (
                   user.saved.map((deal, index) => (
-                    <div className="col mx-2 my-4">
+                    <div className="col mx-2 my-4" key={index}>
                       <DealCard
-                        key={index}
+                        id={deal.id}
                         gameTitle={deal.game_title}
                         imageUrl={deal.image_url}
                         itemType={deal.item_type}
@@ -534,9 +540,9 @@ export const MyProfile = (props) => {
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (
                   user.alerts.map((alert, index) => (
-                    <div className="col mx-2 my-4">
+                    <div className="col mx-2 my-4"key={index}>
                       <DealCard
-                        key={index}
+                        id={alert.id}
                         gameTitle={alert.game_title}
                         imageUrl={alert.image_url}
                         itemType={alert.item_type}

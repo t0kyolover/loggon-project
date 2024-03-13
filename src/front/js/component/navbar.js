@@ -8,6 +8,7 @@ import "/workspaces/loggon-dak-final-project-v2/src/front/styles/button.css"
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const closeSignUpButton = useRef(null);
+  const closeLoginButton = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -45,7 +46,6 @@ export const Navbar = () => {
     }
   }, [location.pathname]);
 
-  //No modal toggle upon success
   function handleSignup(e) {
     e.preventDefault();
     if (signup.password !== signup.password2) {
@@ -59,7 +59,6 @@ export const Navbar = () => {
       return;
     } else {
       closeSignUpButton.current.click();
-      closeSignUpButton.current.click();
       actions.signup(
         signup.email,
         signup.password,
@@ -71,10 +70,10 @@ export const Navbar = () => {
     }
   }
 
-  //No modal suspend after success
   function handleLogin(e) {
     e.preventDefault();
     actions.login(login.email, login.password);
+    closeLoginButton.current.click();
     navigate("/");
   }
 
@@ -146,7 +145,7 @@ export const Navbar = () => {
                   {store.loggedIn && (
                     <Link
                       className="text-white text-decoration-none mb-2"
-                      to={"/myprofile/:username"}
+                      to={`/myprofile/${store.user.username}`}
                     >
                       <div data-bs-dismiss="offcanvas">My profile</div>
                     </Link>
@@ -154,7 +153,7 @@ export const Navbar = () => {
 
                   <Link
                     className="text-white text-decoration-none mb-2"
-                    to={"/postdeal/:username"}
+                    to={`/postdeal/user/${store.user.username}`}
                   >
                     <div data-bs-dismiss="offcanvas">Post deal</div>
                   </Link>
@@ -222,7 +221,7 @@ export const Navbar = () => {
                         className="btn-close "
                         data-bs-dismiss="modal"
                         aria-label="Close"
-                        ref={closeSignUpButton}
+                        ref={closeLoginButton}
                       ></button>
                     </div>
                   </div>
@@ -546,6 +545,7 @@ export const Navbar = () => {
                     className="btn-close "
                     data-bs-dismiss="modal"
                     aria-label="Close"
+                    ref={closeSignUpButton}
                   ></button>
                 </div>
               </div>

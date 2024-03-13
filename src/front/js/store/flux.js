@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      loggedIn: false,
+      loggedIn: true,
       user: {
         id: 1,
         email: "pereayats@email.com",
@@ -307,10 +307,13 @@ const getState = ({ getStore, getActions, setStore }) => {
       //--------------------------POSTS ACTIONS----------------------//
 
       postDeal: (deal) => {
+        const store = getStore();
         setStore((prevStore) => ({
           user: { ...prevStore.user, posts: [...prevStore.user.posts, deal] },
         }));
+        console.log(deal)
         console.log("Deal posted successfully!");
+        console.log(store.user);
       },
 
       modifyPost: (

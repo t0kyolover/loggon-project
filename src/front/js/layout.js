@@ -43,9 +43,9 @@ const Layout = () => {
                         <Route element={<SingleDeal />} path="/post/:id" />
                         <Route element={<Games />} path="/games" />
                         <Route element={<SearchResults />} path="/search_results/:keyword" />
-                        <Route element={<PostDeal />} path="/postdeal/:username" />
+                        <Route element={<PostDeal />} path="/postdeal/user/:username" />
                         <Route element={<UserProfile />} path="/profile/:username" />
-                        <Route element={<PasswordRecovery />} path="/password_recovery" />
+                        <Route element={<PasswordRecovery />} path="/password_recovery/:username" />
                         <Route element={<PrivacyPolicy />} path="/privacy_policy" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

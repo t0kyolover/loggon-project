@@ -132,9 +132,9 @@ export const Feed = () => {
             <div className="container text-center pb-5">
               <div className="row row-cols-auto">
                 {psDeals.map((deal, index) => (
-                  <div className="col m-auto my-4">
+                  <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      key={deal.id}
+                      id={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}
                       itemType={deal.item_type}
@@ -164,9 +164,8 @@ export const Feed = () => {
             <div className="container text-center">
               <div className="row row-cols-auto">
                 {xboxDeals.map((deal, index) => (
-                  <div className="col m-auto my-4">
+                  <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      key={index}
                       id={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}
@@ -197,9 +196,8 @@ export const Feed = () => {
             <div className="container text-center">
               <div className="row row-cols-auto">
                 {pcDeals.map((deal, index) => (
-                  <div className="col m-auto my-4">
+                  <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      key={index}
                       id={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}
@@ -230,9 +228,8 @@ export const Feed = () => {
             <div className="container text-center">
               <div className="row row-cols-auto">
                 {nintendoDeals.map((deal, index) => (
-                  <div className="col m-auto my-4">
+                  <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      key={index}
                       id={deal.id}
                       gameTitle={deal.game_title}
                       imageUrl={deal.image_url}

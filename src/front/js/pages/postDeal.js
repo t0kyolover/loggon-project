@@ -8,10 +8,11 @@ import { Context } from "../store/appContext";
 
 export const PostDeal = (props) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
+  const {username} = useParams();
   const navigate = useNavigate();
 
   const [deal, setDeal] = useState({
+    user_id: store.user.id,
     image_url: "",
     game_title: "",
     platform: "PC",
@@ -42,7 +43,6 @@ export const PostDeal = (props) => {
   }
 
   function handlePostDeal(e, deal) {
-    console.log(deal);
     e.preventDefault();
     if (
       deal.game_title == "" ||
@@ -57,7 +57,7 @@ export const PostDeal = (props) => {
       return;
     } else {
       actions.postDeal(deal);
-      navigate("/myprofile/:username");
+      navigate(`/myprofile/${username}`);
     }
   }
 
