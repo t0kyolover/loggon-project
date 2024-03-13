@@ -432,7 +432,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       setDescription: () => {
         const store = getStore();
-        console.log("Trying to set description")
+        console.log("Trying to set description");
         store.games.map((game) => {
           setStore((prevState) => ({
             games: prevState.games.map((g) => {
@@ -444,19 +444,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                   ),
                 };
               }
-              console.log(g)
+              console.log(g);
               return g;
             }),
-          }))
+          }));
         });
       },
 
       //-----------UTILITIES-----------//
       extractEnglishDescription: (description) => {
-        const cleanedString = description.replace(/<[^>]+>/g, "");
-        const englishRegex = /English(.*?)Español/s;
-        const match = englishRegex.exec(cleanedString);
-        return match ? match[1].trim() : "";
+        const cleanedString = description.replace(/<[^>]*>/g, "");
+        const array = cleanedString.split("Español");
+        console.log(array);
+        return array[0];
       },
 
       validateEmail: (email) => {
