@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
+import { LoadingSpinner } from "../component/loadingSpinner";
 import { DealCard } from "../component/dealCard";
 
 import { Context } from "../store/appContext";
@@ -14,40 +15,12 @@ export const UserProfile = (props) => {
 
   useEffect(() => {
     // fetch with id user data from the API
-    setUser({
-      id: 1,
-      username: "pere",
-      steam_username: "pereayats",
-      image_url:
-        "https://pbs.twimg.com/profile_images/1615039426530316288/jhcrsFcg_400x400.jpg",
-      twitch_username: "pereayats",
-      posts: [
-        {
-          id: 3,
-          user_id: 1,
-          date_of_creation: "",
-          game_title: "Overwatch 2",
-          image_url:
-            "https://xxboxnews.blob.core.windows.net/prod/sites/2/2022/10/OW2-be9287b234afbe7898ac.jpg",
-          item_type: "In-Game Purchase",
-          platform: "PS4",
-          format: "Digital",
-          rating: 10,
-          original_price: 15,
-          offer_price: 9.99,
-          expiration_date: "2024-03-26",
-          promo_code: "DFJISOP",
-          offer_link:
-            "https://store.steampowered.com/app/397540/Borderlands_3/",
-          scheduled_date: "",
-          sheduled_time: "",
-          game_tags: ["multiplayer", "action", "shooter"],
-        },
-      ],
-    });
+    setUser(store.users[0]);
   }, []);
 
-  console.log(user);
+  if (!user) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="container-fluid m-auto">
