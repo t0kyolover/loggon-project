@@ -31,7 +31,9 @@ export const MyProfile = (props) => {
     console.log(store.user)
     setUser(store.user);
     setNewUsername(store.user.username);
-    setNewUserImage(store.user.image_url);
+    if (store.user.image_url !== null) {
+      setNewUserImage(store.user.image_url);
+    }
     setNewSteamUsername(store.user.steam_username);
     setTwitchUsername(store.user.twitch_username);
   }, []);

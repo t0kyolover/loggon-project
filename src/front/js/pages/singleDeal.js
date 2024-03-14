@@ -64,11 +64,12 @@ export const SingleDeal = (props) => {
                 </h5>
                 <h5 className="pb-3">{deal.offer_price} €</h5>
                 <p className="pb-3">{deal.expiration_date}</p>
-                <Link to={`/profile/${deal.user_id}`}>
+                {/**<Link to={`/profile/${deal.user_id}`}>
                   {publisher && (
                     <h5 className="pb-2">@{publisher.username}</h5>
                   )}
-                </Link>
+                </Link> */}
+                
               </div>
               <div className="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center">
 
