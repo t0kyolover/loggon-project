@@ -450,6 +450,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({ deal }),
           headers: {
             "Content-Type": "application/json",
+            
           },
         })
         .then((response) => {

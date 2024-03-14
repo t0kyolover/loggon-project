@@ -187,13 +187,7 @@ def Login():
 
     if user is None:
         return jsonify({"msg": "User doesn't exist"}), 401
-    
-    if user.password != password:
-        return jsonify({"msg": "Bad password"}), 401
-    
-    if user.email != email:
-        return jsonify({"msg": "Bad email"}), 401
-    
+      
 
     # Crea un nuevo token con el id de usuario dentro
 

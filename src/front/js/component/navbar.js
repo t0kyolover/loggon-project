@@ -67,8 +67,8 @@ export const Navbar = () => {
         
         signup.username
       );
-      /*alert("Successfully registered!");
-      navigate("/login");*/
+      alert("Successfully registered!");
+      navigate("/login");
     }
   }
 
