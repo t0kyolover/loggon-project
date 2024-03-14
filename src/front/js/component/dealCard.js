@@ -23,8 +23,8 @@ export const DealCard = (props) => {
     game_tags: props.gameTags,
     rating: props.rating,
   });
-  
-  console.log(deal.id)
+
+  console.log(deal.id);
   return (
     <div
       className="card card-effect sombra text-white"
@@ -34,36 +34,33 @@ export const DealCard = (props) => {
       <div className="card-body flex-row d-flex">
         <div>
           <h5 className="card-title">{deal.game_title}</h5>
-          <p className="card-text">{deal.item_type}</p>
-          <p className="card-text">{deal.format}</p>
-          <p className="card-text text-decoration-line-through">
-            {deal.original_price}
-          </p>
-          <p className="card-text">{deal.offer_price} €</p>
-          {deal.promo_code && <p className="card-text">{deal.promo_code}</p>}
-          {deal.expiration_date && (
-            <p className="card-text">{deal.expiration_date}</p>
-          )}
-          {deal.game_tags.map((tag, index) => (
-            <li
-            className="list-group-item bg-transparent text-white rounded-5 border-white border m-1"
-            key={index}
-          > {tag}</li>
-          ))}
-          <Link className="btn btn-link" to={`/post/${deal.id}`}>
-            Details
-          </Link>
-          <button
+          <div className="d-flex flex-inline">
+            <p className="card-text">{deal.item_type}</p>
+            <p className="card-text ms-2">{deal.format}</p>
+          </div>
+          <div className="d-flex flex-column">
+            <button
             className="btn text-white rounded- ms-3"
             style={{ background: "#992899" }}
           >
             <a className="text-white" href={deal.offer_link} target="_blank">
-              Offer Link
+              Deal
             </a>
           </button>
+          <Link className="btn btn-link" to={`/post/${deal.id}`}>
+            Details
+          </Link>
+          </div>
         </div>
         <div className="ms-auto">
-          <p>Rating {deal.rating}</p>
+          {deal.expiration_date && (
+            <p className="card-text">{deal.expiration_date}</p>
+          )}<p className="card-text text-decoration-line-through">
+              {deal.original_price} €
+            </p>
+            <p className="card-text ms-2">{deal.offer_price} €</p>
+          
+          {/*<p>Rating {deal.rating}</p>*/}
         </div>
       </div>
     </div>
