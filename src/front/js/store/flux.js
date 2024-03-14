@@ -1,8 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      token: null,
-      loggedIn: false,
+      token: localStorage.getItem('token'),
+      loggedIn: !!localStorage.getItem('token'),
       user: {
         /*id: 1,
         email: "pereayats@email.com",
@@ -375,14 +375,25 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
+      loginWithToken: () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          setStore({ token: token, loggedIn: true });
+          getActions().verifyIdentity();
+        }
+      },
+
       forgotPassword: (email) => {
         console.log("Password recovery email sent successfully!");
       },
 
       logout: () => {
-        setStore({ loggedIn: false });
-        setStore({ token: null });
-        localStorage.removeItem("token");
+        localStorage.removeItem('token');
+        setStore({
+          token: null,
+          loggedIn: false,
+          user: null
+        });
         console.log("Logged out successfully!");
       },
 
