@@ -245,10 +245,6 @@ export const Navbar = () => {
                         <i className="fa-brands fa-google text-dark fs-3"></i>
                       </button>
                     </div>
-
-                    <div className="text-center mt-3">
-                      <h1>oR</h1>
-                    </div>
                     {/*---------------------------------------Login modal form---------------------------------*/}
                     <form>
                       <div className="mb-3">
@@ -287,7 +283,7 @@ export const Navbar = () => {
                         id="passwordHelpBlock"
                         className="form-text text-white"
                       ></div>
-                      <div className="mb-3 form-check m-3">
+                      {/**<div className="mb-3 form-check m-3">
                         <input
                           type="checkbox"
                           className="form-check-input"
@@ -309,6 +305,8 @@ export const Navbar = () => {
                           Remember me
                         </label>
                       </div>
+                       * 
+                       */}
 
                       {/*------------------------Forgot Password Modal Trigger Button------------------------*/}
                       <div className="text-center">
@@ -319,6 +317,14 @@ export const Navbar = () => {
                           onClick={(e) => e.preventDefault()}
                         >
                           Forgot my password
+                        </button>{" "}
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-link"
+                          data-bs-target="#signupModalToggle"
+                          data-bs-toggle="modal"
+                        >
+                          Not registered yet?
                         </button>
                       </div>
                       {/*---------------------------------------Login Modal buttons---------------------------------*/}
@@ -329,14 +335,6 @@ export const Navbar = () => {
                           onClick={handleLogin}
                         >
                           Login
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-link"
-                          data-bs-target="#signupModalToggle"
-                          data-bs-toggle="modal"
-                        >
-                          Not registered yet?
                         </button>
                       </div>
                     </form>
@@ -651,7 +649,8 @@ export const Navbar = () => {
 
                     <div
                       id="passwordHelpBlock"
-                      className="form-text text-white"
+                      className="form-text text-white p-2"
+                      style={{fontSize: "10px"}}
                     >
                       Your password must be 8-20 characters long, contain
                       letters and numbers, and must not contain spaces, special
@@ -691,20 +690,16 @@ export const Navbar = () => {
                           setSignup({ ...signup, privacy: !signup.privacy })
                         }
                       />
-                      <label
-                        className="form-check-label"
+                      <Link
+                        to="/privacy_policy"
+                        target="_blank"
                         htmlFor="privacyCheck"
+                        className="form-check-label btn btn-link p-0"
                         style={{ fontSize: "10px" }}
                       >
-                        I have read and accept the{" "}
-                        <Link
-                          to="/privacy_policy"
-                          target="_blank"
-                          className="form-check-label btn btn-link"
-                        >
-                          Terms & Conditions of Use and Privacy Policy
-                        </Link>
-                      </label>
+                        I have read and accept the Terms & Conditions of Use and
+                        Privacy Policy{" "}
+                      </Link>
                     </div>
                     {/*---------------------------------------Signup modal buttons---------------------------------*/}
                     <div className="modal-footer flex-column border-0">
