@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: null,
-      loggedIn: false,
+      loggedIn: true,
       user: {
         id: 1,
         email: "pereayats@email.com",
@@ -323,7 +323,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
       signup: (email, password, username) => {
-        fetch(process.env.BACKEND_URL + "api/login", {
+        console.log("from signupq", email, password, username)
+        fetch(process.env.BACKEND_URL + "/api/signup", {
           method: "POST",
           body: JSON.stringify({ email, password, username }),
           headers: {
@@ -338,9 +339,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then((data) => {
             console.log(data);
+            console.log("User registered successfully!");
           })
           .catch((error) => console.error("Error:", error));
-        console.log("User registered successfully!");
       },
 
       login: (email, password) => {
@@ -351,10 +352,16 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json",
           },
         })
-          .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(`Status: ${response.status}`);
+          }
+          return response.json();
+        })
           .then((data) => {
             if (data.error) alert(data.error);
             else {
+              console.log(data.token)
               localStorage.setItem("token", data.token);
               setStore({ token: data.token, loggedIn: true });
               getActions().verifyIdentity();
@@ -374,29 +381,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         setStore({ loggedIn: false });
-        setStore({ token: null })
-				localStorage.removeItem('token')
+        setStore({ token: null });
+        localStorage.removeItem("token");
         console.log("Logged out successfully!");
       },
 
       verifyIdentity: () => {
-				let token = localStorage.getItem('token')
-				if (token) {
-					fetch(process.env.BACKEND_URL + '/api/verify_identity', {
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							'Authorization': 'Bearer ' + token
-						}
-					})
-						.then(response => response.json())
-						.then(data => {
-							if (data && data.user) {
-								setStore({ user: data.user, token: token })
-							}
-						})
-				}
-			},
+        let token = localStorage.getItem("token");
+        if (token) {
+          fetch(process.env.BACKEND_URL + "/api/verify_identity", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data && data.user) {
+                setStore({ user: data.user, token: token });
+              }
+            });
+        }
+      },
       //------------------------USER DETAILS ACTIONS--------------------//
       updateItem: (newItem, itemType) => {
         setStore((prevStore) => ({
@@ -445,10 +452,18 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json",
           },
         })
-          .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(`Status: ${response.status}`);
+          }
+          return response.json();
+        })
           .then(() => {
             setStore((prevStore) => ({
-              user: { ...prevStore.user, posts: [...prevStore.user.posts, deal] },
+              user: {
+                ...prevStore.user,
+                posts: [...prevStore.user.posts, deal],
+              },
             }));
             console.log(deal);
             console.log("Deal posted successfully!");
@@ -456,6 +471,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .catch((error) => {
             alert(error);
+            console.log(deal);
             console.log("Error posting:", error);
           });
       },

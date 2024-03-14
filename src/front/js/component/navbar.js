@@ -64,11 +64,11 @@ export const Navbar = () => {
       actions.signup(
         signup.email,
         signup.password,
-        signup.newsletter,
-        signup.privacy
+        
+        signup.username
       );
-      alert("Successfully registered!");
-      navigate("/login");
+      /*alert("Successfully registered!");
+      navigate("/login");*/
     }
   }
 
