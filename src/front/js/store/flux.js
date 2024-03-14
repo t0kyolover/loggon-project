@@ -450,7 +450,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore((prevStore) => ({
               user: { ...prevStore.user, posts: [...prevStore.user.posts, deal] },
             }));
-            console.log(deal);
+            gitconsole.log(deal);
             console.log("Deal posted successfully!");
             console.log(store.user);
           })
