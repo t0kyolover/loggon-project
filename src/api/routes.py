@@ -162,7 +162,7 @@ def get_steam_oauth_token():
 ('''
 
 
-Que nos Falta? dinero
+Que nos Falta? dinero JAJAJAJ
 
 
 
@@ -189,6 +189,19 @@ def Login():
 
     access_token = create_access_token(identity=user.id)
     return jsonify({ "token": access_token })
+
+#----ADDED THIS-------------------------------------------------------Verify Identity---------------------------------------------------------------------------------
+
+@api.route('/verify_identity', methods=['GET'])
+@jwt_required()
+def verify():
+    current_user_email = get_jwt_identity()
+    user = User.query.filter_by(email=current_user_email).first()
+
+    if user is None:
+        return jsonify({ "error": "Este usuario no existe" }), 401
+    
+    return jsonify({ "user": user.serialize() })
 
 #---------------------------------------------------------------Modificar usuario-------------------------------------------------------------------
 

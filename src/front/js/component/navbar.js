@@ -18,6 +18,7 @@ export const Navbar = () => {
     remember_me: false,
   });
   const [signup, setSignup] = useState({
+    username: "",
     email: "",
     password: "",
     password2: "",
@@ -29,6 +30,7 @@ export const Navbar = () => {
     email2: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   /* useEffect(() => {
      if (!searchTerm) {
@@ -51,7 +53,7 @@ export const Navbar = () => {
     if (signup.password !== signup.password2) {
       alert("Passwords do not match!");
       return;
-    } else if (!signup.email || !signup.password || !signup.password2) {
+    } else if (!signup.username || !signup.password || !signup.password2) {
       alert("Missing fields!");
       return;
     } else if (!signup.privacy) {
@@ -576,6 +578,7 @@ export const Navbar = () => {
                       <label
                         htmlFor="signupUsernameInput"
                         className="form-label"
+                        
                       >
                         Username
                       </label>
@@ -583,7 +586,11 @@ export const Navbar = () => {
                         type="email"
                         className="form-control rounded-5 text-white bg-transparent"
                         id="signupUsernameInput"
-                        placeholder=""
+                        placeholder="Username"
+                        value={signup.username}
+                        onChange={(e) =>
+                          setSignup({ ...signup, username: e.target.value })
+                        }
                       />
                     </div>
 

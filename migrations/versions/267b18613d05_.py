@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e22ed9c534ed
+Revision ID: 267b18613d05
 Revises: 
-Create Date: 2024-03-12 10:53:48.661492
+Create Date: 2024-03-14 01:44:09.599925
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e22ed9c534ed'
+revision = '267b18613d05'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -50,7 +50,7 @@ def upgrade():
     sa.Column('scheduled_time', sa.DateTime(), nullable=True),
     sa.Column('offer_link', sa.String(length=200), nullable=False),
     sa.Column('image_url', sa.String(length=200), nullable=True),
-    sa.Column('rating', sa.String(length=5), nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('game_tags', sa.String(length=5), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id'),
@@ -59,7 +59,7 @@ def upgrade():
     op.create_table('interest',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('tag_id', sa.Integer(), nullable=False),
+    sa.Column('tag_name', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -75,7 +75,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('deal_id', sa.Integer(), nullable=False),
-    sa.Column('upvote', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['deal_id'], ['deal.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 
 import { DealCard } from "../component/dealCard";
 import { GameCard } from "../component/gameCard";
@@ -10,6 +10,7 @@ import { Context } from "../store/appContext";
 export const SearchResults = () => {
   const { store, actions } = useContext(Context);
   const { keyword } = useParams();
+  
 
   useEffect(() => {
     actions.searchInNavbar(keyword);
@@ -21,6 +22,7 @@ export const SearchResults = () => {
 
   const deals = store.searchResults.filter((item) => item.user_id);
   const games = store.searchResults.filter((item) => item.rawg_id);
+  console.log("games", games);
 
   return (
     <div>

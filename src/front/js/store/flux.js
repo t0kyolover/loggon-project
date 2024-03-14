@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      token: null,
       loggedIn: true,
       user: {
         id: 1,
@@ -233,7 +234,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               user_id: 1,
               date_of_creation: "",
               game_title: "GTA V",
-              image_url: "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
+              image_url:
+                "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
               item_type: "DLC",
               platform: "Xbox",
               format: "Digital",
@@ -320,18 +322,50 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
-      signup: (email, password) => {
+      signup: (email, password, username) => {
+        fetch(process.env.BACKEND_URL + "api/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password, username }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw Error(`Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => console.error("Error:", error));
         console.log("User registered successfully!");
       },
 
       login: (email, password) => {
-        const store = getStore();
-        if (store.user.email === email && store.user.password === password) {
-          setStore({ loggedIn: false });
-          console.log("Logged in successfully!");
-        } else {
-          alert("Email or password incorrect!");
-        }
+        fetch(process.env.BACKEND_URL + "/api/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.error) alert(data.error);
+            else {
+              localStorage.setItem("token", data.token);
+              setStore({ token: data.token, loggedIn: true });
+              getActions().verifyIdentity();
+              console.log("Logged in successfully!");
+            }
+          })
+          .catch((error) => {
+            alert(error);
+            setStore({ loggedIn: false });
+            console.log("Error with login:", error);
+          });
       },
 
       forgotPassword: (email) => {
@@ -340,8 +374,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         setStore({ loggedIn: false });
+        setStore({ token: null })
+				localStorage.removeItem('token')
         console.log("Logged out successfully!");
       },
+
+      verifyIdentity: () => {
+				let token = localStorage.getItem('token')
+				if (token) {
+					fetch(process.env.BACKEND_URL + '/api/verify_identity', {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Bearer ' + token
+						}
+					})
+						.then(response => response.json())
+						.then(data => {
+							if (data && data.user) {
+								setStore({ user: data.user, token: token })
+							}
+						})
+				}
+			},
       //------------------------USER DETAILS ACTIONS--------------------//
       updateItem: (newItem, itemType) => {
         setStore((prevStore) => ({
@@ -383,12 +438,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       postDeal: (deal) => {
         const store = getStore();
-        setStore((prevStore) => ({
-          user: { ...prevStore.user, posts: [...prevStore.user.posts, deal] },
-        }));
-        console.log(deal);
-        console.log("Deal posted successfully!");
-        console.log(store.user);
+        fetch(process.env.BACKEND_URL + "/api/deal", {
+          method: "POST",
+          body: JSON.stringify({ deal }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then(() => {
+            setStore((prevStore) => ({
+              user: { ...prevStore.user, posts: [...prevStore.user.posts, deal] },
+            }));
+            console.log(deal);
+            console.log("Deal posted successfully!");
+            console.log(store.user);
+          })
+          .catch((error) => {
+            alert(error);
+            console.log("Error posting:", error);
+          });
       },
 
       modifyPost: (
@@ -426,8 +495,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       //--------------------------SEARCHES----------------------//
       searchInNavbar: (searchTerm) => {
         const store = getStore();
-        const allItems = [].concat(store.deals, store.games);
-        const results = allItems.filter((item) =>
+        const results = store.deals.filter((item) =>
           item.game_tags.find((tag) =>
             tag.toLowerCase().includes(searchTerm.toLowerCase())
           )

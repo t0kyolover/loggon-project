@@ -73,7 +73,7 @@ export const PostDealCard = (props) => {
                     }}
                   >
                     <option value="PC">PC</option>
-                    <option value="PS4">PS4</option>
+                    <option value="PS5">PS5</option>
                     <option value="Xbox">Xbox</option>
                     <option value="Nintendo">Nintendo</option>
                   </select>
