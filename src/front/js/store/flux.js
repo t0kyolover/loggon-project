@@ -344,7 +344,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => console.error("Error:", error));
       },
 
-      login: (email, password) => {
+      login: (email, password, remember_me) => {
         fetch(process.env.BACKEND_URL + "/api/login", {
           method: "POST",
           body: JSON.stringify({ email, password }),
@@ -366,6 +366,9 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({ token: data.token, loggedIn: true });
               getActions().verifyIdentity();
               console.log("Logged in successfully!");
+             /* if (remember_me) {
+                getActions().rememberMe(remember_me);
+              }*/
             }
           })
           .catch((error) => {
@@ -383,12 +386,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      rememberMe: (remember_me) => {
+        if (remember_me) {
+          localStorage.setItem('remember_me', 'true');
+        } 
+      },
+
       forgotPassword: (email) => {
         console.log("Password recovery email sent successfully!");
       },
 
       logout: () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('remember_me');
         setStore({
           token: null,
           loggedIn: false,

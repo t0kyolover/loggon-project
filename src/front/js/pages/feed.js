@@ -37,6 +37,14 @@ export const Feed = () => {
       }
     };
     document.addEventListener("click", handleClick);
+  
+    // Agregar la clase 'active' al primer elemento con la clase 'ps-effect'
+    const psElement = document.querySelector(".ps-effect");
+    if (psElement) {
+      psElement.classList.add("active");
+      activeElement = psElement;
+    }
+  
     return () => {
       document.removeEventListener("click", handleClick);
     };

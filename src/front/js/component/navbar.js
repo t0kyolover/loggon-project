@@ -74,7 +74,8 @@ export const Navbar = () => {
 
   function handleLogin(e) {
     e.preventDefault();
-    actions.login(login.email, login.password);
+    actions.login(login.email, login.password, login.remember_me);
+    actions.rememberMe(login.remember_me);
     closeLoginButton.current.click();
     navigate("/");
   }
