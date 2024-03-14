@@ -2,9 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: null,
-      loggedIn: true,
+      loggedIn: false,
       user: {
-        id: 1,
+        /*id: 1,
         email: "pereayats@email.com",
         password: "1234",
         image_url:
@@ -130,7 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             game_tags: ["multiplayer", "action", "adventure", "open-world"],
           },
         ],
-        newsletter: false,
+        newsletter: false,*/
       },
       deals: [
         {
@@ -399,7 +399,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             .then((response) => response.json())
             .then((data) => {
               if (data && data.user) {
-                setStore({ user: data.user, token: token });
+                setStore({
+                  
+                  user: data.user,
+                  token: token
+                });
               }
             });
         }
@@ -447,10 +451,28 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         fetch(process.env.BACKEND_URL + "/api/deal", {
           method: "POST",
-          body: JSON.stringify({ deal }),
+          body: JSON.stringify({ 
+            
+            "game_title": "",
+            "format": "",
+            "platform" : "",
+            "original_price" : "",
+            "offer_price": "",
+            "type": "",
+            "offer_link": "",
+            "expiration_date": null,
+            "promo_code": "",
+            "scheduled": false,
+            "scheduled_date": null,
+            "scheduled_time": null,
+            "image_url": "",
+            "rating": "",
+            "game_tags": "",
+            ...deal
+          }),
           headers: {
             "Content-Type": "application/json",
-            
+            Authorization: "Bearer " + store.token
           },
         })
         .then((response) => {
@@ -466,7 +488,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 posts: [...prevStore.user.posts, deal],
               },
             }));
-            gitconsole.log(deal);
+            console.log(deal);
             console.log("Deal posted successfully!");
             console.log(store.user);
           })

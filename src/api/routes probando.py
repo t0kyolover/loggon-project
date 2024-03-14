@@ -266,8 +266,10 @@ def get_user(user_id):
             "username": user.username,
             "steam_username": user.steam_username,
             "twitch_username": user.twitch_username,
-            "image_url": user.image_url
-           
+            "image_url": user.image_url,
+            "saved": [saved.serialize() for saved in user.saved],
+            "posts": [posts.serialize() for posts in user.posts],
+            "alerts": [alerts.serialize() for alerts in user.alerts]           
         }
 
         return jsonify(user_data), 200
