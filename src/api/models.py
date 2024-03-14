@@ -16,13 +16,13 @@ class User(db.Model): #( todo)
     username = db.Column(db.String(30), nullable=False)
     steam_username = db.Column(db.String(40))
     twitch_username = db.Column(db.String(40))
-    interests = db.Column(db.String(20)) 
+    #interests = db.Column(db.String(20)) 
     saved = db.relationship('Saved', backref='user', lazy=True)
     posts = db.Column(db.String) 
     alerts = db.Column(db.String)
     newsletter = db.Column(db.Boolean())
     
-    # interests = db.relationship('Interest', backref='user', lazy=True)
+    interests = db.relationship('Interest', backref='user', lazy=True)
 
     # interests = db.Column(db.ARRAY(db.String(20)))
     
@@ -39,7 +39,7 @@ class User(db.Model): #( todo)
             "username": self.username,
             "steam_username": self.steam_username,
             "twitch_username": self.twitch_username,
-            "interests": [interest.serialize() for interest in self.interest], # preguntar a pere
+            #"interests": [interest.serialize() for interest in self.interest], # preguntar a pere
             "saved" : [saved.serialize() for saved in self.saved],
             "posts": self.posts,
             "alerts": self.alerts,
@@ -54,12 +54,12 @@ class Deal(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     game_title = db.Column(db.String(200), nullable=False)
     platform = db.Column(db.Enum('PC', 'Xbox', 'PS5', 'Nintendo', name='Platform_options'), nullable=False)
-    date_of_creation = db.Column(db.DateTime, nullable=False)
+    #date_of_creation = db.Column(db.DateTime, nullable=False)
     expiration_date = db.Column(db.DateTime)
-    original_price = db.Column(db.Float, nullable=False)
-    offer_price = db.Column(db.Float, nullable=False)
+    original_price = db.Column(db.String, nullable=False)
+    offer_price = db.Column(db.String, nullable=False)
     format = db.Column(db.Enum('Digital', 'CD', name='Format_options'), nullable=False)
-    item_type = db.Column(db.Enum('opcion1','opcion2','opcion3','opcion4','opcion5', name='Type_options'), nullable=False)
+    item_type = db.Column(db.Enum('Game','DLC','In-game Purchase', name='Type_options'), nullable=False)
     promo_code = db.Column(db.String(250))
     scheduled = db.Column(db.Boolean())
     scheduled_date = db.Column(db.DateTime)
@@ -82,7 +82,7 @@ class Deal(db.Model):
             "user_id": self.user_id,
             "game_title": self.game_title,
             "platform": self.platform,
-            "date_of_creation": self.date_of_creation,
+            #"date_of_creation": self.date_of_creation,
             "expiration_date": self.expiration_date,
             "original_price": self.original_price,
             "offer_price": self.offer_price,
@@ -115,9 +115,6 @@ class Interest(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "tag_name": self.tag_name
-            
-            
-           
         }
     
 #---------------------------------------------------------Save------------------------------------------------------------------------
@@ -136,9 +133,6 @@ class Saved(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "deal_id": self.deal_id
-            
-            
-           
         }
     
 #---------------------------------------------------------Vote-------------------------------------------------------------------------
@@ -149,8 +143,6 @@ class Vote(db.Model):
     deal_id = db.Column(db.Integer,db.ForeignKey("deal.id"), nullable=False)
     
     
-    
-
     def __repr__(self):
         return '<Vote %r>' % self.id
 
@@ -158,9 +150,5 @@ class Vote(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "deal_id": self.deal_id
-            
-            
-            
-           
+            "deal_id": self.deal_id 
         }

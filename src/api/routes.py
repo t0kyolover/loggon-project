@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from flask_oauthlib.client import OAuth
+from werkzeug.security import generate_password_hash
 
 
 api = Blueprint('api', __name__)
@@ -29,27 +30,30 @@ def handle_hello():
 #---------------------------------------------------------Signup-------------------------------------------------------------
 
 @api.route("/signup", methods=["POST"])
-
 def signup():
+    # Get the request data
+    data = request.get_json()
+    if not data:
+        return jsonify({"msg": "Bad Request"}), 400
 
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    username = request.json.get("username", None)
+    # Validate the data
+    email = data.get("email")
+    password = data.get("password")
+    username = data.get("username")
+    if not email or not password or not username:
+        return jsonify({"msg": "Missing required fields"}), 400
 
-# Consulta la base de datos por el nombre de usuario y la contraseña
-
+    # Check if the user already exists
     user = User.query.filter_by(email=email).first()
-
     if user is not None:
-
-        
-
         return jsonify({"msg": "User already exists"}), 400
 
+    # Hash the password and create the new user
     new_user = User(email=email, password=password, username=username)
+    
     db.session.add(new_user)
     db.session.commit()
-
+  
 
     return jsonify({ "message": "success" }), 200
 
@@ -175,15 +179,15 @@ def Login():
 
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    username = request.json.get("username", None)
+
 
 # Consulta la base de datos por el nombre de usuario y la contraseña
 
-    user = User.query.filter_by(email=email, password=password, username=username).first()
+    user = User.query.filter_by(email=email, password=password).first()
 
     if user is None:
-        return jsonify({"msg": "Bad email or password"}), 401
-    
+        return jsonify({"msg": "User doesn't exist"}), 401
+      
 
     # Crea un nuevo token con el id de usuario dentro
 
@@ -195,8 +199,8 @@ def Login():
 @api.route('/verify_identity', methods=['GET'])
 @jwt_required()
 def verify():
-    current_user_email = get_jwt_identity()
-    user = User.query.filter_by(email=current_user_email).first()
+    current_user_id = get_jwt_identity()
+    user = User.query.filter_by(id=current_user_id).first()
 
     if user is None:
         return jsonify({ "error": "Este usuario no existe" }), 401
