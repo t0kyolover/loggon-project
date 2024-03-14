@@ -44,12 +44,12 @@ export const SingleDeal = (props) => {
                   alt="Game Image"
                 />
                 {/*------------------------------------RATING---------------------------------*/}
-                <img
+                {/* <img
                   src="https://scontent.xx.fbcdn.net/v/t1.15752-9/430191131_778202110347260_8379671903752576551_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=TMwhnf6h3AMAX_EeK10&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTXZPdjkqkaonHvjvFe7qVT26bJjHsQaPHiBNcvP47d3Q&oe=660B0CA7"
                   className="img-fluid position-absolute bottom-0 end-1"
                   alt="Rating Image"
                   style={{ width: "60px" }} // Ajuste o tamanho da imagem de classificação conforme necessário
-                />
+                /> */}
               </div>
             </div>
             {/*------------------------------------DEAL DETAILS---------------------------------*/}
@@ -74,7 +74,7 @@ export const SingleDeal = (props) => {
 
 
                 {/*------------------------------------PROMO CODE---------------------------------*/}
-                <div className="text-white ">
+                <div className="text-white">
                 <p>PROMOTIONAL CODE:</p>
                 <h2>{deal.promo_code}</h2>
                 </div>
@@ -95,7 +95,7 @@ export const SingleDeal = (props) => {
                   <a
                     target="_blank"
                     role="button"
-                    className="btn btn-effect text-white rounded-2 px-5 mt-4"
+                    className="btn btn-effect-blue text-white rounded-2 px-5 mt-4"
                     taget="_blank"
                     style={{ alignSelf: "start" }}
                     href={deal.offer_link}
@@ -106,7 +106,7 @@ export const SingleDeal = (props) => {
               </div>
             </div>
             {/*---------------------- description (data from 3rd party API) --------------------*/}
-            <div className="row">
+            {/* <div className="row">
               <div className="col-12 bg-light rounded-3 p-3 m-auto my-5">
                 <p>
                   Grand Theft Auto Online Explore GTA Online, um universo online
@@ -116,7 +116,7 @@ export const SingleDeal = (props) => {
                   jogar a sós ou com amigos.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

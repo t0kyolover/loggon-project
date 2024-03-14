@@ -28,8 +28,8 @@ export const SearchResults = () => {
     <div>
       <div className="text-center text-white m-5"></div>
       <div className="container text-center">
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-          <h5 className="text-white">Deals</h5>
+        <div className="row row-cols-auto justify-content-center ">
+          <h3 className="text-white me-4 my-4">Deals</h3>
           {deals.length > 0 &&
             deals.map((deal, index) => (
               <div key={index}>
@@ -54,8 +54,8 @@ export const SearchResults = () => {
               </div>
             ))}
         </div>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
-          <h5 className="text-white">Games</h5>
+        <div className="row row-cols-auto justify-content-center">
+          <h5 className="text-white me-4 my-4">Games</h5>
           {games.length > 0 &&
             games.map((game, index) => (
               <div key={index}>

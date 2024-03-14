@@ -40,13 +40,13 @@ export const GameCard = (props) => {
       <div className="card">
         <div className="face face1 " >
           <div className="content " >
-            <div> 
             <img
               src={game.background_image} 
               //src="https://picsum.photos/id/1/200"
               className="card-img-top rounded-2 img-fluid" 
               alt="..."
             />
+            <div> 
             </div>
           </div>
         </div>
@@ -70,25 +70,25 @@ export const GameCard = (props) => {
         tabIndex="-1"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-dialog modal-dialog-centered modal-xl">
           <div className="modal-content bg-transparent text-white">
             <div className="m-auto" data-bs-theme="dark">
               <button
                 type="button"
-                className="btn-close"
+                className="btn-close position-absolute top-0 end-0 text-white m-1"
+                style={{ zIndex: 1051 }} 
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
             <div className="modal-body p-0">
               <div
-                className="position-relative"
+                className="position-relative image-fluid"
                 style={{
                   backgroundImage: `url(${game.background_image_additional})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                  minHeight: "1000px",
-                  minWidth: "1000px",
+                  height: "100vh",
                 }}
               >
                 {/* Gradiente preto sólido na parte inferior */}
@@ -109,30 +109,55 @@ export const GameCard = (props) => {
                       "linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent)",
                   }}
                 ></div>
-                <div className="position-absolute text-white">
-                  <h1 className="text-white my-auto">{game.name}</h1>
-                  <p className="text-white m-auto">
-                    {game.tba ? "To be announced" : game.released}
-                  </p>
-                  {game.platforms.map((platform, index) => (
-                    <p key={index} className="text-white m-auto">
-                      {platform}
-                    </p>
-                  ))}
-                  <div className="d-flex">
-                    {
-                    game.game_tags.map((tag, index) => (
-                    <p key={index} className="text-white m-auto" style={{fontSize: "10px"}}>
-                      {tag}
-                    </p>
-                    ))}
-                  </div>
-
-                  <a href={game.website} target="_blank">
-                    Website
-                  </a>
-                  <div>{description}</div>
-                </div>
+                 {/*-----------------------------Game Information from API----------------------------------*/}
+                 <div className="position-absolute text-white">
+  <div className="row">
+    <div className="col">
+      <h1 className="text-white my-auto mt-3">{game.name}</h1>
+    </div>
+  </div>
+  <div className="row">
+    <div className="col">
+      <h4 className="text-white mt-3">PLATFORM:</h4>
+      <div className="d-flex justify-content-center align-items-center">
+        {game.platforms.map((platform, index) => (
+          <p key={index} className="text-white me-2">
+            {platform}
+          </p>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div className="row">
+    <div className="col">
+      <h4 className="text-white">TAGS:</h4>
+      <div className="d-flex flex-wrap justify-content-center align-items-center">
+        {game.game_tags.map((tag, index) => (
+          <p key={index} className="text-white me-2" style={{ fontSize: "15px" }}>
+            {tag}
+          </p>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div className="row">
+    <div className="col">
+      <p className="text-white">
+      <h4> RELEASE DAY:</h4> {game.tba ? "To be announced" : game.released}
+      </p>
+    </div>
+    <div className="col mt-2 ">
+    <a href={game.website} target="_blank" className="text-white">
+    <h4> Website</h4>
+      </a>
+    </div>
+  </div>
+  <div className="row">
+    <div className="col-10 m-auto my-2">
+      <div className="text-white">{description}</div>
+    </div>
+  </div>
+</div>
                 <button
                   type="button"
                   className="btn btn-close position-absolute top-0 end-0 text-white"
@@ -140,16 +165,7 @@ export const GameCard = (props) => {
                   data-bs-dismiss="modal"
                 ></button>
               </div>
-              {/*-----------------------------Game Information from API----------------------------------*/}
-              <div className="container text-white">
-                {/* Your content here */}
-              </div>
             </div>
-            {/* <div className="modal-footer border-0">
-              <p style={{ color: "#992899" }}>
-                Made by DKA <i className="fa-solid fa-skull-crossbones"></i>
-              </p>
-            </div> */}
           </div>
         </div>
       </div>

@@ -5,3 +5,7 @@
 .color-morado{
     color: #992899;
 }
+
+.input-placeholder-white::placeholder {
+    color: white; 
+  }

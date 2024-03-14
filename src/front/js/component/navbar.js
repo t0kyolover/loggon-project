@@ -150,13 +150,13 @@ export const Navbar = () => {
                         className="text-white text-decoration-none mb-2"
                         to={`/myprofile/${store.user.username}`}
                       >
-                        <div data-bs-dismiss="offcanvas">My profile</div>
+                        <div className="mb-2"  data-bs-dismiss="offcanvas">My profile</div>
                       </Link>
                       <Link
                         className="text-white text-decoration-none mb-2"
                         to={`/postdeal/user/${store.user.username}`}
                       >
-                        <div data-bs-dismiss="offcanvas">Post deal</div>
+                        <div className="mb-2" data-bs-dismiss="offcanvas">Post deal</div>
                       </Link>{" "}
                     </div>
                   )}
@@ -170,7 +170,7 @@ export const Navbar = () => {
                     className="text-white text-decoration-none mb-2"
                     to={"/"}
                   >
-                    <div data-bs-dismiss="offcanvas">Deals</div>
+                    <div className="mb-2" data-bs-dismiss="offcanvas">Deals</div>
                   </Link>
 
                   {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
