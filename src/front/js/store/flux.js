@@ -264,10 +264,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       //--------------------------INTERSTS ACTIONS----------------------//
       addInterest: (newInterest) => {
-        const store = getStore();
-        setStore({
-          user: { interests: [...store.user.interests, newInterest] },
-        });
+        setStore((prevState) => ({
+          ...prevState,
+          user: {
+            ...prevState.user,
+            interests: [...prevState.user.interests, newInterest],
+          },
+        }));
         console.log("New interest added successfully!");
       },
 

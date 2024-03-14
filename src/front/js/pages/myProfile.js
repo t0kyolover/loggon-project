@@ -36,18 +36,10 @@ export const MyProfile = (props) => {
   }, []);
 
   useEffect(() => {
-    setUser((prevState) => ({
-      ...prevState,
-      interests: store.user.interests,
-    }));
-    setUser((prevState) => ({
-      ...prevState,
-      posts: store.user.posts,
-    }));
+    setUser(store.user);
   }, [store.user]);
 
  
-
   function updateItem(e, newItem, itemType) {
     e.preventDefault();
     if (
@@ -70,6 +62,10 @@ export const MyProfile = (props) => {
   function updateInterests(e) {
     e.preventDefault();
     actions.addInterest(newInterest);
+    setUser((prevState) => ({
+      ...prevState,
+      interests: [...prevState.interests, newInterest],
+    }));
     setNewInterest("");
   }
 
@@ -463,7 +459,7 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center ">
               <div className="row row-cols-auto justify-content-center">
-                {user.posts.length === 0 ? (
+                {(!user || !user.posts || user.posts.length === 0) ? (
                   <p className="bg-transparent p-2">No posts</p>
                 ) : (
                   user.posts.map((post, index) => (
@@ -486,7 +482,7 @@ export const MyProfile = (props) => {
                       />
                     </div>
                   ))
-                )}
+                  )}
               </div>
             </div>
           </div>
@@ -500,7 +496,7 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                {user.saved.length === 0 ? (
+                {(!user || !user.saved || user.saved.length === 0) ? (
                   <p className="bg-transparent p-2">No saved deals</p>
                 ) : (
                   user.saved.map((deal, index) => (
@@ -522,7 +518,7 @@ export const MyProfile = (props) => {
                       />
                     </div>
                   ))
-                )}
+                  )}
               </div>
             </div>
           </div>
@@ -536,7 +532,7 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto">
-                {user.alerts.length === 0 ? (
+                {(!user || !user.alerts || user.alerts.length === 0) ? (
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (
                   user.alerts.map((alert, index) => (
@@ -558,7 +554,7 @@ export const MyProfile = (props) => {
                       />
                     </div>
                   ))
-                )}
+                  )}
               </div>
             </div>
           </div>
