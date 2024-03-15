@@ -203,7 +203,7 @@ export const PostDealCard = (props) => {
                   <input
                     type="text"
                     className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
-                    placehoolder="Offer link"
+                    placeholder="Offerlink"
                     onChange={(e) => {
                       props.onInputChange(e, "offer_link");
                     }}
