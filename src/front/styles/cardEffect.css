@@ -21,5 +21,36 @@
    box-shadow: 0 20px 50px rgba(0,0,0,.8);
 
  }
+
+ .bn-effect{
+  transform: translateY(0);
+  box-shadow:
+    /* inset 0 0 60px whitesmoke,
+    inset 20px 0 80px #f0f,
+    inset -20px 0 80px #0ff,
+    inset 20px 0 300px #f0f,
+    inset -20px 0 300px #0ff, */
+    0 0 50px #fff,
+    -10px 0 80px #f0f,
+    10px 0 80px #0ff;
+   
+}
  
- 
+
+@keyframes blink-bg {
+  0% { background-color: transparent; }
+  40% { background-color: #fff; }
+  60% { background-color: transparent; }
+  100% { background-color: transparent; }
+}
+
+@keyframes blink-shadow {
+  0%, 100% { box-shadow: none; }
+  20% { box-shadow: 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff; }
+  50% { box-shadow: 0 0 50px #fff, -20px 0 80px #f0f, 20px 0 80px #0ff; }
+  80% { box-shadow: 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff; }
+}
+
+.bn-effect {
+  animation: blink-bg 8s infinite, blink-shadow 8s infinite; /* Altere o tempo conforme necessário */
+}

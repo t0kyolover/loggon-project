@@ -5,6 +5,8 @@ import { Context } from "../store/appContext";
 
 import '../../styles/button.css';
 
+import logoImg from '/workspaces/loggon-dak-final-project-v2/src/front/img/loggon1.png';
+
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const closeSignUpButton = useRef(null);
@@ -464,11 +466,11 @@ export const Navbar = () => {
             {/*---------------------------------------LOGO---------------------------------*/}
             <Link to={"/"} className="navbar-brand mx-3">
               <img
-                src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C"
+                src={logoImg}
                 alt="loGGon"
-                width="40"
+                width="auto"
                 height="34"
-                className="rounded-circle text-white"
+                className="mt-2 me-2 "
               />
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
@@ -476,7 +478,7 @@ export const Navbar = () => {
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
-                  className="btn p-0 mt-2"
+                  className="btn p-0 mt-3"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseSearch"
