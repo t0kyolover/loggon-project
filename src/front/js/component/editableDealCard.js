@@ -93,32 +93,44 @@ export const EditableDealCard = (props) => {
   }
   /*No actualiza los datos al modificar en la card, pero si que los modifica a nivel de datos */
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card card-effect sombra text-white" style={{ width: "18rem" }}>
       <img src={deal.image_url} className="card-img-top" alt="..." />
-      <div className="card-body flex-row d-flex">
-        <div>
-          <h5 className="card-title">{deal.game_title}</h5>
+      <div className="card-body flex-row d-flex bg-color text-white rounded-bottom-2 pe-0">
+        <div className="row">
+        <div className="col-12">
+          <h5 className="card-title ">{deal.game_title}</h5>
+          <p className="card-text ">{deal.format}</p>
+          </div>
+          <div className="d-flex mt-2 ">
+          <div className="col-6">
            <p className="card-text">{deal.item_type}</p>
-          <p className="card-text">{deal.format}</p>
+          
           <p className="card-text text-decoration-line-through">
             {deal.original_price}
           </p>
           <p className="card-text">{deal.offer_price} €</p>
-          {deal.promo_code && <p className="card-text">{deal.promo_code}</p>}
+          </div>
+          <div className="col-6">
+          {deal.promo_code && <h6 className="card-text">{deal.promo_code}</h6>}
           {deal.expiration_date && (
             <p className="card-text">{deal.expiration_date}</p>
           )}
-          <Link className="btn btn-link" to={`/post/${deal.id}`}>
-            Details
+          <div className="ms-4">
+          <Link className="btn btn-link text-white btn-effect rounded-2  px-2" to={`/post/${deal.id}`}>
+          DETAILS
           </Link>
+          </div>
+          </div>
+          </div>
+          <div className="d-flex flex-column">
           <button
-            className="btn text-white rounded-5 ms-3"
-            style={{ background: "#992899" }}
+            className="btn btn text-white rounded-2 mt-3 px-2 btn-effect-blue ms-4"
           >
-            <a className="text-white" href={deal.offer_link} target="_blank">
-              Offer Link
+            <a className="text-white " href={deal.offer_link} target="_blank" style={{ textDecoration: 'none' }}>
+            DEAL
             </a>
           </button>
+          </div>
         </div>
         <div className="ms-auto">
           {/*--------------------------MODIFY DEAL MODAL----------------------*/}
@@ -333,7 +345,7 @@ export const EditableDealCard = (props) => {
           >
             <i className="fa-solid fa-pencil" style={{ color: "#992899" }}></i>
           </button>
-          <p>Rating {deal.rating}</p>
+          {/* <p>Rating {deal.rating}</p> */}
           {deal.scheduled && (
             <div>
               <p>{deal.scheduled_date}</p>

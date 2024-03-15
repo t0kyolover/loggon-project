@@ -27,10 +27,9 @@ export const SearchResults = () => {
   return (
     <div>
       <div className="text-center text-white m-5"></div>
-      <div className="container text-center ">
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3 justify-content-center">
-          {/*<h5 className="text-white">Deals</h5>
-          */}
+      <div className="container text-center">
+        <div className="row row-cols-auto justify-content-center ">
+          <h3 className="text-white me-4 my-4">Deals</h3>
           {deals.length > 0 &&
             deals.map((deal, index) => (
               <div key={index}>

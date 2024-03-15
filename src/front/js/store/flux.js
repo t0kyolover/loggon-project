@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       token: localStorage.getItem('token'),
       loggedIn: !!localStorage.getItem('token'),
       user: {
-        /*id: 1,
+        id: 1,
         email: "pereayats@email.com",
         password: "1234",
         image_url:
@@ -130,7 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             game_tags: ["multiplayer", "action", "adventure", "open-world"],
           },
         ],
-        newsletter: false,*/
+        newsletter: false,
       },
       deals: [
         {

@@ -293,9 +293,9 @@ export const MyProfile = (props) => {
               <div style={{ fontSize: "12px", color: "#992899" }}>
                 Interests
               </div>
-              <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
+              <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row" >
                 {/*!!!!!BUG!!!!!!!--------Creo que el problema cuando se añade más intereses y la página empieza a bailar está aquí */}
-                <div className="d-flex flex-wrap gap-2">
+                <div className="d-flex flex-wrap gap-2" >
                   {(!user || !user.interests || user.interests.length === 0) ? (
                     <p className="bg-transparent p-2">No Interests Added</p>
                   ) : (
@@ -303,6 +303,7 @@ export const MyProfile = (props) => {
                       <p
                         className="bg-transparent rounded-5 border-white border p-2"
                         key={index}
+                        s
                       >
                         {interest}
                       </p>
@@ -420,7 +421,7 @@ export const MyProfile = (props) => {
               aria-selected="true"
               style={{ color: "#992899" }}
             >
-              My deals
+              <h6>My deals</h6>
             </button>
             <button
               className="nav-link"
@@ -433,7 +434,7 @@ export const MyProfile = (props) => {
               aria-selected="false"
               style={{ color: "#992899" }}
             >
-              Saved
+              <h6>Saved</h6>
             </button>
             <button
               className="nav-link"
@@ -446,7 +447,7 @@ export const MyProfile = (props) => {
               aria-selected="false"
               style={{ color: "#992899" }}
             >
-              Alerts
+              <h6>Alerts</h6>
             </button>
           </div>
         </nav>
@@ -498,7 +499,7 @@ export const MyProfile = (props) => {
             tabIndex="0"
           >
             <div className="container text-center">
-              <div className="row row-cols-auto">
+              <div className="row row-cols-auto justify-content-center">
                 {(!user || !user.saved || user.saved.length === 0) ? (
                   <p className="bg-transparent p-2">No saved deals</p>
                 ) : (
@@ -534,7 +535,7 @@ export const MyProfile = (props) => {
             tabIndex="0"
           >
             <div className="container text-center">
-              <div className="row row-cols-auto">
+              <div className="row row-cols-auto justify-content-center">
                 {(!user || !user.alerts || user.alerts.length === 0) ? (
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (

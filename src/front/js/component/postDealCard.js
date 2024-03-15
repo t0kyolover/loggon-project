@@ -33,12 +33,12 @@ export const PostDealCard = (props) => {
               <ul className="list-group">
                 {/*---------------------------------------Game Title---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <input
                     type="search"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
                     placeholder="Game title"
                     onChange={(e) => {
                       props.onInputChange(e, "game_title");
@@ -48,12 +48,12 @@ export const PostDealCard = (props) => {
                 </li>
                 {/*---------------------------------------Image Url---------------------------------*/}
                 <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
                   style={{ maxHeight: "35px" }}
                 >
                   <input
                     type="text"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
                     placeholder="Image URL"
                     onChange={(e) => {
                       props.onInputChange(e, "image_url");
@@ -66,7 +66,7 @@ export const PostDealCard = (props) => {
                   style={{ maxHeight: "35px" }}
                 >
                   <select
-                    className="form-control border-0 text-white h-100 p-0"
+                    className="form-control border-0 text-white h-100 p-0 input-placeholder-white"
                     style={{ background: "#020D19" }}
                     onChange={(e) => {
                       props.onInputChange(e, "platform");
@@ -84,7 +84,7 @@ export const PostDealCard = (props) => {
                   style={{ maxHeight: "35px" }}
                 >
                   <select
-                    className="form-control border-0 text-white h-100 p-0"
+                    className="form-control border-0 text-white h-100 p-0 input-placeholder-white"
                     style={{ background: "#020D19" }}
                     placeholder="Type"
                     onChange={(e) => {
@@ -146,7 +146,7 @@ export const PostDealCard = (props) => {
                 >
                   <input
                     type="number"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
                     placeholder="Original price"
                     onChange={(e) => {
                       props.onInputChange(e, "original_price");
@@ -160,7 +160,7 @@ export const PostDealCard = (props) => {
                 >
                   <input
                     type="number"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
                     placeholder="Offer price"
                     onChange={(e) => {
                       props.onInputChange(e, "offer_price");
@@ -175,7 +175,7 @@ export const PostDealCard = (props) => {
                   <input
                     type="date"
                     placeholder="Expiration date"
-                    className="form-control border-0 text-white bg-transparent p-0"
+                    className="form-control border-0 text-white bg-transparent p-0 input-placeholder-white"
                     onChange={(e) => {
                       props.onInputChange(e, "expiration_date");
                     }}
@@ -188,7 +188,7 @@ export const PostDealCard = (props) => {
                 >
                   <input
                     type="text"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
                     placeholder="Promocode"
                     onChange={(e) => {
                       props.onInputChange(e, "promo_code");
@@ -202,7 +202,7 @@ export const PostDealCard = (props) => {
                 >
                   <input
                     type="text"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0"
+                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
                     placehoolder="Offer link"
                     onChange={(e) => {
                       props.onInputChange(e, "offer_link");
@@ -211,7 +211,7 @@ export const PostDealCard = (props) => {
                 </li>
                 {/*---------------------------------------Schedule Post---------------------------------*/}
                 <li
-                  className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row"
+                  className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row "
                   style={{ maxHeight: "35px" }}
                 >
                   <div className="form-check d-flex flex-row align-items-center">
