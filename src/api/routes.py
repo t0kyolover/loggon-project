@@ -430,7 +430,6 @@ def get_all_deals():
                 "user_id": deal.user_id,
                 "game_title": deal.game_title,
                 "platform": deal.platform,
-                "date_of_creation": deal.date_of_creation,
                 "expiration_date": deal.expiration_date,
                 "original_price": deal.original_price,
                 "offer_price": deal.offer_price,

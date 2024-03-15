@@ -54,7 +54,7 @@ export const Feed = () => {
     setDeals(store.deals);
   }, [store.deals]);
 
-  if (store.deals.length === 0) {
+  if (!store.deals || store.deals.length === 0) {
     return <LoadingSpinner />;
   }
 
