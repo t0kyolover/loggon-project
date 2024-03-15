@@ -67,7 +67,7 @@ export const Feed = () => {
         <img src={loggonBn} alt="Descrição da Imagem" className="img-fluid" />
       </div>
       <div className="d-flex justify-content-end pt-4">
-        <Filters />
+        {/*<Filters />*/}
       </div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
       <div className="row m-auto">
