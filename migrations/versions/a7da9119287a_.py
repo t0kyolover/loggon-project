@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 267b18613d05
+Revision ID: a7da9119287a
 Revises: 
-Create Date: 2024-03-14 01:44:09.599925
+Create Date: 2024-03-15 02:05:00.789417
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '267b18613d05'
+revision = 'a7da9119287a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,6 @@ def upgrade():
     sa.Column('username', sa.String(length=30), nullable=False),
     sa.Column('steam_username', sa.String(length=40), nullable=True),
     sa.Column('twitch_username', sa.String(length=40), nullable=True),
-    sa.Column('interests', sa.String(length=20), nullable=True),
     sa.Column('posts', sa.String(), nullable=True),
     sa.Column('alerts', sa.String(), nullable=True),
     sa.Column('newsletter', sa.Boolean(), nullable=True),
@@ -37,13 +36,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('game_title', sa.String(length=200), nullable=False),
-    sa.Column('platform', sa.Enum('PC', 'Xbox', 'PS5', 'Nintendo', name='Platform_options'), nullable=False),
-    sa.Column('date_of_creation', sa.DateTime(), nullable=False),
+    sa.Column('platform', sa.String(length=250), nullable=False),
     sa.Column('expiration_date', sa.DateTime(), nullable=True),
-    sa.Column('original_price', sa.Float(), nullable=False),
-    sa.Column('offer_price', sa.Float(), nullable=False),
-    sa.Column('format', sa.Enum('Digital', 'CD', name='Format_options'), nullable=False),
-    sa.Column('item_type', sa.Enum('opcion1', 'opcion2', 'opcion3', 'opcion4', 'opcion5', name='Type_options'), nullable=False),
+    sa.Column('original_price', sa.String(), nullable=False),
+    sa.Column('offer_price', sa.String(), nullable=False),
+    sa.Column('format', sa.String(length=250), nullable=False),
+    sa.Column('item_type', sa.String(length=250), nullable=False),
     sa.Column('promo_code', sa.String(length=250), nullable=True),
     sa.Column('scheduled', sa.Boolean(), nullable=True),
     sa.Column('scheduled_date', sa.DateTime(), nullable=True),
