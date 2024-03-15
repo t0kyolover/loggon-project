@@ -8,6 +8,8 @@ import { LoadingSpinner } from "../component/loadingSpinner";
 import { DealCard } from "../component/dealCard";
 import { Filters } from "../component/filters";
 
+import bn1 from '/workspaces/loggon-dak-final-project-v2/src/front/img/bn1.png';
+
 import { Context } from "../store/appContext";
 
 export const Feed = () => {
@@ -62,7 +64,14 @@ export const Feed = () => {
     <div>
       {/*------------------------------------LOGO---------------------------------*/}
       <div className="container  py-5 d-flex flex-row justify-content-center">
-        <img
+      <img
+                src={bn1}
+                alt="bn"
+                width="auto"
+                height="auto"
+                className="mt-1 me-2 sombra rounded-4 bn-effect"
+              />
+        {/* <img
           src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
           alt="Descrição da Imagem"
           className="img-fluid opacity-50"
@@ -85,7 +94,7 @@ export const Feed = () => {
           alt="Descrição da Imagem"
           className="img-fluid opacity-50"
           style={{height: "100px", transform: "scaleX(-1)"}}
-        />
+        /> */}
       </div>
       <div className="d-flex justify-content-end pt-4">{/*<Filters />*/}</div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
