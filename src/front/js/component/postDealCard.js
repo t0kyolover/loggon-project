@@ -213,9 +213,11 @@ export const PostDealCard = (props) => {
                 <li
                   className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row "
                   style={{ maxHeight: "35px" }}
+                  
                 >
-                  <div className="form-check d-flex flex-row align-items-center">
-                    <input
+                 
+                  <div className="form-check d-flex flex-row align-items-center"> {/**
+                   * <input
                       onChange={(e) => setScheduled(!scheduled)}
                       className="form-check-input"
                       type="checkbox"
@@ -226,6 +228,8 @@ export const PostDealCard = (props) => {
                     >
                       Schedule
                     </label>
+                   */}
+                    
                     {/*---------------------------------------Schedule Post Modal Trigger---------------------------------*/}
                     <div className="d-inline-flex">
                       {scheduled && (
