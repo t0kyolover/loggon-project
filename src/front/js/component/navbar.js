@@ -145,7 +145,7 @@ export const Navbar = () => {
               </div>
               <div className="offcanvas-body">
                 <div className="d-flex flex-column ms-4 my-3">
-                  {store.loggedIn && (
+                  {(store.loggedIn && store.user) && (
                     <div>
                       <Link
                         className="text-white text-decoration-none mb-2"
