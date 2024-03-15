@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-import "/workspaces/loggon-dak-final-project-v2/src/front/styles/button.css";
+import '../../styles/button.css';
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);

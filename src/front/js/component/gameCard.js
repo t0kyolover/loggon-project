@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import "/workspaces/loggon-dak-final-project-v2/src/front/styles/cardOuterGLowEffect.css";
+import '../../styles/cardOuterGLowEffect.css';
+
 
 import { Context } from "../store/appContext";
 

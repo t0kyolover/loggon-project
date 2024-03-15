@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import "/workspaces/loggon-dak-final-project-v2/src/front/styles/cardEffect.css";
+
+import '../../styles/cardEffect.css';
+
 import { Context } from "../store/appContext";
+
 export const DealCard = (props) => {
   const { store, actions } = useContext(Context);
+
   const [deal, setDeal] = useState({
     id: props.id,
     game_title: props.gameTitle,
@@ -19,7 +23,9 @@ export const DealCard = (props) => {
     game_tags: props.gameTags,
     rating: props.rating,
   });
+
   console.log(deal.id);
+
   return (
     <div
       className="card card-effect sombra text-white"
