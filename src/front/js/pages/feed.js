@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import loggonBn from "/workspaces/loggon-dak-final-project-v2/src/front/img/loggonBn.png";
+//import loggonBn from "/workspaces/loggon-dak-final-project-v2/src/front/img/loggonBn.png";
 import '../../styles/icons.css';
 
 import { LoadingSpinner } from "../component/loadingSpinner";
