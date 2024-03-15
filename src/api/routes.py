@@ -416,9 +416,9 @@ def get_deal(deal_id):
     
 
 @api.route('/deals', methods=['GET'])
-#@jwt_required()
+@jwt_required()
 def get_all_deals():
-    #id = get_jwt_identity()
+    id = get_jwt_identity()
     try:
         # Obtener todos los deals de la base de datos
         deals = Deal.query.all()
