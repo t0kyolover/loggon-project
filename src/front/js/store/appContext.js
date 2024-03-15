@@ -22,6 +22,7 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
+      state.actions.loadDeals();
       state.actions.loadTags();
       state.actions.loginWithToken();
       /**

@@ -12,14 +12,15 @@ import { Context } from "../store/appContext";
 
 export const Feed = () => {
   const { store, actions } = useContext(Context);
+  const [deals, setDeals] = useState([]);
 
   //Cambiar strings segun los datos de API
-  const psDeals = store.deals.filter(
+  const psDeals = deals.filter(
     (deal) => deal.platform === "PS4" || deal.platform === "PS5"
   );
-  const xboxDeals = store.deals.filter((deal) => deal.platform === "Xbox");
-  const pcDeals = store.deals.filter((deal) => deal.platform === "PC");
-  const nintendoDeals = store.deals.filter(
+  const xboxDeals = deals.filter((deal) => deal.platform === "Xbox");
+  const pcDeals = deals.filter((deal) => deal.platform === "PC");
+  const nintendoDeals = deals.filter(
     (deal) => deal.platform === "Nintendo"
   );
 
@@ -49,6 +50,11 @@ export const Feed = () => {
       document.removeEventListener("click", handleClick);
     };
   }, []);
+
+  useEffect(() => {
+    console.log("store.deals", store.deals)
+    setDeals(store.deals);
+  }, [store.deals]);
 
   if (store.deals.length === 0) {
     return <LoadingSpinner />;
