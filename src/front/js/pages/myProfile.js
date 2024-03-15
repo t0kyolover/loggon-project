@@ -300,13 +300,14 @@ export const MyProfile = (props) => {
               </div>
               <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row" >
                 {/*!!!!!BUG!!!!!!!--------Creo que el problema cuando se añade más intereses y la página empieza a bailar está aquí */}
-                <div className="d-flex flex-wrap gap-2" >
+                {/* <div className="d-flex flex-wrap gap-2" > */}
+                <div className="list-group" style={{ height: "200px", overflowX: "auto" }}>
                   {(!user || !user.interests || user.interests.length === 0) ? (
                     <p className="bg-transparent p-2">No Interests Added</p>
                   ) : (
                     user.interests.map((interest, index) => (
                       <p
-                        className="bg-transparent rounded-5 border-white border p-2"
+                        className="bg-transparent rounded-5 border-white m-auto my-2 border p-2"
                         key={index}
                         s
                       >
