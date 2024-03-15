@@ -20,9 +20,7 @@ export const Feed = () => {
   );
   const xboxDeals = deals.filter((deal) => deal.platform === "Xbox");
   const pcDeals = deals.filter((deal) => deal.platform === "PC");
-  const nintendoDeals = deals.filter(
-    (deal) => deal.platform === "Nintendo"
-  );
+  const nintendoDeals = deals.filter((deal) => deal.platform === "Nintendo");
 
   useEffect(() => {
     let activeElement = null;
@@ -38,21 +36,21 @@ export const Feed = () => {
       }
     };
     document.addEventListener("click", handleClick);
-  
+
     // Agregar la clase 'active' al primer elemento con la clase 'ps-effect'
     const psElement = document.querySelector(".ps-effect");
     if (psElement) {
       psElement.classList.add("active");
       activeElement = psElement;
     }
-  
+
     return () => {
       document.removeEventListener("click", handleClick);
     };
   }, []);
 
   useEffect(() => {
-    console.log("store.deals", store.deals)
+    console.log("store.deals", store.deals);
     setDeals(store.deals);
   }, [store.deals]);
 
@@ -63,12 +61,33 @@ export const Feed = () => {
   return (
     <div>
       {/*------------------------------------LOGO---------------------------------*/}
-      <div className="container mt-2 py-5">
-        <img src={loggonBn} alt="Descrição da Imagem" className="img-fluid" />
+      <div className="container  py-5 d-flex flex-row justify-content-center">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
+          alt="Descrição da Imagem"
+          className="img-fluid opacity-50"
+          style={{height: "100px"}}
+        />
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
+          alt="Descrição da Imagem"
+          className="img-fluid opacity-50"
+          style={{height: "100px"}}
+        />
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
+          alt="Descrição da Imagem"
+          className="img-fluid opacity-50"
+          style={{height: "100px", transform: "scaleX(-1)"}}
+        />
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
+          alt="Descrição da Imagem"
+          className="img-fluid opacity-50"
+          style={{height: "100px", transform: "scaleX(-1)"}}
+        />
       </div>
-      <div className="d-flex justify-content-end pt-4">
-        {/*<Filters />*/}
-      </div>
+      <div className="d-flex justify-content-end pt-4">{/*<Filters />*/}</div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
       <div className="row m-auto">
         <nav className="d-flex justify-content-center">
@@ -89,7 +108,7 @@ export const Feed = () => {
               />
             </button>
             <button
-              className="bg-color border-0" 
+              className="bg-color border-0"
               id="nav-xbox-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-xbox"

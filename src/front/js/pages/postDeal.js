@@ -87,14 +87,15 @@ export const PostDeal = (props) => {
           ))}
           {/*---------------------------------------BUTTONS---------------------------------*/}
           <div className="grid gap-3 d-flex justify-content-end mb-4">
-            <button
+            {/**<button
               type="button"
               className="btn"
               style={{ background: "#992899" }}
               onClick={addDeal}
             >
               <i className="fa-solid fa-plus text-white"></i>
-            </button>
+            </button> */}
+            
             <button
               type="button"
               className="btn text-white"
