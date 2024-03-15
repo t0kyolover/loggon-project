@@ -470,6 +470,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       postDeal: (deal) => {
         const store = getStore();
+       /* setStore((prevStore) => ({
+           deals: [...prevStore.deals, deal]
+         }));*/
         fetch(process.env.BACKEND_URL + "/api/deal", {
           method: "POST",
           body: JSON.stringify({ 
@@ -599,8 +602,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             return response.json();
           })
           .then((data) => {
-            console.log(data.results);
-            setStore({ deals: data.results });
+            console.log("fetching deals", data);
+            setStore({ deals: data});
             console.log("Deals loaded successfully!");
           });
       },
