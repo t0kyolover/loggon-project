@@ -389,7 +389,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       loginWithToken: () => {
         const token = localStorage.getItem('token');
         if (token) {
-          setStore({ token: token, loggedIn: true });
+          setStore({ token: token, loggedIn: true, user: {password: "1234"}});
           getActions().verifyIdentity();
         }
       },
