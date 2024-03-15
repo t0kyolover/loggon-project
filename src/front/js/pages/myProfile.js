@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { EditableDealCard } from "../component/editableDealCard";
 import { DealCard } from "../component/dealCard";
+import { LoadingSpinner } from "../component/loadingSpinner";
 
 import { Context } from "../store/appContext";
 
@@ -28,7 +29,7 @@ export const MyProfile = (props) => {
   const [clicked, setClicked] = useState("");
 
   useEffect(() => {
-    console.log(store.user)
+    console.log("From my profile", store.user)
     setUser(store.user);
     setNewUsername(store.user.username);
     if (store.user.image_url !== null) {
@@ -74,6 +75,10 @@ export const MyProfile = (props) => {
 
   if (store.loggedIn === false) {
     navigate("/login");
+  }
+
+  if (user == {}) {
+    return <LoadingSpinner />;
   }
 
   return (
