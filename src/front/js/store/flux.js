@@ -483,9 +483,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       postDeal: (deal) => {
         const store = getStore();
-        /* setStore((prevStore) => ({
-            deals: [...prevStore.deals, deal]
-          }));*/
         fetch(process.env.BACKEND_URL + "/api/deal", {
           method: "POST",
           body: JSON.stringify({
@@ -520,10 +517,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
           .then(() => {
             setStore((prevStore) => ({
-              /* user: {
+              user: {
                  ...prevStore.user,
-                 posts: [...prevStore.user.posts, deal],
-               },*/
+                 posts: [deal],
+               },
               deals: [...prevStore.deals, deal]
             }));
             console.log(deal);
@@ -534,7 +531,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(deal);
             console.log("Error posting:", error);
           });
-        console.log(store.deals)
+        console.log(store.user.posts)
       },
 
       modifyPost: (
