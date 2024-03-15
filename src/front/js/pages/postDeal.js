@@ -60,7 +60,8 @@ export const PostDeal = (props) => {
     } else {
       actions.postDeal(deal);
       alert("Deal posted successfully");
-      navigate(`/myprofile/${username}`);
+      navigate(`/`);
+      console.log(store.deals)
     }
   }
 

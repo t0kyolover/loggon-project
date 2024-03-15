@@ -504,20 +504,21 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then(() => {
             setStore((prevStore) => ({
-              user: {
+             /* user: {
                 ...prevStore.user,
                 posts: [...prevStore.user.posts, deal],
-              },
+              },*/
+              deals: [...prevStore.deals, deal]
             }));
             console.log(deal);
             console.log("Deal posted successfully!");
-            console.log(store.user);
           })
           .catch((error) => {
             alert(error);
             console.log(deal);
             console.log("Error posting:", error);
           });
+          console.log(store.deals)
       },
 
       modifyPost: (
@@ -579,6 +580,29 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(item);
         setDetails(item);
         console.log(`${itemType} found successfully!`);
+      },
+
+      loadDeals: () => {
+        const token = localStorage.getItem("token");
+        fetch(process.env.BACKEND_URL + "/api/deals", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw Error("Failed to get deals");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.results);
+            setStore({ deals: data.results });
+            console.log("Deals loaded successfully!");
+          });
       },
       //-GAMES-
       loadGames: () => {
