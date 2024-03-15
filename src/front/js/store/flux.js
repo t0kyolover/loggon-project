@@ -569,7 +569,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(results);
         }
       },
-      //--------------------------GET ITEMS----------------------//
+      //--------------------------GET ITEMS--------------------------//
       openItem: (id, setDetails, itemType) => {
         const store = getStore();
         const item = store[itemType + "s"].filter((item) => item.id == id);
