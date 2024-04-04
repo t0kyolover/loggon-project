@@ -1,8 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      token: localStorage.getItem('token'),
-      loggedIn: !!localStorage.getItem('token'),
+      token: localStorage.getItem("token"),
+      loggedIn: !!localStorage.getItem("token"),
       user: {
         alerts: [],
         posts: [],
@@ -11,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         saved: [],
         steam_username: "",
         twitch_username: "",
-        password: ""
+        password: "",
         /* id: 1,
          email: "pereayats@email.com",
          password: "1234",
@@ -331,7 +331,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
       signup: (email, password, username) => {
-        console.log("from signupq", email, password, username)
+        console.log("from signupq", email, password, username);
         fetch(process.env.BACKEND_URL + "/api/signup", {
           method: "POST",
           body: JSON.stringify({ email, password, username }),
@@ -369,9 +369,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             if (data.error) alert(data.error);
             else {
-              console.log(data.token)
+              console.log(data.token);
               localStorage.setItem("token", data.token);
-              setStore({ token: data.token, loggedIn: true, user: { password: password } });
+              setStore({
+                token: data.token,
+                loggedIn: true,
+                user: { password: password },
+              });
               getActions().verifyIdentity();
               console.log("Logged in successfully!");
               /* if (remember_me) {
@@ -387,16 +391,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       loginWithToken: () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (token) {
-          setStore({ token: token, loggedIn: true, user: {password: "1234"}});
+          setStore({
+            token: token,
+            loggedIn: true,
+            user: { password: "1234" },
+          });
           getActions().verifyIdentity();
         }
       },
 
       rememberMe: (remember_me) => {
         if (remember_me) {
-          localStorage.setItem('remember_me', 'true');
+          localStorage.setItem("remember_me", "true");
         }
       },
 
@@ -405,12 +413,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('remember_me');
+        localStorage.removeItem("token");
+        localStorage.removeItem("remember_me");
         setStore({
           token: null,
           loggedIn: false,
-          user: null
+          user: null,
         });
         console.log("Logged out successfully!");
       },
@@ -429,18 +437,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             .then((response) => response.json())
             .then((data) => {
               if (data && data.user) {
-                setStore( {
-                  user: {...store.user,
+                setStore({
+                  user: {
+                    ...store.user,
                     id: data.user.id,
                     email: data.user.email,
                     username: data.user.username,
                   },
-                  token: token
+                  token: token,
                 });
               }
             });
         }
-        console.log("store user from verify", store.user)
+        console.log("store user from verify", store.user);
       },
       //------------------------USER DETAILS ACTIONS--------------------//
       updateItem: (newItem, itemType) => {
@@ -486,27 +495,26 @@ const getState = ({ getStore, getActions, setStore }) => {
         fetch(process.env.BACKEND_URL + "/api/deal", {
           method: "POST",
           body: JSON.stringify({
-
-            "game_title": "",
-            "format": "",
-            "platform": "",
-            "original_price": "",
-            "offer_price": "",
-            "type": "",
-            "offer_link": "",
-            "expiration_date": null,
-            "promo_code": "",
-            "scheduled": false,
-            "scheduled_date": null,
-            "scheduled_time": null,
-            "image_url": "",
-            "rating": "",
-            "game_tags": "",
-            ...deal
+            game_title: "",
+            format: "",
+            platform: "",
+            original_price: "",
+            offer_price: "",
+            type: "",
+            offer_link: "",
+            expiration_date: null,
+            promo_code: "",
+            scheduled: false,
+            scheduled_date: null,
+            scheduled_time: null,
+            image_url: "",
+            rating: "",
+            game_tags: "",
+            ...deal,
           }),
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + store.token
+            Authorization: "Bearer " + store.token,
           },
         })
           .then((response) => {
@@ -518,10 +526,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(() => {
             setStore((prevStore) => ({
               user: {
-                 ...prevStore.user,
-                 posts: [deal],
-               },
-              deals: [...prevStore.deals, deal]
+                ...prevStore.user,
+                posts: [deal],
+              },
+              deals: [...prevStore.deals, deal],
             }));
             console.log(deal);
             console.log("Deal posted successfully!");
@@ -531,7 +539,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(deal);
             console.log("Error posting:", error);
           });
-        console.log(store.user.posts)
+        console.log(store.user.posts);
       },
 
       modifyPost: (
@@ -603,8 +611,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
           },
-        }
-        )
+        })
           .then((response) => {
             if (!response.ok) {
               throw Error("Failed to get deals");
