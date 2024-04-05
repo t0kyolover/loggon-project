@@ -176,50 +176,52 @@ export const LoginModal = (props) => {
                 Please input your email
               </h1>
             </div>
-            <div className="modal-body">
-              <input
-                type="email"
-                className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
-                placeholder="Email"
-                value={forgotPassword.email}
-                onChange={(e) =>
-                  setForgotPassword({
-                    ...forgotPassword,
-                    email: e.target.value,
-                  })
-                }
-              />
-              <input
-                type="email"
-                className="form-control rounded-5 text-white bg-transparent h-100"
-                placeholder="Confirm your email"
-                value={forgotPassword.email2}
-                onChange={(e) =>
-                  setForgotPassword({
-                    ...forgotPassword,
-                    email2: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className="modal-footer border-0">
-              <button
-                className="btn text-white btn-effect-blue"
-                data-bs-target="#loginModalToggle"
-                data-bs-toggle="modal"
-              >
-                Back
-              </button>
-              <button
-                className="btn text-white btn-effect"
-                type="submit"
-                // style={{ background: "#992899" }}
-                /* data-bs-dismiss="modal"*/
-                onClick={props.sendRecoveryEmail}
-              >
-                Confirm
-              </button>
-            </div>
+            <form>
+              <div className="modal-body">
+                <input
+                  type="email"
+                  className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
+                  placeholder="Email"
+                  value={forgotPassword.email}
+                  onChange={(e) =>
+                    setForgotPassword({
+                      ...forgotPassword,
+                      email: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="email"
+                  className="form-control rounded-5 text-white bg-transparent h-100"
+                  placeholder="Confirm your email"
+                  value={forgotPassword.email2}
+                  onChange={(e) =>
+                    setForgotPassword({
+                      ...forgotPassword,
+                      email2: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="modal-footer border-0">
+                <button
+                  className="btn text-white btn-effect-blue"
+                  data-bs-target="#loginModalToggle"
+                  data-bs-toggle="modal"
+                >
+                  Back
+                </button>
+                <button
+                  className="btn text-white btn-effect"
+                  type="submit"
+                  // style={{ background: "#992899" }}
+                  /* data-bs-dismiss="modal"*/
+                  onClick={props.sendRecoveryEmail}
+                >
+                  Confirm
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
