@@ -52,7 +52,7 @@ export const DealCard = (props) => {
             <p className="card-text" style={{ fontSize: "small" }}>{deal.item_type}</p>
           </div>
           <div className="col-6">
-            <h5 className="card-text ms-2">{deal.offer_price} €</h5>
+            <h4 className="card-text ms-2">{deal.offer_price} €</h4>
             <p className="card-text text-decoration-line-through">
               {deal.original_price} €
             </p>
