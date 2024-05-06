@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
+import loggon2 from "../../img/loggon2.png";
+
 export const SignupModal = (props) => {
   const { store, actions } = useContext(Context);
 
@@ -46,8 +48,8 @@ export const SignupModal = (props) => {
               <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
                 <div className="mb-3 col-md-6 m-4">
                   <img
-                    src="https://scontent.xx.fbcdn.net/v/t1.15752-9/429797990_692838776259943_2699987145303885142_n.png?_nc_cat=111&ccb=1-7&_nc_sid=510075&_nc_ohc=Iix4AjxwuowAX_ymY-K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRvc8PN5m7QmLQ2f17JEk-r2EHOT5ZqyQ-zxl7jvWq1bg&oe=660AF85C"
-                    className="img-fluid rounded-circle"
+                    src={loggon2}
+                    className="img-fluid mb-5"
                     alt="Logo"
                   />
                   {/*---------------------------------------Signup modal 3rd party buttons---------------------------------*/}
