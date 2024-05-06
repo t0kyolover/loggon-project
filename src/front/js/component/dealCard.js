@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import '../../styles/cardEffect.css';
+import "../../styles/cardEffect.css";
 
 import { Context } from "../store/appContext";
 
@@ -34,41 +34,54 @@ export const DealCard = (props) => {
       <img src={deal.image_url} className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex bg-color text-white rounded-bottom-2">
         <div className="row">
-       
-        <div className="col-12">
-          <h5 className="card-title">{deal.game_title}</h5>
-          <p className="card-text ms-2">{deal.format}</p>
+          <div className="col-7">
+            <h5 className="card-title">{deal.game_title}</h5>
           </div>
-          <div className="d-flex mt-2">
-        <div className="col-6">
-          <p>Original Price:</p>
-          <p className="card-text text-decoration-line-through">
+          <div className="col-5">
+            {deal.expiration_date && (
+              <p
+                className="card-text text-white"
+                style={{ fontSize: "x-small" }}
+              >
+                {deal.expiration_date} ⌛
+              </p>
+            )}
+          </div>
+          <div className="col-6" >
+            <p className="card-text">{deal.format}</p>
+            <p className="card-text" style={{ fontSize: "small" }}>{deal.item_type}</p>
+          </div>
+          <div className="col-6">
+            <h5 className="card-text ms-2">{deal.offer_price} €</h5>
+            <p className="card-text text-decoration-line-through">
               {deal.original_price} €
             </p>
-            <p>Offer Price:</p>
-            <p className="card-text ms-2">{deal.offer_price} €</p>
-            </div>
+          </div>
           {/*<p>Rating {deal.rating}</p>*/}
-          <div className="col-6">
-          <p className="card-text">{deal.item_type}</p>
-          {deal.expiration_date && (
-            <p className="card-text text-white mt-2">{deal.expiration_date} ⌛</p>
-          )}
-          <Link className="btn btn-link text-white btn-effect rounded-2 mt-3 px-2" to={`/post/${deal.id}`} style={{ textDecoration: 'none' }}>
-            DETAILS
-          </Link>
+
+          <div className="d-flex flex-row grid gap-2">
+            <div className="col-6">
+              <Link
+                className="btn btn-link text-white btn-effect rounded-2 mt-3 px-2 w-100"
+                to={`/post/${deal.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                DETAILS
+              </Link>
+            </div>
+            <div className="col-6">
+              <button className="btn text-white rounded-2 mt-3 btn-effect-blue w-100">
+                <a
+                  className="text-white"
+                  href={deal.offer_link}
+                  target="_blank"
+                  style={{ textDecoration: "none" }}
+                >
+                  DEAL
+                </a>
+              </button>
+            </div>
           </div>
-          </div>
-          <div className="d-flex flex-column">
-            <button
-            className="btn text-white rounded-2 mt-3 btn-effect-blue"
-          >
-            <a className="text-white" href={deal.offer_link} target="_blank" style={{ textDecoration: 'none' }}>
-              DEAL
-            </a>
-          </button>
-          </div>
-        
         </div>
       </div>
     </div>
