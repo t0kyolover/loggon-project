@@ -98,7 +98,7 @@ export const Feed = () => {
           style={{height: "100px", transform: "scaleX(-1)"}}
         /> */}
       </div>
-      <div className="d-flex justify-content-end pt-4">{/*<Filters />*/}</div>
+      <div className="d-flex justify-content-end pt-4"><Filters /></div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
       <div className="row m-auto">
         <nav className="d-flex justify-content-center">
