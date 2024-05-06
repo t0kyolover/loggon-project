@@ -63,9 +63,11 @@ export const Feed = () => {
   }
 
   return (
-    <div>
-      {/*------------------------------------LOGO---------------------------------*/}
-      <div className="container  py-5 d-flex flex-row justify-content-center">
+    <div><div className="text-white m-3">
+        <h1 style={{ fontSize: "50px" }}>Deals</h1>
+      </div>
+      {/*------------------------------------BANNER---------------------------------*/}
+      <div className="container d-flex flex-row justify-content-center">
         <img
           src={bn1}
           alt="bn"
@@ -98,13 +100,14 @@ export const Feed = () => {
           style={{height: "100px", transform: "scaleX(-1)"}}
         /> */}
       </div>
+      
       <div className="d-flex justify-content-end pt-4"><Filters /></div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
       <div className="row m-auto">
         <nav className="d-flex justify-content-center">
-          <div className="nav nav-tabs" id="nav-tab" role="tablist">
+          <div className="nav nav-tabs border-0 mb-4" id="nav-tab" role="tablist">
             <button
-              className="bg-color border-0 "
+              className="bg-color border-0 mx-3"
               id="nav-ps-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-ps"
@@ -119,7 +122,7 @@ export const Feed = () => {
               />
             </button>
             <button
-              className="bg-color border-0"
+              className="bg-color border-0 mx-3"
               id="nav-xbox-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-xbox"
@@ -134,7 +137,7 @@ export const Feed = () => {
               />
             </button>
             <button
-              className="bg-color border-0"
+              className="bg-color border-0 mx-3"
               id="nav-pc-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-pc"
@@ -149,7 +152,7 @@ export const Feed = () => {
               />
             </button>
             <button
-              className="bg-color border-0"
+              className="bg-color border-0 mx-3"
               id="nav-nintendo-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-nintendo"
