@@ -87,7 +87,7 @@ export const Navbar = () => {
   }
 
   // Somehow the input doesn't restrict to email format
-  function sendRecoveryEmail() {
+  function sendRecoveryEmail(e) {
     if (
       forgotPassword.email.trim() &&
       forgotPassword.email2.trim() &&
@@ -96,8 +96,10 @@ export const Navbar = () => {
       actions.forgotPassword(forgotPassword.email);
       alert("Password recovery email sent successfully!");
     } else if (!forgotPassword.email || !forgotPassword.email2) {
+      e.preventDefault();
       alert("Missing fields!");
     } else if (forgotPassword.email !== forgotPassword.email2) {
+      e.preventDefault();
       alert("Emails do not match!");
     }
   }
@@ -216,9 +218,13 @@ export const Navbar = () => {
             {/*---------------------------------------LOGIN MODAL---------------------------------*/}
 
             <LoginModal
-              closeLoginButton={closeLoginButton}
-              handleLogin={handleLogin}
+              login={login}
+              setLogin={setLogin}
+              forgotPassword={forgotPassword}
+              setForgotPassword={setForgotPassword}
               sendRecoveryEmail={sendRecoveryEmail}
+              handleLogin={handleLogin}
+              closeLoginButton={closeLoginButton}
             />
             <div className="ms-4 mb-3">
               {/*---------------------------------------LOGOUT MODAL---------------------------------*/}
@@ -292,7 +298,6 @@ export const Navbar = () => {
           setSignup={setSignup}
           handleSignup={handleSignup}
           closeSignUpButton={closeSignUpButton}
-          
         />
       </nav>
     </div>

@@ -39,8 +39,7 @@ export const SingleDeal = (props) => {
     } else if (deal.platform === "Xbox") {
       setDeal({
         ...deal,
-        platform:
-          "https://img.icons8.com/ios/50/40C057/xbox.png",
+        platform: "https://img.icons8.com/ios/50/40C057/xbox.png",
       });
     } else if (deal.platform === "Nintendo") {
       setDeal({
