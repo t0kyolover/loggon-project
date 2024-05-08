@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
-export const LogoutModal = (props) => {
+export const LogoutModal = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div>
       <div
         className="modal fade"
         id="logoutModal"
@@ -20,11 +19,13 @@ export const LogoutModal = (props) => {
             className="modal-content text-white"
             style={{ background: "#020D19" }}
           >
+            {/*---------------------------------Title---------------------------------*/}
             <div className="modal-header border-0">
               <h1 className="modal-title fs-5" id="logoutModalLabel">
                 Are you sure?
               </h1>
               <div className="ms-auto" data-bs-theme="dark">
+                {/*------------------------------Buttons------------------------------*/}
                 <button
                   type="button"
                   className="btn-close "
@@ -56,6 +57,5 @@ export const LogoutModal = (props) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
