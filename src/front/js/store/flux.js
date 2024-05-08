@@ -331,7 +331,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
       signup: (email, password, username) => {
-        console.log("from signupq", email, password, username);
+        console.log("from signup", email, password, username);
         fetch(process.env.BACKEND_URL + "/api/signup", {
           method: "POST",
           body: JSON.stringify({ email, password, username }),

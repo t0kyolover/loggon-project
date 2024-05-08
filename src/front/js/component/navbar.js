@@ -288,8 +288,11 @@ export const Navbar = () => {
         </div>
         {/*---------------------------------------SIGNUP MODAL---------------------------------*/}
         <SignupModal
-          closeLoginButton={closeSignUpButton}
+          signup={signup}
+          setSignup={setSignup}
           handleSignup={handleSignup}
+          closeSignUpButton={closeSignUpButton}
+          
         />
       </nav>
     </div>
