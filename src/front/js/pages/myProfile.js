@@ -29,7 +29,7 @@ export const MyProfile = (props) => {
   const [clicked, setClicked] = useState("");
 
   useEffect(() => {
-    console.log("From my profile", store.user)
+    //console.log("From my profile", store.user)
     setUser(store.user);
     setNewUsername(store.user.username);
     if (store.user.image_url !== null) {

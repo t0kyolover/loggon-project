@@ -39,17 +39,8 @@ export const Games = () => {
               <div key={game.id} className="col">
               <GameCard
                 key={game.id}
-                id={game.id}
-                rawgId={game.rawg_id}
-                name={game.name}
+                game={game}
                 description={(game.description)}
-                released={game.released}
-                tba={game.tba}
-                website={game.website}
-                backgroundImage={game.background_image}
-                backgroundImageAdditional={game.background_image_additional}
-                platforms={game.platforms}
-                gameTags={game.game_tags}
               />
               </div>
             ))}

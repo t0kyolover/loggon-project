@@ -80,12 +80,12 @@ export const SingleDeal = (props) => {
                   <div className="d-flex flex-row">
                     {/*------------------------------------Type---------------------------------*/}
                     <div className="d-flex flex-row mt-3">
-                      <i class="fa-solid fa-gamepad fs-4"></i>
+                      <i className="fa-solid fa-gamepad fs-4"></i>
                       <h5 className="ms-2">{deal.item_type}</h5>
                     </div>
                     {/*------------------------------------Format---------------------------------*/}
                     <div className="d-flex flex-row mt-3 ms-4">
-                      <i class="fa-solid fa-eject fs-4"></i>
+                      <i className="fa-solid fa-eject fs-4"></i>
                       <h5 className="ms-2">{deal.format}</h5>
                     </div>
                   </div>
@@ -116,7 +116,7 @@ export const SingleDeal = (props) => {
                   </h5>{" "}
                   {/*------------------------------------Promocode---------------------------------*/}
                   <div className="d-flex flex-row align-items-center">
-                    <i class="fa-solid fa-barcode fs-4"></i>
+                    <i className="fa-solid fa-barcode fs-4"></i>
                     <h2 className="ms-2">{deal.promo_code}</h2>
                   </div>
                   {/*------------------------------------Offer Link---------------------------------*/}
