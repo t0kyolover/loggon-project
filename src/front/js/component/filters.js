@@ -27,9 +27,9 @@ export const Filters = () => {
         style={{ width: "15%", background: "#020D19" }}
       >
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title text-white" id="offcanvasDarkLabel">
+          <h3 className="offcanvas-title text-white" id="offcanvasDarkLabel">
             Filter by
-          </h5>
+          </h3>
         </div>
         <div className="offcanvas-body">
           <form>

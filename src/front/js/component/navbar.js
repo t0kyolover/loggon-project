@@ -120,14 +120,14 @@ export const Navbar = () => {
     <div className="position-relative">
       {/*Me gusta opacity-75 y fixed-top pero todo lo de mas se pone con opacidad y disabled no se puede tocar*/}
       <nav
-        className="navbar bg-gradient justify-content-evenly flex-row"
+        className="navbar bg-gradient justify-content-evenly flex-row py-0"
         style={{ background: "#020D19" }}
       >
         <div className="container-fluid">
-          <div className="d-flex flex-row w-50">
+          <div className="d-flex flex-row w-50 ms-4">
             {/*---------------------------------------MENU ICON---------------------------------*/}
             <button
-              className="btn btn-effect"
+              className="btn btn-effect border-0 p-0"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#menuOffcanvas"
@@ -144,12 +144,12 @@ export const Navbar = () => {
             >
               {/*---------------------------------------MENU CONTENTS---------------------------------*/}
               <div className="offcanvas-header">
-                <h5
+                <h3
                   className="offcanvas-title text-white"
                   id="menuOffcanvasLabel"
                 >
-                  Menu
-                </h5>
+                  Navigation
+                </h3>
               </div>
               <div className="offcanvas-body">
                 <div className="d-flex flex-column ms-4 my-3">
@@ -160,7 +160,10 @@ export const Navbar = () => {
                         to={`/myprofile/${store.user.username}`}
                       >
                         <div className="mb-2" data-bs-dismiss="offcanvas">
-                          My profile
+                        <h6 className="btn-effect-blue border-0">
+                        My profile
+                        </h6>
+                          
                         </div>
                       </Link>
                       <Link
@@ -168,7 +171,10 @@ export const Navbar = () => {
                         to={`/postdeal/user/${store.user.username}`}
                       >
                         <div className="mb-2" data-bs-dismiss="offcanvas">
-                          Post deal
+                        <h6 className="btn-effect-blue border-0">
+                        Post deal
+                        </h6>
+                          
                         </div>
                       </Link>{" "}
                     </div>
@@ -177,24 +183,30 @@ export const Navbar = () => {
                     className="text-white text-decoration-none mb-2"
                     to={"/games"}
                   >
-                    <div data-bs-dismiss="offcanvas">Games</div>
+                    <div data-bs-dismiss="offcanvas" >
+                      <h6 className="btn-effect-blue border-0">
+                        Games
+                      </h6>
+                      </div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/"}
                   >
                     <div className="mb-2" data-bs-dismiss="offcanvas">
-                      Deals
+                    <h6 className="btn-effect-blue border-0">
+                        Deals
+                      </h6>
+                      
                     </div>
                   </Link>
 
                   {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
-                  <div className="ms-4 mb-3">
+                  <div className="mb-3">
                     {!store.loggedIn ? (
                       <button
                         type="button"
-                        className="btn text-white btn-effect m-auto mt-4"
-                        // style={{ background: "#992899" }}
+                        className="btn btn-effect"
                         data-bs-toggle="modal"
                         data-bs-target="#loginModalToggle"
                       >
@@ -203,8 +215,7 @@ export const Navbar = () => {
                     ) : (
                       <button
                         type="button"
-                        className="btn text-white btn-effect"
-                        // style={{ background: "#992899" }}
+                        className="btn btn-effect"
                         data-bs-toggle="modal"
                         data-bs-target="#logoutModal"
                       >
@@ -237,7 +248,7 @@ export const Navbar = () => {
                 alt="loGGon"
                 width="auto"
                 height="34"
-                className="mt-2 me-2 "
+                className="mt-2 me-2 btn-effect-blue border-0 rounded"
               />
             </Link>
             {/*---------------------------------------SEARCH BAR---------------------------------*/}
