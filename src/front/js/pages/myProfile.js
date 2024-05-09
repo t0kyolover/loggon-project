@@ -43,7 +43,6 @@ export const MyProfile = (props) => {
     setUser(store.user);
   }, [store.user]);
 
- 
   function updateItem(e, newItem, itemType) {
     e.preventDefault();
     if (
@@ -85,23 +84,20 @@ export const MyProfile = (props) => {
     <div className="container-fluid m-auto">
       {/*---------------------------------------PROFILE DETAILS---------------------------------*/}
       <div className="d-flex justify-content-center w-100 mt-3">
-        <div className="d-flex flex-column text-white">
-          <h3 className="m-auto ps-4">My Profile</h3>{" "}
+        <div className="d-flex flex-row text-white">
+          <h1 className="ps-4 me-5">My Profile</h1>{" "}
           {/*--------falta de centralización----------*/}
           <div className="d-flex flex-row flex-wrap ">
             <form>
               {clicked == "image" ? (
                 <div>
                   <button
-                    className="btn py-0"
+                    className="btn btn-effect py-0"
                     onClick={(e) => {
                       updateItem(e, newUserImage, "image_url");
                     }}
                   >
-                    <i
-                      className="fa-solid fa-circle-check"
-                      style={{ color: "#992899" }}
-                    ></i>
+                    <i className="fa-solid fa-circle-check"></i>
                   </button>
                   <input
                     type="text"
@@ -113,16 +109,13 @@ export const MyProfile = (props) => {
               ) : (
                 <div>
                   <button
-                    className="btn py-0"
+                    className="btn btn-effect py-0"
                     onClick={(e) => {
                       e.preventDefault();
                       setClicked("image");
                     }}
                   >
-                    <i
-                      className="fa-solid fa-pencil fa-flip-horizontal"
-                      style={{ color: "#992899" }}
-                    ></i>
+                    <i className="fa-solid fa-pencil fa-flip-horizontal"></i>
                   </button>
                   <img
                     style={{ maxWidth: "500px", maxHeight: "500px" }}
@@ -151,28 +144,22 @@ export const MyProfile = (props) => {
                 <div className="ms-auto">
                   {clicked == "username" ? (
                     <button
-                      className="btn py-0"
+                      className="btn btn-effect py-0"
                       onClick={(e) => {
                         updateItem(e, newUsername, "username");
                       }}
                     >
-                      <i
-                        className="fa-solid fa-circle-check"
-                        style={{ color: "#992899" }}
-                      ></i>
+                      <i className="fa-solid fa-circle-check"></i>
                     </button>
                   ) : (
                     <button
-                      className="btn py-0"
+                      className="btn btn-effect py-0"
                       onClick={(e) => {
                         e.preventDefault();
                         setClicked("username");
                       }}
                     >
-                      <i
-                        className="fa-solid fa-pencil"
-                        style={{ color: "#992899" }}
-                      ></i>
+                      <i className="fa-solid fa-pencil"></i>
                     </button>
                   )}
                 </div>
@@ -187,17 +174,14 @@ export const MyProfile = (props) => {
               {/*---------------------------------------Password---------------------------------*/}
               {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>Password</div>
-              <div className="d-flex flex-row">
+              <div className="d-flex flex-row align-items-center">
                 <li className="list-group-item rounded-5 my-2 text-white bg-transparent">
                   <div className="me-auto">
                     <p className="fw-bold mb-0">*********</p>
                   </div>
                 </li>
                 <Link to={`/password_recovery/${user.username}`}>
-                  <button
-                    className="btn text-white rounded-5 ms-3"
-                    style={{ background: "#992899" }}
-                  >
+                  <button className="btn btn-effect rounded-5 ms-3">
                     Change
                   </button>
                 </Link>
@@ -232,7 +216,7 @@ export const MyProfile = (props) => {
                         onChange={(e) => setNewSteamUsername(e.target.value)}
                       />
                       <button
-                        className="btn py-0"
+                        className="btn btn-effect py-0"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseSteam"
                         aria-expanded="false"
@@ -276,7 +260,7 @@ export const MyProfile = (props) => {
                         onChange={(e) => setTwitchUsername(e.target.value)}
                       />
                       <button
-                        className="btn py-0"
+                        className="btn btn-effect py-0"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseTwitch"
                         aria-expanded="false"
@@ -298,11 +282,14 @@ export const MyProfile = (props) => {
               <div style={{ fontSize: "12px", color: "#992899" }}>
                 Interests
               </div>
-              <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row" >
+              <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
                 {/*!!!!!BUG!!!!!!!--------Creo que el problema cuando se añade más intereses y la página empieza a bailar está aquí */}
                 {/* <div className="d-flex flex-wrap gap-2" > */}
-                <div className="list-group" style={{ height: "200px", overflowX: "auto" }}>
-                  {(!user || !user.interests || user.interests.length === 0) ? (
+                <div
+                  className="list-group"
+                  style={{ height: "200px", overflowX: "auto" }}
+                >
+                  {!user || !user.interests || user.interests.length === 0 ? (
                     <p className="bg-transparent p-2">No Interests Added</p>
                   ) : (
                     user.interests.map((interest, index) => (
@@ -320,7 +307,7 @@ export const MyProfile = (props) => {
                 <div className="ms-3">
                   <button
                     type="button"
-                    className="btn"
+                    className="btn btn-effect"
                     data-bs-toggle="modal"
                     data-bs-target="#modifyInterestsModal"
                   >
@@ -370,10 +357,12 @@ export const MyProfile = (props) => {
                             }}
                           ></input>
                         </form>
-                        <small>My interests</small>
+                        <small style={{ color: "#992899" }}>My interests</small>
                         <ul className="list-group border-0 my-2 bg-transparent d-flex flex-row">
                           <div className="d-flex flex-wrap gap-2 justify-content-center">
-                            {(!user || !user.interests || user.interests.length === 0) ? (
+                            {!user ||
+                            !user.interests ||
+                            user.interests.length === 0 ? (
                               <p className="bg-transparent p-2">
                                 No Interests Added
                               </p>
@@ -469,7 +458,7 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center ">
               <div className="row row-cols-auto justify-content-center">
-                {(!user || !user.posts || user.posts.length === 0) ? (
+                {!user || !user.posts || user.posts.length === 0 ? (
                   <p className="bg-transparent p-2">No posts</p>
                 ) : (
                   user.posts.map((post, index) => (
@@ -492,7 +481,7 @@ export const MyProfile = (props) => {
                       />
                     </div>
                   ))
-                  )}
+                )}
               </div>
             </div>
           </div>
@@ -506,7 +495,7 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto justify-content-center">
-                {(!user || !user.saved || user.saved.length === 0) ? (
+                {!user || !user.saved || user.saved.length === 0 ? (
                   <p className="bg-transparent p-2">No saved deals</p>
                 ) : (
                   user.saved.map((deal, index) => (
@@ -528,7 +517,7 @@ export const MyProfile = (props) => {
                       />
                     </div>
                   ))
-                  )}
+                )}
               </div>
             </div>
           </div>
@@ -542,11 +531,11 @@ export const MyProfile = (props) => {
           >
             <div className="container text-center">
               <div className="row row-cols-auto justify-content-center">
-                {(!user || !user.alerts || user.alerts.length === 0) ? (
+                {!user || !user.alerts || user.alerts.length === 0 ? (
                   <p className="bg-transparent p-2">No alerts</p>
                 ) : (
                   user.alerts.map((alert, index) => (
-                    <div className="col mx-2 my-4"key={index}>
+                    <div className="col mx-2 my-4" key={index}>
                       <DealCard
                         id={alert.id}
                         gameTitle={alert.game_title}
@@ -564,7 +553,7 @@ export const MyProfile = (props) => {
                       />
                     </div>
                   ))
-                  )}
+                )}
               </div>
             </div>
           </div>

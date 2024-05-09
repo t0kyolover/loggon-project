@@ -90,17 +90,17 @@ export const PasswordRecovery = (props) => {
                 value={newPasswordConfirmation}
                 onChange={(e) => setNewPasswordConfirmation(e.target.value)}
               />
-              <div id="passwordHelpBlock" className="form-text text-white">
+              <div id="passwordHelpBlock" className="form-text text-white" >
                 Your password must be 8-20 characters long, contain letters and
                 numbers, and must not contain spaces, special characters, or
                 emoji.
               </div>
-              <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-end mt-3">
                 {store.loggedIn ? (
                   <div>
                     <button
                       type="button"
-                      className="btn btn-danger me-md-2 border-0 mb-3"
+                      className="btn btn-effect-blue me-md-2 mb-3"
                       onClick={() => {
                         navigate(-1);
                       }}
@@ -108,8 +108,7 @@ export const PasswordRecovery = (props) => {
                       Back
                     </button>
                     <button
-                      className="btn text-white me-md-2 border-0 mb-3"
-                      style={{ background: "#992899" }}
+                      className="btn btn-effect me-md-2 mb-3"
                       type="button"
                       onClick={changePassword}
                     >
@@ -118,8 +117,7 @@ export const PasswordRecovery = (props) => {
                   </div>
                 ) : (
                   <button
-                    className="btn text-white me-md-2 border-0 mb-3"
-                    style={{ background: "#992899" }}
+                    className="btn btn-effect me-md-2 mb-3"
                     type="button"
                     onClick={resetPassword}
                   >

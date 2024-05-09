@@ -127,7 +127,7 @@ export const Navbar = () => {
           <div className="d-flex flex-row w-50">
             {/*---------------------------------------MENU ICON---------------------------------*/}
             <button
-              className="btn"
+              className="btn btn-effect"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#menuOffcanvas"
@@ -245,7 +245,7 @@ export const Navbar = () => {
             <div className="d-flex flex-row">
               <p className="mx-2">
                 <button
-                  className="btn p-0 mt-3"
+                  className="btn mt-3 btn-effect border-0 rounded-circle"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseSearch"
@@ -281,7 +281,7 @@ export const Navbar = () => {
           {!store.loggedIn && (
             <button
               type="button"
-              className="mx-3 btn"
+              className="mx-3 btn btn-effect border-0"
               data-bs-toggle="modal"
               data-bs-target="#signupModalToggle"
             >

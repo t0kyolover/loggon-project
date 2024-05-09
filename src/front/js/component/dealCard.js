@@ -32,7 +32,7 @@ export const DealCard = (props) => {
       style={{ width: "18rem" }}
     >
       <img src={deal.image_url} className="card-img-top" alt="..." />
-      <div className="card-body flex-row d-flex bg-color text-white rounded-bottom-2">
+      <div className="card-body flex-row d-flex bg-color text-white rounded-bottom-2 shadow-lg">
         <div className="row">
           <div className="col-7">
             <h5 className="card-title">{deal.game_title}</h5>
@@ -62,7 +62,7 @@ export const DealCard = (props) => {
           <div className="d-flex flex-row grid gap-2">
             <div className="col-6">
               <Link
-                className="btn btn-link text-white btn-effect rounded-2 mt-3 px-2 w-100"
+                className="btn btn-link btn-effect rounded-2 mt-3 px-2 w-100"
                 to={`/post/${deal.id}`}
                 style={{ textDecoration: "none" }}
               >
@@ -70,9 +70,8 @@ export const DealCard = (props) => {
               </Link>
             </div>
             <div className="col-6">
-              <button className="btn text-white rounded-2 mt-3 btn-effect-blue w-100">
+              <button className="btn rounded-2 mt-3 btn-effect-blue w-100">
                 <a
-                  className="text-white"
                   href={deal.offer_link}
                   target="_blank"
                   style={{ textDecoration: "none" }}

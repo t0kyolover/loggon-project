@@ -8,7 +8,7 @@ import { Context } from "../store/appContext";
 
 export const PostDeal = (props) => {
   const { store, actions } = useContext(Context);
-  const {username} = useParams();
+  const { username } = useParams();
   const navigate = useNavigate();
 
   const [deal, setDeal] = useState({
@@ -25,8 +25,8 @@ export const PostDeal = (props) => {
     offer_link: "",
     scheduled_date: null,
     scheduled_time: null,
-    scheduled: false, 
-    rating: 0
+    scheduled: false,
+    rating: 0,
   });
   const [additionalDeals, setAdditionalDeals] = useState([]);
 
@@ -61,7 +61,7 @@ export const PostDeal = (props) => {
       actions.postDeal(deal);
       alert("Deal posted successfully");
       navigate(`/`);
-      console.log(store.deals)
+      console.log(store.deals);
     }
   }
 
@@ -72,38 +72,40 @@ export const PostDeal = (props) => {
   return (
     <div className="container-fluid">
       <div className="d-flex justify-content-center w-100 mt-3">
-        <div className="d-flex flex-column  text-white">
-          <h3 className="m-auto my-3">Post Deal</h3>
-          <PostDealCard
-            gameTitle={deal.game_title}
-            onInputChange={handleInputChange}
-          />
-          {additionalDeals.map((deal, index) => (
-            <PostDealCard
-              key={index}
-              onClick={(e) => deleteDeal(index, e)}
-              isAdditional={true}
-            />
-          ))}
-          {/*---------------------------------------BUTTONS---------------------------------*/}
-          <div className="grid gap-3 d-flex justify-content-end mb-4">
-            {/**<button
-              type="button"
-              className="btn"
-              style={{ background: "#992899" }}
-              onClick={addDeal}
-            >
-              <i className="fa-solid fa-plus text-white"></i>
-            </button> */}
-            
-            <button
-              type="button"
-              className="btn text-white"
-              style={{ background: "#992899" }}
-              onClick={(e) => handlePostDeal(e, deal)}
-            >
-              Post
-            </button>
+        <div className="d-flex flex-column text-white">
+          <div className="d-flex flex-row">
+            <h1 className="my-3">Post Deal</h1>{" "}
+            <div>
+              <PostDealCard
+                gameTitle={deal.game_title}
+                onInputChange={handleInputChange}
+              />
+              {additionalDeals.map((deal, index) => (
+                <PostDealCard
+                  key={index}
+                  onClick={(e) => deleteDeal(index, e)}
+                  isAdditional={true}
+                />
+              ))}
+              {/*---------------------------------------BUTTONS---------------------------------*/}
+              <div className="grid gap-3 d-flex justify-content-end mb-4">
+                <button
+                  type="button"
+                  className="btn btn-effect-blue"
+                  onClick={addDeal}
+                >
+                  <i className="fa-solid fa-plus text-white"></i>
+                </button>
+
+                <button
+                  type="button"
+                  className="btn btn-effect"
+                  onClick={(e) => handlePostDeal(e, deal)}
+                >
+                  Post
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

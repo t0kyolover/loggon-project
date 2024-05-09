@@ -45,20 +45,25 @@ export const UserProfile = (props) => {
               </li>
               {/*---------------------------------------Platforms usernames---------------------------------*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>Link</div>
-              <li className="list-group-item border-0 p-0 my-2 text-white bg-transparent">
+              <li className="list-group-item border-0 p-0 my-2 bg-transparent">
                 <div className="d-flex align-items-center">
-                  <a
+                  <button className="rounded-circle mx-2 btn-effect-blue">
+                    <a
                     href={`https://steamcommunity.com/id/${user.steam_username}`}
                     target="_blank"
                   >
-                    <i className="fa-brands fa-steam text-white fs-3 me-2"></i>
+                    <i className="fa-brands fa-steam fs-3"></i>
                   </a>
-                  <a
+                  </button>
+                  <button className="rounded-circle btn-effect">
+                    <a
                     href={`https://www.twitch.tv/${user.twitch_username}`}
                     target="_blank"
                   >
-                    <i className="fa-brands fa-twitch text-white fs-3"></i>
+                    <i className="fa-brands fa-twitch fs-3"></i>
                   </a>
+                  </button>
+                  
                 </div>
               </li>
             </ul>

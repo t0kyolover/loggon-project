@@ -49,15 +49,15 @@ export const LoginModal = ({
               {/*--------------------------------3rd Party Login---------------------------------*/}
 
               <div className="text-center mt-4 p-3">
-                <button className="mt-2 rounded-circle mx-2">
+                <button className="mt-2 rounded-circle mx-2 btn-effect-blue">
                   <i className="fa-brands fa-steam text-dark fs-3"></i>
                 </button>
 
-                <button className="mt-2 rounded-circle mx-2">
+                <button className="mt-2 rounded-circle mx-2 btn-effect-blue">
                   <i className="fa-brands fa-twitch text-dark fs-3"></i>
                 </button>
 
-                <button className="mt-2 rounded-circle mx-2">
+                <button className="mt-2 rounded-circle mx-2 btn-effect-blue">
                   <i className="fa-brands fa-google text-dark fs-3"></i>
                 </button>
               </div>

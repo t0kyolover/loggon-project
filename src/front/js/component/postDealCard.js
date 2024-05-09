@@ -20,7 +20,7 @@ export const PostDealCard = (props) => {
             {" "}
             {/*---texto del mismo color que el fondo para que sea invisible,
            pero tenemos que cambiarlo correctamente ----*/}
-            <img className="rounded-circle img-fluid "
+            <img className="img-fluid"
               src={
                 props.image_url ||
                 "https://img.freepik.com/premium-photo/cyberpunk-gaming-controller-gamepad-joystick-illustration_691560-5812.jpg?size=338&ext=jpg&ga=GA1.1.1700460183.1710115200&semt=sph"
@@ -216,8 +216,8 @@ export const PostDealCard = (props) => {
                   
                 >
                  
-                  <div className="form-check d-flex flex-row align-items-center"> {/**
-                   * <input
+                  <div className="form-check d-flex flex-row align-items-center"> 
+                    <input
                       onChange={(e) => setScheduled(!scheduled)}
                       className="form-check-input"
                       type="checkbox"
@@ -226,27 +226,30 @@ export const PostDealCard = (props) => {
                       className="form-check-label ms-2"
                       htmlFor="scheduleCheck"
                     >
-                      Schedule
+                      <h6>
+                        Schedule
+                      </h6>
+                      
                     </label>
-                   */}
+                   
                     
                     {/*---------------------------------------Schedule Post Modal Trigger---------------------------------*/}
                     <div className="d-inline-flex">
                       {scheduled && (
                         <button
                           type="button"
-                          className="btn btn-link"
+                          className="btn btn-effect-blue btn-link ms-2"
                           id="scheduleCheck"
                           data-bs-toggle="modal"
                           data-bs-target="#scheduleModal"
                         >
-                          Choose date and time
+                          Choose
                         </button>
                       )}
                       {/*---------------------------------------DELETE BUTTON---------------------------------*/}
                       {props.isAdditional && (
-                        <button className="btn py-0" onClick={props.onClick}>
-                          <i className="fa-regular fa-trash-can text-danger"></i>
+                        <button className="btn btn-effect py-0 ms-3" onClick={props.onClick}>
+                          <i className="fa-regular fa-trash-can"></i>
                         </button>
                       )}
                     </div>
@@ -300,8 +303,7 @@ export const PostDealCard = (props) => {
                       </div>
                       <div className="modal-footer border-0 flex-column">
                         <button
-                          className="btn text-white"
-                          style={{ background: "#992899" }}
+                          className="btn btn-effect text-white"
                           data-bs-dismiss="modal"
                           aria-label="Close"
                           onClick={(e) => e.preventDefault()}

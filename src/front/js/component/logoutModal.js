@@ -37,7 +37,7 @@ export const LogoutModal = () => {
             <div className="modal-footer border-0">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-effect-blue"
                 data-bs-dismiss="modal"
               >
                 Close
@@ -45,9 +45,9 @@ export const LogoutModal = () => {
               <Link to="/">
                 {" "}
                 <button
-                  className="btn text-white"
+                  className="btn btn-effect"
                   data-bs-dismiss="modal"
-                  style={{ background: "#992899" }}
+                  
                   onClick={actions.logout}
                 >
                   Logout
