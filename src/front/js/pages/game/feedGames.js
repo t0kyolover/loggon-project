@@ -1,28 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { LoadingSpinner } from "../component/loadingSpinner";
-import { GameCard } from "../component/gameCard";
-import { Filters } from "../component/filters";
+import { LoadingSpinner } from "../../component/utils/loadingSpinner";
+import { GameCard } from "../../component/game/gameCard";
+import { Filters } from "../../component/utils/filters";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
-export const Games = () => {
+export const FeedGames = () => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
     actions.loadGames();
   }, []);
 
- useEffect(() => {
+  useEffect(() => {
     actions.loadGamesWithDetails();
-    
-  }, [store.games])
+  }, [store.games]);
 
   if (store.gamesWithDetails.length === 0) {
-    return (
-      <LoadingSpinner />
-    );
+    return <LoadingSpinner />;
   }
 
   return (
@@ -35,15 +32,15 @@ export const Games = () => {
       </div>
       <div className="container text-center ">
         <div className="row row-cols-auto justify-content-center">
-            {store.gamesWithDetails.map((game, index) => (
-              <div key={game.id} className="col">
+          {store.gamesWithDetails.map((game, index) => (
+            <div key={game.id} className="col">
               <GameCard
                 key={game.id}
                 game={game}
-                description={(game.description)}
+                description={game.description}
               />
-              </div>
-            ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>

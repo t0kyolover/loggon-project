@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const PasswordRecovery = (props) => {
   const { store, actions } = useContext(Context);
@@ -15,9 +15,9 @@ export const PasswordRecovery = (props) => {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
 
-  useEffect(()=>{
+  useEffect(() => {
     setCurrentPassword(store.user.password);
-  }, [])
+  }, []);
 
   function resetPassword(e) {
     e.preventDefault();
@@ -90,7 +90,7 @@ export const PasswordRecovery = (props) => {
                 value={newPasswordConfirmation}
                 onChange={(e) => setNewPasswordConfirmation(e.target.value)}
               />
-              <div id="passwordHelpBlock" className="form-text text-white" >
+              <div id="passwordHelpBlock" className="form-text text-white">
                 Your password must be 8-20 characters long, contain letters and
                 numbers, and must not contain spaces, special characters, or
                 emoji.

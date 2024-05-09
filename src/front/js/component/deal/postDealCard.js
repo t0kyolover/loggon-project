@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const PostDealCard = (props) => {
   const { store, actions } = useContext(Context);
@@ -20,10 +20,11 @@ export const PostDealCard = (props) => {
             {" "}
             {/*---texto del mismo color que el fondo para que sea invisible,
            pero tenemos que cambiarlo correctamente ----*/}
-            <img className="img-fluid"
+            <img
+              className="img-fluid"
               src={
                 props.image_url ||
-                "https://img.freepik.com/premium-photo/cyberpunk-gaming-controller-gamepad-joystick-illustration_691560-5812.jpg?size=338&ext=jpg&ga=GA1.1.1700460183.1710115200&semt=sph"
+                "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg"
               }
               alt="..."
             />
@@ -213,10 +214,8 @@ export const PostDealCard = (props) => {
                 <li
                   className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row "
                   style={{ maxHeight: "35px" }}
-                  
                 >
-                 
-                  <div className="form-check d-flex flex-row align-items-center"> 
+                  <div className="form-check d-flex flex-row align-items-center">
                     <input
                       onChange={(e) => setScheduled(!scheduled)}
                       className="form-check-input"
@@ -226,13 +225,9 @@ export const PostDealCard = (props) => {
                       className="form-check-label ms-2"
                       htmlFor="scheduleCheck"
                     >
-                      <h6>
-                        Schedule
-                      </h6>
-                      
+                      <h6>Schedule</h6>
                     </label>
-                   
-                    
+
                     {/*---------------------------------------Schedule Post Modal Trigger---------------------------------*/}
                     <div className="d-inline-flex">
                       {scheduled && (
@@ -248,7 +243,10 @@ export const PostDealCard = (props) => {
                       )}
                       {/*---------------------------------------DELETE BUTTON---------------------------------*/}
                       {props.isAdditional && (
-                        <button className="btn btn-effect py-0 ms-3" onClick={props.onClick}>
+                        <button
+                          className="btn btn-effect py-0 ms-3"
+                          onClick={props.onClick}
+                        >
                           <i className="fa-regular fa-trash-can"></i>
                         </button>
                       )}

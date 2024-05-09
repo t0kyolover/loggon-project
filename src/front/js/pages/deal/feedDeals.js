@@ -1,20 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-//import loggonBn from "/workspaces/loggon-dak-final-project-v2/src/front/img/loggonBn.png";
-import '../../styles/icons.css';
+import "../../../styles/icons.css";
 
-import { LoadingSpinner } from "../component/loadingSpinner";
-import { DealCard } from "../component/dealCard";
-import { Filters } from "../component/filters";
+import { LoadingSpinner } from "../../component/utils/loadingSpinner";
+import { DealCard } from "../../component/deal/dealCard";
+import { Filters } from "../../component/utils/filters";
 
-import bn1 from "../../img/bn1.png";
+import bn1 from "../../../img/bn1.png";
 
-// import bn1 from 'src/front/img/bn1.png';
+import { Context } from "../../store/appContext";
 
-import { Context } from "../store/appContext";
-
-export const Feed = () => {
+export const FeedDeals = () => {
   const { store, actions } = useContext(Context);
   const [deals, setDeals] = useState([]);
 
@@ -63,7 +60,8 @@ export const Feed = () => {
   }
 
   return (
-    <div><div className="text-white m-3">
+    <div>
+      <div className="text-white m-3">
         <h1 style={{ fontSize: "50px" }}>Deals</h1>
       </div>
       {/*------------------------------------BANNER---------------------------------*/}
@@ -100,12 +98,18 @@ export const Feed = () => {
           style={{height: "100px", transform: "scaleX(-1)"}}
         /> */}
       </div>
-      
-      <div className="d-flex justify-content-end pt-4"><Filters /></div>
+
+      <div className="d-flex justify-content-end pt-4">
+        <Filters />
+      </div>
       {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
       <div className="row m-auto">
         <nav className="d-flex justify-content-center">
-          <div className="nav nav-tabs border-0 mb-4" id="nav-tab" role="tablist">
+          <div
+            className="nav nav-tabs border-0 mb-4"
+            id="nav-tab"
+            role="tablist"
+          >
             <button
               className="bg-color border-0 mx-3"
               id="nav-ps-tab"

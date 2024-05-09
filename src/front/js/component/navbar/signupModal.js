@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
-import loggon2 from "../../img/loggon2.png";
+import loggon2 from "../../../img/loggon2.png";
 
 export const SignupModal = ({
   signup,
@@ -182,10 +182,7 @@ export const SignupModal = ({
                 {/*---------------------------------------Buttons---------------------------------*/}
                 <div className="modal-footer flex-column border-0">
                   {/*---------------------------------signup---------------------------------*/}
-                  <button
-                    className="btn btn-effect"
-                    onClick={handleSignup}
-                  >
+                  <button className="btn btn-effect" onClick={handleSignup}>
                     Signup
                   </button>
                   {/*---------------------------------to login modal---------------------------------*/}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const EditableDealCard = (props) => {
   const { store, actions } = useContext(Context);
@@ -93,43 +93,54 @@ export const EditableDealCard = (props) => {
   }
   /*No actualiza los datos al modificar en la card, pero si que los modifica a nivel de datos */
   return (
-    <div className="card card-effect sombra text-white" style={{ width: "18rem" }}>
+    <div
+      className="card card-effect sombra text-white"
+      style={{ width: "18rem" }}
+    >
       <img src={deal.image_url} className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex bg-color text-white rounded-bottom-2 pe-0">
         <div className="row">
-        <div className="col-12">
-          <h5 className="card-title ">{deal.game_title}</h5>
-          <p className="card-text ">{deal.format}</p>
+          <div className="col-12">
+            <h5 className="card-title ">{deal.game_title}</h5>
+            <p className="card-text ">{deal.format}</p>
           </div>
           <div className="d-flex mt-2 ">
-          <div className="col-6">
-           <p className="card-text">{deal.item_type}</p>
-          
-          <p className="card-text text-decoration-line-through">
-            {deal.original_price}
-          </p>
-          <p className="card-text">{deal.offer_price} €</p>
-          </div>
-          <div className="col-6">
-          {deal.promo_code && <h6 className="card-text">{deal.promo_code}</h6>}
-          {deal.expiration_date && (
-            <p className="card-text">{deal.expiration_date}</p>
-          )}
-          <div className="ms-4">
-          <Link className="btn btn-link text-white btn-effect rounded-2  px-2" to={`/post/${deal.id}`}>
-          DETAILS
-          </Link>
-          </div>
-          </div>
+            <div className="col-6">
+              <p className="card-text">{deal.item_type}</p>
+
+              <p className="card-text text-decoration-line-through">
+                {deal.original_price}
+              </p>
+              <p className="card-text">{deal.offer_price} €</p>
+            </div>
+            <div className="col-6">
+              {deal.promo_code && (
+                <h6 className="card-text">{deal.promo_code}</h6>
+              )}
+              {deal.expiration_date && (
+                <p className="card-text">{deal.expiration_date}</p>
+              )}
+              <div className="ms-4">
+                <Link
+                  className="btn btn-link text-white btn-effect rounded-2  px-2"
+                  to={`/post/${deal.id}`}
+                >
+                  DETAILS
+                </Link>
+              </div>
+            </div>
           </div>
           <div className="d-flex flex-column">
-          <button
-            className="btn btn text-white rounded-2 mt-3 px-2 btn-effect-blue ms-4"
-          >
-            <a className="text-white " href={deal.offer_link} target="_blank" style={{ textDecoration: 'none' }}>
-            DEAL
-            </a>
-          </button>
+            <button className="btn btn text-white rounded-2 mt-3 px-2 btn-effect-blue ms-4">
+              <a
+                className="text-white "
+                href={deal.offer_link}
+                target="_blank"
+                style={{ textDecoration: "none" }}
+              >
+                DEAL
+              </a>
+            </button>
           </div>
         </div>
         <div className="ms-auto">
@@ -142,7 +153,10 @@ export const EditableDealCard = (props) => {
             tabIndex="-1"
           >
             <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content text-white" style={{ background: "#020D19" }}>
+              <div
+                className="modal-content text-white"
+                style={{ background: "#020D19" }}
+              >
                 <div className="modal-header border-0">
                   <h1
                     className="modal-title fs-5"
@@ -297,7 +311,10 @@ export const EditableDealCard = (props) => {
             tabIndex="-1"
           >
             <div className="modal-dialog modal-sm modal-dialog-centered">
-              <div className="modal-content text-white" style={{ background: "#020D19" }}>
+              <div
+                className="modal-content text-white"
+                style={{ background: "#020D19" }}
+              >
                 <div className="modal-header border-0">
                   <h1
                     className="modal-title fs-5"

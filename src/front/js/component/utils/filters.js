@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const Filters = () => {
   const { store, actions } = useContext(Context);
@@ -50,7 +50,10 @@ export const Filters = () => {
                   role="switch"
                   id="dateFilterSwitch"
                 />
-                <label className="form-check-label text-white" htmlFor="dateFilterSwitch">
+                <label
+                  className="form-check-label text-white"
+                  htmlFor="dateFilterSwitch"
+                >
                   newest
                 </label>
               </div>
@@ -61,7 +64,10 @@ export const Filters = () => {
                   role="switch"
                   id="ratingFilterSwitch"
                 />
-                <label className="form-check-label text-white" htmlFor="ratingFilterSwitch">
+                <label
+                  className="form-check-label text-white"
+                  htmlFor="ratingFilterSwitch"
+                >
                   highest rating
                 </label>
               </div>
@@ -76,7 +82,10 @@ export const Filters = () => {
                   id="formatDigitalFilter"
                   value="Digital"
                 />
-                <label className="form-check-label text-white" htmlFor="formatDigitalFilter">
+                <label
+                  className="form-check-label text-white"
+                  htmlFor="formatDigitalFilter"
+                >
                   Digital
                 </label>
               </div>
@@ -88,7 +97,10 @@ export const Filters = () => {
                   id="formatCDFilter"
                   value="CD"
                 />
-                <label className="form-check-label text-white" htmlFor="formatCDFilter">
+                <label
+                  className="form-check-label text-white"
+                  htmlFor="formatCDFilter"
+                >
                   CD
                 </label>
               </div>

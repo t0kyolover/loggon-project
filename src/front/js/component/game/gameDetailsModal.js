@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import "../../styles/cardOuterGLowEffect.css";
+import "../../../styles/cardOuterGLowEffect.css";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const GameDetailsModal = ({ game, description, setDescription }) => {
   const { store, actions } = useContext(Context);
@@ -28,8 +28,11 @@ export const GameDetailsModal = ({ game, description, setDescription }) => {
       tabIndex="-1"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" >
-        <div className="modal-content bg-transparent text-white" style={{maxHeight: "700px"}}>
+      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div
+          className="modal-content bg-transparent text-white"
+          style={{ maxHeight: "700px" }}
+        >
           <div className="m-auto" data-bs-theme="dark">
             <button
               type="button"

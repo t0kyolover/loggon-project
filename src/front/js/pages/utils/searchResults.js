@@ -1,16 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link, useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import { DealCard } from "../component/dealCard";
-import { GameCard } from "../component/gameCard";
+import { DealCard } from "../../component/deal/dealCard";
+import { GameCard } from "../../component/game/gameCard";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const SearchResults = () => {
   const { store, actions } = useContext(Context);
   const { keyword } = useParams();
-  
 
   useEffect(() => {
     actions.searchInNavbar(keyword);
@@ -33,7 +32,7 @@ export const SearchResults = () => {
           {deals.length > 0 &&
             deals.map((deal, index) => (
               <div key={index}>
-                <div className="col" >
+                <div className="col">
                   <DealCard
                     id={deal.id}
                     gameTitle={deal.game_title}
@@ -54,12 +53,12 @@ export const SearchResults = () => {
               </div>
             ))}
         </div>
-        {/*<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 mt-3">
           <h5 className="text-white">Games</h5>
           {games.length > 0 &&
             games.map((game, index) => (
               <div key={index}>
-                <div className="col" >
+                <div className="col">
                   <GameCard
                     id={game.id}
                     rawgId={game.rawg_id}
@@ -77,8 +76,6 @@ export const SearchResults = () => {
               </div>
             ))}
         </div>
-        */}
-        
       </div>
     </div>
   );

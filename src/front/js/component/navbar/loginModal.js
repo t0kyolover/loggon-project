@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { ForgotPasswordModal } from "./forgotPasswordModal";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const LoginModal = ({
   login,

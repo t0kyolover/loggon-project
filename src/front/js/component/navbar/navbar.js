@@ -5,11 +5,11 @@ import { LoginModal } from "./loginModal";
 import { SignupModal } from "./signupModal";
 import { LogoutModal } from "./logoutModal";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
-import "../../styles/button.css";
+import "../../../styles/button.css";
 
-import logoImg from "../../img/loggon1.png";
+import logoImg from "../../../img/loggon1.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -160,10 +160,9 @@ export const Navbar = () => {
                         to={`/myprofile/${store.user.username}`}
                       >
                         <div className="mb-2" data-bs-dismiss="offcanvas">
-                        <h6 className="btn-effect-blue border-0">
-                        My profile
-                        </h6>
-                          
+                          <h6 className="btn-effect-blue border-0">
+                            My profile
+                          </h6>
                         </div>
                       </Link>
                       <Link
@@ -171,10 +170,9 @@ export const Navbar = () => {
                         to={`/postdeal/user/${store.user.username}`}
                       >
                         <div className="mb-2" data-bs-dismiss="offcanvas">
-                        <h6 className="btn-effect-blue border-0">
-                        Post deal
-                        </h6>
-                          
+                          <h6 className="btn-effect-blue border-0">
+                            Post deal
+                          </h6>
                         </div>
                       </Link>{" "}
                     </div>
@@ -183,21 +181,16 @@ export const Navbar = () => {
                     className="text-white text-decoration-none mb-2"
                     to={"/games"}
                   >
-                    <div data-bs-dismiss="offcanvas" >
-                      <h6 className="btn-effect-blue border-0">
-                        Games
-                      </h6>
-                      </div>
+                    <div data-bs-dismiss="offcanvas">
+                      <h6 className="btn-effect-blue border-0">Games</h6>
+                    </div>
                   </Link>
                   <Link
                     className="text-white text-decoration-none mb-2"
                     to={"/"}
                   >
                     <div className="mb-2" data-bs-dismiss="offcanvas">
-                    <h6 className="btn-effect-blue border-0">
-                        Deals
-                      </h6>
-                      
+                      <h6 className="btn-effect-blue border-0">Deals</h6>
                     </div>
                   </Link>
 

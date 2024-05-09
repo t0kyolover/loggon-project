@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import "../../styles/cardEffect.css";
+import "../../../styles/cardEffect.css";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const DealCard = (props) => {
   const { store, actions } = useContext(Context);
@@ -47,9 +47,11 @@ export const DealCard = (props) => {
               </p>
             )}
           </div>
-          <div className="col-6" >
+          <div className="col-6">
             <p className="card-text">{deal.format}</p>
-            <p className="card-text" style={{ fontSize: "small" }}>{deal.item_type}</p>
+            <p className="card-text" style={{ fontSize: "small" }}>
+              {deal.item_type}
+            </p>
           </div>
           <div className="col-6">
             <h4 className="card-text ms-2">{deal.offer_price} €</h4>

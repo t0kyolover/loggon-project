@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import "../../styles/cardOuterGLowEffect.css";
+import "../../../styles/cardOuterGLowEffect.css";
 
 import { GameDetailsModal } from "./gameDetailsModal";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const GameCard = ({ game }) => {
   const { store, actions } = useContext(Context);

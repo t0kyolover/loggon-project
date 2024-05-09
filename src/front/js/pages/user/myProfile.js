@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
-import { EditableDealCard } from "../component/editableDealCard";
-import { DealCard } from "../component/dealCard";
-import { LoadingSpinner } from "../component/loadingSpinner";
+import { EditableDealCard } from "../../component/deal/editableDealCard";
+import { DealCard } from "../../component/deal/dealCard";
+import { LoadingSpinner } from "../../component/utils/loadingSpinner";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const MyProfile = (props) => {
   const { store, actions } = useContext(Context);

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
-import { PostDealCard } from "../component/postDealCard";
+import { PostDealCard } from "../../component/deal/postDealCard";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const PostDeal = (props) => {
   const { store, actions } = useContext(Context);

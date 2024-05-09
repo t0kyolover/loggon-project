@@ -2,10 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
-import { LoadingSpinner } from "../component/loadingSpinner";
-import { DealCard } from "../component/dealCard";
+import { LoadingSpinner } from "../../component/utils/loadingSpinner";
+import { DealCard } from "../../component/deal/dealCard";
 
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 
 export const UserProfile = (props) => {
   const { store, actions } = useContext(Context);
@@ -49,21 +49,20 @@ export const UserProfile = (props) => {
                 <div className="d-flex align-items-center">
                   <button className="rounded-circle mx-2 btn-effect-blue">
                     <a
-                    href={`https://steamcommunity.com/id/${user.steam_username}`}
-                    target="_blank"
-                  >
-                    <i className="fa-brands fa-steam fs-3"></i>
-                  </a>
+                      href={`https://steamcommunity.com/id/${user.steam_username}`}
+                      target="_blank"
+                    >
+                      <i className="fa-brands fa-steam fs-3"></i>
+                    </a>
                   </button>
                   <button className="rounded-circle btn-effect">
                     <a
-                    href={`https://www.twitch.tv/${user.twitch_username}`}
-                    target="_blank"
-                  >
-                    <i className="fa-brands fa-twitch fs-3"></i>
-                  </a>
+                      href={`https://www.twitch.tv/${user.twitch_username}`}
+                      target="_blank"
+                    >
+                      <i className="fa-brands fa-twitch fs-3"></i>
+                    </a>
                   </button>
-                  
                 </div>
               </li>
             </ul>
