@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: localStorage.getItem("token"),
-      loggedIn: !!localStorage.getItem("token"),
+      loggedIn: true,
       user: {
         alerts: [],
         posts: [],
@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         steam_username: "",
         twitch_username: "",
         password: "",
-        /* id: 1,
+         id: 1,
          email: "pereayats@email.com",
          password: "1234",
          image_url:
@@ -138,7 +138,7 @@ const getState = ({ getStore, getActions, setStore }) => {
              game_tags: ["multiplayer", "action", "adventure", "open-world"],
            },
          ],
-         newsletter: false,*/
+         newsletter: false,
       },
       deals: [
         {

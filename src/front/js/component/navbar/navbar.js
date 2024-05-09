@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
+import { NavigationOffcanvas } from "./navigationOffcanvas";
 import { LoginModal } from "./loginModal";
 import { SignupModal } from "./signupModal";
 import { LogoutModal } from "./logoutModal";
+import { SearchBar } from "../utils/searchBar";
 
 import { Context } from "../../store/appContext";
 
@@ -43,6 +45,8 @@ export const Navbar = () => {
        setSuggestions([]);
      }
    }, [searchTerm]);*/
+
+  useEffect(() => {}, [store.user]);
 
   useEffect(() => {
     if (location.pathname === "/login") {
@@ -125,7 +129,7 @@ export const Navbar = () => {
       >
         <div className="container-fluid">
           <div className="d-flex flex-row w-50 ms-4">
-            {/*---------------------------------------MENU ICON---------------------------------*/}
+            {/*-------------------------MENU ICON------------------------*/}
             <button
               className="btn btn-effect border-0 p-0"
               type="button"
@@ -135,106 +139,10 @@ export const Navbar = () => {
             >
               <i className="fa-solid fa-bars" style={{ color: "#992899" }}></i>
             </button>
-            <div
-              className="offcanvas offcanvas-start"
-              tabIndex="-1"
-              id="menuOffcanvas"
-              aria-labelledby="menuOffcanvasLabel"
-              style={{ width: "15%", background: "#020D19" }}
-            >
-              {/*---------------------------------------MENU CONTENTS---------------------------------*/}
-              <div className="offcanvas-header">
-                <h3
-                  className="offcanvas-title text-white"
-                  id="menuOffcanvasLabel"
-                >
-                  Navigation
-                </h3>
-              </div>
-              <div className="offcanvas-body">
-                <div className="d-flex flex-column ms-4 my-3">
-                  {store.loggedIn && store.user && (
-                    <div>
-                      <Link
-                        className="text-white text-decoration-none mb-2"
-                        to={`/myprofile/${store.user.username}`}
-                      >
-                        <div className="mb-2" data-bs-dismiss="offcanvas">
-                          <h6 className="btn-effect-blue border-0">
-                            My profile
-                          </h6>
-                        </div>
-                      </Link>
-                      <Link
-                        className="text-white text-decoration-none mb-2"
-                        to={`/postdeal/user/${store.user.username}`}
-                      >
-                        <div className="mb-2" data-bs-dismiss="offcanvas">
-                          <h6 className="btn-effect-blue border-0">
-                            Post deal
-                          </h6>
-                        </div>
-                      </Link>{" "}
-                    </div>
-                  )}
-                  <Link
-                    className="text-white text-decoration-none mb-2"
-                    to={"/games"}
-                  >
-                    <div data-bs-dismiss="offcanvas">
-                      <h6 className="btn-effect-blue border-0">Games</h6>
-                    </div>
-                  </Link>
-                  <Link
-                    className="text-white text-decoration-none mb-2"
-                    to={"/"}
-                  >
-                    <div className="mb-2" data-bs-dismiss="offcanvas">
-                      <h6 className="btn-effect-blue border-0">Deals</h6>
-                    </div>
-                  </Link>
+            {/*---------------------------MENU CONTENTS-------------------------*/}
+            <NavigationOffcanvas />
 
-                  {/*---------------------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON---------------------------------*/}
-                  <div className="mb-3">
-                    {!store.loggedIn ? (
-                      <button
-                        type="button"
-                        className="btn btn-effect"
-                        data-bs-toggle="modal"
-                        data-bs-target="#loginModalToggle"
-                      >
-                        <div data-bs-dismiss="offcanvas">Login</div>
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        className="btn btn-effect"
-                        data-bs-toggle="modal"
-                        data-bs-target="#logoutModal"
-                      >
-                        <div data-bs-dismiss="offcanvas">Logout</div>
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/*---------------------------------------LOGIN MODAL---------------------------------*/}
-
-            <LoginModal
-              login={login}
-              setLogin={setLogin}
-              forgotPassword={forgotPassword}
-              setForgotPassword={setForgotPassword}
-              sendRecoveryEmail={sendRecoveryEmail}
-              handleLogin={handleLogin}
-              closeLoginButton={closeLoginButton}
-            />
-            <div className="ms-4 mb-3">
-              {/*---------------------------------------LOGOUT MODAL---------------------------------*/}
-              <LogoutModal />
-            </div>
-            {/*---------------------------------------LOGO---------------------------------*/}
+            {/*---------------------------LOGO----------------------------*/}
             <Link to={"/"} className="navbar-brand mx-3">
               <img
                 src={logoImg}
@@ -244,59 +152,65 @@ export const Navbar = () => {
                 className="mt-2 me-2 btn-effect-blue border-0 rounded"
               />
             </Link>
-            {/*---------------------------------------SEARCH BAR---------------------------------*/}
-
-            <div className="d-flex flex-row">
-              <p className="mx-2">
-                <button
-                  className="btn mt-3 btn-effect border-0 rounded-circle"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseSearch"
-                  aria-expanded="false"
-                  aria-controls="collapseSearch"
-                >
-                  <i
-                    className="fa-solid fa-magnifying-glass"
-                    style={{ color: "#992899" }}
-                  ></i>
-                </button>
-              </p>
-              <div style={{ minHeight: "50px" }}>
-                <div
-                  className="collapse collapse-horizontal"
-                  id="collapseSearch"
-                >
-                  <form onSubmit={performSearch}>
-                    <input
-                      type="search"
-                      className="form-control rounded-5 w-auto text-white bg-transparent mt-2"
-                      style={{ maxHeight: "30px" }}
-                      aria-label="Búsqueda"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                  </form>
-                </div>
-              </div>
-            </div>
+            {/*------------------------------SEARCH BAR----------------------------*/}
+            <SearchBar
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              performSearch={performSearch}
+            />
           </div>
-          {/*---------------------------------------SIGNUP MODAL TRIGGER BUTTON---------------------------------*/}
-          {!store.loggedIn && (
-            <button
-              type="button"
-              className="mx-3 btn btn-effect border-0"
-              data-bs-toggle="modal"
-              data-bs-target="#signupModalToggle"
-            >
-              <i
-                className="fa-solid fa-user-plus"
-                style={{ color: "#992899" }}
-              ></i>
-            </button>
-          )}
+          <div>
+            {/*-------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON------------------*/}
+            {!store.loggedIn ? (
+              <button
+                type="button"
+                className="btn btn-effect border-0"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModalToggle"
+              >
+                <i className="fa-solid fa-right-to-bracket"></i>
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-effect-blue border-0"
+                data-bs-toggle="modal"
+                data-bs-target="#logoutModal"
+              >
+                <i className="fa-solid fa-right-from-bracket"></i>
+              </button>
+            )}
+
+            {/*------------------------SIGNUP MODAL TRIGGER BUTTON------------------------*/}
+
+            {!store.loggedIn && (
+              <button
+                type="button"
+                className="mx-3 btn btn-effect border-0"
+                data-bs-toggle="modal"
+                data-bs-target="#signupModalToggle"
+              >
+                <i className="fa-solid fa-user-plus"></i>
+              </button>
+            )}
+          </div>
         </div>
-        {/*---------------------------------------SIGNUP MODAL---------------------------------*/}
+        {/*-----------------------LOGIN MODAL----------------------*/}
+
+        <LoginModal
+          login={login}
+          setLogin={setLogin}
+          forgotPassword={forgotPassword}
+          setForgotPassword={setForgotPassword}
+          sendRecoveryEmail={sendRecoveryEmail}
+          handleLogin={handleLogin}
+          closeLoginButton={closeLoginButton}
+        />
+
+        {/*----------------------LOGOUT MODAL------------------------*/}
+        <LogoutModal />
+
+        {/*----------------------SIGNUP MODAL-----------------------*/}
         <SignupModal
           signup={signup}
           setSignup={setSignup}

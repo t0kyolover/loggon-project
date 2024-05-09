@@ -5,33 +5,19 @@ import "../../../styles/cardEffect.css";
 
 import { Context } from "../../store/appContext";
 
-export const DealCard = (props) => {
+import defaultDeal from "../../../img/defaultDeal.png";
+
+export const DealCard = ({deal}) => {
   const { store, actions } = useContext(Context);
 
-  const [deal, setDeal] = useState({
-    id: props.id,
-    game_title: props.gameTitle,
-    image_url: props.imageUrl,
-    item_type: props.itemType,
-    platform: props.platform,
-    format: props.format,
-    original_price: props.originalPrice,
-    offer_price: props.offerPrice,
-    expiration_date: props.expirationDate,
-    promo_code: props.promoCode,
-    offer_link: props.offerLink,
-    game_tags: props.gameTags,
-    rating: props.rating,
-  });
-
-  console.log(deal.id);
+  //console.log(deal.id);
 
   return (
     <div
       className="card card-effect sombra text-white"
       style={{ width: "18rem" }}
     >
-      <img src={deal.image_url} className="card-img-top" alt="..." />
+      <img src={deal.image_url || defaultDeal} className="card-img-top" alt="..." />
       <div className="card-body flex-row d-flex bg-color text-white rounded-bottom-2 shadow-lg">
         <div className="row">
           <div className="col-7">

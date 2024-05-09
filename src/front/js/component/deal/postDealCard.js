@@ -2,321 +2,268 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { Context } from "../../store/appContext";
+import { SchedulePostModal } from "./schedulePostModal";
 
-export const PostDealCard = (props) => {
+export const PostDealCard = ({ onInputChange, isAdditional, onClick }) => {
   const { store, actions } = useContext(Context);
 
   const [scheduled, setScheduled] = useState(false);
 
   return (
-    <div
-      className="card mb-3 border-0 text-white"
-      style={{ maxWidth: "540px", background: "#020D19" }}
-    >
-      {/*---------------------------------------DEAL INPUT FORM---------------------------------*/}
-      <form>
-        <div className="row flex-row">
-          <div className="col-md-6 text-center m-auto">
-            {" "}
-            {/*---texto del mismo color que el fondo para que sea invisible,
-           pero tenemos que cambiarlo correctamente ----*/}
-            <img
-              className="img-fluid"
-              src={
-                props.image_url ||
-                "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg"
-              }
-              alt="..."
-            />
-          </div>
-          <div className="col-md-6">
-            <div className="card-body">
-              <ul className="list-group">
-                {/*---------------------------------------Game Title---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <input
-                    type="search"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
-                    placeholder="Game title"
-                    onChange={(e) => {
-                      props.onInputChange(e, "game_title");
-                    }}
-                    required
-                  />
-                </li>
-                {/*---------------------------------------Image Url---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <input
-                    type="text"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
-                    placeholder="Image URL"
-                    onChange={(e) => {
-                      props.onInputChange(e, "image_url");
-                    }}
-                  />
-                </li>
-                {/*---------------------------------------Platform---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <select
-                    className="form-control border-0 text-white h-100 p-0 input-placeholder-white"
-                    style={{ background: "#020D19" }}
-                    onChange={(e) => {
-                      props.onInputChange(e, "platform");
-                    }}
-                  >
-                    <option value="PC">PC</option>
-                    <option value="PS5">PS5</option>
-                    <option value="Xbox">Xbox</option>
-                    <option value="Nintendo">Nintendo</option>
-                  </select>
-                </li>
-                {/*---------------------------------------Type---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <select
-                    className="form-control border-0 text-white h-100 p-0 input-placeholder-white"
-                    style={{ background: "#020D19" }}
-                    placeholder="Type"
-                    onChange={(e) => {
-                      props.onInputChange(e, "type");
-                    }}
-                  >
-                    <option value="Game">Game</option>
-                    <option value="DLC">DLC</option>
-                    <option value="In-game Purchase">In-game Purchase</option>
-                  </select>
-                </li>
-                {/*---------------------------------------Format---------------------------------*/}
-                <li
-                  className="list-group-item border-0 my-2 text-white bg-transparent d-flex"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <div className="form-check me-3">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioFormat"
-                      id="flexRadioDigital"
-                      checked
-                      value="Digital"
-                      onChange={(e) => {
-                        props.onInputChange(e, "format");
-                      }}
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexRadioDigital"
-                    >
-                      Digital
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="flexRadioFormat"
-                      id="flexRadioPhysical"
-                      value="CD"
-                      onChange={(e) => {
-                        props.onInputChange(e, "format");
-                      }}
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexRadioPhysical"
-                    >
-                      CD
-                    </label>
-                  </div>
-                </li>
-                {/*---------------------------------------Original Price---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <input
-                    type="number"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
-                    placeholder="Original price"
-                    onChange={(e) => {
-                      props.onInputChange(e, "original_price");
-                    }}
-                  />
-                </li>
-                {/*---------------------------------------Offer Price---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <input
-                    type="number"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
-                    placeholder="Offer price"
-                    onChange={(e) => {
-                      props.onInputChange(e, "offer_price");
-                    }}
-                  />
-                </li>
-                {/*---------------------------------------Expiration Date---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <input
-                    type="date"
-                    placeholder="Expiration date"
-                    className="form-control border-0 text-white bg-transparent p-0 input-placeholder-white"
-                    onChange={(e) => {
-                      props.onInputChange(e, "expiration_date");
-                    }}
-                  />
-                </li>
-                {/*---------------------------------------Promo Code---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <input
-                    type="text"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
-                    placeholder="Promocode"
-                    onChange={(e) => {
-                      props.onInputChange(e, "promo_code");
-                    }}
-                  />
-                </li>
-                {/*---------------------------------------Offer Link---------------------------------*/}
-                <li
-                  className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
-                  style={{ maxHeight: "35px" }}
-                >
-                  <input
-                    type="text"
-                    className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
-                    placeholder="Offerlink"
-                    onChange={(e) => {
-                      props.onInputChange(e, "offer_link");
-                    }}
-                  />
-                </li>
-                {/*---------------------------------------Schedule Post---------------------------------*/}
-                <li
-                  className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row "
-                  style={{ maxHeight: "35px" }}
-                >
-                  <div className="form-check d-flex flex-row align-items-center">
-                    <input
-                      onChange={(e) => setScheduled(!scheduled)}
-                      className="form-check-input"
-                      type="checkbox"
-                    />
-                    <label
-                      className="form-check-label ms-2"
-                      htmlFor="scheduleCheck"
-                    >
-                      <h6>Schedule</h6>
-                    </label>
-
-                    {/*---------------------------------------Schedule Post Modal Trigger---------------------------------*/}
-                    <div className="d-inline-flex">
-                      {scheduled && (
-                        <button
-                          type="button"
-                          className="btn btn-effect-blue btn-link ms-2"
-                          id="scheduleCheck"
-                          data-bs-toggle="modal"
-                          data-bs-target="#scheduleModal"
-                        >
-                          Choose
-                        </button>
-                      )}
-                      {/*---------------------------------------DELETE BUTTON---------------------------------*/}
-                      {props.isAdditional && (
-                        <button
-                          className="btn btn-effect py-0 ms-3"
-                          onClick={props.onClick}
-                        >
-                          <i className="fa-regular fa-trash-can"></i>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </li>
-
-                {/*---------------------------------------Schedule Post Modal---------------------------------*/}
-                <div
-                  className="modal fade"
-                  id="scheduleModal"
-                  aria-hidden="true"
-                  aria-labelledby="scheduleModalLabel"
-                  tabIndex="-1"
-                >
-                  <div className="modal-dialog modal-sm modal-dialog-centered">
-                    <div
-                      className="modal-content text-white"
-                      style={{ background: "#020D19" }}
-                    >
-                      <div className="modal-header border-0">
-                        <h1
-                          className="modal-title fs-5"
-                          id="scheduleModalLabel"
-                        >
-                          Schedule Post
-                        </h1>
-                        <div className="ms-auto" data-bs-theme="dark">
-                          <button
-                            type="button"
-                            className="btn-close "
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                      </div>
-                      <div className="modal-body">
-                        <input
-                          type="date"
-                          className="form-control rounded-5 text-white bg-transparent h-100 mb-3"
-                          onChange={(e) => {
-                            props.onInputChange(e, "scheduled_date");
-                          }}
-                        />
-                        <input
-                          type="time"
-                          className="form-control rounded-5 text-white bg-transparent h-100"
-                          onChange={(e) => {
-                            props.onInputChange(e, "scheduled_time");
-                          }}
-                        />
-                      </div>
-                      <div className="modal-footer border-0 flex-column">
-                        <button
-                          className="btn btn-effect text-white"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ul>
-            </div>
+    <form style={{ background: "#020D19" }}>
+      <ul className="list-group">
+        <div className="row">
+          <div className="col-3">
+            {/*---------------------------------------Game Title---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="search"
+                className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
+                placeholder="Game title"
+                onChange={(e) => {
+                  onInputChange(e, "game_title");
+                }}
+                required
+              />
+            </li>
+          </div><div className="col-3">
+            {/*---------------------------------------Image Url---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="text"
+                className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
+                placeholder="Image URL"
+                onChange={(e) => {
+                  onInputChange(e, "image_url");
+                }}
+              />
+            </li>
           </div>
         </div>
-      </form>
-    </div>
+        <div className="row">
+          
+        </div>
+        <div className="row">
+          <div className="col-1">
+            {/*---------------------------------------Platform---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <select
+                className="form-control border-0 text-white h-100 p-0 input-placeholder-white"
+                style={{ background: "#020D19" }}
+                onChange={(e) => {
+                  onInputChange(e, "platform");
+                }}
+              >
+                <option value="PC">PC</option>
+                <option value="PS5">PS5</option>
+                <option value="Xbox">Xbox</option>
+                <option value="Nintendo">Nintendo</option>
+              </select>
+            </li>
+          </div>
+          <div className="col-1">
+            {/*---------------------------------------Type---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <select
+                className="form-control border-0 text-white h-100 p-0 input-placeholder-white"
+                style={{ background: "#020D19" }}
+                placeholder="Type"
+                onChange={(e) => {
+                  onInputChange(e, "type");
+                }}
+              >
+                <option value="Game">Game</option>
+                <option value="DLC">DLC</option>
+                <option value="In-game Purchase">In-game Purchase</option>
+              </select>
+            </li>
+          </div>
+          <div className="col-1">
+            {/*---------------------------------------Format---------------------------------*/}
+            <li
+              className="list-group-item border-0 my-2 text-white bg-transparent d-flex"
+              style={{ maxHeight: "35px" }}
+            >
+              <div className="form-check me-3">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="flexRadioFormat"
+                  id="flexRadioDigital"
+                  checked
+                  value="Digital"
+                  onChange={(e) => {
+                    onInputChange(e, "format");
+                  }}
+                />
+                <label className="form-check-label" htmlFor="flexRadioDigital">
+                  Digital
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="flexRadioFormat"
+                  id="flexRadioPhysical"
+                  value="CD"
+                  onChange={(e) => {
+                    onInputChange(e, "format");
+                  }}
+                />
+                <label className="form-check-label" htmlFor="flexRadioPhysical">
+                  CD
+                </label>
+              </div>
+            </li>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-3">
+            {/*---------------------------------------Original Price---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="number"
+                className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
+                placeholder="Original price"
+                onChange={(e) => {
+                  onInputChange(e, "original_price");
+                }}
+              />
+            </li>
+          </div>
+          <div className="col-3">
+            {/*---------------------------------------Offer Price---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="number"
+                className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
+                placeholder="Offer price"
+                onChange={(e) => {
+                  onInputChange(e, "offer_price");
+                }}
+              />
+            </li>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-1">
+            {/*---------------------------------------Expiration Date---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="date"
+                placeholder="Expiration date"
+                className="form-control border-0 text-white bg-transparent p-0 input-placeholder-white"
+                onChange={(e) => {
+                  onInputChange(e, "expiration_date");
+                }}
+              />
+            </li>
+          </div>
+          <div className="col-1">
+            {/*---------------------------------------Promo Code---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="text"
+                className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
+                placeholder="Promocode"
+                onChange={(e) => {
+                  onInputChange(e, "promo_code");
+                }}
+              />
+            </li>
+          </div>
+          <div className="col-1">
+            {/*---------------------------------------Offer Link---------------------------------*/}
+            <li
+              className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row border border-white"
+              style={{ maxHeight: "35px" }}
+            >
+              <input
+                type="text"
+                className="form-control border-0 text-white bg-transparent h-100 p-0 input-placeholder-white"
+                placeholder="Offerlink"
+                onChange={(e) => {
+                  onInputChange(e, "offer_link");
+                }}
+              />
+            </li>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            {/*---------------------------------------Schedule Post---------------------------------*/}
+            <li
+              className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row"
+              style={{ maxHeight: "35px" }}
+            >
+              <div className="form-check d-flex flex-row align-items-center">
+                <input
+                  onChange={(e) => setScheduled(!scheduled)}
+                  className="form-check-input"
+                  type="checkbox"
+                />
+                <label
+                  className="form-check-label ms-2"
+                  htmlFor="scheduleCheck"
+                >
+                  <h6>Schedule</h6>
+                </label>
+
+                {/*---------------------------------------Schedule Post Modal Trigger---------------------------------*/}
+                <div className="d-inline-flex">
+                  {scheduled && (
+                    <button
+                      type="button"
+                      className="btn btn-effect-blue btn-link ms-2"
+                      id="scheduleCheck"
+                      data-bs-toggle="modal"
+                      data-bs-target="#scheduleModal"
+                    >
+                      Choose
+                    </button>
+                  )}
+                  {/*---------------------------------------DELETE BUTTON---------------------------------*/}
+                  {isAdditional && (
+                    <button
+                      className="btn btn-effect py-0 ms-3"
+                      onClick={onClick}
+                    >
+                      <i className="fa-regular fa-trash-can"></i>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </li>
+          </div>
+        </div>
+      </ul>
+      {/*---------------------------------------Schedule Post Modal---------------------------------*/}
+      <SchedulePostModal onInputChange={onInputChange} />
+    </form>
   );
 };

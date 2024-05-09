@@ -187,19 +187,8 @@ export const FeedDeals = () => {
                 {psDeals.map((deal, index) => (
                   <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      id={deal.id}
-                      gameTitle={deal.game_title}
-                      imageUrl={deal.image_url}
-                      itemType={deal.item_type}
-                      platform={deal.platform}
-                      format={deal.format}
-                      originalPrice={deal.original_price}
-                      offerPrice={deal.offer_price}
-                      expirationDate={deal.expiration_date}
-                      promoCode={deal.promo_code}
-                      offerLink={deal.offer_link}
-                      gameTags={deal.game_tags}
-                      rating={deal.rating}
+                    deal={deal}
+                      
                     />
                   </div>
                 ))}
@@ -219,19 +208,7 @@ export const FeedDeals = () => {
                 {xboxDeals.map((deal, index) => (
                   <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      id={deal.id}
-                      gameTitle={deal.game_title}
-                      imageUrl={deal.image_url}
-                      itemType={deal.item_type}
-                      platform={deal.platform}
-                      format={deal.format}
-                      originalPrice={deal.original_price}
-                      offerPrice={deal.offer_price}
-                      expirationDate={deal.expiration_date}
-                      promoCode={deal.promo_code}
-                      offerLink={deal.offer_link}
-                      gameTags={deal.game_tags}
-                      rating={deal.rating}
+                      deal={deal}
                     />
                   </div>
                 ))}
@@ -251,19 +228,7 @@ export const FeedDeals = () => {
                 {pcDeals.map((deal, index) => (
                   <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      id={deal.id}
-                      gameTitle={deal.game_title}
-                      imageUrl={deal.image_url}
-                      itemType={deal.item_type}
-                      platform={deal.platform}
-                      format={deal.format}
-                      originalPrice={deal.original_price}
-                      offerPrice={deal.offer_price}
-                      expirationDate={deal.expiration_date}
-                      promoCode={deal.promo_code}
-                      offerLink={deal.offer_link}
-                      gameTags={deal.game_tags}
-                      rating={deal.rating}
+                      deal={deal}
                     />
                   </div>
                 ))}
@@ -283,19 +248,7 @@ export const FeedDeals = () => {
                 {nintendoDeals.map((deal, index) => (
                   <div className="col m-auto my-4" key={index}>
                     <DealCard
-                      id={deal.id}
-                      gameTitle={deal.game_title}
-                      imageUrl={deal.image_url}
-                      itemType={deal.item_type}
-                      platform={deal.platform}
-                      format={deal.format}
-                      originalPrice={deal.original_price}
-                      offerPrice={deal.offer_price}
-                      expirationDate={deal.expiration_date}
-                      promoCode={deal.promo_code}
-                      offerLink={deal.offer_link}
-                      gameTags={deal.game_tags}
-                      rating={deal.rating}
+                      deal={deal}
                     />
                   </div>
                 ))}
