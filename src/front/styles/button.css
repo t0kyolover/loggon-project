@@ -4,6 +4,8 @@
     /* font-family: 'Poppins', sans-serif; */
 }
 
+/* btn efecto neón purple con letra blanca */
+
 .btn-effect {
     position: relative;
     display: inline-block;
@@ -44,8 +46,7 @@
 .btn-effect:hover:before {
     width: 100%;
 }
-
-
+/* btn efecto neón azul con letra blanca */
 
 .btn-effect-blue {
     position: relative;
@@ -85,4 +86,40 @@
 }
 .btn-effect-blue:hover:before {
     width: 100%;
+}
+
+/* icon efecto neón purple*/
+
+.icon-effect-purple {
+    color: transparent; 
+    transition: color 0.5s, text-shadow 1s; 
+}
+
+.icon-effect-purple:hover {
+   text-shadow:
+   0 0 10px #8a648a,
+   0 0 10px #8a648a,        
+   0 0 20px #992899,    
+   0 0 30px #992899,   
+   0 0 40px #992899,   
+   0 0 50px #992899, 
+   0 0 60px #992899,    
+   0 0 80px #992899,    
+   0 0 160px #8a648a,   
+   0 0 160px #8a648a,   
+   0 0 320px #992899,   
+   0 0 640px #992899; 
+}
+
+/* text efecto neón blanco*/ 
+
+.text-effect-white {
+    color: white; /* torna o ícone transparente */
+    transition: color 0.5s, text-shadow 1s; /* adicionei a transição para text-shadow */
+}
+
+.text-effect-white:hover {
+   text-shadow:   
+   0 0 30px #ffffff,   
+   0 0 40px #ffffff;   
 }

@@ -21,9 +21,9 @@ export const SearchBar = ({searchTerm, setSearchTerm, performSearch}) => {
 
   return (
     <div className="d-flex flex-row">
-      <p className="mx-2">
+      <p className="">
         <button
-          className="btn mt-3 btn-effect border-0 rounded-circle"
+          className="btn mt-3 icon-effect-purple border-0 rounded-circle"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapseSearch"
@@ -32,7 +32,7 @@ export const SearchBar = ({searchTerm, setSearchTerm, performSearch}) => {
         >
           <i
             className="fa-solid fa-magnifying-glass"
-            style={{ color: "#992899" }}
+            style={{ color: "#992899", fontSize: "20px" }}
           ></i>
         </button>
       </p>
@@ -41,7 +41,7 @@ export const SearchBar = ({searchTerm, setSearchTerm, performSearch}) => {
           <form onSubmit={performSearch}>
             <input
               type="search"
-              className="form-control rounded-5 w-auto text-white bg-transparent mt-2"
+              className="form-control rounded-5 w-auto text-white bg-transparent mt-3"
               style={{ maxHeight: "30px" }}
               aria-label="Búsqueda"
               value={searchTerm}
