@@ -592,7 +592,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(`${itemType} not found!`);
           return;
         }
-        console.log(item);
+        console.log("I AM DEAL FROM STORE",item);
         setDetails(item);
         console.log(`${itemType} found successfully!`);
       },

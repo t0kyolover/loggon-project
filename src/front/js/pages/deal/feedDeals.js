@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "../../../styles/icons.css";
 
+import { LandingBanner } from "../../component/utils/landingBanner";
 import { LoadingSpinner } from "../../component/utils/loadingSpinner";
 import { DealCard } from "../../component/deal/dealCard";
 import { Filters } from "../../component/utils/filters";
@@ -22,6 +23,10 @@ export const FeedDeals = () => {
   const xboxDeals = deals.filter((deal) => deal.platform === "Xbox");
   const pcDeals = deals.filter((deal) => deal.platform === "PC");
   const nintendoDeals = deals.filter((deal) => deal.platform === "Nintendo");
+
+  // useEffect(() => {
+    
+  // }, [store.loggedIn]);
 
   useEffect(() => {
     let activeElement = null;
@@ -55,12 +60,12 @@ export const FeedDeals = () => {
     setDeals(store.deals);
   }, [store.deals]);
 
-  if (!store.deals || store.deals.length === 0) {
-    return <LoadingSpinner />;
+  if (!store.loggedIn) {
+    return <LandingBanner />;
   }
 
-  console.log("From Feed", store.user, store.token)
-  
+  console.log("From Feed", store.user, store.token);
+
   return (
     <div>
       <div className="text-white m-3">
@@ -100,165 +105,161 @@ export const FeedDeals = () => {
           style={{height: "100px", transform: "scaleX(-1)"}}
         /> */}
       </div>
-
       <div className="d-flex justify-content-end pt-4">
         <Filters />
       </div>
-      {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
-      <div className="row m-auto">
-        <nav className="d-flex justify-content-center">
-          <div
-            className="nav nav-tabs border-0 mb-4"
-            id="nav-tab"
-            role="tablist"
-          >
-            <button
-              className="bg-color border-0 mx-3"
-              id="nav-ps-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-ps"
-              type="button"
-              role="tab"
-              aria-controls="nav-ps"
-            >
-              <img
-                className="ps-effect rounded-circle mx-1"
-                src="https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png"
-                alt="play-station"
-              />
-            </button>
-            <button
-              className="bg-color border-0 mx-3"
-              id="nav-xbox-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-xbox"
-              type="button"
-              role="tab"
-              aria-controls="nav-xbox"
-            >
-              <img
-                className="xbox-effect rounded-circle mx-1"
-                src="https://img.icons8.com/ios/50/40C057/xbox.png"
-                alt="xbox"
-              />
-            </button>
-            <button
-              className="bg-color border-0 mx-3"
-              id="nav-pc-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-pc"
-              type="button"
-              role="tab"
-              aria-controls="nav-pc"
-            >
-              <img
-                className="pc-effect rounded-4 img-fluid mx-1"
-                src="https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png"
-                alt="windows-10"
-              />
-            </button>
-            <button
-              className="bg-color border-0 mx-3"
-              id="nav-nintendo-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-nintendo"
-              type="button"
-              role="tab"
-              aria-controls="nav-nintendo"
-            >
-              <img
-                className="nintendo-effect rounded-4 img-fluid mx-1"
-                src="https://img.icons8.com/ios-filled/50/FA5252/nintendo-switch-logo.png"
-                alt="nintendo-switch-logo"
-              />
-            </button>
-          </div>
-        </nav>
-        {/*---------------------------------------PLATFORMS TABS CONTENT---------------------------------*/}
-        <div className="tab-content" id="nav-tabContent">
-          {/*---------------------------------------PS---------------------------------*/}
-          <div
-            className="tab-pane fade show active"
-            id="nav-ps"
-            role="tabpanel"
-            aria-labelledby="nav-ps-tab"
-            tabIndex="0"
-          >
-            <div className="container text-center">
-              <div className="row row-cols-auto">
-                {psDeals.map((deal, index) => (
-                  <div className="col m-auto my-4" key={index}>
-                    <DealCard
-                    deal={deal}
-                      
-                    />
-                  </div>
-                ))}
+      {store.deals.length === 0 ? (
+        <LoadingSpinner />
+      ) : (
+        <div>
+          {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
+          <div className="row m-auto">
+            <nav className="d-flex justify-content-center">
+              <div
+                className="nav nav-tabs border-0 mb-4"
+                id="nav-tab"
+                role="tablist"
+              >
+                <button
+                  className="bg-color border-0 mx-3"
+                  id="nav-ps-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-ps"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-ps"
+                >
+                  <img
+                    className="ps-effect rounded-circle mx-1"
+                    src="https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png"
+                    alt="play-station"
+                  />
+                </button>
+                <button
+                  className="bg-color border-0 mx-3"
+                  id="nav-xbox-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-xbox"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-xbox"
+                >
+                  <img
+                    className="xbox-effect rounded-circle mx-1"
+                    src="https://img.icons8.com/ios/50/40C057/xbox.png"
+                    alt="xbox"
+                  />
+                </button>
+                <button
+                  className="bg-color border-0 mx-3"
+                  id="nav-pc-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-pc"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-pc"
+                >
+                  <img
+                    className="pc-effect rounded-4 img-fluid mx-1"
+                    src="https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png"
+                    alt="windows-10"
+                  />
+                </button>
+                <button
+                  className="bg-color border-0 mx-3"
+                  id="nav-nintendo-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-nintendo"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-nintendo"
+                >
+                  <img
+                    className="nintendo-effect rounded-4 img-fluid mx-1"
+                    src="https://img.icons8.com/ios-filled/50/FA5252/nintendo-switch-logo.png"
+                    alt="nintendo-switch-logo"
+                  />
+                </button>
               </div>
-            </div>
-          </div>
-          {/*---------------------------------------XBOX---------------------------------*/}
-          <div
-            className="tab-pane fade"
-            id="nav-xbox"
-            role="tabpanel"
-            aria-labelledby="nav-xbox-tab"
-            tabIndex="0"
-          >
-            <div className="container text-center">
-              <div className="row row-cols-auto">
-                {xboxDeals.map((deal, index) => (
-                  <div className="col m-auto my-4" key={index}>
-                    <DealCard
-                      deal={deal}
-                    />
+            </nav>
+            {/*---------------------------------------PLATFORMS TABS CONTENT---------------------------------*/}
+            <div className="tab-content" id="nav-tabContent">
+              {/*---------------------------------------PS---------------------------------*/}
+              <div
+                className="tab-pane fade show active"
+                id="nav-ps"
+                role="tabpanel"
+                aria-labelledby="nav-ps-tab"
+                tabIndex="0"
+              >
+                <div className="container text-center">
+                  <div className="row row-cols-auto">
+                    {psDeals.map((deal, index) => (
+                      <div className="col m-auto my-4" key={index}>
+                        <DealCard deal={deal} />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          </div>
-          {/*---------------------------------------PC---------------------------------*/}
-          <div
-            className="tab-pane fade"
-            id="nav-pc"
-            role="tabpanel"
-            aria-labelledby="nav-pc-tab"
-            tabIndex="0"
-          >
-            <div className="container text-center">
-              <div className="row row-cols-auto">
-                {pcDeals.map((deal, index) => (
-                  <div className="col m-auto my-4" key={index}>
-                    <DealCard
-                      deal={deal}
-                    />
+              {/*---------------------------------------XBOX---------------------------------*/}
+              <div
+                className="tab-pane fade"
+                id="nav-xbox"
+                role="tabpanel"
+                aria-labelledby="nav-xbox-tab"
+                tabIndex="0"
+              >
+                <div className="container text-center">
+                  <div className="row row-cols-auto">
+                    {xboxDeals.map((deal, index) => (
+                      <div className="col m-auto my-4" key={index}>
+                        <DealCard deal={deal} />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          </div>
-          {/*---------------------------------------NINTENDO---------------------------------*/}
-          <div
-            className="tab-pane fade"
-            id="nav-nintendo"
-            role="tabpanel"
-            aria-labelledby="nav-nintendo-tab"
-            tabIndex="0"
-          >
-            <div className="container text-center">
-              <div className="row row-cols-auto">
-                {nintendoDeals.map((deal, index) => (
-                  <div className="col m-auto my-4" key={index}>
-                    <DealCard
-                      deal={deal}
-                    />
+              {/*---------------------------------------PC---------------------------------*/}
+              <div
+                className="tab-pane fade"
+                id="nav-pc"
+                role="tabpanel"
+                aria-labelledby="nav-pc-tab"
+                tabIndex="0"
+              >
+                <div className="container text-center">
+                  <div className="row row-cols-auto">
+                    {pcDeals.map((deal, index) => (
+                      <div className="col m-auto my-4" key={index}>
+                        <DealCard deal={deal} />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+              </div>
+              {/*---------------------------------------NINTENDO---------------------------------*/}
+              <div
+                className="tab-pane fade"
+                id="nav-nintendo"
+                role="tabpanel"
+                aria-labelledby="nav-nintendo-tab"
+                tabIndex="0"
+              >
+                <div className="container text-center">
+                  <div className="row row-cols-auto">
+                    {nintendoDeals.map((deal, index) => (
+                      <div className="col m-auto my-4" key={index}>
+                        <DealCard deal={deal} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
