@@ -2,9 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: localStorage.getItem("token"),
-      loggedIn: true,
+      loggedIn: !!localStorage.getItem('token')/*true*/,
       user: {
-        alerts: [],
+        /*alerts: [],
         posts: [],
         image_url: "",
         interests: [],
@@ -138,192 +138,192 @@ const getState = ({ getStore, getActions, setStore }) => {
              game_tags: ["multiplayer", "action", "adventure", "open-world"],
            },
          ],
-         newsletter: false,
+         newsletter: false,*/
       },
       deals: [
-        {
-          id: 1,
-          user_id: 1,
-          date_of_creation: "",
-          game_title: "GTA V",
-          image_url: "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
-          item_type: "DLC",
-          platform: "Xbox",
-          format: "Digital",
-          rating: 8,
-          original_price: 79.99,
-          offer_price: 35.99,
-          expiration_date: "2024-03-27",
-          promo_code: "HDGUDS",
-          offer_link:
-            "https://store.steampowered.com/app/397540/Borderlands_3/",
-          scheduled: false,
-          scheduled_date: "",
-          sheduled_time: "",
-          game_tags: ["multiplayer", "action", "adventure", "open-world"],
-        },
-        {
-          id: 2,
-          user_id: 1,
-          date_of_creation: "",
-          game_title: "Atomic Heart",
-          image_url:
-            "https://image.api.playstation.com/vulcan/ap/rnd/202209/2815/ghdxLSLpUl24o2Q1eq3yTaji.jpg",
-          item_type: "Game",
-          platform: "PC",
-          format: "CD",
-          rating: 10,
-          original_price: 79.99,
-          offer_price: 60.99,
-          expiration_date: "2024-03-28",
-          promo_code: "DJIODP",
-          offer_link:
-            "https://store.steampowered.com/app/397540/Borderlands_3/",
-          scheduled_date: "",
-          sheduled_time: "",
-          game_tags: ["singleplayer", "action", "adventure"],
-        },
-        {
-          id: 3,
-          user_id: 1,
-          date_of_creation: "",
-          game_title: "Overwatch 2",
-          image_url:
-            "https://xxboxnews.blob.core.windows.net/prod/sites/2/2022/10/OW2-be9287b234afbe7898ac.jpg",
-          item_type: "In-Game Purchase",
-          platform: "PS4",
-          format: "Digital",
-          rating: 10,
-          original_price: 15,
-          offer_price: 9.99,
-          expiration_date: "2024-03-26",
-          promo_code: "DFJISOP",
-          offer_link:
-            "https://store.steampowered.com/app/397540/Borderlands_3/",
-          scheduled_date: "",
-          sheduled_time: "",
-          game_tags: ["multiplayer", "action", "shooter"],
-        },
-        {
-          id: 4,
-          user_id: 1,
-          date_of_creation: "",
-          game_title: "Pokemon Violet",
-          image_url:
-            "https://assets-prd.ignimgs.com/2022/08/03/pokemon-violet-1659542326365.jpg",
-          item_type: "Game",
-          platform: "Nintendo",
-          format: "CD",
-          rating: 10,
-          original_price: 65,
-          offer_price: 49,
-          expiration_date: "2024-03-29",
-          promo_code: "DFJSIF",
-          offer_link:
-            "https://store.steampowered.com/app/397540/Borderlands_3/",
-          scheduled_date: "",
-          sheduled_time: "",
-          game_tags: ["singleplayer", "adventure", "open-world"],
-        },
-      ],
-      games: [],
-      gamesWithDetails: [],
-      users: [
-        {
-          id: 1,
-          username: "pere",
-          image_url:
-            "https://pbs.twimg.com/profile_images/1615039426530316288/jhcrsFcg_400x400.jpg",
-          steam_username: "pereayts",
-          twitch_username: "pereayats",
-          posts: [
-            {
-              id: 1,
-              user_id: 1,
-              date_of_creation: "",
-              game_title: "GTA V",
-              image_url:
-                "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
-              item_type: "DLC",
-              platform: "Xbox",
-              format: "Digital",
-              rating: 8,
-              original_price: 79.99,
-              offer_price: 35.99,
-              expiration_date: "2024-03-27",
-              promo_code: "HDGUDS",
-              offer_link:
-                "https://store.steampowered.com/app/397540/Borderlands_3/",
-              scheduled: false,
-              scheduled_date: "",
-              sheduled_time: "",
-              game_tags: ["multiplayer", "action", "adventure", "open-world"],
-            },
-            {
-              id: 2,
-              user_id: 1,
-              date_of_creation: "",
-              game_title: "Atomic Heart",
-              image_url:
-                "https://image.api.playstation.com/vulcan/ap/rnd/202209/2815/ghdxLSLpUl24o2Q1eq3yTaji.jpg",
-              item_type: "Game",
-              platform: "PC",
-              format: "CD",
-              rating: 10,
-              original_price: 79.99,
-              offer_price: 60.99,
-              expiration_date: "2024-03-28",
-              promo_code: "DJIODP",
-              offer_link:
-                "https://store.steampowered.com/app/397540/Borderlands_3/",
-              scheduled_date: "",
-              sheduled_time: "",
-              game_tags: ["singleplayer", "action", "adventure"],
-            },
-            {
-              id: 3,
-              user_id: 1,
-              date_of_creation: "",
-              game_title: "Overwatch 2",
-              image_url:
-                "https://xxboxnews.blob.core.windows.net/prod/sites/2/2022/10/OW2-be9287b234afbe7898ac.jpg",
-              item_type: "In-Game Purchase",
-              platform: "PS4",
-              format: "Digital",
-              rating: 10,
-              original_price: 15,
-              offer_price: 9.99,
-              expiration_date: "2024-03-26",
-              promo_code: "DFJISOP",
-              offer_link:
-                "https://store.steampowered.com/app/397540/Borderlands_3/",
-              scheduled_date: "",
-              sheduled_time: "",
-              game_tags: ["multiplayer", "action", "shooter"],
-            },
-            {
-              id: 4,
-              user_id: 1,
-              date_of_creation: "",
-              game_title: "Pokemon Violet",
-              image_url:
-                "https://assets-prd.ignimgs.com/2022/08/03/pokemon-violet-1659542326365.jpg",
-              item_type: "Game",
-              platform: "Nintendo",
-              format: "CD",
-              rating: 10,
-              original_price: 65,
-              offer_price: 49,
-              expiration_date: "2024-03-29",
-              promo_code: "DFJSIF",
-              offer_link:
-                "https://store.steampowered.com/app/397540/Borderlands_3/",
-              scheduled_date: "",
-              sheduled_time: "",
-              game_tags: ["singleplayer", "adventure", "open-world"],
-            },
-          ],
-        },
+      //   {
+      //     id: 1,
+      //     user_id: 1,
+      //     date_of_creation: "",
+      //     game_title: "GTA V",
+      //     image_url: "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
+      //     item_type: "DLC",
+      //     platform: "Xbox",
+      //     format: "Digital",
+      //     rating: 8,
+      //     original_price: 79.99,
+      //     offer_price: 35.99,
+      //     expiration_date: "2024-03-27",
+      //     promo_code: "HDGUDS",
+      //     offer_link:
+      //       "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //     scheduled: false,
+      //     scheduled_date: "",
+      //     sheduled_time: "",
+      //     game_tags: ["multiplayer", "action", "adventure", "open-world"],
+      //   },
+      //   {
+      //     id: 2,
+      //     user_id: 1,
+      //     date_of_creation: "",
+      //     game_title: "Atomic Heart",
+      //     image_url:
+      //       "https://image.api.playstation.com/vulcan/ap/rnd/202209/2815/ghdxLSLpUl24o2Q1eq3yTaji.jpg",
+      //     item_type: "Game",
+      //     platform: "PC",
+      //     format: "CD",
+      //     rating: 10,
+      //     original_price: 79.99,
+      //     offer_price: 60.99,
+      //     expiration_date: "2024-03-28",
+      //     promo_code: "DJIODP",
+      //     offer_link:
+      //       "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //     scheduled_date: "",
+      //     sheduled_time: "",
+      //     game_tags: ["singleplayer", "action", "adventure"],
+      //   },
+      //   {
+      //     id: 3,
+      //     user_id: 1,
+      //     date_of_creation: "",
+      //     game_title: "Overwatch 2",
+      //     image_url:
+      //       "https://xxboxnews.blob.core.windows.net/prod/sites/2/2022/10/OW2-be9287b234afbe7898ac.jpg",
+      //     item_type: "In-Game Purchase",
+      //     platform: "PS4",
+      //     format: "Digital",
+      //     rating: 10,
+      //     original_price: 15,
+      //     offer_price: 9.99,
+      //     expiration_date: "2024-03-26",
+      //     promo_code: "DFJISOP",
+      //     offer_link:
+      //       "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //     scheduled_date: "",
+      //     sheduled_time: "",
+      //     game_tags: ["multiplayer", "action", "shooter"],
+      //   },
+      //   {
+      //     id: 4,
+      //     user_id: 1,
+      //     date_of_creation: "",
+      //     game_title: "Pokemon Violet",
+      //     image_url:
+      //       "https://assets-prd.ignimgs.com/2022/08/03/pokemon-violet-1659542326365.jpg",
+      //     item_type: "Game",
+      //     platform: "Nintendo",
+      //     format: "CD",
+      //     rating: 10,
+      //     original_price: 65,
+      //     offer_price: 49,
+      //     expiration_date: "2024-03-29",
+      //     promo_code: "DFJSIF",
+      //     offer_link:
+      //       "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //     scheduled_date: "",
+      //     sheduled_time: "",
+      //     game_tags: ["singleplayer", "adventure", "open-world"],
+      //   },
+      // ],
+      // games: [],
+      // gamesWithDetails: [],
+      // users: [
+      //   {
+      //     id: 1,
+      //     username: "pere",
+      //     image_url:
+      //       "https://pbs.twimg.com/profile_images/1615039426530316288/jhcrsFcg_400x400.jpg",
+      //     steam_username: "pereayts",
+      //     twitch_username: "pereayats",
+      //     posts: [
+      //       {
+      //         id: 1,
+      //         user_id: 1,
+      //         date_of_creation: "",
+      //         game_title: "GTA V",
+      //         image_url:
+      //           "https://i.blogs.es/dfbccc/trucosgtavps4/1366_2000.jpg",
+      //         item_type: "DLC",
+      //         platform: "Xbox",
+      //         format: "Digital",
+      //         rating: 8,
+      //         original_price: 79.99,
+      //         offer_price: 35.99,
+      //         expiration_date: "2024-03-27",
+      //         promo_code: "HDGUDS",
+      //         offer_link:
+      //           "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //         scheduled: false,
+      //         scheduled_date: "",
+      //         sheduled_time: "",
+      //         game_tags: ["multiplayer", "action", "adventure", "open-world"],
+      //       },
+      //       {
+      //         id: 2,
+      //         user_id: 1,
+      //         date_of_creation: "",
+      //         game_title: "Atomic Heart",
+      //         image_url:
+      //           "https://image.api.playstation.com/vulcan/ap/rnd/202209/2815/ghdxLSLpUl24o2Q1eq3yTaji.jpg",
+      //         item_type: "Game",
+      //         platform: "PC",
+      //         format: "CD",
+      //         rating: 10,
+      //         original_price: 79.99,
+      //         offer_price: 60.99,
+      //         expiration_date: "2024-03-28",
+      //         promo_code: "DJIODP",
+      //         offer_link:
+      //           "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //         scheduled_date: "",
+      //         sheduled_time: "",
+      //         game_tags: ["singleplayer", "action", "adventure"],
+      //       },
+      //       {
+      //         id: 3,
+      //         user_id: 1,
+      //         date_of_creation: "",
+      //         game_title: "Overwatch 2",
+      //         image_url:
+      //           "https://xxboxnews.blob.core.windows.net/prod/sites/2/2022/10/OW2-be9287b234afbe7898ac.jpg",
+      //         item_type: "In-Game Purchase",
+      //         platform: "PS4",
+      //         format: "Digital",
+      //         rating: 10,
+      //         original_price: 15,
+      //         offer_price: 9.99,
+      //         expiration_date: "2024-03-26",
+      //         promo_code: "DFJISOP",
+      //         offer_link:
+      //           "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //         scheduled_date: "",
+      //         sheduled_time: "",
+      //         game_tags: ["multiplayer", "action", "shooter"],
+      //       },
+      //       {
+      //         id: 4,
+      //         user_id: 1,
+      //         date_of_creation: "",
+      //         game_title: "Pokemon Violet",
+      //         image_url:
+      //           "https://assets-prd.ignimgs.com/2022/08/03/pokemon-violet-1659542326365.jpg",
+      //         item_type: "Game",
+      //         platform: "Nintendo",
+      //         format: "CD",
+      //         rating: 10,
+      //         original_price: 65,
+      //         offer_price: 49,
+      //         expiration_date: "2024-03-29",
+      //         promo_code: "DFJSIF",
+      //         offer_link:
+      //           "https://store.steampowered.com/app/397540/Borderlands_3/",
+      //         scheduled_date: "",
+      //         sheduled_time: "",
+      //         game_tags: ["singleplayer", "adventure", "open-world"],
+      //       },
+      //     ],
+      //   },
       ],
       tags: [],
       searchResults: [],
@@ -373,8 +373,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               localStorage.setItem("token", data.token);
               setStore({
                 token: data.token,
-                loggedIn: true,
-                user: { password: password },
+                loggedIn: true
               });
               getActions().verifyIdentity();
               console.log("Logged in successfully!");
@@ -396,7 +395,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({
             token: token,
             loggedIn: true,
-            user: { password: "1234" },
           });
           getActions().verifyIdentity();
         }
@@ -427,7 +425,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         let token = localStorage.getItem("token");
         if (token) {
-          fetch(process.env.BACKEND_URL + "/api/verify_identity", {
+          fetch(process.env.BACKEND_URL + "api/verify_identity", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -438,12 +436,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             .then((data) => {
               if (data && data.user) {
                 setStore({
-                  user: {
-                    ...store.user,
-                    id: data.user.id,
-                    email: data.user.email,
-                    username: data.user.username,
-                  },
+                  ...store,
+                  user: data.user,
                   token: token,
                 });
               }

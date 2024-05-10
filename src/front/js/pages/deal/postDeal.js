@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
 import { DealCard } from "../../component/deal/dealCard";
-import { PostDealCard } from "../../component/deal/postDealCard";
+import { PostDealForm } from "../../component/deal/postDealForm";
 
 import { Context } from "../../store/appContext";
 
@@ -96,7 +96,7 @@ export const PostDeal = () => {
               </div>
             </div>
             <div className="col-8">
-              <PostDealCard
+              <PostDealForm
                 gameTitle={deal.game_title}
                 onInputChange={handleInputChange}
               />
@@ -119,7 +119,7 @@ export const PostDeal = () => {
             <DealCard key={index} deal={deal} />
           </div>
           <div className="col-8">
-            <PostDealCard
+            <PostDealForm
               key={index}
               onClick={(e) => deleteDeal(index, e)}
               isAdditional={true}

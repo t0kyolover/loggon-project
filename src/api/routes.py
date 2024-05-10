@@ -201,11 +201,14 @@ def Login():
 def verify():
     current_user_id = get_jwt_identity()
     user = User.query.filter_by(id=current_user_id).first()
+    print(current_user_id)
+    print(user)
 
-    if user is None:
-        return jsonify({ "error": "Este usuario no existe" }), 401
+    if user is not None:
+        return jsonify({ "user": user.serialize() }), 200
     
-    return jsonify({ "user": user.serialize() })
+    return jsonify({ "error": "Este usuario no existe" }), 401
+
 
 #---------------------------------------------------------------Modificar usuario-------------------------------------------------------------------
 

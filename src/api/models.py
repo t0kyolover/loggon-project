@@ -16,7 +16,7 @@ class User(db.Model): #(todo)
     username = db.Column(db.String(30), nullable=False)
     steam_username = db.Column(db.String(40))
     twitch_username = db.Column(db.String(40))
-    interests = db.relationship('Interest', backref='user', lazy=True) 
+    interest = db.relationship('Interest', backref='user', lazy=True) 
     saved = db.relationship('Saved', backref='user', lazy=True)
     posts = db.relationship('Deal', backref='user', lazy=True)
     # alerts = db.relationship('Alerts', backref='user', lazy=True)
@@ -38,7 +38,7 @@ class User(db.Model): #(todo)
             "interests": [interest.serialize() for interest in self.interest],
             "saved" : [saved.serialize() for saved in self.saved],
             "posts": [posts.serialize() for posts in self.saved],
-            "alerts": [alerts.serialize() for alerts in self.saved],
+            #"alerts": [alerts.serialize() for alerts in self.saved],
             "newsletter": self.newsletter,
     
         }

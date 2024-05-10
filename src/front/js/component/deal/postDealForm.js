@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { SchedulePostModal } from "./schedulePostModal";
 
-export const PostDealCard = ({ onInputChange, isAdditional, onClick }) => {
+export const PostDealForm = ({ onInputChange, isAdditional, onClick }) => {
   const { store, actions } = useContext(Context);
 
   const [scheduled, setScheduled] = useState(false);

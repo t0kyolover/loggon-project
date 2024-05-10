@@ -46,8 +46,6 @@ export const Navbar = () => {
      }
    }, [searchTerm]);*/
 
-  useEffect(() => {}, [store.user]);
-
   useEffect(() => {
     if (location.pathname === "/login") {
       const loginModal = document.getElementById("loginModalToggle");

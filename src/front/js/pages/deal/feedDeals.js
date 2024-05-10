@@ -59,6 +59,8 @@ export const FeedDeals = () => {
     return <LoadingSpinner />;
   }
 
+  console.log("From Feed", store.user, store.token)
+  
   return (
     <div>
       <div className="text-white m-3">
