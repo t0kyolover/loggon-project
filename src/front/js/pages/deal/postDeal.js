@@ -11,8 +11,14 @@ export const PostDeal = () => {
   const { username } = useParams();
   const navigate = useNavigate();
 
-  const [deal, setDeal] = useState(store.newDealDefault);
+  const [deal, setDeal] = useState(store.newDealDefault || {});
   const [additionalDeals, setAdditionalDeals] = useState([]);
+
+  useEffect(() => {
+    if (store.newDeals && store.newDeals.length > 0) {
+      setDeal(store.newDeals[0]);
+    }
+  }, [store.newDeals]);
 
 
   function addDeal() {

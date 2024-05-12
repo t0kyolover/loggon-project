@@ -7,21 +7,24 @@ import { Context } from "../../store/appContext";
 
 export const PostDealForm = ({ onValuesChange }) => {
   const { store, actions } = useContext(Context);
-  const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: store.newDealDefault,
-      //validationSchema: postDealSchema,
-      onSubmit: (values, actions) => {
-        console.log(values);
-        console.log(actions);
-        //actions.savePostDealForm(values);
-        // actions.postDeal(values);
-        console.log(store.newDeals, "Saved");
-        onValuesChange(values);
-      },
-    });
-
- 
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
+    initialValues: store.newDealDefault,
+    //validationSchema: postDealSchema,
+    onSubmit: (values) => {
+      actions.savePostDealForm(values);
+      // actions.postDeal(values);
+      console.log(store.newDeals, "Saved");
+      onValuesChange(values);
+    },
+  });
 
   return (
     <>
@@ -225,14 +228,14 @@ export const PostDealForm = ({ onValuesChange }) => {
               </div>
             </div>
           </div>
-          {/*---------------------------------------Carousel Navigation Buttons---------------------------------*/}
+          {/*---------------------------------------Buttons---------------------------------*/}
           <div className="row mt-3">
             <div className="d-flex flex-row justify-content-end">
-              {/*-------------------------Save Button-----------------------**/}
-              <button type="submit" className="col-2 btn btn-effect me-3">
+              {/*-------------------------save-----------------------**/}
+              <button disabled={isSubmitting} type="submit" className="col-2 btn btn-effect me-3">
                 Save
               </button>
-
+              {/*----------------carousel navigation-------------------*/}
               <button
                 className="col-1 btn btn-effect-blue me-2 p-0"
                 type="button"
