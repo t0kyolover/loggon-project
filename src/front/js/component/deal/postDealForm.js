@@ -5,36 +5,24 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../../store/appContext";
 
-export const PostDealForm = () => {
+export const PostDealForm = ({ onValuesChange }) => {
   const { store, actions } = useContext(Context);
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit } =
     useFormik({
-      initialValues: {
-        // user_id: store.user.id,
-        image_url: "",
-        game_title: "",
-        platform: "PC",
-        type: "Game",
-        format: "Digital",
-        original_price: "",
-        offer_price: "",
-        expiration_date: null,
-        promo_code: "",
-        offer_link: "",
-        scheduled_date: null,
-        scheduled_time: null,
-        scheduled: false,
-        rating: 0,
-      },
+      initialValues: store.newDealDefault,
       //validationSchema: postDealSchema,
-      onSubmit: (values) => {
-        actions.savePostDealForm(values)
+      onSubmit: (values, actions) => {
+        console.log(values);
+        console.log(actions);
+        //actions.savePostDealForm(values);
         // actions.postDeal(values);
         console.log(store.newDeals, "Saved");
+        onValuesChange(values);
       },
     });
 
-  console.log(values);
+ 
+
   return (
     <>
       <form
@@ -67,10 +55,10 @@ export const PostDealForm = () => {
                       id="game_title"
                       required
                     />
-                    
-                  </div>{errors.game_title && touched.game_title && (
-                  <p className="error mt-2 ms-3">{errors.game_title}</p>
-                )}
+                  </div>
+                  {errors.game_title && touched.game_title && (
+                    <p className="error mt-2 ms-3">{errors.game_title}</p>
+                  )}
                 </div>
                 {/*---------------------------------------image url---------------------------------*/}
                 <div className="col-6">
@@ -89,8 +77,8 @@ export const PostDealForm = () => {
                     required
                   />
                   {errors.image_url && touched.image_url && (
-                  <p className="error mt-2">{errors.image_url}</p>
-                )}
+                    <p className="error mt-2">{errors.image_url}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -163,10 +151,10 @@ export const PostDealForm = () => {
                       id="original_price"
                       required
                     />
-                    
-                  </div>{errors.original_price && touched.original_price && (
-                  <p className="error mt-2">{errors.original_price}</p>
-                )}
+                  </div>
+                  {errors.original_price && touched.original_price && (
+                    <p className="error mt-2">{errors.original_price}</p>
+                  )}
                 </div>
                 {/*---------------------------------------offer price---------------------------------*/}
                 <div className="col-6">
@@ -186,10 +174,10 @@ export const PostDealForm = () => {
                       id="offer_price"
                       required
                     />
-                    
-                  </div>{errors.offer_price && touched.offer_price && (
-                  <p className="error mt-2">{errors.offer_price}</p>
-                )}
+                  </div>
+                  {errors.offer_price && touched.offer_price && (
+                    <p className="error mt-2">{errors.offer_price}</p>
+                  )}
                 </div>
               </div>
               <div className="row">
@@ -229,10 +217,10 @@ export const PostDealForm = () => {
                       id="offer_link"
                       required
                     />
-                    
-                  </div>{errors.offer_link && touched.offer_link && (
-                  <p className="error mt-2">{errors.offer_link}</p>
-                )}
+                  </div>
+                  {errors.offer_link && touched.offer_link && (
+                    <p className="error mt-2">{errors.offer_link}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -241,30 +229,26 @@ export const PostDealForm = () => {
           <div className="row mt-3">
             <div className="d-flex flex-row justify-content-end">
               {/*-------------------------Save Button-----------------------**/}
-              <button
-                type="submit"
-                className="col-2 btn btn-effect me-3"
-              >
+              <button type="submit" className="col-2 btn btn-effect me-3">
                 Save
               </button>
-              
-                <button
-                  className="col-1 btn btn-effect-blue me-2 p-0"
-                  type="button"
-                  data-bs-target="#carouselPostDealForm"
-                  data-bs-slide="prev"
-                >
-                  <i className="fa-solid fa-arrow-left"></i>
-                </button>
-                <button
-                  className="col-1 btn btn-effect-blue"
-                  type="button"
-                  data-bs-target="#carouselPostDealForm"
-                  data-bs-slide="next"
-                >
-                  <i className="fa-solid fa-arrow-right"></i>
-                </button>
-              
+
+              <button
+                className="col-1 btn btn-effect-blue me-2 p-0"
+                type="button"
+                data-bs-target="#carouselPostDealForm"
+                data-bs-slide="prev"
+              >
+                <i className="fa-solid fa-arrow-left"></i>
+              </button>
+              <button
+                className="col-1 btn btn-effect-blue"
+                type="button"
+                data-bs-target="#carouselPostDealForm"
+                data-bs-slide="next"
+              >
+                <i className="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
         </div>

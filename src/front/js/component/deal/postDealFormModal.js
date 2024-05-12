@@ -7,95 +7,17 @@ import { PostDealForm } from "./postDealForm";
 
 import { Context } from "../../store/appContext";
 
-export const PostDealFormModal = (deal, setDeal, onInputChange) => {
+export const PostDealFormModal = () => {
   const { store, actions } = useContext(Context);
-
-  // const [deal, setDeal] = useState({
-  //   id: props.id,
-  //   user_id: props.userId,
-  //   game_title: props.gameTitle,
-  //   item_type: props.itemType,
-  //   format: props.format,
-  //   rating: props.rating,
-  //   image_url: props.imageUrl,
-  //   offer_link: props.offerLink,
-  //   offer_price: props.offerPrice,
-  //   expiration_date: props.expirationDate,
-  //   promo_code: props.promoCode,
-  //   scheduled_date: props.scheduledDate,
-  //   scheduled_time: props.scheduledTime,
-  // });
-  const [newPostData, setNewPostData] = useState({
-    imageUrl: "",
-    offerPrice: "",
-    expirationDate: "",
-    promoCode: "",
-    scheduledDate: "",
-    scheduledTime: "",
-  });
-  const [scheduledButton, setScheduledButton] = useState(false);
-  const [scheduled, setScheduled] = useState(false);
+  const [deal, setDeal] = useState(store.newDealDefault || {});
 
   useEffect(() => {
-    setNewPostData({
-      imageUrl: deal.image_url,
-      offerPrice: deal.offer_price,
-      expirationDate: deal.expiration_date,
-      promoCode: deal.promo_code,
-      scheduledDate: deal.scheduled_date,
-      scheduledTime: deal.scheduled_time,
-    });
-  }, []);
+    if (store.newDeals && store.newDeals.length > 0) {
+      setDeal(store.newDeals[0]);
+    }
+  }, [store.newDeals]);
 
-  // useEffect(() => {
-  //   setDeal({
-  //     id: props.id,
-  //     user_id: props.userId,
-  //     game_title: props.gameTitle,
-  //     item_type: props.itemType,
-  //     format: props.format,
-  //     rating: props.rating,
-  //     image_url: props.imageUrl,
-  //     offer_link: props.offerLink,
-  //     original_price: props.originalPrice,
-  //     offer_price: props.offerPrice,
-  //     expiration_date: props.expirationDate,
-  //     promo_code: props.promoCode,
-  //     scheduled_date: props.scheduledDate,
-  //     scheduled_time: props.scheduledTime,
-  //   });
-  // }, [store.user, props.user]);
 
-  function handleInputChange(e, item) {
-    e.persist();
-    setNewPostData((prevState) => ({
-      ...prevState,
-      [item]: e.target.value,
-    }));
-  }
-
-  function modifyPostHandler(e) {
-    e.preventDefault();
-    actions.modifyPost(
-      newPostData.imageUrl,
-      newPostData.offerPrice,
-      newPostData.expirationDate,
-      newPostData.promoCode,
-      newPostData.scheduledDate,
-      newPostData.scheduledTime,
-      newPostData.scheduled
-    );
-    console.log(newPostData);
-    setDeal((prevState) => ({
-      ...prevState,
-      image_url: newPostData.imageUrl,
-      offer_price: newPostData.offerPrice,
-      expiration_date: newPostData.expirationDate,
-      promo_code: newPostData.promoCode,
-      scheduled_date: newPostData.scheduledDate,
-      scheduled_time: newPostData.scheduledTime,
-    }));
-  }
   /*No actualiza los datos al modificar en la card, pero si que los modifica a nivel de datos */
   return (
     <>
@@ -128,13 +50,13 @@ export const PostDealFormModal = (deal, setDeal, onInputChange) => {
               </div>
             </div>
             <div className="modal-body">
-              <PostDealForm />
+              <PostDealForm  onValuesChange={(values) => {actions.savePostDealForm(values)}}/>
             </div>
           </div>
         </div>
       </div>
-      {/*---------------------------------------Schedule Post Modal---------------------------------**/}
-      <SchedulePostModal onInputChange={handleInputChange} deal={deal} />
+      {/*---------------------------------------Schedule Post Modal---------------------------------*
+      <SchedulePostModal onInputChange={handleInputChange} deal={deal} />*/}
     </>
   );
 };

@@ -11,9 +11,28 @@ export const PostDeal = () => {
   const { username } = useParams();
   const navigate = useNavigate();
 
-  const [deal, setDeal] = useState(store.newDealDefault);
+  const [deal, setDeal] = useState({
+    user_id: store.user.id,
+    image_url: "",
+    game_title: "",
+    platform: "PC",
+    type: "Game",
+    format: "Digital",
+    original_price: "",
+    offer_price: "",
+    expiration_date: null,
+    promo_code: "",
+    offer_link: "",
+    scheduled_date: null,
+    scheduled_time: null,
+    scheduled: false,
+    rating: 0,
+  });
   const [additionalDeals, setAdditionalDeals] = useState([]);
 
+  function handleInputChange(e, item) {
+    setDeal({ ...deal, [item]: e.target.value });
+  }
 
   function addDeal() {
     setAdditionalDeals([...additionalDeals, {}]);
