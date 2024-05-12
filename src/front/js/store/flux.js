@@ -327,6 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       tags: [],
       searchResults: [],
+      newDeals: []
     },
     actions: {
       //--------------------------LOGIN/LOGOUT/SIGNUP ACTIONS----------------------//
@@ -535,6 +536,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
         console.log(store.user.posts);
       },
+      savePostDealForm: (deal) => {
+        const store = getStore();
+        setStore({
+          newDeals: [...store.newDeals, deal],
+        });
+
+      },
+
 
       modifyPost: (
         imageUrl,
