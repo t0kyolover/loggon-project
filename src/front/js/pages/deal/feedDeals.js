@@ -68,7 +68,7 @@ export const FeedDeals = () => {
 
   return (
     <div>
-      <div className="text-white m-3">
+      <div className="text-white m-3 fontRetro">
         <h1 style={{ fontSize: "50px" }}>Deals</h1>
       </div>
       {/*------------------------------------BANNER---------------------------------*/}
