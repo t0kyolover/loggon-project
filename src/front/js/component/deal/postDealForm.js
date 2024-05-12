@@ -15,16 +15,17 @@ export const PostDealForm = ({ onValuesChange }) => {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: store.newDealDefault,
     //validationSchema: postDealSchema,
     onSubmit: (values) => {
       actions.savePostDealForm(values);
-      // actions.postDeal(values);
-      console.log(store.newDeals, "Saved");
       onValuesChange(values);
+      alert("Saved successufully");
     },
   });
+  const [scheduled, setScheduled] = useState(false);
 
   return (
     <>
@@ -96,7 +97,7 @@ export const PostDealForm = ({ onValuesChange }) => {
                   <select
                     value={values.platform}
                     className={
-                      "form-control rounded-5 text-white bg-transparent text-white"
+                      "form-control rounded-5 text-white bg-transparent"
                     }
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -110,7 +111,39 @@ export const PostDealForm = ({ onValuesChange }) => {
                   </select>
                 </div>{" "}
                 {/*---------------------------------------format---------------------------------*/}
-                <div className="col-4"></div>
+                <div className="col-4">
+                  <label htmlFor="format" className="form-label">
+                    Format
+                  </label>
+                  <div className="d-flex flex-row justify-content-evenly">
+                    <div className="form-check-input text-white bg-transparent border-0">
+                      <input
+                        value="Digital"
+                        name="format"
+                        type="radio"
+                        className=""
+                        checked={values.format === "Digital"}
+                        onChange={() => setFieldValue("format", "Digital")}
+                      />
+                      <label className="form-check-label" htmlFor="format">
+                        Digital
+                      </label>
+                    </div>
+                    <div className="form-check-input text-white bg-transparent border-0">
+                      <input
+                        value="CD"
+                        name="format"
+                        type="radio"
+                        className=""
+                        checked={values.format === "CD"}
+                        onChange={() => setFieldValue("format", "CD")}
+                      />
+                      <label className="form-check-label" htmlFor="format">
+                        CD
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 {/*---------------------------------------type---------------------------------*/}
                 <div className="col-4">
                   <label htmlFor="type" className="form-label">
@@ -185,7 +218,31 @@ export const PostDealForm = ({ onValuesChange }) => {
               </div>
               <div className="row">
                 {/*---------------------------------------expiration date---------------------------------*/}
-                <div className="col-4"></div>
+                <div className="col-5">
+                  {" "}
+                  <label htmlFor="expiration_date" className="form-label">
+                    Valid untill
+                  </label>
+                  <div className="input-group mb-3 align-items-center">
+                    <i
+                      id="expiration_date-addon"
+                      className="fas fa-clock me-2"
+                    ></i>
+                    <input
+                      value={values.expiration_date}
+                      type="date"
+                      className="form-control rounded-5 text-white bg-transparent text-white"
+                      aria-label="expiration_date"
+                      aria-describedby="expiration_date-addon"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      id="expiration_date"
+                    />
+                  </div>
+                  {errors.expiration_date && touched.expiration_date && (
+                    <p className="error mt-2">{errors.expiration_date}</p>
+                  )}
+                </div>
                 {/*---------------------------------------promo code---------------------------------*/}
                 <div className="col-4">
                   <label htmlFor="promo_code" className="form-label">
@@ -206,7 +263,7 @@ export const PostDealForm = ({ onValuesChange }) => {
                   </div>
                 </div>
                 {/*---------------------------------------offer link---------------------------------*/}
-                <div className="col-4">
+                <div className="col-3">
                   <label htmlFor="offer_link" className="form-label">
                     Offer link
                   </label>
@@ -226,13 +283,74 @@ export const PostDealForm = ({ onValuesChange }) => {
                   )}
                 </div>
               </div>
+              {/*---------------------------------------Carousel 4th Slide---------------------------------*/}
             </div>
+            {/*---------------------------------------schedule date---------------------------------*/}
+            {scheduled && (
+              <div className="carousel-item">
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="schedule_date" className="form-label">
+                      Schedule Date
+                    </label>
+                    <div className="input-group mb-3 align-items-center">
+                      <input
+                        value={values.schedule_date}
+                        type="date"
+                        className="form-control rounded-5 text-white bg-transparent text-white"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        id="schedule_date"
+                      />
+                    </div>
+                    {errors.schedule_date && touched.schedule_date && (
+                      <p className="error mt-2">{errors.schedule_date}</p>
+                    )}
+                  </div>
+                  {/*---------------------------------------schedule time---------------------------------*/}
+                  <div className="col-6">
+                    <label htmlFor="schedule_time" className="form-label">
+                      Schedule Time
+                    </label>
+                    <div className="input-group mb-3 align-items-center">
+                      <input
+                        value={values.schedule_time}
+                        type="date"
+                        className="form-control rounded-5 text-white bg-transparent text-white"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        id="schedule_time"
+                      />
+                    </div>
+                    {errors.schedule_time && touched.schedule_time && (
+                      <p className="error mt-2">{errors.schedule_time}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           {/*---------------------------------------Buttons---------------------------------*/}
           <div className="row mt-3">
+            {/*-------------------------schedule-----------------------**/}
+            <div>
+              <label className="form-check-label me-2" htmlFor="schedule">
+                <h6>Schedule</h6>
+              </label>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="scheduled"
+                onChange={(e) => setScheduled(!scheduled)}
+              />
+            </div>
             <div className="d-flex flex-row justify-content-end">
               {/*-------------------------save-----------------------**/}
-              <button disabled={isSubmitting} type="submit" className="col-2 btn btn-effect me-3">
+              <button
+                disabled={isSubmitting}
+                type="submit"
+                className="col-2 btn btn-effect me-3"
+              >
                 Save
               </button>
               {/*----------------carousel navigation-------------------*/}

@@ -7,7 +7,7 @@ import { Context } from "../../store/appContext";
 
 import defaultDeal from "../../../img/defaultDeal.png";
 
-export const EditableDealCard = ( deleteDeal, isAdditional) => {
+export const EditableDealCard = (deleteDeal, isAdditional) => {
   const { store, actions } = useContext(Context);
   const [deal, setDeal] = useState(store.newDealDefault || {});
 
@@ -31,7 +31,7 @@ export const EditableDealCard = ( deleteDeal, isAdditional) => {
         />
         <div className="card-body bg-color text-white rounded-bottom-2 shadow-lg">
           <div className="row">
-            <div className="d-flex flex-row">
+            <div className="d-flex flex-row justify-content-between">
               <div className="col-6">
                 <h5 className="card-title">
                   {deal.game_title || "Game Title"}
@@ -57,8 +57,9 @@ export const EditableDealCard = ( deleteDeal, isAdditional) => {
                   <i className="fa-solid fa-pencil"></i>
                 </button>
               </div>
+              {/*---------------------------------------DELETE BUTTON---------------------------------
               <div className="col-1">
-                {/*---------------------------------------DELETE BUTTON---------------------------------*/}
+                
                 {isAdditional && (
                     <button
                       className="btn btn-effect-blue py-0 ms-3"
@@ -67,7 +68,7 @@ export const EditableDealCard = ( deleteDeal, isAdditional) => {
                       <i className="fa-regular fa-trash-can"></i>
                     </button>
                   )}
-              </div>
+              </div>*/}
             </div>
 
             <div className="col-6">
@@ -111,9 +112,7 @@ export const EditableDealCard = ( deleteDeal, isAdditional) => {
           </div>
         </div>
       </div>
-      <PostDealFormModal
-        deal={deal}
-      />
+      <PostDealFormModal />
     </>
   );
 };

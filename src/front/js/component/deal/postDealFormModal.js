@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Formik } from 'formik';
 import { Link } from "react-router-dom";
 
-import { SchedulePostModal } from "./schedulePostModal";
 import { PostDealForm } from "./postDealForm";
 
 import { Context } from "../../store/appContext";
@@ -17,8 +16,6 @@ export const PostDealFormModal = () => {
     }
   }, [store.newDeals]);
 
-
-  /*No actualiza los datos al modificar en la card, pero si que los modifica a nivel de datos */
   return (
     <>
       <div
@@ -55,8 +52,6 @@ export const PostDealFormModal = () => {
           </div>
         </div>
       </div>
-      {/*---------------------------------------Schedule Post Modal---------------------------------*
-      <SchedulePostModal onInputChange={handleInputChange} deal={deal} />*/}
     </>
   );
 };
