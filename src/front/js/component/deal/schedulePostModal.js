@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 import { Context } from "../../store/appContext";
 
-export const SchedulePostModal = ({onInputChange}) => {
+export const SchedulePostModal = ({onInputChange, deal}) => {
   const { store, actions } = useContext(Context);
 
   return (
     <div
       className="modal fade"
-      id="scheduleModal"
+      id={`scheduleModalToggle-${deal.id}`}
       aria-hidden="true"
-      aria-labelledby="scheduleModalLabel"
+      aria-labelledby={`scheduleModalToggleLabel-${deal.id}`}
       tabIndex="-1"
     >
       <div className="modal-dialog modal-sm modal-dialog-centered">
@@ -20,7 +20,7 @@ export const SchedulePostModal = ({onInputChange}) => {
           style={{ background: "#020D19" }}
         >
           <div className="modal-header border-0">
-            <h1 className="modal-title fs-5" id="scheduleModalLabel">
+            <h1 className="modal-title fs-5" id={`scheduleModalToggleLabel-${deal.id}`}>
               Schedule Post
             </h1>
             <div className="ms-auto" data-bs-theme="dark">
