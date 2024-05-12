@@ -20,7 +20,6 @@ export const PostDeal = () => {
     }
   }, [store.newDeals]);
 
-
   function addDeal() {
     setAdditionalDeals([...additionalDeals, {}]);
   }
@@ -60,18 +59,22 @@ export const PostDeal = () => {
     <div className="container my-4">
       <div className="row">
         {/*--------------------------------Title----------------------------*/}
-        <div className="col-3">
+        <div className="col-4">
           <h1 className="my-3 text-white">Post Deal</h1>
         </div>
       </div>
       <div className="row">
         <div className="d-flex justify-content-center flex-wrap">
-          <div className="col-3">
-            <EditableDealCard deal={deal} setDeal={setDeal} isAdditional={false}/>
+          <div className="col-4 my-3">
+            <EditableDealCard
+              deal={deal}
+              setDeal={setDeal}
+              isAdditional={false}
+            />
           </div>
           {/*----------------------Additional Deal Form------------------------*/}
           {additionalDeals.map((deal, index) => (
-            <div className="col-3">
+            <div className="col-4 my-3">
               <EditableDealCard
                 deal={deal}
                 setDeal={setDeal}
@@ -80,34 +83,23 @@ export const PostDeal = () => {
                 isAdditional={true}
               />
             </div>
-            // <div className="row">
-            //   <div className="col-4">
-            //     <DealCard key={index} deal={deal} />
-            //   </div>
-            //   <div className="col-8">
-            //     <PostDealForm
-            //       key={index}
-            //       onClick={(e) => deleteDeal(index, e)}
-            //       isAdditional={true}
-            //     />
-            //   </div>
-            // </div>
           ))}
-          <div className="col-3">
-            {/*----------------------Button Add Additional Deal Form-----------------*/}
-            <button
-              type="button"
-              className="btn btn-effect-blue"
-              onClick={addDeal}
+          {/*----------------------Button Add Additional Deal Form-----------------*/}
+          <div className="col-4">
+            <div
+              className="card card-effect sombra my-5"
+              style={{ width: "18rem" }}
             >
-              <i className="fa-solid fa-plus"></i>
-            </button>
+              <button type="button" className="btn" onClick={addDeal}>
+                <i className="fa-solid fa-plus text-white"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col-4">
-          {/*-------------------------Button Add Post---------------------*/}
+          {/*-------------------------Button Publish Post---------------------*/}
           <button
             type="button"
             className="btn btn-effect w-25 my-5"

@@ -315,7 +315,7 @@ export const PostDealForm = ({ onValuesChange }) => {
                     <div className="input-group mb-3 align-items-center">
                       <input
                         value={values.schedule_time}
-                        type="date"
+                        type="time"
                         className="form-control rounded-5 text-white bg-transparent text-white"
                         onChange={handleChange}
                         onBlur={handleBlur}
