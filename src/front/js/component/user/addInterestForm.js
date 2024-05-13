@@ -129,7 +129,7 @@ export const AddInterestForm = (props) => {
                   newInterest: "",
                   interests: store.user.interests || [],
                 }}
-                onSubmit={(values, { setSubmitting, resetForm }) => {
+                onSubmit={(values, { setSubmitting, resetForm, setFieldValue }) => {
                   const updatedValues = {
                     ...values,
                     interests: [...values.interests, values.newInterest],

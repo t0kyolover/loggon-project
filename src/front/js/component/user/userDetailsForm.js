@@ -344,15 +344,14 @@ export const UserDetailsForm = () => {
             </button>
           </div>
           <div
-            className="list-group text-white justify-content-center"
-            style={{ height: "200px", overflowX: "auto" }}
+            className="col-5 d-flex flex-wrap text-white"
           >
             {!store.user ||
-            !values.interests ||
-            values.interests.length === 0 ? (
+            !store.user.interests ||
+            store.user.interests.length === 0 ? (
               <p className="bg-transparent p-2">No Interests Added</p>
             ) : (
-              values.interests.map((interest, index) => (
+              store.user.interests.map((interest, index) => (
                 <p
                   className="bg-transparent rounded-5 border-white m-auto my-2 border p-2"
                   key={index}
