@@ -478,6 +478,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("Password updated successfully!");
       },
 
+      updateUserDetails: (newUserDetails) => {
+        const store = getStore();
+        setStore({
+          user: {...store.user, ...newUserDetails},
+        });
+      },
+
       //--------------------------INTERSTS ACTIONS----------------------//
       addInterest: (newInterest) => {
         setStore((prevState) => ({

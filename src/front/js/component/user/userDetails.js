@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Formik, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
@@ -9,6 +10,27 @@ export const UserDetails = (props) => {
   const params = useParams();
   const navigate = useNavigate();
   const [user, setUser] = useState(store.user);
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+  } = useFormik({
+    initialValues: store.user,
+    //validationSchema: postDealSchema,
+    onSubmit: (values) => {
+      actions.updateUserDetails(values);
+      setClicked("");
+      // onValuesChange(values);
+      console.log("values", values);
+      console.log("Saved successufully", store.user);
+    },
+  });
+
   const [newUserData, setNewUserData] = useState({
     username: "",
     imageUrl: "",
@@ -33,20 +55,24 @@ export const UserDetails = (props) => {
 
   function updateItem(e, newItem, itemType) {
     e.preventDefault();
-    if (
-      newItem.trim() == "" &&
-      (itemType != "steam_username" || itemType != "twitch_username")
-    ) {
-      setUser(store.user);
+    if (newItem && typeof newItem === "string") {
+      newItem = newItem.trim();
+      if (
+        newItem === "" &&
+        itemType !== "steam_username" &&
+        itemType !== "twitch_username"
+      ) {
+        setUser(store.user);
+        setClicked("");
+      } else {
+        setUser((prevState) => ({
+          ...prevState,
+          [itemType]: newItem,
+        }));
+        actions.updateItem(newItem, itemType);
+      }
       setClicked("");
-    } else {
-      setUser((prevState) => ({
-        ...prevState,
-        [itemType]: newItem,
-      }));
-      actions.updateItem(newItem, itemType);
     }
-    setClicked("");
   }
 
   //The interests get updated in the store but the page doesn't re-render when deleted, function in line 346
@@ -73,24 +99,22 @@ export const UserDetails = (props) => {
       <div className="d-flex flex-row text-white">
         {/*--------falta de centralización----------*/}
         <div className="d-flex flex-row flex-wrap ">
-          <form>
+          <form autoComplete="off" onSubmit={handleSubmit}>
             {clicked == "image" ? (
               <div>
                 <button
+                  type="submit"
                   className="btn btn-effect py-0"
-                  onClick={(e) => {
-                    updateItem(e, newUserData.imageUrl, "image_url");
-                  }}
                 >
                   <i className="fa-solid fa-circle-check"></i>
                 </button>
                 <input
                   type="text"
                   className="img-fluid"
-                  value={newUserData.imageUrl}
-                  onChange={(e) =>
-                    setNewUserData({ ...newUserData, imageUrl: e.target.value })
-                  }
+                  value={values.image_url}
+                  onChange={(e) => setFieldValue("image_url", e.target.value)}
+                  onBlur={handleBlur}
+                  id="user_image_url"
                 />
               </div>
             ) : (
@@ -121,7 +145,7 @@ export const UserDetails = (props) => {
                 {clicked == "username" ? (
                   <input
                     className="form-control border-0 text-white bg-transparent"
-                    value={newUserData.username}
+                    value={values.username}
                     onChange={(e) =>
                       setNewUserData({
                         ...newUserData,

@@ -87,11 +87,11 @@ export const PostDeal = () => {
           {/*----------------------Button Add Additional Deal Form-----------------*/}
           <div className="col-4">
             <div
-              className="card card-effect sombra my-5"
-              style={{ width: "18rem" }}
+              className="card card-effect sombra my-3 align-items-center justify-content-center text-white"
+              style={{ width: "18rem", height: "90%"}}
             >
               <button type="button" className="btn" onClick={addDeal}>
-                <i className="fa-solid fa-plus text-white"></i>
+                <i className="fa-solid fa-plus"></i> <h3>Add another post</h3>
               </button>
             </div>
           </div>
