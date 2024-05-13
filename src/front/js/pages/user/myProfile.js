@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
-import { UserDetails } from "../../component/user/userDetails";
+import { UserDetailsForm } from "../../component/user/userDetailsForm";
 import { EditableDealCard } from "../../component/deal/editableDealCard";
 import { DealCard } from "../../component/deal/dealCard";
 import { LoadingSpinner } from "../../component/utils/loadingSpinner";
@@ -33,7 +33,7 @@ export const MyProfile = () => {
     <div className="container-fluid m-auto">
        <h1 className="ps-4 me-5 text-white">My Profile</h1>{" "}
       {/*------------------------PROFILE DETAILS---------------------------*/}
-      <UserDetails />
+      <UserDetailsForm />
       {/*---------------------------------------TABS---------------------------------*/}
       <div className="row mt-3 m-auto">
         <nav className="d-flex justify-content-center">

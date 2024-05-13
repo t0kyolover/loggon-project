@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { Context } from "../../store/appContext";
 
-export const UserDetails = (props) => {
+export const UserDetailsForm = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export const UserDetails = (props) => {
     handleChange,
     handleSubmit,
     setFieldValue,
-    resetForm
+    resetForm,
   } = useFormik({
     initialValues: { ...store.user, username: store.user.username || "" },
     //validationSchema: postDealSchema,
@@ -29,7 +29,9 @@ export const UserDetails = (props) => {
       // onValuesChange(values);
       console.log("values", values);
       console.log("Saved successufully", store.user);
-      resetForm({ values: { ...store.user, username: store.user.username || "" } });
+      resetForm({
+        values: { ...store.user, username: store.user.username || "" },
+      });
     },
   });
 
@@ -98,8 +100,10 @@ export const UserDetails = (props) => {
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
+      {/*---------------------------------------Image---------------------------------*/}
       <div className="row">
         {" "}
+        {/*---------------------------------edit image button----------------------*/}
         {clicked == !"image" && (
           <div>
             <button
@@ -114,15 +118,16 @@ export const UserDetails = (props) => {
           </div>
         )}
       </div>
+      {/*---------------------------------image----------------------------*/}
       <div className="row">
-        <div className="col-4">
-      
-        <img
-              style={{ maxWidth: "500px", maxHeight: "500px" }}
-              className="rounded-circle img-fluid p-5 image-container me-5"
-              src={user.image_url}
-            />
+        <div className="col-6">
+          <img
+            style={{ maxWidth: "500px", maxHeight: "500px" }}
+            className="rounded-circle img-fluid p-5 image-container me-5"
+            src={user.image_url}
+          />
         </div>
+        {/*---------------------------------------Username---------------------------------*/}
         <div className="col-6">
           <div className="d-flex flex-column justify-content-end ">
             <label
@@ -138,6 +143,7 @@ export const UserDetails = (props) => {
                 className="fas fa-at me-2"
                 style={{ color: "#992899" }}
               ></i>
+
               {clicked == "username" ? (
                 <div className="d-flex flex-row text-white">
                   <input
@@ -151,6 +157,7 @@ export const UserDetails = (props) => {
                     id="username"
                     required
                   />
+                  {/*---------------------------------save username button----------------------*/}
                   <button type="submit" className="btn btn-effect py-0">
                     <i className="fa-solid fa-circle-check"></i>
                   </button>
@@ -160,6 +167,7 @@ export const UserDetails = (props) => {
                   <p className="form-control rounded-5 text-white bg-transparent">
                     {store.user.username}
                   </p>
+                  {/*---------------------------------edit username button----------------------*/}
                   <button
                     className="btn btn-effect border-0 py-0"
                     onClick={(e) => {
@@ -176,9 +184,9 @@ export const UserDetails = (props) => {
         </div>
       </div>
       <div className="row">
-        <div>
+        <div className="d-flex justify-content-center">
           {clicked == "image" && (
-            <div>
+            <div className="col-6">
               <button type="submit" className="btn btn-effect py-0">
                 <i className="fa-solid fa-circle-check"></i>
               </button>
@@ -194,6 +202,29 @@ export const UserDetails = (props) => {
           )}
         </div>
       </div>
+      <div className="row">
+        {/*---------------------------------------Email---------------------------------*/}
+        <div className="col-6">
+          <div className="d-flex flex-column justify-content-end ">
+            <label
+              htmlFor="user_username"
+              className="form-label"
+              style={{ color: "#992899" }}
+            >
+              Email
+            </label>{" "}
+            <div className="d-flex flex-row text-white align">
+              <p className="form-control rounded-5 text-white bg-transparent">
+                {values.email}
+              </p>
+            </div>{" "}
+          </div>
+        </div>
+      </div>
+      <div className="row"></div>
+      <div className="row"></div>
+      <div className="row"></div>
+
       <div className="d-flex justify-content-center w-100 mt-3">
         <div className="d-flex flex-row text-white">
           {/*--------falta de centralización----------*/}
@@ -201,49 +232,6 @@ export const UserDetails = (props) => {
             <form autoComplete="off" onSubmit={handleSubmit}></form>
 
             <ul className="list-group m-auto">
-              {/*---------------------------------------Username---------------------------------*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>Username</div>
-              <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
-                <div className="w-100">
-                  {clicked == "username" ? (
-                    <input
-                      className="form-control border-0 text-white bg-transparent"
-                      value={values.username}
-                      onChange={(e) =>
-                        setNewUserData({
-                          ...newUserData,
-                          username: e.target.value,
-                        })
-                      }
-                    />
-                  ) : (
-                    <p className="fw-bold mb-0">@{user.username}</p>
-                  )}
-                </div>
-                <div className="ms-auto">
-                  {clicked == "username" ? (
-                    <button
-                      className="btn btn-effect py-0"
-                      onClick={(e) => {
-                        updateItem(e, newUserData.username, "username");
-                      }}
-                    >
-                      <i className="fa-solid fa-circle-check"></i>
-                    </button>
-                  ) : (
-                    <button
-                      className="btn btn-effect py-0"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setClicked("username");
-                      }}
-                    >
-                      <i className="fa-solid fa-pencil"></i>
-                    </button>
-                  )}
-                </div>
-              </li>
-              {/*---------------------------------------Email---------------------------------*/}
               <div style={{ fontSize: "12px", color: "#992899" }}>Email</div>
               <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
                 <div className="w-100">
