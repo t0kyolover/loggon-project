@@ -172,3 +172,102 @@
   /* padding: 0; */
   color:rgb(255, 255, 255);
 }
+
+
+/* Banner Card Animation */
+
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper .containerBanner {
+  height: 400px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: start;
+}
+
+.wrapper .cardBanner {
+  width: 80px;
+  border-radius: .75rem;
+  background-size: cover;
+  cursor: pointer;
+  border-radius: 2rem;
+  margin: 0 10px;
+  display: flex;
+  align-items: flex-end;
+  transition: .6s cubic-bezier(.28,-0.03,0,.99);
+  box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+}
+
+.wrapper .cardBanner > .row {
+  color: white;
+  display: flex;
+  flex-wrap: nowrap;
+  padding-left: 12px;
+}
+
+.wrapper .cardBanner > .row > .icon {
+  background: #223;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  
+}
+
+.wrapper .cardBanner > .row > .description {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80px;
+  width: 520px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition-delay: .3s;
+  transition: all .3s ease;
+}
+
+.wrapper .description p {
+  color: #b0b0ba;
+  padding-top: 5px;
+}
+
+.wrapper .description h4 {
+  text-transform: uppercase;
+}
+
+.wrapper input {
+  display: none;
+}
+
+.wrapper input:checked + label {
+  width: 600px;
+}
+
+.wrapper input:checked + label .description {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.cardBanner[for="c1"] {
+  background-image: url('../img/bn1.png');
+}
+
+.cardBanner[for="c2"] {
+  background-image: url('../img/bn1.png');
+}
+
+.cardBanner[for="c3"] {
+  background-image: url('../img/bn1.png');
+}
+
+.cardBanner[for="c4"] {
+  background-image: url('../img/bn1.png');
+}

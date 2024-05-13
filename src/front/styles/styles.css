@@ -1,3 +1,7 @@
+.main-content {
+    margin-bottom: 200px !important;  /* Adiciona uma margem inferior de 100px */
+  }
+  
 .bg-color{
     background-color:#020D19;
 }
