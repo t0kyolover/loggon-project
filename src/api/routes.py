@@ -118,7 +118,7 @@ def get_google_oauth_token():
 
 #-------------------------------------------------Login Steam (Esperando por autorizacion de steam)----------------------------------------------------------------------
 
-('''
+
 steam = oauth.remote_app(
     'steam',
     consumer_key='DC6C64C101D47449665EB173CF4E9A62',
@@ -158,7 +158,7 @@ def authorized_steam():
 @steam.tokengetter
 def get_steam_oauth_token():
     return session.get('steam_token')
-    ''')
+    
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -189,12 +189,12 @@ def Login():
         return jsonify({"msg": "User doesn't exist"}), 401
       
 
-    # Crea un nuevo token con el id de usuario dentro
+# Crea un nuevo token con el id de usuario dentro
 
     access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token })
+    return jsonify({ "token": access_token }), 200
 
-#----ADDED THIS-------------------------------------------------------Verify Identity---------------------------------------------------------------------------------
+#----ADDED THIS-------------------------------------------------Verify Identity---------------------------------------------------------------------------------
 
 @api.route('/verify_identity', methods=['GET'])
 @jwt_required()
@@ -205,7 +205,7 @@ def verify():
     if user is None:
         return jsonify({ "error": "Este usuario no existe" }), 401
     
-    return jsonify({ "user": user.serialize() })
+    return jsonify({ "user": user.serialize() }), 200
 
 #---------------------------------------------------------------Modificar usuario-------------------------------------------------------------------
 
@@ -293,19 +293,19 @@ def create_deal():
             user_id=id,
             game_title=data['game_title'],
             platform=data['platform'],
-            expiration_date=data['expiration_date'],
+            expiration_date=data.get['expiration_date', None], # No obligatorio, por defecto 'None'
             original_price=data['original_price'],
             offer_price=data['offer_price'],
             format=data['format'],
             item_type=data['type'],
-            promo_code=data['promo_code'],
-            scheduled=data['scheduled'],
-            scheduled_date=data['scheduled_date'],
-            scheduled_time=data['scheduled_time'],
+            promo_code=data.get('promo_code', 'N/A'),  # No obligatorio, por defecto 'N/A'
+            scheduled=data.get['scheduled', False],
+            scheduled_date=data.get['scheduled_date', None],
+            scheduled_time=data.get['scheduled_time', None],
             offer_link=data['offer_link'],
             image_url=data['image_url'],
-            rating=data['rating'],
-            game_tags=data['game_tags']
+            rating=data.get['rating', 0],
+            game_tags=data.get['game_tags', None]
         )
 
         # Agregar la instancia a la base de datos
@@ -314,6 +314,8 @@ def create_deal():
 
         return jsonify({"message": "Deal created successfully"}), 201
 
+    except KeyError as e:
+        return jsonify({"error": f"Missing required field: {str(e)}"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
@@ -335,10 +337,11 @@ def update_deal(deal_id):
 
         # Modificar solo los campos que necesitemos actualizar
         deal.promo_code = data.get('promo_code', deal.promo_code)
-        deal.image_url = data.get('image_url', deal.image_url)
         deal.expiration_date = data.get('expiration_date', deal.expiration_date)
         deal.offer_price = data.get('offer_price', deal.offer_price)
         deal.scheduled_date = data.get('scheduled_date', deal.scheduled_date)
+        deal.scheduled = data.get('scheduled', deal.scheduled)
+        deal.scheduled_time = data.get('scheduled_time', deal.scheduled_time)
         #  Actualiza otros campos según sea necesario
 
         # Guardar los cambios en la base de datos
@@ -476,7 +479,8 @@ def reset_password_request():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    ''')
+ ''')
+    
 #-------------------------------------------------------- Rating (chequear)--------------------------------------------------------------------
     
 @api.route('/deal/up_rating/<int:item_id>', methods=['PATCH'])
@@ -518,4 +522,3 @@ def dislike_item(item_id):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
