@@ -200,7 +200,7 @@
   display: flex;
   align-items: flex-end;
   transition: .6s cubic-bezier(.28,-0.03,0,.99);
-  box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+  /* box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8); */
 }
 
 .wrapper .cardBanner > .row {
@@ -256,7 +256,8 @@
   transform: translateY(0) !important;
 }
 
-.cardBanner[for="c1"] {
+
+.cardBanner-c1 {
   background-image: url('../img/bn1.png');
 }
 
@@ -271,3 +272,4 @@
 .cardBanner[for="c4"] {
   background-image: url('../img/bn1.png');
 }
+
