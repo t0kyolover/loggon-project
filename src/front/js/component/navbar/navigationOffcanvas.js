@@ -50,12 +50,12 @@ export const NavigationOffcanvas = () => {
                 to={"/games"}
               >
                 <div data-bs-dismiss="offcanvas">
-                  <h6 className="btn-effect-blue border-0">Games</h6>
+                  <h6 className="text-effect-white border-0">Games</h6>
                 </div>
               </Link>
               <Link className="text-white text-decoration-none mb-2" to={"/"}>
                 <div className="mb-2" data-bs-dismiss="offcanvas">
-                  <h6 className="btn-effect-blue border-0">Deals</h6>
+                  <h6 className="text-effect-white border-0">Deals</h6>
                 </div>
               </Link>
             </div>

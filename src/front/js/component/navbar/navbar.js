@@ -129,13 +129,13 @@ export const Navbar = () => {
           <div className="d-flex flex-row w-50 ms-4">
             {/*-------------------------MENU ICON------------------------*/}
             <button
-              className="btn btn-effect border-0 p-0"
+              className="btn border-0 p-0 me-3"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#menuOffcanvas"
               aria-controls="menuOffcanvas"
             >
-              <i className="fa-solid fa-bars" style={{ color: "#992899" }}></i>
+              <i className="fa-solid fa-bars icon-effect-purple" style={{ color: "#992899", fontSize: "20px" }}></i>
             </button>
             {/*---------------------------MENU CONTENTS-------------------------*/}
             <NavigationOffcanvas />
@@ -147,7 +147,7 @@ export const Navbar = () => {
                 alt="loGGon"
                 width="auto"
                 height="34"
-                className="mt-2 me-2 btn-effect-blue border-0 rounded"
+                className="mt-3 mx-4 btn-effect-blue border-0 rounded"
               />
             </Link>
             {/*------------------------------SEARCH BAR----------------------------*/}
