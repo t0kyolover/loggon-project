@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Formik, useFormik } from "formik";
-import { postDealSchema } from "../../schemas/postDealSchema";
+import { postDealSchema } from "../../validation/postDealSchema";
 import { Link } from "react-router-dom";
 
 import { Context } from "../../store/appContext";
