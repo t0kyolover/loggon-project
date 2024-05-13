@@ -19,36 +19,36 @@ export const SingleDeal = (props) => {
     actions.openItem(id, ([fetchedDeal]) => setDeal(fetchedDeal), "deal");
   }, [id]);
 
-  // useEffect(() => {
-  //   // actions.openItem(
-  //   //   deal.user_id,
-  //   //   ([fetchedPublisher]) => setPublisher(fetchedPublisher),
-  //   //   "user"
-  //   // );
-  //   if (deal.platform === "PC") {
-  //     setDeal({
-  //       ...deal,
-  //       platform: "https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png",
-  //     });
-  //   } else if (deal.platform === "PS4") {
-  //     setDeal({
-  //       ...deal,
-  //       platform:
-  //         "https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png",
-  //     });
-  //   } else if (deal.platform === "Xbox") {
-  //     setDeal({
-  //       ...deal,
-  //       platform: "https://img.icons8.com/ios/50/40C057/xbox.png",
-  //     });
-  //   } else if (deal.platform === "Nintendo") {
-  //     setDeal({
-  //       ...deal,
-  //       platform:
-  //         "https://img.icons8.com/ios-filled/50/FA5252/nintendo-switch-logo.png",
-  //     });
-  //   }
-  // }, [deal]);
+  useEffect(() => {
+    // actions.openItem(
+    //   deal.user_id,
+    //   ([fetchedPublisher]) => setPublisher(fetchedPublisher),
+    //   "user"
+    // );
+    if (deal.platform === "PC") {
+      setDeal({
+        ...deal,
+        platform: "https://img.icons8.com/ios-glyphs/50/FD7E14/windows-10.png",
+      });
+    } else if (deal.platform === "PS5") {
+      setDeal({
+        ...deal,
+        platform:
+          "https://img.icons8.com/ios-glyphs/50/228BE6/play-station.png",
+      });
+    } else if (deal.platform === "Xbox") {
+      setDeal({
+        ...deal,
+        platform: "https://img.icons8.com/ios/50/40C057/xbox.png",
+      });
+    } else if (deal.platform === "Nintendo") {
+      setDeal({
+        ...deal,
+        platform:
+          "https://img.icons8.com/ios-filled/50/FA5252/nintendo-switch-logo.png",
+      });
+    }
+  }, [deal]);
 
   return (
     <div className="container-fluid">

@@ -140,6 +140,7 @@ const getState = ({ getStore, getActions, setStore }) => {
          ],
          newsletter: false,*/
       },
+      users: [],
       deals: [
         //   {
         //     id: 1,
@@ -625,7 +626,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         console.log("I AM DEAL FROM STORE", item);
         setDetails(item);
-        console.log(`${itemType} found successfully!`);
+        console.log(`${itemType} found successfully!`, item);
       },
 
       loadDeals: () => {
