@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Formik, useFormik } from "formik";
-import { postDealSchema } from "../../schemas";
+import { postDealSchema } from "../../schemas/postDealSchema";
 import { Link } from "react-router-dom";
 
 import { Context } from "../../store/appContext";
@@ -12,16 +12,18 @@ export const PostDealForm = ({ onValuesChange }) => {
     errors,
     touched,
     isSubmitting,
+    setSubmitting,
     handleBlur,
     handleChange,
     handleSubmit,
     setFieldValue,
   } = useFormik({
     initialValues: store.newDealDefault,
-    //validationSchema: postDealSchema,
+    validationSchema: postDealSchema,
     onSubmit: (values) => {
       actions.savePostDealForm(values);
       onValuesChange(values);
+      setSubmitting(false);
       alert("Saved successufully");
     },
   });
