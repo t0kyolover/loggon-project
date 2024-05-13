@@ -3,13 +3,14 @@ import { Formik, useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
+import { AddInterestForm } from "./addInterestForm";
+
 import { Context } from "../../store/appContext";
 
-export const UserDetailsForm = (props) => {
+export const UserDetailsForm = () => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState(store.user);
+  const [clicked, setClicked] = useState("");
   const {
     values,
     errors,
@@ -21,254 +22,217 @@ export const UserDetailsForm = (props) => {
     setFieldValue,
     resetForm,
   } = useFormik({
-    initialValues: { ...store.user, username: store.user.username || "" },
+    initialValues: store.user,
     //validationSchema: postDealSchema,
     onSubmit: (values) => {
       actions.updateUserDetails(values);
       setClicked("");
       // onValuesChange(values);
-      console.log("values", values);
       console.log("Saved successufully", store.user);
       resetForm({
-        values: { ...store.user, username: store.user.username || "" },
+        values: store.user,
       });
     },
   });
-
-  const [newUserData, setNewUserData] = useState({
-    username: "",
-    imageUrl: "",
-    steamUsername: "",
-    twitchUsername: "",
-    newInterest: "",
-  });
-  const [newInterest, setNewInterest] = useState("");
-  const [clicked, setClicked] = useState("");
-
-  useEffect(() => {
-    setUser(store.user);
-    setNewUserData(store.user.username);
-    if (store.user.image_url !== null) {
-      setNewUserData({ ...newUserData, imageUrl: store.user.image_url });
-    }
-  }, []);
-
-  useEffect(() => {
-    setUser(store.user);
-  }, [store.user]);
-
-  function updateItem(e, newItem, itemType) {
-    e.preventDefault();
-    if (newItem && typeof newItem === "string") {
-      newItem = newItem.trim();
-      if (
-        newItem === "" &&
-        itemType !== "steam_username" &&
-        itemType !== "twitch_username"
-      ) {
-        setUser(store.user);
-        setClicked("");
-      } else {
-        setUser((prevState) => ({
-          ...prevState,
-          [itemType]: newItem,
-        }));
-        actions.updateItem(newItem, itemType);
-      }
-      setClicked("");
-    }
-  }
-
-  //The interests get updated in the store but the page doesn't re-render when deleted, function in line 346
-  function updateInterests(e) {
-    e.preventDefault();
-    actions.addInterest(newUserData.newInterest);
-    setUser((prevState) => ({
-      ...prevState,
-      interests: [...prevState.interests, newUserData.newInterest],
-    }));
-    setNewUserData({ ...newUserData, newInterest: "" });
-  }
 
   if (store.loggedIn === false) {
     navigate("/login");
   }
 
-  if (user == {}) {
+  if (store.user == {}) {
     return <LoadingSpinner />;
   }
 
   return (
-    <form autoComplete="off" onSubmit={handleSubmit}>
-      {/*---------------------------------------Image---------------------------------*/}
-      <div className="row">
-        {" "}
-        {/*---------------------------------edit image button----------------------*/}
-        {clicked == !"image" && (
-          <div>
-            <button
-              className="btn btn-effect py-0"
-              onClick={(e) => {
-                e.preventDefault();
-                setClicked("image");
-              }}
-            >
-              <i className="fa-solid fa-pencil fa-flip-horizontal"></i>
-            </button>
-          </div>
-        )}
-      </div>
-      {/*---------------------------------image----------------------------*/}
-      <div className="row">
-        <div className="col-6">
-          <img
-            style={{ maxWidth: "500px", maxHeight: "500px" }}
-            className="rounded-circle img-fluid p-5 image-container me-5"
-            src={user.image_url}
-          />
-        </div>
-        {/*---------------------------------------Username---------------------------------*/}
-        <div className="col-6">
-          <div className="d-flex flex-column justify-content-end ">
-            <label
-              htmlFor="user_username"
-              className="form-label"
-              style={{ color: "#992899" }}
-            >
-              Username
-            </label>
-            <div className="input-group mb-3 align-items-center">
-              <i
-                id="username-addon"
-                className="fas fa-at me-2"
-                style={{ color: "#992899" }}
-              ></i>
-
-              {clicked == "username" ? (
-                <div className="d-flex flex-row text-white">
-                  <input
-                    value={values.username}
-                    type="text"
-                    className="form-control rounded-5 text-white bg-transparent"
-                    aria-label="Username"
-                    aria-describedby="username-addon"
-                    onChange={(e) => setFieldValue("username", e.target.value)}
-                    onBlur={handleBlur}
-                    id="username"
-                    required
-                  />
-                  {/*---------------------------------save username button----------------------*/}
-                  <button type="submit" className="btn btn-effect py-0">
-                    <i className="fa-solid fa-circle-check"></i>
-                  </button>
-                </div>
-              ) : (
-                <div className="d-flex flex-row text-white align">
-                  <p className="form-control rounded-5 text-white bg-transparent">
-                    {store.user.username}
-                  </p>
-                  {/*---------------------------------edit username button----------------------*/}
-                  <button
-                    className="btn btn-effect border-0 py-0"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setClicked("username");
-                    }}
-                  >
-                    <i className="fa-solid fa-pencil"></i>
-                  </button>
-                </div>
+    <>
+      <form autoComplete="off" onSubmit={handleSubmit}>
+        {/*---------------------------------------Image---------------------------------*/}
+        <div className="d-flex flex-row align-items-center justify-content-start">
+          <div className="col-6 ms-5">
+            <div className="d-flex flex-row align-items-center">
+              {/*---------------------------------image----------------------------*/}
+              <img
+                style={{ maxWidth: "500px", maxHeight: "500px" }}
+                className="rounded-circle img-fluid p-5 image-container me-5"
+                src={
+                  store.user.image_url ||
+                  "https://static.vecteezy.com/system/resources/previews/007/698/902/non_2x/geek-gamer-avatar-profile-icon-free-vector.jpg"
+                }
+              />
+              {/*---------------------------------edit image button----------------------*/}
+              {clicked == !"image" && (
+                <button
+                  className="btn btn-effect border-0 py-0 h-25"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setClicked("image");
+                  }}
+                >
+                  <i className="fa-solid fa-pencil"></i>
+                </button>
               )}
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="d-flex justify-content-center">
-          {clicked == "image" && (
-            <div className="col-6">
-              <button type="submit" className="btn btn-effect py-0">
-                <i className="fa-solid fa-circle-check"></i>
-              </button>
-              <input
-                type="text"
-                className="form-control rounded-5 text-white bg-transparent"
-                value={values.image_url}
-                onChange={(e) => setFieldValue("image_url", e.target.value)}
-                onBlur={handleBlur}
-                id="user_image_url"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="row">
-        {/*---------------------------------------Email---------------------------------*/}
-        <div className="col-6">
-          <div className="d-flex flex-column justify-content-end ">
-            <label
-              htmlFor="user_username"
-              className="form-label"
-              style={{ color: "#992899" }}
-            >
-              Email
-            </label>{" "}
-            <div className="d-flex flex-row text-white align">
-              <p className="form-control rounded-5 text-white bg-transparent">
-                {values.email}
-              </p>
-            </div>{" "}
-          </div>
-        </div>
-      </div>
-      <div className="row"></div>
-      <div className="row"></div>
-      <div className="row"></div>
-
-      <div className="d-flex justify-content-center w-100 mt-3">
-        <div className="d-flex flex-row text-white">
-          {/*--------falta de centralización----------*/}
-          <div className="d-flex flex-row flex-wrap ">
-            <form autoComplete="off" onSubmit={handleSubmit}></form>
-
-            <ul className="list-group m-auto">
-              <div style={{ fontSize: "12px", color: "#992899" }}>Email</div>
-              <li className="list-group-item rounded-5 my-2 text-white bg-transparent d-flex flex-row">
-                <div className="w-100">
-                  <p className="fw-bold mb-0">{user.email}</p>
-                </div>
-              </li>
-              {/*---------------------------------------Password---------------------------------*/}
-              {/*Cuadrar el boton. Onclick el boton redirige al mismo workflow de "Forgot password"*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>Password</div>
-              <div className="d-flex flex-row align-items-center">
-                <li className="list-group-item rounded-5 my-2 text-white bg-transparent">
-                  <div className="me-auto">
-                    <p className="fw-bold mb-0">*********</p>
+            <div className="row">
+              <div className="col-3">
+                {clicked == "image" && (
+                  <div className="d-flex flex-column">
+                    <label
+                      htmlFor="user_image_url"
+                      className="form-label"
+                      style={{ color: "#992899" }}
+                    >
+                      Image URL
+                    </label>
+                    <div className="d-flex justify-content-center flex-row">
+                      <input
+                        type="text"
+                        className="form-control rounded-5 text-white bg-transparent"
+                        value={values.image_url}
+                        onChange={(e) =>
+                          setFieldValue("image_url", e.target.value)
+                        }
+                        onBlur={handleBlur}
+                        id="user_image_url"
+                      />
+                      {/*---------------------------------save image button---------------------------------*/}
+                      <button type="submit" className="btn btn-effect py-0">
+                        <i className="fa-solid fa-circle-check"></i>
+                      </button>
+                    </div>
                   </div>
-                </li>
-                <Link to={`/password_recovery/${user.username}`}>
-                  <button className="btn btn-effect rounded-5 ms-3">
-                    Change
-                  </button>
-                </Link>
+                )}
               </div>
-              {/*---------------------------------------Platforms usernames---------------------------------*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>Link</div>
+            </div>
+          </div>
+          <div className="col-5 me-5">
+            {/*---------------------------------------Username-------------------------*/}
+
+            <div className="col-6">
+              <div className="d-flex flex-column">
+                <label
+                  htmlFor="user_username"
+                  className="form-label"
+                  style={{ color: "#992899" }}
+                >
+                  Username
+                </label>
+                <div /*className="d-flex flex-row align-items-center"*/>
+                  <i
+                    id="username-addon"
+                    className="fas fa-at me-2"
+                    style={{ color: "#992899" }}
+                  ></i>
+
+                  {clicked == "username" ? (
+                    <div className="d-flex flex-row text-white">
+                      <input
+                        value={values.username}
+                        type="text"
+                        className="form-control rounded-5 text-white bg-transparent"
+                        aria-label="Username"
+                        aria-describedby="username-addon"
+                        onChange={(e) =>
+                          setFieldValue("username", e.target.value)
+                        }
+                        onBlur={handleBlur}
+                        id="username"
+                        required
+                      />
+                      {/*---------------------------------save username button----------------------*/}
+                      <button type="submit" className="btn btn-effect py-0">
+                        <i className="fa-solid fa-circle-check"></i>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="d-flex flex-row text-white align">
+                      <p className="form-control rounded-5 text-white bg-transparent">
+                        {store.user.username}
+                      </p>
+                      {/*---------------------------------edit username button----------------------*/}
+                      <button
+                        className="btn btn-effect border-0 py-0"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setClicked("username");
+                        }}
+                      >
+                        <i className="fa-solid fa-pencil"></i>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/*---------------------------------------Email---------------------------------*/}
+            <div className="col-6">
+              <div className="d-flex flex-column">
+                <label
+                  htmlFor="user_email"
+                  className="form-label"
+                  style={{ color: "#992899" }}
+                >
+                  Email
+                </label>{" "}
+                <div className="d-flex flex-row text-white align">
+                  <p
+                    className="form-control rounded-5 text-white bg-transparent"
+                    id="user_email"
+                  >
+                    {store.user.email}
+                  </p>
+                </div>{" "}
+              </div>
+            </div>
+            {/*---------------------------------------Password---------------------------------*/}
+            <div className="col-6">
+              <div className="d-flex flex-row align-items-center">
+                <div className="d-flex flex-column">
+                  <label
+                    htmlFor="user_password"
+                    className="form-label"
+                    style={{ color: "#992899" }}
+                  >
+                    Password
+                  </label>{" "}
+                  <div className="d-flex flex-row text-white align">
+                    <p
+                      className="form-control rounded-5 text-white bg-transparent"
+                      id="user_password"
+                    >
+                      ***********
+                    </p>
+                    {/*---------------------------reset password button-----------------------*/}
+                    <Link to={`/password_recovery/${store.user.username}`}>
+                      <button className="btn btn-effect ms-3">Change</button>
+                    </Link>
+                  </div>{" "}
+                </div>{" "}
+              </div>
+            </div>
+            <div className="col-6">
+              {/*---------------------------------------Links---------------------------------*/}
+              <label
+                htmlFor="user_links"
+                className="form-label"
+                style={{ color: "#992899" }}
+              >
+                Links
+              </label>
               <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
                 {/*---------------------------------------Steam---------------------------------*/}
                 <p className="me-2">
                   <a
-                    className="btn p-0"
+                    className="btn btn-effect-blue rounded-5 border-0 p-0"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseSteam"
                     aria-expanded="false"
                     aria-controls="collapseSteam"
                   >
-                    <i className="fa-brands fa-steam text-white fs-3"></i>
+                    <i className="fa-brands fa-steam text-white fs-3 "></i>
                   </a>
                 </p>
+                {/*---------------------------------------edit steam username---------------------------------*/}
                 <div style={{ minHeight: "50px" }}>
                   <div
                     className="collapse collapse-horizontal"
@@ -279,27 +243,21 @@ export const UserDetailsForm = (props) => {
                         type="text"
                         className="form-control rounded-5 text-black w-auto"
                         style={{ maxHeight: "30px" }}
-                        value={newUserData.steamUsername}
+                        value={values.steam_username}
                         onChange={(e) =>
-                          setNewUserData({
-                            ...newUserData,
-                            steamUsername: e.target.value,
-                          })
+                          setFieldValue("steam_username", e.target.value)
                         }
+                        onBlur={handleBlur}
+                        id="user_steam_username"
                       />
+                      {/*--------------------------------save steam button---------------------------*/}
                       <button
-                        className="btn btn-effect py-0"
+                        className="btn btn-effect border-0 py-0"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseSteam"
                         aria-expanded="false"
                         aria-controls="collapseSteam"
-                        onClick={(e) => {
-                          updateItem(
-                            e,
-                            newUserData.steamUsername,
-                            "steam_username"
-                          );
-                        }}
+                        type="submit"
                       >
                         <i
                           className="fa-solid fa-circle-check"
@@ -312,7 +270,7 @@ export const UserDetailsForm = (props) => {
                 {/*---------------------------------------Twitch---------------------------------*/}
                 <p className="mx-2">
                   <button
-                    className="btn p-0"
+                    className="btn btn-effect border-0 p-0"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseTwitch"
@@ -322,6 +280,7 @@ export const UserDetailsForm = (props) => {
                     <i className="fa-brands fa-twitch text-white fs-3"></i>
                   </button>
                 </p>
+                {/*---------------------------------------edit twitch username---------------------------------*/}
                 <div style={{ minHeight: "50px" }}>
                   <div
                     className="collapse collapse-horizontal"
@@ -332,27 +291,21 @@ export const UserDetailsForm = (props) => {
                         type="text"
                         className="form-control rounded-5 text-black w-auto"
                         style={{ maxHeight: "30px" }}
-                        value={newUserData.twitchUsername}
+                        value={values.twitch_username}
                         onChange={(e) =>
-                          setNewUserData({
-                            ...newUserData,
-                            twitchUsername: e.target.value,
-                          })
+                          setFieldValue("twitch_username", e.target.value)
                         }
+                        onBlur={handleBlur}
+                        id="user_twitch_username"
                       />
+                      {/*--------------------------------save twitch button---------------------------*/}
                       <button
+                        type="submit"
                         className="btn btn-effect py-0"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseTwitch"
                         aria-expanded="false"
                         aria-controls="collapseTwitch"
-                        onClick={(e) => {
-                          updateItem(
-                            e,
-                            newUserData.twitchUsername,
-                            "twitch_username"
-                          );
-                        }}
                       >
                         <i
                           className="fa-solid fa-circle-check"
@@ -363,132 +316,56 @@ export const UserDetailsForm = (props) => {
                   </div>
                 </div>
               </li>
-              {/*---------------------------------------Interests---------------------------------*/}
-              <div style={{ fontSize: "12px", color: "#992899" }}>
-                Interests
-              </div>
-              <li className="list-group-item border-0 my-2 text-white bg-transparent d-flex flex-row">
-                {/*!!!!!BUG!!!!!!!--------Creo que el problema cuando se añade más intereses y la página empieza a bailar está aquí */}
-                {/* <div className="d-flex flex-wrap gap-2" > */}
-                <div
-                  className="list-group"
-                  style={{ height: "200px", overflowX: "auto" }}
-                >
-                  {!user || !user.interests || user.interests.length === 0 ? (
-                    <p className="bg-transparent p-2">No Interests Added</p>
-                  ) : (
-                    user.interests.map((interest, index) => (
-                      <p
-                        className="bg-transparent rounded-5 border-white m-auto my-2 border p-2"
-                        key={index}
-                        s
-                      >
-                        {interest}
-                      </p>
-                    ))
-                  )}
-                </div>
-                {/*----------------------------Modify Interests Modal Trigger Button-----------------------*/}
-                <div className="ms-3">
-                  <button
-                    type="button"
-                    className="btn btn-effect"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modifyInterestsModal"
-                  >
-                    <i
-                      className="fa-solid fa-pencil"
-                      style={{ color: "#992899" }}
-                    ></i>
-                  </button>
-                </div>
-                {/*----------------------------Modify Interests Modal-------------------------------*/}
-                <div
-                  className="modal fade"
-                  id="modifyInterestsModal"
-                  tabIndex="-1"
-                  aria-labelledby="modifyInterestsModalLabel"
-                  aria-hidden="true"
-                >
-                  <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div
-                      className="modal-content"
-                      style={{ background: "#020D19" }}
-                    >
-                      <div className="modal-header border-0">
-                        <h1
-                          className="modal-title fs-5"
-                          id="modifyInterestsModalLabel"
-                        >
-                          Interests
-                        </h1>
-                        <div className="ms-auto" data-bs-theme="dark">
-                          <button
-                            type="button"
-                            className="btn-close "
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                      </div>
-                      <div className="modal-body">
-                        <form onSubmit={updateInterests}>
-                          <input
-                            type="search"
-                            className="form-control rounded-5 bg-transparent text-white mb-3"
-                            value={newUserData.newInterest}
-                            onChange={(e) =>
-                              setNewUserData({
-                                ...newUserData,
-                                newInterest: e.target.value,
-                              })
-                            }
-                          ></input>
-                        </form>
-                        <small style={{ color: "#992899" }}>My interests</small>
-                        <ul className="list-group border-0 my-2 bg-transparent d-flex flex-row">
-                          <div className="d-flex flex-wrap gap-2 justify-content-center">
-                            {!user ||
-                            !user.interests ||
-                            user.interests.length === 0 ? (
-                              <p className="bg-transparent p-2">
-                                No Interests Added
-                              </p>
-                            ) : (
-                              user.interests.map((interest, index) => (
-                                <li
-                                  className="list-group-item bg-transparent text-white rounded-5 border-white border p-2"
-                                  key={index}
-                                >
-                                  {interest}
-                                  <button
-                                    className="btn border-0 p-0 ms-2"
-                                    onClick={() => {
-                                      actions.deleteInterest(index);
-                                      setUser((prevState) => ({
-                                        ...prevState,
-                                        interests: prevState.interests.filter(
-                                          (_, i) => i !== index
-                                        ),
-                                      }));
-                                    }}
-                                  >
-                                    <i className="fa-solid fa-xmark"></i>
-                                  </button>
-                                </li>
-                              ))
-                            )}
-                          </div>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+        {/*-------------------------------Interests--------------------------*/}
+        <div className="row ms-5">
+          <div className="d-flex align-items-center">
+            <label
+              htmlFor="user_links"
+              className="form-label"
+              style={{ color: "#992899" }}
+            >
+              My interests
+            </label>
+            {/*-------------------modify interests modal trigger button-----------------*/}
+
+            <button
+              type="button"
+              className="btn btn-effect border-0 ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#modifyInterestsModal"
+            >
+              <i
+                className="fa-solid fa-pencil"
+                style={{ color: "#992899" }}
+              ></i>
+            </button>
+          </div>
+          <div
+            className="list-group text-white justify-content-center"
+            style={{ height: "200px", overflowX: "auto" }}
+          >
+            {!store.user ||
+            !values.interests ||
+            values.interests.length === 0 ? (
+              <p className="bg-transparent p-2">No Interests Added</p>
+            ) : (
+              values.interests.map((interest, index) => (
+                <p
+                  className="bg-transparent rounded-5 border-white m-auto my-2 border p-2"
+                  key={index}
+                  s
+                >
+                  {interest}
+                </p>
+              ))
+            )}
+          </div>
+        </div>
+      </form>
+      <AddInterestForm />
+    </>
   );
 };
