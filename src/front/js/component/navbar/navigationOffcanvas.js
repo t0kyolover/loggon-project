@@ -32,7 +32,7 @@ export const NavigationOffcanvas = () => {
                     to={`/myprofile/${store.user.username}`}
                   >
                     <div className="mb-2" data-bs-dismiss="offcanvas">
-                      <h6 className="btn-effect-blue border-0">My profile</h6>
+                      <h6 className="text-effect-white border-0">My profile</h6>
                     </div>
                   </Link>
                   <Link
@@ -40,7 +40,7 @@ export const NavigationOffcanvas = () => {
                     to={`/postdeal/user/${store.user.username}`}
                   >
                     <div className="mb-2" data-bs-dismiss="offcanvas">
-                      <h6 className="btn-effect-blue border-0">Post deal</h6>
+                      <h6 className="text-effect-white border-0">Post deal</h6>
                     </div>
                   </Link>{" "}
                 </div>
