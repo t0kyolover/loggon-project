@@ -76,30 +76,7 @@ export const FeedDeals = () => {
       {/*------------------------------------BANNER---------------------------------*/}
       <div className="container d-flex flex-row justify-content-center">
         < BannerDeal />
-        {/* <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px"}}
-        />
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px"}}
-        />
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px", transform: "scaleX(-1)"}}
-        />
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px", transform: "scaleX(-1)"}}
-  /> */}
+ 
       </div>
       <div className="d-flex justify-content-end pt-4">
         <Filters />
