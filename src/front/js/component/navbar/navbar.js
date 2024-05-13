@@ -126,22 +126,22 @@ export const Navbar = () => {
         style={{ background: "#020D19" }}
       >
         <div className="container-fluid">
-          <div className="d-flex flex-row w-50 ms-4">
+          <div className="d-flex flex-row w-50">
             {/*---------------------------LOGO----------------------------*/}
-            <Link to={"/"} className="navbar-brand mx-3">
+            <Link to={"/"} className="navbar-brand">
               <img
                 src={logoImg}
                 alt="loGGon"
                 width="auto"
                 height="34"
-                className="mt-3 mx-4 btn-effect-blue border-0 rounded"
+                className="mt-3 btn-effect-blue border-0 rounded"
               />
             </Link>
             {store.loggedIn && store.user && (
               <>
                 {/*-------------------------MENU ICON------------------------*/}
                 <button
-                  className="btn border-0 p-0 me-3"
+                  className="btn border-0 p-0 me-2"
                   type="button"
                   data-bs-toggle="offcanvas"
                   data-bs-target="#menuOffcanvas"

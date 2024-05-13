@@ -26,9 +26,10 @@ export const FeedDeals = () => {
   const pcDeals = deals.filter((deal) => deal.platform === "PC");
   const nintendoDeals = deals.filter((deal) => deal.platform === "Nintendo");
 
-  // useEffect(() => {
-    
-  // }, [store.loggedIn]);
+ useEffect(() => {
+    console.log("store.deals", store.deals);
+    setDeals(store.deals);
+  }, [store.deals, store.loggedIn]);
 
   useEffect(() => {
     let activeElement = null;
@@ -57,16 +58,11 @@ export const FeedDeals = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("store.deals", store.deals);
-    setDeals(store.deals);
-  }, [store.deals]);
+ 
 
   if (!store.loggedIn) {
     return <LandingBanner />;
   }
-
-  console.log("From Feed", store.user, store.token);
 
   return (
     <div className="main-content">
