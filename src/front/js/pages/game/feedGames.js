@@ -18,7 +18,7 @@ export const FeedGames = () => {
     actions.loadGamesWithDetails();
   }, [store.games]);
 
-  if (store.gamesWithDetails.length === 0) {
+  if (!store.gamesWithDetails || store.gamesWithDetails.length === 0) {
     return <LoadingSpinner />;
   }
 

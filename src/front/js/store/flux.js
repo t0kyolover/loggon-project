@@ -670,6 +670,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       loadGamesWithDetails: () => {
         const store = getStore();
         const actions = getActions();
+        if (!store.games) {
+          console.error("store.games is undefined");
+          return;
+        }
         Promise.all(
           store.games.map((game, index) =>
             fetch(

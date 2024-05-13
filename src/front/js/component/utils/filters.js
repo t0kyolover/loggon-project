@@ -7,7 +7,7 @@ export const Filters = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div>
+    <div className="">
       <button
         className="btn btn-effect"
         // style={{ background: "#992899" }}
