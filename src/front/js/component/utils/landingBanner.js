@@ -12,7 +12,7 @@ export const LandingBanner = () => {
 
   return (
     <>
-      <div className="container d-flex flex-column justify-content-center p-5">
+      <div className="container d-flex flex-column justify-content-center p-5 main-content">
         <div className="text-white text-center m-3">
           <h1 style={{ fontSize: "50px" }}>Welcome to</h1>
         </div>

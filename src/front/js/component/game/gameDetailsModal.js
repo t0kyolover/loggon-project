@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import "../../../styles/cardOuterGLowEffect.css";
+import "../../../styles/cardEffect.css";
 
 import { Context } from "../../store/appContext";
 

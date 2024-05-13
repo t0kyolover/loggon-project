@@ -2,8 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../../../styles/icons.css";
+import "../../../styles/styles.css";
 
 import { LandingBanner } from "../../component/utils/landingBanner";
+import { BannerDeal } from "../../component/deal/bannerDeal";
 import { LoadingSpinner } from "../../component/utils/loadingSpinner";
 import { DealCard } from "../../component/deal/dealCard";
 import { Filters } from "../../component/utils/filters";
@@ -67,43 +69,14 @@ export const FeedDeals = () => {
   console.log("From Feed", store.user, store.token);
 
   return (
-    <div>
-      <div className="text-white m-3 fontRetro">
+    <div className="main-content">
+      <div className="text-white m-3 fontRetro ">
         <h1 style={{ fontSize: "50px" }}>Deals</h1>
       </div>
       {/*------------------------------------BANNER---------------------------------*/}
       <div className="container d-flex flex-row justify-content-center">
-        <img
-          src={bn1}
-          alt="bn"
-          width="auto"
-          height="auto"
-          className="mt-1 me-2 sombra rounded-4 bn-effect"
-        />
-        {/* <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px"}}
-        />
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px"}}
-        />
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px", transform: "scaleX(-1)"}}
-        />
-        <img
-          src="https://static.vecteezy.com/system/resources/previews/026/852/558/large_2x/neon-glowing-forward-arrows-showing-right-png.png"
-          alt="Descrição da Imagem"
-          className="img-fluid opacity-50"
-          style={{height: "100px", transform: "scaleX(-1)"}}
-        /> */}
+        < BannerDeal />
+ 
       </div>
       <div className="d-flex justify-content-end pt-4">
         <Filters />
@@ -113,7 +86,7 @@ export const FeedDeals = () => {
       ) : (
         <div>
           {/*---------------------------------------PLATFORMS TABS---------------------------------*/}
-          <div className="row m-auto">
+          <div className="row m-auto main-content">
             <nav className="d-flex justify-content-center">
               <div
                 className="nav nav-tabs border-0 mb-4"

@@ -15,7 +15,7 @@ import { PrivacyPolicy } from "./pages/utils/privacyPolicy";
 
 import injectContext from "./store/appContext";
 
-import "../styles/fontNove.css";
+import "../styles/fonts.css";
 import "../styles/button.css";
 import "../styles/styles.css";
 
