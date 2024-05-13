@@ -127,19 +127,6 @@ export const Navbar = () => {
       >
         <div className="container-fluid">
           <div className="d-flex flex-row w-50 ms-4">
-            {/*-------------------------MENU ICON------------------------*/}
-            <button
-              className="btn border-0 p-0 me-3"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#menuOffcanvas"
-              aria-controls="menuOffcanvas"
-            >
-              <i className="fa-solid fa-bars icon-effect-purple" style={{ color: "#992899", fontSize: "20px" }}></i>
-            </button>
-            {/*---------------------------MENU CONTENTS-------------------------*/}
-            <NavigationOffcanvas />
-
             {/*---------------------------LOGO----------------------------*/}
             <Link to={"/"} className="navbar-brand mx-3">
               <img
@@ -150,12 +137,31 @@ export const Navbar = () => {
                 className="mt-3 mx-4 btn-effect-blue border-0 rounded"
               />
             </Link>
-            {/*------------------------------SEARCH BAR----------------------------*/}
-            <SearchBar
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              performSearch={performSearch}
-            />
+            {store.loggedIn && store.user && (
+              <>
+                {/*-------------------------MENU ICON------------------------*/}
+                <button
+                  className="btn border-0 p-0 me-3"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#menuOffcanvas"
+                  aria-controls="menuOffcanvas"
+                >
+                  <i
+                    className="fa-solid fa-bars icon-effect-purple"
+                    style={{ color: "#992899", fontSize: "20px" }}
+                  ></i>
+                </button>
+                {/*---------------------------MENU CONTENTS-------------------------*/}
+                <NavigationOffcanvas />
+                {/*------------------------------SEARCH BAR----------------------------*/}
+                <SearchBar
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  performSearch={performSearch}
+                />
+              </>
+            )}
           </div>
           <div>
             {/*-------------------------LOGIN/LOGOUT MODAL TRIGGER BUTTON------------------*/}
