@@ -148,8 +148,8 @@ export const Navbar = () => {
                   aria-controls="menuOffcanvas"
                 >
                   <i
-                    className="fa-solid fa-bars icon-effect-purple"
-                    style={{ color: "#992899", fontSize: "20px" }}
+                    className="fa-brands fa-elementor icon-effect-purple"
+                    style={{ color: "#992899", fontSize: "1.5rem" }}
                   ></i>
                 </button>
                 {/*---------------------------MENU CONTENTS-------------------------*/}

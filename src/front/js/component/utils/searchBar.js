@@ -23,7 +23,7 @@ export const SearchBar = ({searchTerm, setSearchTerm, performSearch}) => {
     <div className="d-flex flex-row">
       <p className="">
         <button
-          className="btn mt-3 icon-effect-purple border-0 rounded-circle"
+          className="btn mt-3 border-0 rounded-circle"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapseSearch"
@@ -31,8 +31,8 @@ export const SearchBar = ({searchTerm, setSearchTerm, performSearch}) => {
           aria-controls="collapseSearch"
         >
           <i
-            className="fa-solid fa-magnifying-glass"
-            style={{ color: "#992899", fontSize: "20px" }}
+            className="fa-brands fa-searchengin icon-effect-purple"
+            style={{ color: "#992899", fontSize: "1.5rem" }}
           ></i>
         </button>
       </p>
