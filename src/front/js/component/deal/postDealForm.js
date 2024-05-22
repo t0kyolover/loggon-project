@@ -123,7 +123,6 @@ export const PostDealForm = ({ onValuesChange }) => {
                         value="Digital"
                         name="format"
                         type="radio"
-                        className=""
                         checked={values.format === "Digital"}
                         onChange={() => setFieldValue("format", "Digital")}
                       />
@@ -136,7 +135,6 @@ export const PostDealForm = ({ onValuesChange }) => {
                         value="CD"
                         name="format"
                         type="radio"
-                        className=""
                         checked={values.format === "CD"}
                         onChange={() => setFieldValue("format", "CD")}
                       />
